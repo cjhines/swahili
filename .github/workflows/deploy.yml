@@ -1,0 +1,55 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time. Let an in-progress deploy finish rather than cancel it half-way.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  checks:
+    uses: ./.github/workflows/checks.yml
+    with:
+      pages-artifact: true
+
+  deploy:
+    needs: checks
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
+
+  # Confirms both URLs serve this commit. The cjhin.es proxy lives on Chris's server, not in this
+  # repo, so a failure here warns rather than failing the deploy.
+  verify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Both URLs serve this build
+        run: |
+          for url in https://cjhines.github.io/swahili/ https://cjhin.es/swahili/; do
+            ok=
+            for attempt in 1 2 3 4 5 6 7 8 9 10; do
+              if curl -fsSL "$url" | grep -q "content=\"$GITHUB_SHA\""; then ok=1; break; fi
+              sleep 30
+            done
+            if [ -n "$ok" ]; then
+              echo "$url serves $GITHUB_SHA"
+            else
+              echo "::warning::$url is not serving $GITHUB_SHA after 5 minutes"
+              exit 1
+            fi
+          done

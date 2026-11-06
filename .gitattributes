@@ -1,0 +1,10 @@
+# Store LF in the repo and convert in the working tree to suit the platform. Without this,
+# Windows checkouts (core.autocrlf=true) show files as modified when nothing has changed.
+* text=auto
+
+*.sh text eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
