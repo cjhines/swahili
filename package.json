@@ -24,8 +24,10 @@
     "ids:update": "tsx scripts/update-ids.ts"
   },
   "dependencies": {
+    "idb": "^8.0.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "ts-fsrs": "^6.0.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -43,6 +45,7 @@
     "eslint-config-universe": "^16.1.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.7",
+    "fake-indexeddb": "^6.2.7",
     "jsdom": "^31.0.0",
     "prettier": "^3.9.10",
     "tsx": "^4.23.15",

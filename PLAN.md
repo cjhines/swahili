@@ -102,6 +102,7 @@ swahili/
 ├── src/
 │   ├── main.tsx
 │   ├── App.tsx               # screen state machine; no router
+│   ├── domain.ts             # Direction, Grade, Mode, ProgressKey
 │   ├── screens/              # Setup, Card, End, Settings (export/import)
 │   ├── components/
 │   ├── content/
@@ -147,7 +148,7 @@ swahili/
 | **Plain CSS + custom properties** | The app is small. Part colours live in `theme.css` |
 | **`yaml`** (eemeli) | Follows YAML 1.2, so `en: no` stays a string rather than becoming `false` |
 | **Zod 4** | One source for runtime validation, TS types (`z.infer`) and the editor's JSON Schema (`z.toJSONSchema`) |
-| **ts-fsrs** | FSRS, the scheduler modern Anki uses, with short-term (same-day) reviews built in |
+| **ts-fsrs v6 (FSRS-7 model)** | FSRS, the scheduler modern Anki uses, with short-term (same-day) reviews built in |
 | **`idb`** | Tiny promise wrapper. Access is just "load everything, put one", so Dexie's query layer isn't needed |
 | **vite-plugin-pwa** (Workbox `generateSW`) | Manifest, precaching and update flow, scoped to `/swahili/` |
 | **Vitest + Testing Library + `fake-indexeddb`** | Unit tests for the scheduler, queue, conjugation and storage, plus component tests |
@@ -289,31 +290,50 @@ a YAML file hot-reloads it. A bad deck fails `vite build` with the file name and
 ### The scheduler: pure, no I/O
 
 ```ts
+// src/domain.ts
 type Grade = 'got' | 'missed';                 // → Rating.Good / Rating.Again
 type Direction = 'sw-en' | 'en-sw';
 type ProgressKey = `${string}:${Direction}`;   // e.g. 'vocab-kesho:sw-en', 'nani-we-past-neg:en-sw'
 
-review(state: Card | undefined, grade: Grade, now: Date): { state: Card; log: ReviewLog }
-isDue(state: Card | undefined, now: Date): boolean   // undefined = new
+// src/scheduler/scheduler.ts
+createScheduler({ fuzz = true }): Promise<Scheduler>   // async: ts-fsrs v6 loads its model lazily
+scheduler.review(key, state: MemoryState | undefined, grade, now): { state: MemoryState; log: ReviewLog }
+isNew(state)            // no state = new in that direction
+isDue(state, now)       // has state and dueAt <= now
 ```
 
-- There's a single `fsrs()` instance with `enable_short_term: true`, `enable_fuzz: true`, and the
-  default target retention of 0.9.
-- Same-day repeats (repeat-missed-cards) go through the same function. Within a single relearning
-  episode, ts-fsrs counts one lapse, not one per miss.
+- This uses **ts-fsrs v6** with the **FSRS-7** model, which the scheduler pins explicitly. Stored
+  memory state is model-specific (FSRS-7 adds `stabilityFast`), so a silent model change on a
+  library upgrade would misread it.
+- Fuzz is on (it's off by default in v6), so cards learned together spread over neighbouring days.
+  Target retention is 0.9.
+- A new card's ts-fsrs `cardId` is set to its progress key, so every review log carries it.
+- FSRS-7 sets short-term intervals itself. A first "Got it" on a new card schedules it days out,
+  and a first "Missed it" brings it back within minutes.
+- **Same-day repeats** (from repeat-missed-cards) go through the same function. One relearning
+  episode counts **one lapse**, however many misses, but **each miss lowers stability**, so a card
+  missed repeatedly comes back sooner. That's the intended behaviour: what you keep missing, you
+  see more.
+- Early reviews (Complete deck mode) still lengthen the interval, just by less than an on-time
+  review.
+- ts-fsrs v6 field names are camelCase (`dueAt`, `lastReviewAt`, `scheduledDays`). Its validation
+  rejects date **strings**, so anything that round-trips through JSON, like a backup file, has to
+  turn dates back into `Date` objects first. IndexedDB's structured clone keeps them as Dates.
 
 ### IndexedDB: database `swahili`, version 1
 
 | Store | Key | Value |
 | --- | --- | --- |
-| `progress` | `key` (`cardId:direction`) | `{ key, cardId, direction, card: <ts-fsrs Card, as-is>, updatedAt }` |
+| `progress` | `key` (`cardId:direction`) | `{ key, cardId, direction, state: <ts-fsrs memory state, as-is>, updatedAt }` |
 | `reviews` | `id` = `${key}@${reviewedAt ISO}` | `{ id, key, grade, mode, reviewedAt, log: <ts-fsrs ReviewLog> }`, indexed by `key` |
 | `meta` | `name` | `schemaVersion`, `firstLaunchAt`, `persistGranted`, `lastExportAt` |
 
 - **Loading:** at startup, `getAll('progress')` goes into a `Map`. Even a few thousand records is
   trivial, so no query indexes are needed.
-- **Marking a card:** `review()`, then one transaction that puts the `progress` record and adds a
-  `reviews` row. This happens immediately on every mark.
+- **Marking a card:** `ProgressStore.mark()` calls `review()`, then one transaction that puts the
+  `progress` record and adds a `reviews` row. This happens immediately on every mark. Marks are
+  queued, so two quick taps apply in order, each from the state the previous one produced. Memory
+  is updated only after the write commits.
 - **Joining:** a card with no record is new. A record whose card no longer exists is an
   **orphan**. Orphans are kept, ignored, and never deleted automatically.
 - The review log isn't shown anywhere in v1. It's kept so stats can come later.
@@ -328,8 +348,11 @@ isDue(state: Card | undefined, now: Date): boolean   // undefined = new
 
 ### Session logic: pure, in `session/`
 
-- **Practice queue:** due items sorted by `due` ascending, plus `newCap` new items picked at
-  random and inserted at random positions.
+- **Practice queue:** due items sorted by `dueAt` ascending, plus `newCap` new items picked at
+  random and inserted at random positions. `practiceSummary()` gives the due and new counts and the
+  next due date, for the setup screen and the "nothing due" message.
+- **Session state** is a pure reducer (`flip`, `mark`) over plain JSON-serialisable data, so a
+  Complete deck run can be saved and resumed. Saving each mark is the caller's job.
 - **Complete deck queue:** every item in the selection, shuffled.
 - **Nani na Lini?:** the verb is chosen per card from eligible verbs, never the same verb twice in a
   row. A verb is eligible if it has a `progress` record in either direction. If fewer than 5 are
@@ -342,7 +365,8 @@ isDue(state: Card | undefined, now: Date): boolean   // undefined = new
 - **Export** downloads `swahili-progress-YYYY-MM-DD.json`, containing
   `{ app: 'swahili', format: 1, exportedAt, progress[], reviews[] }`.
 - **Import (merge)** is the default. For each key it keeps whichever record has the later
-  `card.last_review`, and takes the union of `reviews` by `id`.
+  `state.lastReviewAt`, and takes the union of `reviews` by `id`. Dates in the file are turned
+  back into `Date` objects before anything else (see above).
 - **Replace** is a separate button with a confirmation. It clears both stores and loads the file
   in one transaction.
 - The file is validated with Zod before anything is written.
