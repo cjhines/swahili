@@ -1,0 +1,37 @@
+# Every card ID ever published. Checked by `npm run decks:check`.
+#
+# - Never delete a line. To delete a card, keep its line and append "# retired".
+# - Renaming an ID resets that card's progress, so don't.
+# - Add new IDs with `npm run ids:update`.
+
+vocab-alhamisi
+vocab-arobaini
+vocab-elfu-moja
+vocab-hamsini
+vocab-ijumaa
+vocab-ishirini
+vocab-ishirini-na-mbili
+vocab-jumamosi
+vocab-jumanne
+vocab-jumapili
+vocab-jumatano
+vocab-jumatatu
+vocab-kumi
+vocab-kumi-na-mbili
+vocab-kumi-na-moja
+vocab-mbili
+vocab-mia-moja
+vocab-moja
+vocab-nane
+vocab-nne
+vocab-saba
+vocab-sabini
+vocab-sita
+vocab-sitini
+vocab-sufuri
+vocab-tano
+vocab-thelathini
+vocab-thelathini-na-tatu
+vocab-themanini
+vocab-tisa
+vocab-tisini

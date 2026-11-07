@@ -30,6 +30,9 @@ jobs:
       - run: npm run typecheck
       - run: npm test
 
+      - name: Check decks (schema, duplicate IDs, ids.lock, generated JSON Schema)
+        run: npm run decks:check
+
       - name: Build
         run: npm run build
 

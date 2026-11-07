@@ -1,0 +1,124 @@
+# yaml-language-server: $schema=../../schema/vocab-deck.schema.json
+title: Numbers
+cards:
+  - id: vocab-sufuri
+    kind: word
+    sw: sufuri
+    en: zero
+
+  - id: vocab-moja
+    kind: word
+    sw: moja
+    en: one
+
+  - id: vocab-mbili
+    kind: word
+    sw: mbili
+    en: two
+
+  - id: vocab-nne
+    kind: word
+    sw: nne
+    en: four
+
+  - id: vocab-tano
+    kind: word
+    sw: tano
+    en: five
+
+  - id: vocab-sita
+    kind: word
+    sw: sita
+    en: six
+
+  - id: vocab-saba
+    kind: word
+    sw: saba
+    en: seven
+
+  - id: vocab-nane
+    kind: word
+    sw: nane
+    en: eight
+
+  - id: vocab-tisa
+    kind: word
+    sw: tisa
+    en: nine
+
+  - id: vocab-kumi
+    kind: word
+    sw: kumi
+    en: ten
+
+  - id: vocab-kumi-na-moja
+    kind: word
+    sw: kumi na moja
+    en: eleven
+
+  - id: vocab-kumi-na-mbili
+    kind: word
+    sw: kumi na mbili
+    en: twelve
+
+  - id: vocab-ishirini
+    kind: word
+    sw: ishirini
+    en: twenty
+
+  - id: vocab-ishirini-na-mbili
+    kind: word
+    sw: ishirini na mbili
+    en: twenty-two
+
+  - id: vocab-thelathini
+    kind: word
+    sw: thelathini
+    en: thirty
+
+  - id: vocab-thelathini-na-tatu
+    kind: word
+    sw: thelathini na tatu
+    en: thirty-three
+
+  - id: vocab-arobaini
+    kind: word
+    sw: arobaini
+    alt: [arubaini]
+    en: forty
+
+  - id: vocab-hamsini
+    kind: word
+    sw: hamsini
+    en: fifty
+
+  - id: vocab-sitini
+    kind: word
+    sw: sitini
+    en: sixty
+
+  - id: vocab-sabini
+    kind: word
+    sw: sabini
+    en: seventy
+
+  - id: vocab-themanini
+    kind: word
+    sw: themanini
+    en: eighty
+
+  - id: vocab-tisini
+    kind: word
+    sw: tisini
+    en: ninety
+
+  - id: vocab-mia-moja
+    kind: word
+    sw: mia moja
+    en: one hundred
+
+  - id: vocab-elfu-moja
+    kind: word
+    sw: elfu moja
+    alt: [alfu moja]
+    en: one thousand

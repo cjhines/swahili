@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/vocab-deck.schema.json
+title: Time + dates
+cards:
+  # The week counts from Saturday: Jumamosi is "day one" (moja), Jumapili "day two" (mbili),
+  # Jumatatu "day three" (tatu), Jumanne "day four" (nne), Jumatano "day five" (tano).
+  - id: vocab-jumatatu
+    kind: word
+    sw: Jumatatu
+    en: Monday
+
+  - id: vocab-jumanne
+    kind: word
+    sw: Jumanne
+    en: Tuesday
+
+  - id: vocab-jumatano
+    kind: word
+    sw: Jumatano
+    en: Wednesday
+
+  - id: vocab-alhamisi
+    kind: word
+    sw: Alhamisi
+    en: Thursday
+
+  - id: vocab-ijumaa
+    kind: word
+    sw: Ijumaa
+    en: Friday
+
+  - id: vocab-jumamosi
+    kind: word
+    sw: Jumamosi
+    en: Saturday
+
+  - id: vocab-jumapili
+    kind: word
+    sw: Jumapili
+    en: Sunday

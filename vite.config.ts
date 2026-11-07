@@ -2,6 +2,8 @@ import react from '@vitejs/plugin-react';
 import { type Plugin } from 'vite';
 import { defineConfig } from 'vitest/config';
 
+import { decksPlugin } from './src/content/node/vite-plugin.ts';
+
 // Stamp the commit into index.html so the deploy workflow can confirm that both
 // cjhines.github.io/swahili/ and the cjhin.es/swahili/ proxy serve the new build.
 const buildVersion = (): Plugin => ({
@@ -23,7 +25,7 @@ export default defineConfig({
   // and cjhines.github.io/swahili/ (GitHub Pages project site). Every asset URL must sit
   // under this prefix. The Playwright smoke test fails if one doesn't.
   base: '/swahili/',
-  plugins: [react(), buildVersion()],
+  plugins: [react(), buildVersion(), decksPlugin()],
   test: {
     environment: 'jsdom',
     include: ['src/**/*.test.{ts,tsx}'],

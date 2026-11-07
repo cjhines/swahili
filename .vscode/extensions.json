@@ -1,0 +1,8 @@
+{
+  // Autocomplete and validation inside decks/**/*.yaml, from schema/vocab-deck.schema.json.
+  "recommendations": [
+    "redhat.vscode-yaml",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}

@@ -88,10 +88,9 @@ swahili/
 ├── decks/
 │   ├── LICENSE               # CC BY-SA 4.0
 │   ├── ids.lock              # every ID ever published (see "ID rules")
-│   ├── vocab/
-│   │   ├── time-and-dates.yaml
-│   │   ├── figures-of-speech.yaml
-│   │   └── verbs.yaml
+│   ├── vocab/                # one file per themed deck
+│   │   ├── numbers.yaml
+│   │   └── time-and-dates.yaml
 │   └── nani-na-lini/
 │       ├── rules.yaml        # subjects, tenses, negatives, have, English templates, labels
 │       └── fixtures.yaml     # known-correct forms that Chris checks against his sheets
@@ -107,8 +106,12 @@ swahili/
 │   ├── components/
 │   ├── content/
 │   │   ├── schema.ts         # Zod schemas, the source of truth for deck shape
-│   │   ├── validate.ts       # shared by the Vite plugin, scripts and tests
-│   │   └── vite-plugin-decks.ts   # `import decks from 'virtual:decks'`
+│   │   ├── validate.ts       # parse + validate, with file:line errors; no fs, so shared by all callers
+│   │   ├── ids.ts            # ids.lock rules
+│   │   ├── json-schema.ts    # Zod → the editor's JSON Schema
+│   │   └── node/             # Node-only (separate tsconfig)
+│   │       ├── load.ts       # reads decks/vocab/*.yaml
+│   │       └── vite-plugin.ts    # `import decks from 'virtual:decks'`
 │   ├── nani/
 │   │   ├── patterns.ts       # enumerates the 80 patterns and their IDs
 │   │   ├── conjugate.ts      # pure: (verb, pattern) → { sw, parts }
@@ -140,7 +143,7 @@ swahili/
 | --- | --- |
 | **React 19 + Vite 8 + TypeScript 6 (strict)** | Same stack as cjhin.es, so config and habits carry over |
 | **No router** | Four screens held as app state. Pages has no rewrites, so this avoids 404 fallbacks entirely |
-| **ESLint 9 (flat) + Prettier** | Copy cjhin.es's `eslint.config.cjs` (universe + typescript-eslint), plus `eslint-plugin-react-hooks` |
+| **ESLint 9 (flat) + Prettier** | Copied from cjhin.es (universe + typescript-eslint). One difference: relative imports always carry their extension (`'./schema.ts'`), which Vite's upcoming native config loader requires |
 | **Plain CSS + custom properties** | The app is small. Part colours live in `theme.css` |
 | **`yaml`** (eemeli) | Follows YAML 1.2, so `en: no` stays a string rather than becoming `false` |
 | **Zod 4** | One source for runtime validation, TS types (`z.infer`) and the editor's JSON Schema (`z.toJSONSchema`) |
@@ -185,9 +188,13 @@ Card kinds, with required fields in **bold**:
 
 | `kind` | Fields |
 | --- | --- |
-| `noun` | **`id`, `sw`, `en`**, `plural`, `example`, `hint`, `note` |
-| `verb` | **`id`, `sw` (ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `example`**, `stem`, `nani`, `hint`, `note` |
-| `word` | **`id`, `sw`, `en`**, `example`, `hint`, `note` (adjectives, adverbs, phrases, figures of speech) |
+| `noun` | **`id`, `sw`, `en`**, `plural`, `alt`, `example`, `hint`, `note` |
+| `verb` | **`id`, `sw` (ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `example`**, `stem`, `nani`, `alt`, `hint`, `note` |
+| `word` | **`id`, `sw`, `en`**, `alt`, `example`, `hint`, `note` (numbers, days, adjectives, adverbs, phrases, figures of speech) |
+
+- `alt` lists other accepted Swahili forms, such as `alt: [alfu moja]` for *elfu moja*. They're
+  shown on the answer side.
+- Every object is strict, so a misspelt field (`plurl:`) is an error, not silently ignored.
 
 - `hint` is shown on the **front** to tell apart words with the same English, e.g.
   `hint: (for someone)`.
@@ -271,7 +278,7 @@ ship in the app until all of its fixtures are verified.
 
 ### How decks reach the app
 
-`vite-plugin-decks.ts` reads `decks/**/*.yaml` and runs `validate.ts`. It serves the result as the
+`src/content/node/vite-plugin.ts` reads `decks/vocab/*.yaml` and runs `validate.ts`. It serves the result as the
 virtual module `virtual:decks`. Dev and build therefore go through the same validation, and editing
 a YAML file hot-reloads it. A bad deck fails `vite build` with the file name and YAML line number.
 

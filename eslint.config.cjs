@@ -14,6 +14,11 @@ module.exports = defineConfig([
   {
     files: ['**/*.ts', '**/*.tsx'],
     extends: [tsPlugin.configs['flat/recommended']],
+    rules: {
+      // Zod's idiom is a schema and its type sharing a name (`const Noun` + `type Noun`).
+      // TypeScript itself already rejects real redeclarations.
+      '@typescript-eslint/no-redeclare': 'off',
+    },
   },
   {
     rules: {
@@ -22,11 +27,10 @@ module.exports = defineConfig([
         { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
       ],
       'max-len': ['warn', { code: 120 }],
-      'import/extensions': [
-        'error',
-        'ignorePackages',
-        { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
-      ],
+      // Unlike cjhin.es: relative imports always carry their extension ('./schema.ts'). Vite's
+      // upcoming native config loader requires it for everything vite.config.ts imports, and
+      // one rule everywhere beats two styles.
+      'import/extensions': ['error', 'ignorePackages'],
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
     },
   },

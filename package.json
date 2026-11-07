@@ -18,11 +18,15 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "decks:check": "tsx scripts/check-decks.ts",
+    "decks:schema": "tsx scripts/export-schema.ts",
+    "ids:update": "tsx scripts/update-ids.ts"
   },
   "dependencies": {
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.0",
@@ -41,8 +45,10 @@
     "eslint-plugin-prettier": "^5.5.7",
     "jsdom": "^31.0.0",
     "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
     "typescript": "~6.0.3",
     "vite": "^8.3.6",
-    "vitest": "^5.1.0"
+    "vitest": "^5.1.0",
+    "yaml": "^2.9.1"
   }
 }

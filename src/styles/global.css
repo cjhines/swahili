@@ -60,3 +60,27 @@ body {
   margin: 0;
   color: var(--muted);
 }
+
+.deck-list {
+  margin: 1.25rem auto 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+  min-width: min(18rem, 100%);
+}
+
+.deck-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--brand) 10%, transparent);
+  font-weight: 600;
+}
+
+.deck-list li span {
+  font-weight: 400;
+  color: var(--muted);
+}

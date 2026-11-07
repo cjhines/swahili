@@ -1,0 +1,294 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "pattern": "^\\S(.*\\S)?$",
+      "description": "The deck name shown on the setup screen, e.g. \"Time + dates\"."
+    },
+    "cards": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^vocab-[a-z0-9]+(-[a-z0-9]+)*$",
+                "description": "Permanent ID. Progress is attached to it, so never rename or reuse one once published."
+              },
+              "kind": {
+                "type": "string",
+                "const": "noun"
+              },
+              "sw": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "The Swahili word or phrase."
+              },
+              "alt": {
+                "description": "Other accepted Swahili forms, e.g. alfu moja for elfu moja. Shown on the answer side.",
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^\\S(.*\\S)?$",
+                  "description": "An alternative spelling or form."
+                }
+              },
+              "hint": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "Shown on the front when going English → Swahili, to tell apart words with the same English, e.g. \"(for someone)\"."
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "A short note shown on the answer side."
+              },
+              "en": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "The English meaning."
+              },
+              "plural": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "The plural form, even when it is the same as the singular."
+              },
+              "example": {
+                "type": "object",
+                "properties": {
+                  "sw": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "The example sentence in Swahili."
+                  },
+                  "en": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "Its English translation."
+                  }
+                },
+                "required": [
+                  "sw",
+                  "en"
+                ],
+                "additionalProperties": false,
+                "description": "An example sentence, shown on the answer side."
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "sw",
+              "en"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^vocab-[a-z0-9]+(-[a-z0-9]+)*$",
+                "description": "Permanent ID. Progress is attached to it, so never rename or reuse one once published."
+              },
+              "kind": {
+                "type": "string",
+                "const": "word",
+                "description": "Anything that is not a noun or a verb: numbers, adjectives, phrases…"
+              },
+              "sw": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "The Swahili word or phrase."
+              },
+              "alt": {
+                "description": "Other accepted Swahili forms, e.g. alfu moja for elfu moja. Shown on the answer side.",
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^\\S(.*\\S)?$",
+                  "description": "An alternative spelling or form."
+                }
+              },
+              "hint": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "Shown on the front when going English → Swahili, to tell apart words with the same English, e.g. \"(for someone)\"."
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "A short note shown on the answer side."
+              },
+              "en": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "The English meaning."
+              },
+              "example": {
+                "type": "object",
+                "properties": {
+                  "sw": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "The example sentence in Swahili."
+                  },
+                  "en": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "Its English translation."
+                  }
+                },
+                "required": [
+                  "sw",
+                  "en"
+                ],
+                "additionalProperties": false,
+                "description": "An example sentence, shown on the answer side."
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "sw",
+              "en"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^verb-k[uw][a-z]+(-[a-z0-9]+)*$",
+                "description": "Permanent ID. Progress is attached to it, so never rename or reuse one once published."
+              },
+              "kind": {
+                "type": "string",
+                "const": "verb"
+              },
+              "sw": {
+                "type": "string",
+                "pattern": "^k[uw][a-z]+$",
+                "description": "The ku- form, e.g. kusoma."
+              },
+              "alt": {
+                "description": "Other accepted Swahili forms, e.g. alfu moja for elfu moja. Shown on the answer side.",
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^\\S(.*\\S)?$",
+                  "description": "An alternative spelling or form."
+                }
+              },
+              "hint": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "Shown on the front when going English → Swahili, to tell apart words with the same English, e.g. \"(for someone)\"."
+              },
+              "note": {
+                "type": "string",
+                "pattern": "^\\S(.*\\S)?$",
+                "description": "A short note shown on the answer side."
+              },
+              "stem": {
+                "description": "Only if it cannot be derived by dropping ku-/kw- (kusoma → soma, kwenda → enda).",
+                "type": "string",
+                "pattern": "^[a-z]+$"
+              },
+              "en": {
+                "type": "object",
+                "properties": {
+                  "base": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "e.g. read (shown as \"to read\")"
+                  },
+                  "past": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "e.g. read, ate"
+                  },
+                  "participle": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "e.g. read, eaten"
+                  },
+                  "ing": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "e.g. reading, eating"
+                  }
+                },
+                "required": [
+                  "base",
+                  "past",
+                  "participle",
+                  "ing"
+                ],
+                "additionalProperties": false,
+                "description": "Every English form, needed to build Nani na Lini? prompts like \"We didn't eat\"."
+              },
+              "example": {
+                "type": "object",
+                "properties": {
+                  "sw": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "The example sentence in Swahili."
+                  },
+                  "en": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "Its English translation."
+                  }
+                },
+                "required": [
+                  "sw",
+                  "en"
+                ],
+                "additionalProperties": false,
+                "description": "An example sentence, shown on the answer side."
+              },
+              "nani": {
+                "description": "Nani na Lini? overrides for this verb.",
+                "type": "object",
+                "properties": {
+                  "exclude": {
+                    "description": "Never use this verb in Nani na Lini?, e.g. kuwa.",
+                    "type": "boolean",
+                    "const": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "sw",
+              "en",
+              "example"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "title",
+    "cards"
+  ],
+  "additionalProperties": false,
+  "title": "Swahili vocabulary deck",
+  "description": "Generated from src/content/schema.ts by `npm run decks:schema`. Do not edit by hand."
+}

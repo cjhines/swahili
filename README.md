@@ -21,7 +21,10 @@ npm run lint
 npm run typecheck
 npm run build        # → dist/
 npm run e2e          # smoke-tests the production build under /swahili/ (Playwright)
+npm run decks:check  # validates the deck files exactly as CI does
 ```
+
+To add cards, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 The first time you run `npm run e2e`, install the browser with `npx playwright install chromium`.
 
