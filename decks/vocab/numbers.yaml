@@ -16,6 +16,11 @@ cards:
     sw: mbili
     en: two
 
+  - id: vocab-tatu
+    kind: word
+    sw: tatu
+    en: three
+
   - id: vocab-nne
     kind: word
     sw: nne
