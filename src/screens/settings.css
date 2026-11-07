@@ -1,0 +1,83 @@
+.settings {
+  gap: 1.75rem;
+}
+
+.settings-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: -0.5rem;
+}
+
+.settings-bar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.settings section p {
+  margin: 0 0 0.75rem;
+}
+
+.settings-actions {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.settings-actions label.btn {
+  position: relative;
+}
+
+.settings-actions .is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* The file input is visually hidden; show focus on the label that wraps it. */
+.settings-actions label.btn:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.btn-danger-quiet {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--missed);
+}
+
+.settings-hint {
+  margin: -0.2rem 0 0.4rem !important;
+  font-size: 0.85rem;
+}
+
+.settings-message {
+  margin-top: 0.9rem !important;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius);
+}
+
+.settings-message.is-ok {
+  background: color-mix(in srgb, var(--got) 14%, var(--surface));
+}
+
+.settings-message.is-error {
+  background: color-mix(in srgb, var(--missed) 16%, var(--surface));
+}
+
+.settings-facts {
+  display: grid;
+  gap: 0.25rem 1rem;
+  margin: 0;
+}
+
+.settings-facts dt {
+  font-weight: 650;
+}
+
+.settings-facts dd {
+  margin: 0 0 0.6rem;
+  color: var(--muted);
+}
+
+.settings a {
+  color: var(--brand);
+}

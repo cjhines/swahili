@@ -21,7 +21,8 @@
     "e2e": "playwright test",
     "decks:check": "tsx scripts/check-decks.ts",
     "decks:schema": "tsx scripts/export-schema.ts",
-    "ids:update": "tsx scripts/update-ids.ts"
+    "ids:update": "tsx scripts/update-ids.ts",
+    "icons": "tsx scripts/generate-icons.ts"
   },
   "dependencies": {
     "idb": "^8.0.4",
@@ -51,7 +52,10 @@
     "tsx": "^4.23.15",
     "typescript": "~6.0.3",
     "vite": "^8.3.6",
+    "vite-plugin-pwa": "^2.0.0",
     "vitest": "^5.1.0",
+    "workbox-build": "^7.4.1",
+    "workbox-window": "^7.4.1",
     "yaml": "^2.9.1"
   }
 }

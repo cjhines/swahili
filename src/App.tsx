@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import decks from 'virtual:decks';
 
 import { Study } from './Study.tsx';
+import { requestPersistentStorage } from './pwa/persistence.ts';
 import { createScheduler } from './scheduler/scheduler.ts';
 import { ProgressStore } from './storage/progress.ts';
 
@@ -19,8 +20,13 @@ const useProgressStore = (): Boot => {
       try {
         const scheduler = await createScheduler();
         opened = await ProgressStore.open({ scheduler });
-        if (cancelled) opened.close();
-        else setBoot({ status: 'ready', store: opened });
+        if (cancelled) {
+          opened.close();
+          return;
+        }
+        setBoot({ status: 'ready', store: opened });
+        // In the background: nothing waits on it, and a refusal isn't an error.
+        requestPersistentStorage(opened).catch(() => undefined);
       } catch (error) {
         if (!cancelled)
           setBoot({

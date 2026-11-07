@@ -96,9 +96,12 @@ swahili/
 │       └── fixtures.yaml     # known-correct forms that Chris checks against his sheets
 ├── schema/
 │   └── vocab-deck.schema.json   # generated from Zod; gives editor autocomplete in the YAML
+├── assets/icons/             # SVG sources for the app icons
 ├── scripts/
 │   ├── check-decks.ts        # schema + duplicates + ids.lock + Nani fixtures
-│   └── update-ids.ts         # appends new IDs to ids.lock
+│   ├── update-ids.ts         # appends new IDs to ids.lock
+│   ├── export-schema.ts      # regenerates schema/vocab-deck.schema.json
+│   └── generate-icons.ts     # `npm run icons`: SVG → PNG icons via Playwright's Chromium
 ├── src/
 │   ├── main.tsx
 │   ├── App.tsx               # boot: opens the progress store, then <Study>
@@ -365,8 +368,11 @@ isDue(state, now)       // has state and dueAt <= now
 
 ### Backup: Settings screen
 
-- **Export** downloads `swahili-progress-YYYY-MM-DD.json`, containing
-  `{ app: 'swahili', format: 1, exportedAt, progress[], reviews[] }`.
+- The Settings screen is reached from the sliders icon on setup.
+- **Export** saves `swahili-progress-YYYY-MM-DD.json`, containing
+  `{ app: 'swahili', format: 1, exportedAt, progress[], reviews[] }`. On iOS it goes through the
+  share sheet (Save to Files), because download links are unreliable in home-screen apps.
+  Everywhere else it's a normal download.
 - **Import (merge)** is the default. For each key it keeps whichever record has the later
   `state.lastReviewAt`, and takes the union of `reviews` by `id`. Dates in the file are turned
   back into `Date` objects before anything else (see above).
@@ -391,11 +397,17 @@ The app shares the `https://cjhin.es` origin with the main site, so everything b
 - `base: '/swahili/'`. The manifest has `start_url` and `scope` set to `/swahili/`. The service
   worker is served at `/swahili/sw.js` and registered with `scope: '/swahili/'`. Workbox's
   `navigateFallbackAllowlist` is `[/^\/swahili\//]`.
-- **Updates:** `registerType: 'prompt'`. A waiting update is applied only from the setup screen,
-  never during a session.
-- `navigator.storage.persist()` is called on first launch, and the result is recorded in `meta`.
-- **iPhone install nudge:** a banner on the setup screen, shown in iOS Safari when the app isn't
-  running from the home screen. It can be dismissed for 30 days.
+- **Updates:** `registerType: 'prompt'`. A waiting update shows "Update now" on the setup screen,
+  never during a session, or takes over at the next full relaunch. Update checks run on launch
+  and hourly. `docs/deploy.md` has the details and the **kill switch** for a broken worker.
+- **`navigator.storage.persist()`** is asked once in a browser tab and once more after installing
+  to the home screen, where Safari is likelier to agree. It's never asked on every launch, because
+  Firefox shows a prompt each time. The result is recorded in `meta` and shown in Settings.
+- **iPhone install nudge:** a banner on the setup screen, shown on iOS when the app isn't running
+  from the home screen. It can be dismissed for 30 days. Not shown on Android, where storage isn't
+  cleared after 7 days.
+- **Icons:** the SVG sources are in `assets/icons/`, and `npm run icons` renders the PNGs (standard,
+  maskable, apple-touch) with Playwright's Chromium. The PNGs are committed.
 - The app sets no cookies. `index.html` has
   `<link rel="canonical" href="https://cjhin.es/swahili/">`.
 - **Android back button:** starting a session pushes a history entry, so Back returns to setup

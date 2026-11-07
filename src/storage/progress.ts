@@ -5,6 +5,7 @@ import {
   type Mode,
   type ProgressKey,
 } from '../domain.ts';
+import { mergeProgress, type BackupData } from './backup.ts';
 import {
   openSwahiliDb,
   type ProgressRecord,
@@ -12,6 +13,15 @@ import {
   type SwahiliDb,
 } from './db.ts';
 import type { MemoryState, Scheduler } from '../scheduler/scheduler.ts';
+
+export type ImportResult = {
+  mode: 'merge' | 'replace';
+  /** Progress records written from the file. */
+  written: number;
+  /** Merge only: local records kept because they were reviewed more recently. */
+  kept: number;
+  reviews: number;
+};
 
 export type MarkInput = {
   cardId: string;
@@ -26,7 +36,8 @@ export type MarkInput = {
  * every mark written through to IndexedDB immediately.
  *
  * Records for cards that no longer exist in any deck (orphans) are loaded, kept and ignored:
- * nothing here ever deletes a record. Queues are built from the decks, so orphans never show up.
+ * nothing deletes a record except a backup import the user chose to "replace" with. Queues are
+ * built from the decks, so orphans never show up.
  */
 export class ProgressStore {
   // Marks are applied strictly in order, each from the state the previous one produced, even if
@@ -110,6 +121,65 @@ export class ProgressStore {
 
   reviewsOf(key: ProgressKey): Promise<ReviewRecord[]> {
     return this.db.getAllFromIndex('reviews', 'byKey', key);
+  }
+
+  getMeta(name: string): Promise<unknown> {
+    return this.db.get('meta', name).then((record) => record?.value);
+  }
+
+  async setMeta(name: string, value: unknown) {
+    await this.db.put('meta', { name, value });
+  }
+
+  /** Everything a backup holds: all progress (orphans included) and the whole review log. */
+  async exportData(): Promise<BackupData> {
+    const [progress, reviews] = await Promise.all([
+      this.db.getAll('progress'),
+      this.db.getAll('reviews'),
+    ]);
+    return { progress, reviews };
+  }
+
+  /**
+   * Loads a backup. `merge` keeps, per card and direction, whichever copy was reviewed last, and
+   * adds any reviews not already logged. `replace` deletes everything first: the only thing in
+   * the app that ever removes progress, and only when asked. Either way it's one transaction,
+   * queued behind any marks still being saved.
+   */
+  importData(
+    data: BackupData,
+    mode: 'merge' | 'replace'
+  ): Promise<ImportResult> {
+    const run = this.pending.then(async () => {
+      const tx = this.db.transaction(['progress', 'reviews'], 'readwrite');
+      const progressStore = tx.objectStore('progress');
+      const reviewStore = tx.objectStore('reviews');
+
+      let write = data.progress;
+      let kept = 0;
+      if (mode === 'replace') {
+        await Promise.all([progressStore.clear(), reviewStore.clear()]);
+      } else {
+        ({ write, kept } = mergeProgress(this.records, data.progress));
+      }
+      await Promise.all([
+        ...write.map((record) => progressStore.put(record)),
+        ...data.reviews.map((review) => reviewStore.put(review)),
+        tx.done,
+      ]);
+
+      this.records.clear();
+      for (const record of await this.db.getAll('progress'))
+        this.records.set(record.key, record);
+      return {
+        mode,
+        written: write.length,
+        kept,
+        reviews: data.reviews.length,
+      };
+    });
+    this.pending = run.catch(() => undefined);
+    return run;
   }
 
   close() {

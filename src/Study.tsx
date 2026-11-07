@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 
+import { Notices } from './components/Notices.tsx';
 import { indexCards } from './content/display.ts';
 import type { VocabDeck } from './content/schema.ts';
 import { EndScreen } from './screens/EndScreen.tsx';
 import { SessionScreen } from './screens/SessionScreen.tsx';
+import { SettingsScreen } from './screens/SettingsScreen.tsx';
 import { SetupScreen } from './screens/SetupScreen.tsx';
 import {
   clearResume,
@@ -18,12 +20,13 @@ import type { ProgressStore } from './storage/progress.ts';
 type Screen =
   | { name: 'setup' }
   | { name: 'session'; setup: VocabSetup; state: SessionState; startedAt: Date }
-  | { name: 'end'; state: SessionState };
+  | { name: 'end'; state: SessionState }
+  | { name: 'settings' };
 
 /**
- * Setup → session → end, with no router (GitHub Pages can't rewrite URLs). Starting a session
- * pushes one history entry, so the browser's or Android's Back button returns to setup instead of
- * leaving the app, and the app's own exit buttons simply go back.
+ * Setup → session → end (or setup → settings), with no router (GitHub Pages can't rewrite URLs).
+ * Leaving setup pushes one history entry, so the browser's or Android's Back button returns to
+ * setup instead of leaving the app, and the app's own exit buttons simply go back.
  */
 export const Study = ({
   decks,
@@ -43,10 +46,12 @@ export const Study = ({
     return () => window.removeEventListener('popstate', onPop);
   }, []);
 
-  const begin = (setup: VocabSetup, state: SessionState, startedAt: Date) => {
-    window.history.pushState({ swahili: 'session' }, '');
-    setScreen({ name: 'session', setup, state, startedAt });
+  const open = (next: Exclude<Screen, { name: 'setup' }>) => {
+    window.history.pushState({ swahili: next.name }, '');
+    setScreen(next);
   };
+  const begin = (setup: VocabSetup, state: SessionState, startedAt: Date) =>
+    open({ name: 'session', setup, state, startedAt });
   const leave = useCallback(() => window.history.back(), []);
   const finish = useCallback(
     (state: SessionState) => setScreen({ name: 'end', state }),
@@ -82,8 +87,12 @@ export const Study = ({
             clearResume();
             rerender();
           }}
+          onSettings={() => open({ name: 'settings' })}
+          notices={<Notices />}
         />
       );
+    case 'settings':
+      return <SettingsScreen store={store} onBack={leave} />;
     case 'session':
       return (
         <SessionScreen

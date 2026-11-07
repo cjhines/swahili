@@ -67,6 +67,34 @@ The block has no `add_header`, so the vhost's server-level security headers (HST
 `X-Frame-Options`, `nosniff`, `Referrer-Policy`) still apply. GitHub adds
 `Access-Control-Allow-Origin: *` and `Cache-Control: max-age=600`.
 
+## The service worker
+
+`vite-plugin-pwa` (Workbox) generates `/swahili/sw.js` with scope `/swahili/`. It precaches the
+whole build, including the lazily loaded FSRS model chunk, so the installed app works offline.
+
+**How a deploy reaches users:**
+
+1. On launch, and hourly while the app stays open, the browser checks for a new `sw.js`. GitHub
+   Pages serves it with `max-age=600`, but browsers bypass the HTTP cache for these checks.
+2. A new version installs in the background and **waits**. Nothing reloads by itself.
+3. The setup screen shows **"A new version is ready · Update now"**, never a session screen.
+   Otherwise the new version takes over the next time the app is fully closed and reopened.
+
+So a fix can take a while to reach a phone that keeps the app open. Tapping "Update now" is
+instant.
+
+### Kill switch
+
+If a service worker ever ships broken and keeps serving a bad build, a fixed deploy alone won't
+reach users, because the broken worker is what serves the app. To remove it everywhere:
+
+1. In `vite.config.ts`, add `selfDestroying: true` to the `VitePWA({...})` options and deploy.
+   Each browser's next update check installs a worker that unregisters itself and deletes its
+   caches.
+2. Once things are fixed, remove the option and deploy again.
+
+Progress lives in IndexedDB, not in the service worker's caches, so neither step touches it.
+
 ## Constraints this setup imposes on the app
 
 - **Base path:** `vite.config.ts` sets `base: '/swahili/'`. The Playwright smoke test fails if

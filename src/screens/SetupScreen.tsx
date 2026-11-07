@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 
 import { Choice } from '../components/Choice.tsx';
 import type { VocabDeck } from '../content/schema.ts';
@@ -58,7 +58,22 @@ type Props = {
   onStart: (setup: VocabSetup) => void;
   onResume: (run: ResumableRun) => void;
   onDiscardResume: () => void;
+  onSettings: () => void;
+  /** Update ready, add to Home Screen: shown above everything else. */
+  notices?: ReactNode;
 };
+
+const SettingsIcon = () => (
+  <svg viewBox="0 0 24 24" width="1.3em" height="1.3em" aria-hidden="true">
+    <path
+      d="M4 7h10M18 7h2M4 17h4M12 17h8M16 5v4M10 15v4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
 
 export const SetupScreen = ({
   decks,
@@ -67,6 +82,8 @@ export const SetupScreen = ({
   onStart,
   onResume,
   onDiscardResume,
+  onSettings,
+  notices,
 }: Props) => {
   const [setup, setSetupState] = useState(() => loadVocabSetup(decks));
   const setSetup = (next: VocabSetup) => {
@@ -99,7 +116,17 @@ export const SetupScreen = ({
           Kadi za Kiswahili
           <span>Swahili flashcards</span>
         </h1>
+        <button
+          type="button"
+          className="icon-btn"
+          aria-label="Settings and backup"
+          onClick={onSettings}
+        >
+          <SettingsIcon />
+        </button>
       </header>
+
+      {notices}
 
       {resume && (
         <section className="resume" aria-label="Unfinished run">
