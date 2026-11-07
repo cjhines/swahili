@@ -1,0 +1,134 @@
+.flashcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: min(52dvh, 26rem);
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-align: center;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  user-select: none;
+  /* Vertical scrolling stays with the browser; horizontal movement is ours, for swiping. */
+  touch-action: pan-y;
+  transition: transform 180ms ease;
+}
+
+.flashcard.is-flipped {
+  cursor: grab;
+  justify-content: flex-start;
+}
+
+.flashcard.is-dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.flashcard-prompt {
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.is-flipped .flashcard-prompt {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.flashcard-hint {
+  font-size: 1rem;
+}
+
+.flashcard-cue {
+  position: absolute;
+  bottom: 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.flashcard-answer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.flashcard-answer-text {
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--brand);
+}
+
+.flashcard-meta {
+  margin: 0;
+  color: var(--muted);
+}
+
+.flashcard-meta span {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.flashcard-example {
+  margin: 0.5rem 0 0;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+.flashcard-example p {
+  margin: 0;
+}
+
+.flashcard-example p[lang='sw'] {
+  font-weight: 600;
+}
+
+.flashcard-note {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* The label that fades in while swiping */
+.flashcard-stamp {
+  position: absolute;
+  top: 1rem;
+  padding: 0.2rem 0.7rem;
+  border: 3px solid currentColor;
+  border-radius: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: var(--lean, 0);
+}
+
+.stamp-got {
+  left: 1rem;
+  color: var(--got);
+  transform: rotate(-8deg);
+}
+
+.stamp-missed {
+  right: 1rem;
+  color: var(--missed);
+  transform: rotate(8deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flashcard {
+    transition: none;
+  }
+}

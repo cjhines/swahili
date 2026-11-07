@@ -1,19 +1,63 @@
+import { useEffect, useState } from 'react';
 import decks from 'virtual:decks';
 
-// Placeholder until milestone 4 brings the real setup screen. It lists the decks so the live
-// site shows that deck validation and bundling work end to end.
-export const App = () => (
-  <main className="placeholder">
-    <h1>
-      Karibu! <span lang="sw">Kadi za Kiswahili</span>
-    </h1>
-    <p>Swahili flashcards are on the way. Decks so far:</p>
-    <ul className="deck-list">
-      {decks.map((deck) => (
-        <li key={deck.id}>
-          {deck.title} <span>{deck.cards.length} cards</span>
-        </li>
-      ))}
-    </ul>
-  </main>
-);
+import { Study } from './Study.tsx';
+import { createScheduler } from './scheduler/scheduler.ts';
+import { ProgressStore } from './storage/progress.ts';
+
+type Boot =
+  | { status: 'loading' }
+  | { status: 'ready'; store: ProgressStore }
+  | { status: 'error'; message: string };
+
+const useProgressStore = (): Boot => {
+  const [boot, setBoot] = useState<Boot>({ status: 'loading' });
+  useEffect(() => {
+    let cancelled = false;
+    let opened: ProgressStore | undefined;
+    (async () => {
+      try {
+        const scheduler = await createScheduler();
+        opened = await ProgressStore.open({ scheduler });
+        if (cancelled) opened.close();
+        else setBoot({ status: 'ready', store: opened });
+      } catch (error) {
+        if (!cancelled)
+          setBoot({
+            status: 'error',
+            message: error instanceof Error ? error.message : String(error),
+          });
+      }
+    })();
+    return () => {
+      cancelled = true;
+      opened?.close();
+    };
+  }, []);
+  return boot;
+};
+
+export const App = () => {
+  const boot = useProgressStore();
+  switch (boot.status) {
+    case 'loading':
+      return (
+        <div className="splash" aria-busy="true">
+          Loading…
+        </div>
+      );
+    case 'error':
+      return (
+        <main className="splash" role="alert">
+          <h1>Can&apos;t save progress here</h1>
+          <p>
+            This browser won&apos;t let the app store your progress. Private
+            browsing or blocked site data can cause this.
+          </p>
+          <p className="muted">{boot.message}</p>
+        </main>
+      );
+    case 'ready':
+      return <Study decks={decks} store={boot.store} />;
+  }
+};

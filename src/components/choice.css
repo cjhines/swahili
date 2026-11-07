@@ -1,0 +1,78 @@
+.choice {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.choice-options {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+.choice-option {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.choice-option input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.choice-option span {
+  display: grid;
+  place-items: center;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: calc(var(--radius) - 4px);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.25;
+  color: var(--muted);
+  transition:
+    background 120ms ease,
+    color 120ms ease;
+}
+
+.choice-option input:checked + span {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.choice-option input:focus-visible + span {
+  outline: 3px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.choice-option input:disabled {
+  cursor: not-allowed;
+}
+
+.choice-option input:disabled + span {
+  opacity: 0.5;
+}
+
+.choice-description {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+}

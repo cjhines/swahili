@@ -1,8 +1,24 @@
+/* Design tokens. Every colour is defined once here and redefined for dark mode. */
 :root {
   --bg: #f4efe4;
+  --surface: #fffdf8;
+  --surface-2: #ece5d6;
   --ink: #1d2421;
-  --brand: #0f5b4a;
   --muted: #5d6662;
+  --line: rgb(29 36 33 / 0.12);
+  --brand: #0f5b4a;
+  --brand-ink: #ffffff;
+  --accent: #d98c2b;
+  --got: #1f7a4d;
+  --got-ink: #ffffff;
+  --missed: #b5452a;
+  --missed-ink: #ffffff;
+  --focus: #d98c2b;
+  --shadow: 0 1px 2px rgb(29 36 33 / 0.06), 0 8px 24px rgb(29 36 33 / 0.08);
+
+  --radius: 14px;
+  --radius-lg: 22px;
+  --gutter: 16px;
 
   color-scheme: light dark;
   font-family:
@@ -14,14 +30,24 @@
   line-height: 1.5;
   color: var(--ink);
   background: var(--bg);
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #131816;
+    --surface: #1c2320;
+    --surface-2: #26302c;
     --ink: #e9e4d8;
-    --brand: #5cc2a6;
     --muted: #9aa39f;
+    --line: rgb(233 228 216 / 0.14);
+    --brand: #5cc2a6;
+    --brand-ink: #0b1a15;
+    --got: #4cc38a;
+    --got-ink: #0b1a15;
+    --missed: #f08a6b;
+    --missed-ink: #1f0d07;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
   }
 }
 
@@ -34,53 +60,120 @@
 body {
   margin: 0;
   min-height: 100dvh;
+  background: var(--bg);
 }
 
-.placeholder {
-  display: grid;
-  place-content: center;
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* One column, phone-width first, centred on larger screens. */
+.page {
+  display: flex;
+  flex-direction: column;
+  max-width: 34rem;
   min-height: 100dvh;
-  padding: 2rem;
-  text-align: center;
+  margin: 0 auto;
+  padding: max(var(--gutter), env(safe-area-inset-top)) var(--gutter)
+    max(var(--gutter), env(safe-area-inset-bottom));
 }
 
-.placeholder h1 {
-  margin: 0 0 0.5rem;
-  font-size: clamp(1.75rem, 6vw, 2.75rem);
-  color: var(--brand);
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.placeholder h1 span {
-  display: block;
-  font-size: 0.6em;
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  padding: 0.75rem 1.25rem;
+  border: 0;
+  border-radius: var(--radius);
+  font-weight: 650;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    transform 80ms ease,
+    filter 120ms ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+
+.btn-got {
+  background: var(--got);
+  color: var(--got-ink);
+}
+
+.btn-missed {
+  background: var(--missed);
+  color: var(--missed-ink);
+}
+
+.btn-quiet {
+  background: var(--surface-2);
   color: var(--ink);
 }
 
-.placeholder p {
-  margin: 0;
+.btn-block {
+  width: 100%;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--surface-2);
+}
+
+.muted {
   color: var(--muted);
 }
 
-.deck-list {
-  margin: 1.25rem auto 0;
-  padding: 0;
-  list-style: none;
+/* Shown while the progress database opens. */
+.splash {
   display: grid;
-  gap: 0.5rem;
-  min-width: min(18rem, 100%);
-}
-
-.deck-list li {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.6rem 0.9rem;
-  border-radius: 0.6rem;
-  background: color-mix(in srgb, var(--brand) 10%, transparent);
-  font-weight: 600;
-}
-
-.deck-list li span {
-  font-weight: 400;
+  place-content: center;
+  min-height: 100dvh;
+  padding: var(--gutter);
+  text-align: center;
   color: var(--muted);
 }

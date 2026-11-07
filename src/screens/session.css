@@ -1,0 +1,78 @@
+.session {
+  gap: 0.75rem;
+}
+
+.session-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: -0.5rem;
+}
+
+.session-progress {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.session-progress .muted {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.session-count {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--brand);
+  transition: width 200ms ease;
+}
+
+.save-error {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius);
+  background: var(--missed);
+  color: var(--missed-ink);
+  font-size: 0.9rem;
+}
+
+.session-card {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+/* Answer buttons sit at the bottom, in thumb reach */
+.session-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.session-actions .btn {
+  min-height: 3.75rem;
+  font-size: 1.1rem;
+}
+
+.btn-wide {
+  grid-column: 1 / -1;
+}

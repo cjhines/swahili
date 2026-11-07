@@ -1,0 +1,81 @@
+.end h1 {
+  margin: 2rem 0 1.5rem;
+  font-size: 2.25rem;
+  line-height: 1.1;
+  color: var(--brand);
+}
+
+.end h1 span {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.end-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin: 0 0 1.75rem;
+}
+
+.end-stats div {
+  padding: 0.9rem 0.5rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: center;
+}
+
+.end-stats dt {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.end-stats dd {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-got {
+  color: var(--got);
+}
+
+.stat-missed {
+  color: var(--missed);
+}
+
+.end-missed ul {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--line);
+}
+
+.end-missed li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+}
+
+.end-missed li span:first-child {
+  font-weight: 650;
+}
+
+.end-missed li span:last-child {
+  color: var(--muted);
+  text-align: right;
+}
+
+.end-footer {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}

@@ -101,10 +101,12 @@ swahili/
 │   └── update-ids.ts         # appends new IDs to ids.lock
 ├── src/
 │   ├── main.tsx
-│   ├── App.tsx               # screen state machine; no router
+│   ├── App.tsx               # boot: opens the progress store, then <Study>
+│   ├── Study.tsx             # screen state machine (setup → session → end); no router
 │   ├── domain.ts             # Direction, Grade, Mode, ProgressKey
-│   ├── screens/              # Setup, Card, End, Settings (export/import)
-│   ├── components/
+│   ├── screens/              # SetupScreen, SessionScreen, EndScreen; Settings (export/import) in M5
+│   ├── components/           # Flashcard (tap + swipe), Choice (segmented radios)
+│   ├── ui/format.ts          # "in 3 hours", plurals
 │   ├── content/
 │   │   ├── schema.ts         # Zod schemas, the source of truth for deck shape
 │   │   ├── validate.ts       # parse + validate, with file:line errors; no fs, so shared by all callers
@@ -147,7 +149,7 @@ swahili/
 | **ESLint 9 (flat) + Prettier** | Copied from cjhin.es (universe + typescript-eslint). One difference: relative imports always carry their extension (`'./schema.ts'`), which Vite's upcoming native config loader requires |
 | **Plain CSS + custom properties** | The app is small. Part colours live in `theme.css` |
 | **`yaml`** (eemeli) | Follows YAML 1.2, so `en: no` stays a string rather than becoming `false` |
-| **Zod 4** | One source for runtime validation, TS types (`z.infer`) and the editor's JSON Schema (`z.toJSONSchema`) |
+| **Zod 4** | One source for validation, TS types (`z.infer`) and the editor's JSON Schema (`z.toJSONSchema`). Full Zod for the build-time deck schema; **`zod/mini`** in anything the app ships (localStorage, backups), which cut it from 83 kB to 22 kB of the bundle |
 | **ts-fsrs v6 (FSRS-7 model)** | FSRS, the scheduler modern Anki uses, with short-term (same-day) reviews built in |
 | **`idb`** | Tiny promise wrapper. Access is just "load everything, put one", so Dexie's query layer isn't needed |
 | **vite-plugin-pwa** (Workbox `generateSW`) | Manifest, precaching and update flow, scoped to `/swahili/` |
@@ -342,8 +344,9 @@ isDue(state, now)       // has state and dueAt <= now
 
 - `swahili:setup`: the last setup-screen choices, one set per deck kind.
 - `swahili:resume`: an unfinished Complete deck run, holding the queue (card IDs, plus the chosen
-  verb for Nani na Lini?), the position and `startedAt`. It's ignored after 24 hours, or if any card
-  in it no longer exists.
+  verb for Nani na Lini?), the position, `startedAt` and `savedAt`. It's deleted 24 hours after the
+  **last mark** (not the start), or if any card in it no longer exists. It always resumes on the
+  front of the card.
 - `swahili:installNudgeDismissedAt`
 
 ### Session logic: pure, in `session/`
