@@ -2,45 +2,62 @@ import { join } from 'node:path';
 import { normalizePath, type Plugin } from 'vite';
 
 import { formatErrors, parseDecks } from '../validate.ts';
-import { loadDeckSources, VOCAB_DIR } from './load.ts';
+import { loadDeckSources, loadNaniRules, NANI_DIR, VOCAB_DIR } from './load.ts';
 
-const VIRTUAL_ID = 'virtual:decks';
-const RESOLVED_ID = `\0${VIRTUAL_ID}`;
+const MODULES = {
+  'virtual:decks': (root: string) => {
+    const { decks, errors } = parseDecks(loadDeckSources(root));
+    return { data: decks, errors };
+  },
+  'virtual:nani-rules': (root: string) => {
+    const { data, errors } = loadNaniRules(root);
+    return { data, errors };
+  },
+};
+type VirtualId = keyof typeof MODULES;
+const isVirtual = (id: string): id is VirtualId => id in MODULES;
 
 /**
- * Serves the validated decks as `import decks from 'virtual:decks'`. An invalid deck fails
- * `vite build` (and shows the error overlay in dev) with file:line for every problem, so a
- * broken deck can never be deployed. Editing, adding or removing a deck file reloads the page.
+ * Serves validated content as virtual modules:
+ *   import decks from 'virtual:decks'            every vocabulary deck
+ *   import rules from 'virtual:nani-rules'       the Nani na Lini? grammar (fixtures stay out)
+ * An invalid file fails `vite build` (and shows the error overlay in dev) with file:line for
+ * every problem, so broken content can never be deployed. Editing any of it reloads the page.
  */
 export const decksPlugin = (): Plugin => {
   let root = process.cwd();
 
   return {
-    name: 'swahili-decks',
+    name: 'swahili-content',
 
     configResolved(config) {
       root = config.root;
     },
 
     resolveId(id) {
-      return id === VIRTUAL_ID ? RESOLVED_ID : undefined;
+      return isVirtual(id) ? `\0${id}` : undefined;
     },
 
     load(id) {
-      if (id !== RESOLVED_ID) return undefined;
-      const { decks, errors } = parseDecks(loadDeckSources(root));
+      const name = id.slice(1);
+      if (!id.startsWith('\0') || !isVirtual(name)) return undefined;
+      const { data, errors } = MODULES[name](root);
       if (errors.length)
-        this.error(`Invalid deck files:\n${formatErrors(errors)}`);
-      return `export default ${JSON.stringify(decks)};`;
+        this.error(`Invalid content files:\n${formatErrors(errors)}`);
+      return `export default ${JSON.stringify(data)};`;
     },
 
     configureServer(server) {
-      const dir = normalizePath(join(root, VOCAB_DIR));
-      server.watcher.add(dir);
+      const dirs = [VOCAB_DIR, NANI_DIR].map((dir) =>
+        normalizePath(join(root, dir))
+      );
+      server.watcher.add(dirs);
       const reload = (file: string) => {
-        if (!normalizePath(file).startsWith(dir)) return;
-        const mod = server.moduleGraph.getModuleById(RESOLVED_ID);
-        if (mod) server.moduleGraph.invalidateModule(mod);
+        if (!dirs.some((dir) => normalizePath(file).startsWith(dir))) return;
+        for (const name of Object.keys(MODULES)) {
+          const mod = server.moduleGraph.getModuleById(`\0${name}`);
+          if (mod) server.moduleGraph.invalidateModule(mod);
+        }
         server.ws.send({ type: 'full-reload' });
       };
       server.watcher

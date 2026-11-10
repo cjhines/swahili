@@ -177,7 +177,7 @@
               "sw": {
                 "type": "string",
                 "pattern": "^k[uw][a-z]+$",
-                "description": "The ku- form, e.g. kusoma."
+                "description": "The ku- form, e.g. kusoma. Grammar quirks (kwenda keeping its kw-, kuwa never being conjugated) live in decks/nani-na-lini/rules.yaml, not here."
               },
               "alt": {
                 "description": "Other accepted Swahili forms, e.g. alfu moja for elfu moja. Shown on the answer side.",
@@ -198,11 +198,6 @@
                 "type": "string",
                 "pattern": "^\\S(.*\\S)?$",
                 "description": "A short note shown on the answer side."
-              },
-              "stem": {
-                "description": "Only if it cannot be derived by dropping ku-/kw- (kusoma → soma, kwenda → enda).",
-                "type": "string",
-                "pattern": "^[a-z]+$"
               },
               "en": {
                 "type": "object",
@@ -257,18 +252,6 @@
                 ],
                 "additionalProperties": false,
                 "description": "An example sentence, shown on the answer side."
-              },
-              "nani": {
-                "description": "Nani na Lini? overrides for this verb.",
-                "type": "object",
-                "properties": {
-                  "exclude": {
-                    "description": "Never use this verb in Nani na Lini?, e.g. kuwa.",
-                    "type": "boolean",
-                    "const": true
-                  }
-                },
-                "additionalProperties": false
               }
             },
             "required": [

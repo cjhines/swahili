@@ -92,8 +92,9 @@ swahili/
 │   │   ├── numbers.yaml
 │   │   └── time-and-dates.yaml
 │   └── nani-na-lini/
-│       ├── rules.yaml        # subjects, tenses, negatives, have, English templates, labels
-│       └── fixtures.yaml     # known-correct forms that Chris checks against his sheets
+│       ├── rules.yaml        # subjects, tenses, negatives, have, English templates, labels, verb quirks
+│       ├── fixtures.yaml     # known-correct forms that Chris checks against his sheets
+│       └── forms.md          # generated: every fixture with English and parts, for checking
 ├── schema/
 │   └── vocab-deck.schema.json   # generated from Zod; gives editor autocomplete in the YAML
 ├── assets/icons/             # SVG sources for the app icons
@@ -119,9 +120,12 @@ swahili/
 │   │       ├── load.ts       # reads decks/vocab/*.yaml
 │   │       └── vite-plugin.ts    # `import decks from 'virtual:decks'`
 │   ├── nani/
-│   │   ├── patterns.ts       # enumerates the 80 patterns and their IDs
-│   │   ├── conjugate.ts      # pure: (verb, pattern) → { sw, parts }
-│   │   └── english.ts        # pure: (verb, pattern) → "We didn't read"
+│   │   ├── patterns.ts       # enumerates the 80 patterns and their IDs (Zod-free: the app imports it)
+│   │   ├── conjugate.ts      # pure: (rules, pattern, verb) → { sw, parts }
+│   │   ├── english.ts        # pure: (rules, pattern, verb) → "We didn't read"
+│   │   ├── schema.ts         # Zod for rules.yaml and fixtures.yaml (build time only)
+│   │   ├── fixtures.ts       # proves the rules against fixtures.yaml
+│   │   └── forms.ts          # renders forms.md
 │   ├── scheduler/
 │   │   └── scheduler.ts      # pure FSRS wrapper
 │   ├── session/
@@ -195,7 +199,7 @@ Card kinds, with required fields in **bold**:
 | `kind` | Fields |
 | --- | --- |
 | `noun` | **`id`, `sw`, `en`**, `plural`, `alt`, `example`, `hint`, `note` |
-| `verb` | **`id`, `sw` (ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `example`**, `stem`, `nani`, `alt`, `hint`, `note` |
+| `verb` | **`id`, `sw` (ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `example`**, `alt`, `hint`, `note` |
 | `word` | **`id`, `sw`, `en`**, `alt`, `example`, `hint`, `note` (numbers, days, adjectives, adverbs, phrases, figures of speech) |
 
 - `alt` lists other accepted Swahili forms, such as `alt: [alfu moja]` for *elfu moja*. They're
@@ -204,9 +208,10 @@ Card kinds, with required fields in **bold**:
 
 - `hint` is shown on the **front** to tell apart words with the same English, e.g.
   `hint: (for someone)`.
-- `stem` is normally derived from `sw` (`kusoma` → `soma`, `kwenda` → `enda`, `kula` → `la`).
-  Set it only to override that.
-- `nani` holds per-verb overrides for Nani na Lini?, e.g. `nani: { exclude: true }` for *kuwa*.
+- A verb's grammar quirks (*kwenda* keeping its *kw-*, *kuwa* never being conjugated) are facts
+  about Swahili, not about a deck, so they live in `rules.yaml` under `verbs:`, keyed by the ku-
+  form. They don't go on the card. (The draft plan had `stem` and `nani` fields here. They were
+  never used, and were removed in milestone 6.)
 - Claude writes every English verb form, so nobody has to fill them in by hand. CI rejects any
   verb that's missing one.
 - A verb can sit in a themed deck (e.g. *kula* in *Food*). Nani na Lini? draws from every
@@ -214,32 +219,22 @@ Card kinds, with required fields in **bold**:
 
 ### Nani na Lini? rules
 
-`rules.yaml` holds all the grammar as data, so a fix is an edit to a data file, not a code change:
+`decks/nani-na-lini/rules.yaml` holds all the grammar as data, so a fix is an edit to a data
+file, not a code change. It has these sections:
 
-```yaml
-subjects:
-  - { id: i,      en: I,              be: am,  have: have, do: do,   pos: ni, neg: si }
-  - { id: you,    en: you,            be: are, have: have, do: do,   pos: u,  neg: hu }
-  - { id: heshe,  en: he/she,         be: is,  have: has,  do: does, pos: a,  neg: ha }
-  - { id: we,     en: we,             be: are, have: have, do: do,   pos: tu, neg: hatu }
-  - { id: youpl,  en: you (plural),   be: are, have: have, do: do,   pos: m,  neg: ham }
-  - { id: they,   en: they,           be: are, have: have, do: do,   pos: wa, neg: hawa }
-  - { id: it,     en: it,             be: is,  have: has,  do: does, pos: i,  neg: hai }
-  - { id: things, en: they (things),  be: are, have: have, do: do,   pos: zi, neg: hazi }
+- `subjects`: each subject's prefix (`pos: tu`), its negative as parts (`neg: [ha, tu]`, or one
+  fused part `[si]`), and am/is/are, have/has, do/does for the English.
+- `tenses`: a positive and negative marker, each with its plain-language label (`li` "past", `ja`
+  "not yet"). `kept` says what a kept *ku-* does in that tense: `keep` it (*ni·ta·ku·la*), `drop`
+  it (*si·ja·la*), or `merge` it with a marker that is itself *ku* (*si·ku·la*).
+- `presentNegativeEnding`, `have`, `labels`.
+- `english`: the templates, e.g. `past: { pos: '{past}', neg: "didn't {base}" }`. A misspelt
+  placeholder fails the build.
+- `verbs`: quirks by ku- form: `keepKu` (*kwenda*, *kwisha*), `exclude` (*kuwa*), `stem`.
 
-tenses:
-  present: { pos: na, neg: ~,  negEnding: i, label: now }
-  past:    { pos: li, neg: ku, label: past }
-  future:  { pos: ta, neg: ta, label: future }
-  perfect: { pos: me, neg: ja, label: done }
-
-english:
-  present: { pos: "{be} {ing}",      neg: "{be} not {ing}" }
-  past:    { pos: "{past}",          neg: "didn't {base}" }
-  future:  { pos: "will {base}",     neg: "won't {base}" }
-  perfect: { pos: "{have} {participle}", neg: "{have}n't {participle} yet" }
-  have:    { pos: "{have}",          neg: "{do}n't have" }
-```
+The engine (`src/nani/conjugate.ts`, `english.ts`) is pure. It returns the word plus labelled,
+role-tagged parts (subject, negative, tense, ku, stem, ending, have) for the coloured breakdown.
+The app gets the validated rules as `virtual:nani-rules`. The fixtures never ship.
 
 The rules the engine applies, each covered by fixtures:
 
@@ -258,17 +253,25 @@ The rules the engine applies, each covered by fixtures:
 **Pattern IDs** are built from their parts: `nani-<subject>-<tense>-<pos|neg>`, e.g.
 `nani-we-past-neg` or `nani-things-have-pos`. That's 8 × 4 × 2 + 8 × 2 = **80 patterns**.
 
-**Fixtures** list known-correct forms:
+**Fixtures** (`fixtures.yaml`) list known-correct forms as tables, one per verb and tense, the
+way a grammar sheet does:
 
 ```yaml
-- { verb: kusoma, subject: we, tense: past,    polarity: neg, sw: hatukusoma, verified: false }
-- { verb: kula,   subject: i,  tense: present, polarity: pos, sw: ninakula,   verified: false }
-- { verb: kula,   subject: i,  tense: present, polarity: neg, sw: sili,       verified: false }
+- verb: kusoma
+  tense: past
+  pos: [nilisoma, ulisoma, alisoma, tulisoma, mlisoma, walisoma, ilisoma, zilisoma]
+  neg: [sikusoma, hukusoma, hakusoma, hatukusoma, hamkusoma, hawakusoma, haikusoma, hazikusoma]
+  verified: false
 ```
 
-CI fails if the engine disagrees with **any** fixture, verified or not. Claude writes the fixtures,
-and Chris flips `verified: true` once he has checked each one against his sheets. A tense doesn't
-ship in the app until all of its fixtures are verified.
+They cover a regular verb in full, have / don't have, one-syllable verbs (*kula*, *kunywa*), *kwenda*,
+a verb not ending in *-a* (*kujibu*), and a vowel-initial verb (*kuosha*), plus English prompts.
+
+CI fails if the engine disagrees with **any** fixture, verified or not, and points at the
+file:line. Claude writes the fixtures; Chris checks each table against his sheets, and it's marked
+`verified: true`. **`forms.md`** (`npm run nani:forms`, kept current by CI) shows every table with
+its English and dotted parts, for that check. A tense doesn't ship in the app until all of its
+tables are verified.
 
 ### ID rules, enforced by `npm run decks:check` in CI
 

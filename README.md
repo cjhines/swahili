@@ -21,7 +21,8 @@ npm run lint
 npm run typecheck
 npm run build        # → dist/
 npm run e2e          # smoke-tests the production build under /swahili/ (Playwright)
-npm run decks:check  # validates the deck files exactly as CI does
+npm run decks:check  # validates decks/ (and the Nani na Lini? rules) exactly as CI does
+npm run nani:forms   # regenerates decks/nani-na-lini/forms.md after changing rules or fixtures
 ```
 
 To add cards, see [CONTRIBUTING.md](CONTRIBUTING.md).

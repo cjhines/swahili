@@ -1,0 +1,80 @@
+# Nani na Lini? — the grammar, as data.
+#
+# The engine (src/nani/conjugate.ts) builds every form from this file. To fix a rule, fix it
+# here; fixtures.yaml then proves the fix against known-correct forms (`npm run decks:check`).
+#
+# How a form is built:
+#   positive:  subject + tense marker + stem              tu · li · soma      we read
+#   negative:  negative subject + tense marker + stem     ha · tu · ku · soma we didn't read
+#   present negative has no marker; a final -a becomes -i  si · som · i        I am not reading
+#   have:      subject + na                               tu · na             we have
+#
+# `label` is the plain-language word shown under each part on the answer side.
+
+subjects:
+  # pos: the subject prefix. neg: the negative prefix, either one fused part (si, hu, ha)
+  # or "ha" + the subject prefix as two parts. be/have/do: for the English sentence.
+  - { id: i, en: I, be: am, have: have, do: do, pos: ni, neg: [si] }
+  - { id: you, en: you, be: are, have: have, do: do, pos: u, neg: [hu] }
+  - { id: heshe, en: he/she, be: is, have: has, do: does, pos: a, neg: [ha] }
+  - { id: we, en: we, be: are, have: have, do: do, pos: tu, neg: [ha, tu] }
+  - {
+      id: youpl,
+      en: you (plural),
+      be: are,
+      have: have,
+      do: do,
+      pos: m,
+      neg: [ha, m],
+    }
+  - { id: they, en: they, be: are, have: have, do: do, pos: wa, neg: [ha, wa] }
+  # i/zi: "it" and "they" for things in the N- class (nyumba, nyumba).
+  - { id: it, en: it, be: is, have: has, do: does, pos: i, neg: [ha, i] }
+  - {
+      id: things,
+      en: they (things),
+      be: are,
+      have: have,
+      do: do,
+      pos: zi,
+      neg: [ha, zi],
+    }
+
+tenses:
+  # `kept` says what happens to the ku- of a verb that keeps it (one-syllable verbs like kula,
+  # and kwenda): keep it (ninakula), drop it (sijala), or merge it with a marker that is itself
+  # ku (sikula, sikwenda). Positive markers always keep it.
+  present:
+    pos: { marker: na, label: now }
+    neg: ~ # no marker: the verb's final -a becomes -i instead (see presentNegativeEnding)
+  past:
+    pos: { marker: li, label: past }
+    neg: { marker: ku, label: past, kept: merge }
+  future:
+    pos: { marker: ta, label: future }
+    neg: { marker: ta, label: future, kept: keep }
+  perfect:
+    pos: { marker: me, label: done }
+    neg: { marker: ja, label: not yet, kept: drop }
+
+presentNegativeEnding: { ending: i, label: not } # soma → somi; verbs not ending in -a keep their ending
+have: { marker: na, label: have }
+labels:
+  negative: not # the "ha" in ha·tu
+  keptKu: kept # the ku in ni·na·ku·la
+
+english:
+  # Put after the subject: "We" + "didn't read". The present is always "-ing", so a bare past
+  # like "We read" can only mean the past, even for verbs spelled the same in both.
+  present: { pos: '{be} {ing}', neg: '{be} not {ing}' }
+  past: { pos: '{past}', neg: "didn't {base}" }
+  future: { pos: 'will {base}', neg: "won't {base}" }
+  perfect: { pos: '{have} {participle}', neg: "{have}n't {participle} yet" }
+  have: { pos: '{have}', neg: "{do}n't have" }
+
+verbs:
+  # Quirks of particular verbs, keyed by their ku- form. One-syllable stems (kula, kunywa, kuja)
+  # are detected automatically and keep their ku-; list only what can't be worked out.
+  kwenda: { keepKu: true } # ninakwenda, siendi, sikwenda, sitakwenda, sijaenda
+  kwisha: { keepKu: true }
+  kuwa: { exclude: true } # "to be" has its own forms; have / don't have covers kuwa na

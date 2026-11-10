@@ -81,13 +81,9 @@ export const Verb = z.strictObject({
   sw: z
     .string()
     .regex(/^k[uw][a-z]+$/, 'must be the ku- form in lowercase, e.g. kusoma')
-    .describe('The ku- form, e.g. kusoma.'),
-  stem: z
-    .string()
-    .regex(/^[a-z]+$/)
-    .optional()
     .describe(
-      'Only if it cannot be derived by dropping ku-/kw- (kusoma → soma, kwenda → enda).'
+      'The ku- form, e.g. kusoma. Grammar quirks (kwenda keeping its kw-, kuwa never being ' +
+        'conjugated) live in decks/nani-na-lini/rules.yaml, not here.'
     ),
   en: z
     .strictObject({
@@ -100,15 +96,6 @@ export const Verb = z.strictObject({
       'Every English form, needed to build Nani na Lini? prompts like "We didn\'t eat".'
     ),
   example: Example,
-  nani: z
-    .strictObject({
-      exclude: z
-        .literal(true)
-        .optional()
-        .describe('Never use this verb in Nani na Lini?, e.g. kuwa.'),
-    })
-    .optional()
-    .describe('Nani na Lini? overrides for this verb.'),
 });
 
 export const VocabCard = z.discriminatedUnion('kind', [Noun, Word, Verb], {

@@ -16,6 +16,7 @@
     "playwright.config.ts",
     "e2e",
     "scripts",
-    "src/content/node"
+    "src/content/node",
+    "src/**/*.node.test.ts"
   ]
 }

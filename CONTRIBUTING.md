@@ -24,7 +24,7 @@ errors as you type.
 | --- | --- | --- |
 | `word` (numbers, days, adjectives, phrases…) | `id`, `sw`, `en` | `alt`, `example`, `hint`, `note` |
 | `noun` | `id`, `sw`, `en` | `plural`, `alt`, `example`, `hint`, `note` |
-| `verb` | `id`, `sw` (the ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `example` | `stem`, `nani`, `alt`, `hint`, `note` |
+| `verb` | `id`, `sw` (the ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `example` | `alt`, `hint`, `note` |
 
 - `alt`: other accepted Swahili forms, e.g. `alt: [alfu moja]` for *elfu moja*.
 - `hint`: shown on the front when going English → Swahili, to tell apart words with the same
@@ -42,6 +42,22 @@ errors as you type.
   ```
 
 A verb can sit in any themed deck. Nani na Lini? picks up every `kind: verb` card wherever it is.
+
+## Nani na Lini? grammar
+
+Conjugations aren't written out card by card. They're built from
+`decks/nani-na-lini/rules.yaml` (subjects, tense markers, negatives, the English templates, and
+the quirks of particular verbs).
+
+- **A verb behaves oddly** (like *kwenda*, which keeps its *kw-*): add it under `verbs:` in
+  `rules.yaml`. One-syllable verbs (*kula*, *kunywa*) are detected automatically.
+- **A rule is wrong:** fix it in `rules.yaml`, then correct or add the affected forms in
+  `fixtures.yaml`.
+- **`fixtures.yaml`** holds known-correct forms, as tables per verb and tense. CI fails if the
+  rules produce anything different. Set `verified: true` on a table once it has been checked
+  against a grammar reference. A tense isn't offered in the app until all its tables are verified.
+- **`forms.md`** is the readable version: every table with English and the parts (*ha·tu·ku·soma*).
+  Regenerate it with `npm run nani:forms`; CI checks it's current.
 
 ## IDs: the one rule that matters
 
@@ -68,7 +84,9 @@ This runs exactly what CI runs on the decks. Every problem is reported as `file:
 
 - every file matches the schema, with no missing, misspelt or unexpected fields
 - no ID appears twice
-- every ID is in `ids.lock`, no published ID has disappeared, and no retired ID is back
+- every ID is in `ids.lock` (Nani na Lini? patterns included), no published ID has disappeared,
+  and no retired ID is back
+- every form in `fixtures.yaml` comes out of `rules.yaml` exactly, and `forms.md` is current
 - `schema/vocab-deck.schema.json` matches `src/content/schema.ts`. After changing the schema,
   run `npm run decks:schema`.
 
