@@ -51,8 +51,49 @@ verbs:
       past: { pos: '{was}', neg: "{was}n't" }
       future: { pos: will be, neg: "won't be" }
       perfect: { pos: '{have} become', neg: "{have}n't become yet" }
+  kuja: { base: come, past: came, participle: come, ing: coming }
+  kuona: { base: see, past: saw, participle: seen, ing: seeing, stative: true, third: sees }
+  kupenda: { base: like, past: liked, participle: liked, ing: liking, stative: true, third: likes }
+  kuelewa:
+    {
+      base: understand,
+      past: understood,
+      participle: understood,
+      ing: understanding,
+      stative: true,
+      third: understands,
+    }
+  kuhitaji: { base: need, past: needed, participle: needed, ing: needing, stative: true, third: needs }
+  kurudi: { base: return, past: returned, participle: returned, ing: returning }
 
 paradigms:
+  # Given in Chris's core-verbs list (2026-11-11), so verified; positives or negatives only,
+  # exactly as given.
+  - verb: kwenda
+    tense: present
+    subjects: [i]
+    pos: [ninakwenda]
+    verified: true
+    note: From Chris's core-verbs list. Keeps kw-; ninaenda is common too.
+  - verb: kuja
+    tense: past
+    subjects: [i]
+    pos: [nilikuja]
+    verified: true
+    note: From Chris's core-verbs list.
+  - verb: kula
+    tense: present
+    subjects: [i]
+    pos: [ninakula]
+    verified: true
+    note: From Chris's core-verbs list.
+  - verb: kuelewa
+    tense: present
+    subjects: [i]
+    neg: [sielewi]
+    verified: true
+    note: From Chris's core-verbs list. Sielewi, I don't understand.
+
   # Confirmed by Chris's tutor (2026-11-11): one-syllable verbs keep ku- in the na, li, ta and
   # me tenses. Only the forms the tutor gave, so these tables list positives only.
   - verb: kuwa
@@ -176,7 +217,7 @@ paradigms:
     pos: [ninakwenda, anakwenda]
     neg: [siendi, haendi]
     verified: false
-    note: Textbook forms. Everyday speech also says ninaenda, nilienda, nimeenda; check which your sheets teach.
+    note: Textbook forms (Chris's list confirms ninakwenda). Everyday speech also says ninaenda, nilienda, nimeenda.
   - verb: kwenda
     tense: past
     subjects: [i, heshe]
@@ -246,6 +287,39 @@ paradigms:
     neg: [siiti, haiti]
     verified: false
 
+  # Core verbs (2026-11-11): one-syllable kuja, a vowel stem (kuona), and stems ending in -i,
+  # which keep it in the present negative (sihitaji, sirudi).
+  - verb: kuja
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninakuja, anakuja]
+    neg: [siji, haji]
+    verified: false
+  - verb: kuja
+    tense: perfect
+    subjects: [i, heshe]
+    pos: [nimekuja, amekuja]
+    neg: [sijaja, hajaja]
+    verified: false
+  - verb: kuona
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninaona, anaona]
+    neg: [sioni, haoni]
+    verified: false
+  - verb: kuhitaji
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninahitaji, anahitaji]
+    neg: [sihitaji, hahitaji]
+    verified: false
+  - verb: kurudi
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninarudi, anarudi]
+    neg: [sirudi, harudi]
+    verified: false
+
 english:
   - { verb: kusoma, subject: i, tense: present, polarity: pos, en: I am reading }
   - { verb: kusoma, subject: heshe, tense: present, polarity: neg, en: He/she is not reading }
@@ -277,3 +351,9 @@ english:
   - { verb: kuwa, subject: i, tense: present, polarity: pos, en: I am becoming }
   - { verb: kuwa, subject: i, tense: past, polarity: pos, en: I was }
   - { verb: kuwa, subject: they, tense: future, polarity: neg, en: "They won't be" }
+  # Core verbs: stative ones take the simple present.
+  - { verb: kuona, subject: heshe, tense: present, polarity: pos, en: He/she sees }
+  - { verb: kupenda, subject: i, tense: present, polarity: neg, en: "I don't like" }
+  - { verb: kuelewa, subject: i, tense: present, polarity: neg, en: "I don't understand" }
+  - { verb: kuhitaji, subject: heshe, tense: present, polarity: pos, en: He/she needs }
+  - { verb: kuja, subject: we, tense: past, polarity: pos, en: We came }

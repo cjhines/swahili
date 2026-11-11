@@ -19,8 +19,12 @@ export type VerbFacts = {
  * prove it. Built by the same engine fixtures.yaml checks, so the card can't contradict the rules.
  */
 export const verbFacts = (rules: NaniRules, sw: string): VerbFacts => {
-  const { stem, prefix, keepKu, oneSyllable } = verbInfo(rules, sw);
-  if (!keepKu) return { stem, prefix };
+  const { stem, prefix, keepKu, oneSyllable, needsObject } = verbInfo(
+    rules,
+    sw
+  );
+  // A verb that always takes an object (kupa) never appears bare, so its "kept" forms would mislead.
+  if (!keepKu || needsObject) return { stem, prefix };
   const first = rules.subjects[0]!.id; // "I", first in rules.yaml
   const forms = TENSES.map(
     (tense) =>

@@ -59,6 +59,10 @@ export const NaniRules = z
         z.strictObject({
           keepKu: z.literal(true).optional(),
           exclude: z.literal(true).optional(),
+          // Always takes a marker for who it's done to (kupa: nipe, give me). Its bare forms
+          // would be misread (ninakupa = "I'm giving you"), so it's left out of Nani na Lini?
+          // and its card doesn't list kept-ku forms.
+          needsObject: z.literal(true).optional(),
           stem: Piece.optional(),
         })
       )

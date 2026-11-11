@@ -38,7 +38,8 @@ export const verbInfo = (rules: NaniRules, sw: string) => {
     stem,
     oneSyllable,
     keepKu: quirks.keepKu ?? oneSyllable,
-    exclude: quirks.exclude ?? false,
+    needsObject: quirks.needsObject ?? false,
+    exclude: (quirks.exclude ?? false) || (quirks.needsObject ?? false),
   };
 };
 

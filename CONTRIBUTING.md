@@ -64,8 +64,13 @@ Conjugations aren't written out card by card. They're built from
 `decks/nani-na-lini/rules.yaml` (subjects, tense markers, negatives, the English templates, and
 the quirks of particular verbs).
 
-- **A verb behaves oddly** (like *kwenda*, which keeps its *kw-*): add it under `verbs:` in
-  `rules.yaml`. One-syllable verbs (*kula*, *kunywa*) are detected automatically.
+- **A verb behaves oddly**: add it under `verbs:` in `rules.yaml`. One-syllable verbs (*kula*,
+  *kunywa*) are detected automatically. The quirks are:
+  - `keepKu` for a verb that keeps its *ku-/kw-* anyway, like *kwenda*.
+  - `exclude` to keep a verb out of Nani na Lini?: *kuwa*, whose present isn't am/is/are, and
+    reciprocal *kuonana*.
+  - `needsObject` for a verb that always takes a marker for who it's done to, like *kupa*
+    (*nipe*, give me). It's excluded, and its card lists no kept-*ku-* forms.
 - **A rule is wrong:** fix it in `rules.yaml`, then correct or add the affected forms in
   `fixtures.yaml`.
 - **`fixtures.yaml`** holds known-correct forms, as tables per verb and tense. CI fails if the

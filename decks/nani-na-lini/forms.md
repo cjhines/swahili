@@ -6,7 +6,39 @@ Every form below is what the app will produce. Check each table against your gra
 when one is right, set `verified: true` on it in `fixtures.yaml` (or tell Claude which).
 If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows the correct forms.
 
-**7 of 30 tables checked.**
+**11 of 39 tables checked.**
+
+## ✅ kwenda (to go): Present (now)
+
+> From Chris's core-verbs list. Keeps kw-; ninaenda is common too.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·kw·enda** | I am going |  |  |
+
+## ✅ kuja (to come): Past
+
+> From Chris's core-verbs list.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·li·ku·ja** | I came |  |  |
+
+## ✅ kula (to eat): Present (now)
+
+> From Chris's core-verbs list.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·ku·la** | I am eating |  |  |
+
+## ✅ kuelewa (to understand): Present (now)
+
+> From Chris's core-verbs list. Sielewi, I don't understand.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I |  |  | **si·elew·i** | I don't understand |
 
 ## ✅ kuwa (to be): Present (now)
 
@@ -206,7 +238,7 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 
 ## ⬜ kwenda (to go): Present (now)
 
-> Textbook forms. Everyday speech also says ninaenda, nilienda, nimeenda; check which your sheets teach.
+> Textbook forms (Chris's list confirms ninakwenda). Everyday speech also says ninaenda, nilienda, nimeenda.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -286,3 +318,38 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | --- | --- | --- | --- | --- |
 | I | **ni·na·ita** | I am calling | **si·it·i** | I am not calling |
 | he/she | **a·na·ita** | He/she is calling | **ha·it·i** | He/she is not calling |
+
+## ⬜ kuja (to come): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·ku·ja** | I am coming | **si·j·i** | I am not coming |
+| he/she | **a·na·ku·ja** | He/she is coming | **ha·j·i** | He/she is not coming |
+
+## ⬜ kuja (to come): Perfect (have done / not yet)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·me·ku·ja** | I have come | **si·ja·ja** | I haven't come yet |
+| he/she | **a·me·ku·ja** | He/she has come | **ha·ja·ja** | He/she hasn't come yet |
+
+## ⬜ kuona (to see): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·ona** | I see | **si·on·i** | I don't see |
+| he/she | **a·na·ona** | He/she sees | **ha·on·i** | He/she doesn't see |
+
+## ⬜ kuhitaji (to need): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·hitaji** | I need | **si·hitaji** | I don't need |
+| he/she | **a·na·hitaji** | He/she needs | **ha·hitaji** | He/she doesn't need |
+
+## ⬜ kurudi (to return): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·rudi** | I am returning | **si·rudi** | I am not returning |
+| he/she | **a·na·rudi** | He/she is returning | **ha·rudi** | He/she is not returning |

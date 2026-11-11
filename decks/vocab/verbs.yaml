@@ -1,8 +1,110 @@
 # yaml-language-server: $schema=../../schema/vocab-deck.schema.json
 title: Verbs
 # `meaning` is what Vocabulary shows (Chris's wording). The four forms build Nani na Lini?
-# sentences, so they use one meaning: kuita gives "We didn't call", not "call / shout".
+# sentences, so they use one meaning: kuita gives "We didn't call", not "call / call out".
+# Stems and kept ku- forms are shown on each card automatically (from rules.yaml): don't
+# repeat them in notes.
 cards:
+  # Core verbs, roughly most frequent first (2026-11-11). "have" (kuwa na) is further down.
+  - id: verb-kwenda
+    kind: verb
+    sw: kwenda
+    en: { base: go, past: went, participle: gone, ing: going }
+    note: 'Ninaenda is common too. Command: nenda!'
+
+  - id: verb-kuja
+    kind: verb
+    sw: kuja
+    en: { base: come, past: came, participle: come, ing: coming }
+    note: 'Command: njoo!'
+
+  - id: verb-kula
+    kind: verb
+    sw: kula
+    en: { base: eat, past: ate, participle: eaten, ing: eating }
+
+  - id: verb-kufanya
+    kind: verb
+    sw: kufanya
+    en: { meaning: to do / to make, base: do, past: did, participle: done, ing: doing }
+
+  - id: verb-kusema
+    kind: verb
+    sw: kusema
+    en: { base: say, past: said, participle: said, ing: saying }
+
+  - id: verb-kuona
+    kind: verb
+    sw: kuona
+    en: { base: see, past: saw, participle: seen, ing: seeing, stative: true, third: sees }
+
+  - id: verb-kupata
+    kind: verb
+    sw: kupata
+    en: { meaning: to get / to obtain, base: get, past: got, participle: got, ing: getting }
+
+  - id: verb-kupa
+    kind: verb
+    sw: kupa
+    en: { base: give, past: gave, participle: given, ing: giving }
+    note: 'Always needs a marker for who receives it: nipe, give me.'
+
+  - id: verb-kupenda
+    kind: verb
+    sw: kupenda
+    en:
+      {
+        meaning: to like / to love,
+        base: like,
+        past: liked,
+        participle: liked,
+        ing: liking,
+        stative: true,
+        third: likes,
+      }
+
+  - id: verb-kuelewa
+    kind: verb
+    sw: kuelewa
+    en:
+      base: understand
+      past: understood
+      participle: understood
+      ing: understanding
+      stative: true
+      third: understands
+    example: { sw: Sielewi., en: I don't understand. }
+
+  - id: verb-kuhitaji
+    kind: verb
+    sw: kuhitaji
+    en: { base: need, past: needed, participle: needed, ing: needing, stative: true, third: needs }
+
+  - id: verb-kutoka
+    kind: verb
+    sw: kutoka
+    en:
+      meaning: to go out / to come from / to leave
+      base: go out
+      past: went out
+      participle: gone out
+      ing: going out
+
+  - id: verb-kurudi
+    kind: verb
+    sw: kurudi
+    en: { meaning: to return / to come back, base: return, past: returned, participle: returned, ing: returning }
+
+  - id: verb-kufika
+    kind: verb
+    sw: kufika
+    en: { base: arrive, past: arrived, participle: arrived, ing: arriving }
+
+  - id: verb-kulala
+    kind: verb
+    sw: kulala
+    en: { meaning: to sleep / to lie down, base: sleep, past: slept, participle: slept, ing: sleeping }
+
   - id: verb-kutaka
     kind: verb
     sw: kutaka

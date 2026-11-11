@@ -63,7 +63,8 @@ english:
 verbs:
   # Quirks of particular verbs, keyed by their ku- form. One-syllable stems (kula, kunywa, kuja)
   # are detected automatically and keep their ku-; list only what can't be worked out.
-  kwenda: { keepKu: true } # ninakwenda, siendi, sikwenda, sitakwenda, sijaenda
+  # Irregular: keeps kw- (ninakwenda, siendi, sikwenda, sitakwenda, sijaenda); ninaenda is common too.
+  kwenda: { keepKu: true }
   kwisha: { keepKu: true }
   # Excluded from Nani na Lini? (still on their vocabulary cards):
   # kuwa: its present isn't "am/is/are" (that's ni: mimi ni mwalimu; ninakuwa = "I'm becoming"),
@@ -72,3 +73,6 @@ verbs:
   # kuonana: "see each other" is reciprocal. It needs a plural subject or "na …", and "I saw
   # each other" isn't English. (kukutana, "to meet", has no such problem.)
   kuonana: { exclude: true }
+  # kupa: "give" always needs a marker for who receives it (nipe, give me). Bare, ninakupa reads
+  # as "I'm giving you" (ku = you), so it's left out, and its card lists no kept-ku forms.
+  kupa: { needsObject: true }
