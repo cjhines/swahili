@@ -105,6 +105,104 @@ cards:
     sw: kulala
     en: { meaning: to sleep / to lie down, base: sleep, past: slept, participle: slept, ing: sleeping }
 
+  # More everyday verbs (2026-11-11). "meet" (kukutana) was already in, from the tutor's review.
+  - id: verb-kusikia
+    kind: verb
+    sw: kusikia
+    en:
+      {
+        meaning: to hear / to feel,
+        base: hear,
+        past: heard,
+        participle: heard,
+        ing: hearing,
+        stative: true,
+        third: hears,
+      }
+    example: { sw: Nasikia njaa., en: I feel hungry. }
+    note: 'Nasikia is everyday speech for ninasikia. Compare kusikiliza: to listen.'
+
+  - id: verb-kuuliza
+    kind: verb
+    sw: kuuliza
+    en: { base: ask, past: asked, participle: asked, ing: asking }
+
+  - id: verb-kujibu
+    kind: verb
+    sw: kujibu
+    en: { base: answer, past: answered, participle: answered, ing: answering }
+
+  - id: verb-kufikiri
+    kind: verb
+    sw: kufikiri
+    en: { base: think, past: thought, participle: thought, ing: thinking, stative: true, third: thinks }
+
+  - id: verb-kuongea
+    kind: verb
+    sw: kuongea
+    hint: (everyday, especially in Kenya)
+    en: { base: talk, past: talked, participle: talked, ing: talking }
+    note: 'More everyday in Kenya than kuzungumza.'
+
+  - id: verb-kununua
+    kind: verb
+    sw: kununua
+    en: { base: buy, past: bought, participle: bought, ing: buying }
+
+  - id: verb-kulipa
+    kind: verb
+    sw: kulipa
+    en: { base: pay, past: paid, participle: paid, ing: paying }
+
+  - id: verb-kuleta
+    kind: verb
+    sw: kuleta
+    en: { base: bring, past: brought, participle: brought, ing: bringing }
+
+  - id: verb-kuchukua
+    kind: verb
+    sw: kuchukua
+    en: { base: take, past: took, participle: taken, ing: taking }
+
+  - id: verb-kuweka
+    kind: verb
+    sw: kuweka
+    en: { meaning: to put / to place, base: put, past: put, participle: put, ing: putting }
+
+  - id: verb-kusaidia
+    kind: verb
+    sw: kusaidia
+    en: { base: help, past: helped, participle: helped, ing: helping }
+
+  - id: verb-kutafuta
+    kind: verb
+    sw: kutafuta
+    en: { base: look for, past: looked for, participle: looked for, ing: looking for }
+
+  # wait: two verbs with the same meaning. Each accepts the other as an answer.
+  - id: verb-kungoja
+    kind: verb
+    sw: kungoja
+    alt: [kusubiri]
+    en: { base: wait, past: waited, participle: waited, ing: waiting }
+
+  - id: verb-kusubiri
+    kind: verb
+    sw: kusubiri
+    alt: [kungoja]
+    en: { base: wait, past: waited, participle: waited, ing: waiting }
+
+  - id: verb-kupiga
+    kind: verb
+    sw: kupiga
+    en: { meaning: to hit / to strike, base: hit, past: hit, participle: hit, ing: hitting }
+    note: 'Used in lots of fixed phrases: piga simu, phone someone; piga picha, take a photo; piga kelele, shout.'
+
+  - id: verb-kuacha
+    kind: verb
+    sw: kuacha
+    en: { meaning: to leave / to stop / to let, base: leave, past: left, participle: left, ing: leaving }
+
   - id: verb-kutaka
     kind: verb
     sw: kutaka
@@ -257,6 +355,7 @@ cards:
     kind: verb
     sw: kuzungumza
     en: { meaning: to talk / to chat, base: talk, past: talked, participle: talked, ing: talking }
+    note: 'Compare kuongea: also to talk, and more everyday in Kenya.'
 
   - id: verb-kujua
     kind: verb
@@ -267,6 +366,7 @@ cards:
     kind: verb
     sw: kusikiliza
     en: { base: listen, past: listened, participle: listened, ing: listening }
+    note: 'Compare kusikia: to hear, or to feel.'
 
   - id: verb-kuamka
     kind: verb

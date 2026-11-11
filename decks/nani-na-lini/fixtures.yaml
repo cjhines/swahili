@@ -65,6 +65,12 @@ verbs:
     }
   kuhitaji: { base: need, past: needed, participle: needed, ing: needing, stative: true, third: needs }
   kurudi: { base: return, past: returned, participle: returned, ing: returning }
+  kufikiri: { base: think, past: thought, participle: thought, ing: thinking, stative: true, third: thinks }
+  kuuliza: { base: ask, past: asked, participle: asked, ing: asking }
+  kuacha: { base: leave, past: left, participle: left, ing: leaving }
+  kuongea: { base: talk, past: talked, participle: talked, ing: talking }
+  kusikia: { base: hear, past: heard, participle: heard, ing: hearing, stative: true, third: hears }
+  kuweka: { base: put, past: put, participle: put, ing: putting }
 
 paradigms:
   # Given in Chris's core-verbs list (2026-11-11), so verified; positives or negatives only,
@@ -320,6 +326,32 @@ paradigms:
     neg: [sirudi, harudi]
     verified: false
 
+  # More everyday verbs (2026-11-11): another stem ending in -i (sifikiri), and vowel stems.
+  - verb: kufikiri
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninafikiri, anafikiri]
+    neg: [sifikiri, hafikiri]
+    verified: false
+  - verb: kuuliza
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninauliza, anauliza]
+    neg: [siulizi, haulizi]
+    verified: false
+  - verb: kuacha
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninaacha, anaacha]
+    neg: [siachi, haachi]
+    verified: false
+  - verb: kuongea
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninaongea, anaongea]
+    neg: [siongei, haongei]
+    verified: false
+
 english:
   - { verb: kusoma, subject: i, tense: present, polarity: pos, en: I am reading }
   - { verb: kusoma, subject: heshe, tense: present, polarity: neg, en: He/she is not reading }
@@ -357,3 +389,8 @@ english:
   - { verb: kuelewa, subject: i, tense: present, polarity: neg, en: "I don't understand" }
   - { verb: kuhitaji, subject: heshe, tense: present, polarity: pos, en: He/she needs }
   - { verb: kuja, subject: we, tense: past, polarity: pos, en: We came }
+  # More everyday verbs: stative ones, and "put", whose past is spelled like its base.
+  - { verb: kusikia, subject: heshe, tense: present, polarity: pos, en: He/she hears }
+  - { verb: kufikiri, subject: i, tense: present, polarity: neg, en: "I don't think" }
+  - { verb: kuweka, subject: we, tense: past, polarity: pos, en: We put }
+  - { verb: kuweka, subject: we, tense: present, polarity: pos, en: We are putting }

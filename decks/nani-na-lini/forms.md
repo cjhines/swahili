@@ -6,7 +6,7 @@ Every form below is what the app will produce. Check each table against your gra
 when one is right, set `verified: true` on it in `fixtures.yaml` (or tell Claude which).
 If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows the correct forms.
 
-**11 of 39 tables checked.**
+**11 of 43 tables checked.**
 
 ## ✅ kwenda (to go): Present (now)
 
@@ -353,3 +353,31 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | --- | --- | --- | --- | --- |
 | I | **ni·na·rudi** | I am returning | **si·rudi** | I am not returning |
 | he/she | **a·na·rudi** | He/she is returning | **ha·rudi** | He/she is not returning |
+
+## ⬜ kufikiri (to think): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·fikiri** | I think | **si·fikiri** | I don't think |
+| he/she | **a·na·fikiri** | He/she thinks | **ha·fikiri** | He/she doesn't think |
+
+## ⬜ kuuliza (to ask): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·uliza** | I am asking | **si·uliz·i** | I am not asking |
+| he/she | **a·na·uliza** | He/she is asking | **ha·uliz·i** | He/she is not asking |
+
+## ⬜ kuacha (to leave): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·acha** | I am leaving | **si·ach·i** | I am not leaving |
+| he/she | **a·na·acha** | He/she is leaving | **ha·ach·i** | He/she is not leaving |
+
+## ⬜ kuongea (to talk): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·ongea** | I am talking | **si·onge·i** | I am not talking |
+| he/she | **a·na·ongea** | He/she is talking | **ha·onge·i** | He/she is not talking |
