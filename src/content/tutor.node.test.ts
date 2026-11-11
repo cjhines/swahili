@@ -99,10 +99,16 @@ test('kuoga: "to bathe / to shower", with the slash', () => {
 });
 
 describe('kuita: to call, not to shout; its passive is kuitwa', () => {
-  test('call / call out / name, and no "shout"', () => {
+  test('call / call out, and no "shout"', () => {
     const kuita = verb('verb-kuita');
-    expect(kuita.en.meaning).toBe('to call / to call out / to name');
+    expect(kuita.en.meaning).toBe('to call / to call out');
     expect(kuita.en.meaning).not.toMatch(/shout/);
+  });
+
+  test('the tutor\'s "call by a name" sense is kept, in the note, not as "to name"', () => {
+    const kuita = verb('verb-kuita');
+    expect(kuita.en.meaning).not.toMatch(/to name/);
+    expect(kuita.note).toMatch(/call someone by a name, as in the example/);
   });
 
   test("with the tutor's example, and a pointer to kupiga kelele for shouting", () => {

@@ -74,7 +74,7 @@ const setup = (
 const start = () => screen.getByRole('button', { name: /^Start/ });
 const promptText = () =>
   within(screen.getByTestId('flashcard')).getByText(
-    (_, el) => el?.className === 'flashcard-prompt'
+    (_, el) => el?.classList.contains('flashcard-prompt') ?? false
   ).textContent!;
 
 /** Picks options on the setup screen. */

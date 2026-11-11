@@ -205,7 +205,7 @@ Card kinds, with required fields in **bold**:
 Verb English (added in milestone 7, when Chris's verbs arrived):
 
 - The four forms describe **one** meaning, the one Nani na Lini? sentences use. `meaning` is what
-  Vocabulary shows ("to call / to call out / to name").
+  Vocabulary shows ("to call / to call out").
 - `stative` verbs (*kutaka*, *kujua*, *kuishi*) take the simple present: "I want", "He/she
   wants". Their `third` form supplies the "-s".
 - `tenses` gives a verb its own English per tense when nothing else fits. *Kuweza*: can / could /
@@ -221,7 +221,7 @@ from the grammar engine (`src/nani/facts.ts`), never typed by hand, so a card ca
 
 - *kuwa* and *kunywa* got their stems shown and their kept-*ku-* forms.
 - *kuwa* got a note that "am/is/are" is *ni*.
-- *kuita* became "to call / to call out / to name", with the example *Wanamwita Chris*, linked to
+- *kuita* became "to call / to call out" (the tutor's "call by a name" sense is in its note), with the example *Wanamwita Chris*, linked to
   its passive *kuitwa*.
 - *kuonana* became "to see each other", and *kukutana* ("to meet") was added.
 - *kuishi* and *kukaa* got notes that separate them.

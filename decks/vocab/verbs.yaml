@@ -233,13 +233,14 @@ cards:
     note: 'To live: be alive, or reside. Compare kukaa: to stay or sit, also to reside.'
 
   # Chris's tutor: kuita is to call someone over, or call someone by a name. Shouting is
-  # usually kupiga kelele.
+  # usually kupiga kelele. The tutor's "name" sense is calling someone BY a name (the example),
+  # not naming someone, so it lives in the note rather than the meaning (Chris, 2026-11-11).
   - id: verb-kuita
     kind: verb
     sw: kuita
-    en: { meaning: to call / to call out / to name, base: call, past: called, participle: called, ing: calling }
+    en: { meaning: to call / to call out, base: call, past: called, participle: called, ing: calling }
     example: { sw: Wanamwita Chris., en: They call him Chris. }
-    note: 'Its passive is kuitwa (to be called). To shout is usually kupiga kelele.'
+    note: 'Also to call someone by a name, as in the example. Its passive is kuitwa (to be called). To shout is usually kupiga kelele.'
 
   - id: verb-kuweza
     kind: verb

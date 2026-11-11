@@ -34,6 +34,12 @@
   font-size: clamp(2rem, 9vw, 2.75rem);
   font-weight: 700;
   line-height: 1.15;
+  /* Even line lengths: no single word left alone on the last line. */
+  text-wrap: balance;
+}
+
+.flashcard-prompt.is-long {
+  font-size: clamp(1.5rem, 6.5vw, 2rem);
 }
 
 .is-flipped .flashcard-prompt {
@@ -53,16 +59,29 @@
   font-size: 0.9rem;
 }
 
+/*
+ * Two spacings only: the answer and its own details (stem, plural, "also") sit tight together
+ * in .flashcard-answer-head; every extra after it (kept forms, example, note, breakdown) is one
+ * even step further down. The answer starts a fixed distance below the line, not centred in
+ * whatever space is left, so it's in the same place on every card.
+ */
 .flashcard-answer {
   display: flex;
   flex: 1;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: flex-start;
+  gap: 1rem;
   width: 100%;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--line);
+}
+
+.flashcard-answer-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .flashcard-answer-text {
@@ -70,6 +89,11 @@
   font-weight: 700;
   line-height: 1.15;
   color: var(--brand);
+  text-wrap: balance;
+}
+
+.flashcard-answer-text.is-long {
+  font-size: clamp(1.5rem, 6.5vw, 2rem);
 }
 
 .flashcard-meta {
@@ -83,7 +107,7 @@
 }
 
 .flashcard-example {
-  margin: 0.5rem 0 0;
+  margin: 0;
   padding: 0.75rem 1rem;
   border-radius: var(--radius);
   background: var(--surface-2);
@@ -100,6 +124,7 @@
 .flashcard-note {
   margin: 0;
   font-size: 0.9rem;
+  text-wrap: pretty;
 }
 
 /* The label that fades in while swiping */

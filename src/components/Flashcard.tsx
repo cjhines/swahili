@@ -9,6 +9,10 @@ import './flashcard.css';
 /** How far (px) a swipe must travel to count as a mark. */
 export const SWIPE_THRESHOLD = 90;
 
+/** Past this many characters, headline text drops a size so it doesn't wrap into a ragged block. */
+export const LONG_TEXT = 18;
+export const isLong = (text: string) => text.length > LONG_TEXT;
+
 type Props = {
   prompt: Prompt;
   answer: Answer;
@@ -110,31 +114,41 @@ export const Flashcard = ({
         </div>
       )}
 
-      <div className="flashcard-prompt" lang={prompt.lang}>
+      <div
+        className={`flashcard-prompt${isLong(prompt.text) ? ' is-long' : ''}`}
+        lang={prompt.lang}
+      >
         {prompt.text}
       </div>
       {prompt.hint && <div className="flashcard-hint muted">{prompt.hint}</div>}
 
       {flipped ? (
         <div className="flashcard-answer" aria-live="polite">
-          <div className="flashcard-answer-text" lang={answer.lang}>
-            {answer.text}
+          {/* The answer and the details that belong to the word itself, kept tight together.
+              Everything after it is an extra, spaced evenly below. */}
+          <div className="flashcard-answer-head">
+            <div
+              className={`flashcard-answer-text${isLong(answer.text) ? ' is-long' : ''}`}
+              lang={answer.lang}
+            >
+              {answer.text}
+            </div>
+            {answer.alt && (
+              <p className="flashcard-meta">
+                also <span lang="sw">{answer.alt.join(', ')}</span>
+              </p>
+            )}
+            {answer.plural && (
+              <p className="flashcard-meta">
+                plural <span lang="sw">{answer.plural}</span>
+              </p>
+            )}
+            {answer.stem && (
+              <p className="flashcard-meta">
+                stem <span lang="sw">{answer.stem}</span>
+              </p>
+            )}
           </div>
-          {answer.alt && (
-            <p className="flashcard-meta">
-              also <span lang="sw">{answer.alt.join(', ')}</span>
-            </p>
-          )}
-          {answer.plural && (
-            <p className="flashcard-meta">
-              plural <span lang="sw">{answer.plural}</span>
-            </p>
-          )}
-          {answer.stem && (
-            <p className="flashcard-meta">
-              stem <span lang="sw">{answer.stem}</span>
-            </p>
-          )}
           {answer.kept && <p className="flashcard-note muted">{answer.kept}</p>}
           {answer.example && (
             <blockquote className="flashcard-example">
