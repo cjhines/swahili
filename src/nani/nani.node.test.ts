@@ -4,6 +4,7 @@ import { beforeAll, describe, expect, test } from 'vitest';
 
 import { conjugate, verbInfo, type NaniVerb } from './conjugate.ts';
 import { english } from './english.ts';
+import { verbFacts } from './facts.ts';
 import { checkFixtures } from './fixtures.ts';
 import {
   allPatterns,
@@ -14,6 +15,7 @@ import {
 import { NaniRules, type NaniFixtures } from './schema.ts';
 import { loadNaniFixtures, loadNaniRules } from '../content/node/load.ts';
 import { parseYaml } from '../content/validate.ts';
+import { keptLine } from '../session/views.ts';
 
 let rules: NaniRules;
 let fixtures: ReturnType<typeof loadNaniFixtures>;
@@ -157,9 +159,18 @@ describe('patterns', () => {
 });
 
 describe('checkFixtures', () => {
+  /** A table by verb and tense, in a copy of the fixtures that a test can tamper with. */
+  const tableIn = (data: NaniFixtures, verb: string, tense: string) => {
+    const table = data.paradigms.find(
+      (t) => t.verb === verb && t.tense === tense && t.pos && t.neg
+    );
+    if (!table) throw new Error(`no full ${verb} ${tense} table`);
+    return table as typeof table & { pos: string[]; neg: string[] };
+  };
+
   test('a wrong fixture is reported with its line', () => {
     const data = structuredClone(fixtures.data!) as NaniFixtures;
-    data.paradigms[0]!.neg[3] = 'hatusomu';
+    tableIn(data, 'kusoma', 'present').neg[3] = 'hatusomu';
     const result = checkFixtures(rules, data, {
       path: fixtures.path,
       at: fixtures.at,
@@ -177,7 +188,7 @@ describe('checkFixtures', () => {
   test('lists the tables not yet verified', () => {
     const data = structuredClone(fixtures.data!) as NaniFixtures;
     data.paradigms.forEach((table) => (table.verified = true));
-    data.paradigms[1]!.verified = false;
+    tableIn(data, 'kusoma', 'past').verified = false;
     expect(
       checkFixtures(rules, data, { path: '', at: () => ({}) }).unverified
     ).toEqual(['kusoma past']);
@@ -185,7 +196,7 @@ describe('checkFixtures', () => {
 
   test('a table with the wrong number of forms is reported', () => {
     const data = structuredClone(fixtures.data!) as NaniFixtures;
-    data.paradigms[0]!.pos.pop();
+    tableIn(data, 'kusoma', 'present').pos.pop();
     expect(
       checkFixtures(rules, data, { path: '', at: () => ({}) }).errors[0]!
         .message
@@ -209,5 +220,26 @@ describe('rules.yaml validation', () => {
   test('duplicate subject ids fail', () => {
     const result = parse(original().replace('{ id: we,', '{ id: you,'));
     expect(result.errors[0]!.message).toMatch(/subject ids must be unique/);
+  });
+});
+
+describe('verbFacts (what a verb card shows about the verb)', () => {
+  test('a regular verb: its stem, and nothing about ku-', () => {
+    expect(verbFacts(rules, 'kusoma')).toEqual({ stem: 'soma', prefix: 'ku' });
+  });
+
+  test('a verb that keeps kw- by rule, not by syllables', () => {
+    const facts = verbFacts(rules, 'kwenda');
+    expect(facts).toEqual({
+      stem: 'enda',
+      prefix: 'kw',
+      kept: {
+        oneSyllable: false,
+        forms: ['ninakwenda', 'nilikwenda', 'nitakwenda', 'nimekwenda'],
+      },
+    });
+    expect(keptLine(facts)).toBe(
+      'Keeps kw-: ninakwenda · nilikwenda · nitakwenda · nimekwenda'
+    );
   });
 });

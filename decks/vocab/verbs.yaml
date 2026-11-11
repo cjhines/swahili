@@ -23,16 +23,23 @@ cards:
         past: { pos: '{was} called', neg: "{was}n't called" }
         future: { pos: will be called, neg: "won't be called" }
         perfect: { pos: '{have} been called', neg: "{have}n't been called yet" }
+    note: 'The passive of kuita (to call): anaitwa Chris, he is called Chris.'
 
   - id: verb-kuishi
     kind: verb
     sw: kuishi
+    hint: (be alive, or reside)
     en: { base: live, past: lived, participle: lived, ing: living, stative: true, third: lives }
+    note: 'To live: be alive, or reside. Compare kukaa: to stay or sit, also to reside.'
 
+  # Chris's tutor: kuita is to call someone over, or call someone by a name. Shouting is
+  # usually kupiga kelele.
   - id: verb-kuita
     kind: verb
     sw: kuita
-    en: { meaning: to call / to shout, base: call, past: called, participle: called, ing: calling }
+    en: { meaning: to call / to call out / to name, base: call, past: called, participle: called, ing: calling }
+    example: { sw: Wanamwita Chris., en: They call him Chris. }
+    note: 'Its passive is kuitwa (to be called). To shout is usually kupiga kelele.'
 
   - id: verb-kuweza
     kind: verb
@@ -84,22 +91,60 @@ cards:
     kind: verb
     sw: kukaa
     en: { meaning: to stay / to sit / to live, base: stay, past: stayed, participle: stayed, ing: staying }
+    example: { sw: Anakaa Nairobi., en: He lives in Nairobi. }
+    note: 'To stay or sit; also to reside. Compare kuishi: to live, be alive or reside.'
 
+  # Chris's tutor: one syllable (stem wa), so it keeps its ku- (nilikuwa, nitakuwa, nimekuwa);
+  # the card shows those forms automatically. Not conjugated in Nani na Lini? (rules.yaml).
   - id: verb-kuwa
     kind: verb
     sw: kuwa
-    # Never conjugated in Nani na Lini? (see rules.yaml); have / don't have covers kuwa na.
-    en: { meaning: to be / to become, base: be, past: was, participle: been, ing: being }
+    en:
+      meaning: to be / to become
+      base: be
+      past: was
+      participle: been
+      ing: being
+      tenses:
+        present: { pos: '{be} becoming', neg: '{be} not becoming' }
+        past: { pos: '{was}', neg: "{was}n't" }
+        future: { pos: will be, neg: "won't be" }
+        perfect: { pos: '{have} become', neg: "{have}n't become yet" }
+    note: "In the present, am/is/are is ni, not kuwa: mimi ni mwalimu, I'm a teacher. Ninakuwa means I'm becoming."
 
+  # Chris's tutor: kuwa na is everywhere, so it gets its own card.
+  - id: vocab-kuwa-na
+    kind: word
+    sw: kuwa na
+    en: to have
+    note: "nina, I have · sina, I don't have · nilikuwa na, I had · nitakuwa na, I will have"
+
+  # Chris's tutor: stem nywa, one syllable, so it keeps its ku- (ninakunywa, nilikunywa,
+  # nitakunywa). The card shows the stem and those forms automatically.
   - id: verb-kunywa
     kind: verb
     sw: kunywa
     en: { base: drink, past: drank, participle: drunk, ing: drinking }
 
+  # Chris's tutor: kuonana leans toward "see each other" (tuonane baadaye, see you later);
+  # the everyday "meet" is kukutana. Not in Nani na Lini? (rules.yaml: it's reciprocal).
   - id: verb-kuonana
     kind: verb
     sw: kuonana
-    en: { meaning: to see each other / to meet, base: meet, past: met, participle: met, ing: meeting }
+    en:
+      meaning: to see each other
+      base: see each other
+      past: saw each other
+      participle: seen each other
+      ing: seeing each other
+    example: { sw: Tuonane baadaye., en: See you later. }
+    note: 'For "to meet", the everyday word is kukutana.'
+
+  - id: verb-kukutana
+    kind: verb
+    sw: kukutana
+    en: { base: meet, past: met, participle: met, ing: meeting }
+    note: 'Compare kuonana: to see each other.'
 
   - id: verb-kuangalia
     kind: verb

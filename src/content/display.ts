@@ -22,6 +22,10 @@ export type Answer = {
   plural?: string;
   example?: { sw: string; en: string };
   note?: string;
+  /** Verbs: the stem, e.g. nywa for kunywa. */
+  stem?: string;
+  /** Verbs that keep their ku-: "One syllable, so it keeps ku-: ninakunywa · nilikunywa · …". */
+  kept?: string;
   /** Nani na Lini?: the form in coloured, labelled parts (ha·tu·ku·soma). */
   breakdown?: Part[];
   /** Nani na Lini?: which verb it was, e.g. "kusoma: to read". */

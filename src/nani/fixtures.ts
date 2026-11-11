@@ -62,6 +62,7 @@ export const checkFixtures = (
 
     for (const polarity of POLARITIES) {
       const forms = table[polarity];
+      if (!forms) continue; // a table may list only positive (or only negative) forms
       if (forms.length !== subjects.length) {
         fail(
           ['paradigms', t, polarity],

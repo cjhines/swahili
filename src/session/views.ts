@@ -10,6 +10,7 @@ import {
 } from '../content/display.ts';
 import { conjugate } from '../nani/conjugate.ts';
 import { english } from '../nani/english.ts';
+import { verbFacts, type VerbFacts } from '../nani/facts.ts';
 import { allPatterns } from '../nani/patterns.ts';
 import type { NaniRules } from '../nani/schema.ts';
 
@@ -25,17 +26,33 @@ export type CardView = {
 
 export type ViewOf = (item: ReviewItem) => CardView | undefined;
 
+/** "One syllable, so it keeps ku-: ninakuwa · nilikuwa · nitakuwa · nimekuwa". */
+export const keptLine = ({ prefix, kept }: VerbFacts) =>
+  kept &&
+  `${kept.oneSyllable ? 'One syllable, so it keeps' : 'Keeps'} ${prefix}-: ${kept.forms.join(' · ')}`;
+
+/**
+ * A vocabulary card. Verbs also show their stem, and, if they keep their ku-, the forms that show
+ * it: both worked out by the Nani na Lini? engine from rules.yaml, never typed by hand.
+ */
 export const vocabView =
-  (index: CardIndex): ViewOf =>
+  (index: CardIndex, rules: NaniRules): ViewOf =>
   (item) => {
     const entry = index.get(item.cardId);
-    return (
-      entry && {
-        title: entry.deck.title,
-        prompt: promptFor(entry.card, item.direction),
-        answer: answerFor(entry.card, item.direction),
-      }
-    );
+    if (!entry) return undefined;
+    const { card } = entry;
+    const answer = answerFor(card, item.direction);
+    if (card.kind === 'verb') {
+      const facts = verbFacts(rules, card.sw);
+      answer.stem = facts.stem;
+      const kept = keptLine(facts);
+      if (kept) answer.kept = kept;
+    }
+    return {
+      title: entry.deck.title,
+      prompt: promptFor(card, item.direction),
+      answer,
+    };
   };
 
 export const NANI_TITLE = 'Nani na Lini?';

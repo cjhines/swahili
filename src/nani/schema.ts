@@ -81,15 +81,21 @@ export const NaniFixtures = z.strictObject({
   verbs: z.record(VerbKu, VerbEnglish),
   /** Known-correct forms, one table per verb and tense. Subjects in rules.yaml order. */
   paradigms: z.array(
-    z.strictObject({
-      verb: VerbKu.optional(), // absent for "have"
-      tense: z.enum(NANI_TENSES),
-      subjects: z.array(z.string()).min(1).optional(), // default: every subject
-      pos: z.array(Piece),
-      neg: z.array(Piece),
-      verified: z.boolean(),
-      note: z.string().optional(),
-    })
+    z
+      .strictObject({
+        verb: VerbKu.optional(), // absent for "have"
+        tense: z.enum(NANI_TENSES),
+        subjects: z.array(z.string()).min(1).optional(), // default: every subject
+        // Either or both: a reference may confirm only the positive forms.
+        pos: z.array(Piece).optional(),
+        neg: z.array(Piece).optional(),
+        verified: z.boolean(),
+        note: z.string().optional(),
+      })
+      .refine(
+        (table) => table.pos || table.neg,
+        'a table needs pos, neg or both'
+      )
   ),
   /** Known-correct English prompts. */
   english: z.array(

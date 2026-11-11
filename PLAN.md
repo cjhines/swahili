@@ -200,17 +200,36 @@ Card kinds, with required fields in **bold**:
 | --- | --- |
 | `noun` | **`id`, `sw`, `en`**, `plural`, `alt`, `example`, `hint`, `note` |
 | `verb` | **`id`, `sw` (ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`**, `en.meaning`, `en.stative` + `en.third`, `en.tenses`, `example`, `alt`, `hint`, `note` |
+| `word` | **`id`, `sw`, `en`**, `alt`, `example`, `hint`, `note` (numbers, days, adjectives, adverbs, phrases, figures of speech) |
 
 Verb English (added in milestone 7, when Chris's verbs arrived):
 
 - The four forms describe **one** meaning, the one Nani na Lini? sentences use. `meaning` is what
-  Vocabulary shows ("to call / to shout").
+  Vocabulary shows ("to call / to call out / to name").
 - `stative` verbs (*kutaka*, *kujua*, *kuishi*) take the simple present: "I want", "He/she
   wants". Their `third` form supplies the "-s".
 - `tenses` gives a verb its own English per tense when nothing else fits. *Kuweza*: can / could /
   will be able to. *Kuitwa*: "{be} called", "{was} called".
 - `example` became optional for verbs, because Chris's verb list has none and the content is his.
-| `word` | **`id`, `sw`, `en`**, `alt`, `example`, `hint`, `note` (numbers, days, adjectives, adverbs, phrases, figures of speech) |
+
+Verb cards also show the verb's **stem** and, for verbs that keep their *ku-*, the forms that
+show it ("One syllable, so it keeps ku-: ninakuwa · nilikuwa · nitakuwa · nimekuwa"). Both come
+from the grammar engine (`src/nani/facts.ts`), never typed by hand, so a card can't contradict
+`rules.yaml`.
+
+**Tutor review (2026-11-11).** Chris's tutor reviewed the verbs deck. The result:
+
+- *kuwa* and *kunywa* got their stems shown and their kept-*ku-* forms.
+- *kuwa* got a note that "am/is/are" is *ni*.
+- *kuita* became "to call / to call out / to name", with the example *Wanamwita Chris*, linked to
+  its passive *kuitwa*.
+- *kuonana* became "to see each other", and *kukutana* ("to meet") was added.
+- *kuishi* and *kukaa* got notes that separate them.
+- A *kuwa na* card was added.
+- *kuonana* joined *kuwa* outside Nani na Lini?, because it's reciprocal.
+
+Every point is pinned by a test in `src/content/tutor.node.test.ts`. The forms the tutor gave are
+**verified** fixtures, noted as the tutor's.
 
 - `alt` lists other accepted Swahili forms, such as `alt: [alfu moja]` for *elfu moja*. They're
   shown on the answer side.

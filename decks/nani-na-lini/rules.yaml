@@ -65,4 +65,10 @@ verbs:
   # are detected automatically and keep their ku-; list only what can't be worked out.
   kwenda: { keepKu: true } # ninakwenda, siendi, sikwenda, sitakwenda, sijaenda
   kwisha: { keepKu: true }
-  kuwa: { exclude: true } # "to be" has its own forms; have / don't have covers kuwa na
+  # Excluded from Nani na Lini? (still on their vocabulary cards):
+  # kuwa: its present isn't "am/is/are" (that's ni: mimi ni mwalimu; ninakuwa = "I'm becoming"),
+  # so the patterns' English would mislead. Have / don't have covers kuwa na.
+  kuwa: { exclude: true }
+  # kuonana: "see each other" is reciprocal. It needs a plural subject or "na …", and "I saw
+  # each other" isn't English. (kukutana, "to meet", has no such problem.)
+  kuonana: { exclude: true }

@@ -6,7 +6,63 @@ Every form below is what the app will produce. Check each table against your gra
 when one is right, set `verified: true` on it in `fixtures.yaml` (or tell Claude which).
 If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows the correct forms.
 
-**0 of 23 tables checked.**
+**7 of 30 tables checked.**
+
+## ✅ kuwa (to be): Present (now)
+
+> Confirmed by Chris's tutor. Ninakuwa means "I'm becoming"; "I am" is ni (mimi ni mwalimu).
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·ku·wa** | I am becoming |  |  |
+
+## ✅ kuwa (to be): Past
+
+> Confirmed by Chris's tutor.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·li·ku·wa** | I was |  |  |
+
+## ✅ kuwa (to be): Future
+
+> Confirmed by Chris's tutor.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·ta·ku·wa** | I will be |  |  |
+
+## ✅ kuwa (to be): Perfect (have done / not yet)
+
+> Confirmed by Chris's tutor.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·me·ku·wa** | I have become |  |  |
+
+## ✅ kunywa (to drink): Present (now)
+
+> Confirmed by Chris's tutor.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·ku·nywa** | I am drinking |  |  |
+
+## ✅ kunywa (to drink): Past
+
+> Confirmed by Chris's tutor.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·li·ku·nywa** | I drank |  |  |
+
+## ✅ kunywa (to drink): Future
+
+> Confirmed by Chris's tutor.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·ta·ku·nywa** | I will drink |  |  |
 
 ## ⬜ kusoma (to read): Present (now)
 

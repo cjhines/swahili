@@ -22,6 +22,8 @@ export type Part = { text: string; role: PartRole; label: string };
 export type Form = { sw: string; parts: Part[] };
 
 export type NaniVerb = { sw: string; en: VerbEnglish };
+/** All conjugation needs: the ku- form, and the English base for the stem's label. */
+export type ConjugatableVerb = { sw: string; en: Pick<VerbEnglish, 'base'> };
 
 const VOWELS = /[aeiou]/g;
 
@@ -30,10 +32,11 @@ export const verbInfo = (rules: NaniRules, sw: string) => {
   const quirks = rules.verbs[sw] ?? {};
   const prefix = sw.slice(0, 2); // ku, or kw before a vowel (kwenda)
   const stem = quirks.stem ?? sw.slice(2);
-  const oneSyllable = (stem.match(VOWELS)?.length ?? 0) === 1; // la, nywa, ja
+  const oneSyllable = (stem.match(VOWELS)?.length ?? 0) === 1; // la, nywa, wa
   return {
     prefix,
     stem,
+    oneSyllable,
     keepKu: quirks.keepKu ?? oneSyllable,
     exclude: quirks.exclude ?? false,
   };
@@ -62,7 +65,7 @@ const subjectParts = (rules: NaniRules, pattern: Pattern): Part[] => {
 export const conjugate = (
   rules: NaniRules,
   pattern: Pattern,
-  verb?: NaniVerb
+  verb?: ConjugatableVerb
 ): Form => {
   const parts = subjectParts(rules, pattern);
 

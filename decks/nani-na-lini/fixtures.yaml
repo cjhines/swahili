@@ -39,8 +39,65 @@ verbs:
       past: { pos: '{was} called', neg: "{was}n't called" }
       future: { pos: will be called, neg: "won't be called" }
       perfect: { pos: '{have} been called', neg: "{have}n't been called yet" }
+  # Chris's tutor: the present isn't "am/is/are" (that's ni: mimi ni mwalimu); ninakuwa means
+  # "I'm becoming".
+  kuwa:
+    base: be
+    past: was
+    participle: been
+    ing: being
+    tenses:
+      present: { pos: '{be} becoming', neg: '{be} not becoming' }
+      past: { pos: '{was}', neg: "{was}n't" }
+      future: { pos: will be, neg: "won't be" }
+      perfect: { pos: '{have} become', neg: "{have}n't become yet" }
 
 paradigms:
+  # Confirmed by Chris's tutor (2026-11-11): one-syllable verbs keep ku- in the na, li, ta and
+  # me tenses. Only the forms the tutor gave, so these tables list positives only.
+  - verb: kuwa
+    tense: present
+    subjects: [i]
+    pos: [ninakuwa]
+    verified: true
+    note: Confirmed by Chris's tutor. Ninakuwa means "I'm becoming"; "I am" is ni (mimi ni mwalimu).
+  - verb: kuwa
+    tense: past
+    subjects: [i]
+    pos: [nilikuwa]
+    verified: true
+    note: Confirmed by Chris's tutor.
+  - verb: kuwa
+    tense: future
+    subjects: [i]
+    pos: [nitakuwa]
+    verified: true
+    note: Confirmed by Chris's tutor.
+  - verb: kuwa
+    tense: perfect
+    subjects: [i]
+    pos: [nimekuwa]
+    verified: true
+    note: Confirmed by Chris's tutor.
+  - verb: kunywa
+    tense: present
+    subjects: [i]
+    pos: [ninakunywa]
+    verified: true
+    note: Confirmed by Chris's tutor.
+  - verb: kunywa
+    tense: past
+    subjects: [i]
+    pos: [nilikunywa]
+    verified: true
+    note: Confirmed by Chris's tutor.
+  - verb: kunywa
+    tense: future
+    subjects: [i]
+    pos: [nitakunywa]
+    verified: true
+    note: Confirmed by Chris's tutor.
+
   # A regular verb, in full.
   - verb: kusoma
     tense: present
@@ -216,3 +273,7 @@ english:
   - { verb: kuitwa, subject: we, tense: past, polarity: pos, en: We were called }
   - { verb: kuitwa, subject: heshe, tense: past, polarity: neg, en: "He/she wasn't called" }
   - { verb: kuitwa, subject: it, tense: present, polarity: pos, en: It is called }
+  # kuwa, as Chris's tutor explained it (it's excluded from Nani na Lini?, but its card shows these forms).
+  - { verb: kuwa, subject: i, tense: present, polarity: pos, en: I am becoming }
+  - { verb: kuwa, subject: i, tense: past, polarity: pos, en: I was }
+  - { verb: kuwa, subject: they, tense: future, polarity: neg, en: "They won't be" }

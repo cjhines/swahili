@@ -48,6 +48,7 @@ export const renderForms = (rules: NaniRules, fixtures: NaniFixtures) => {
 
     for (const subjectId of table.subjects ?? [...subjects.keys()]) {
       const cells = (['pos', 'neg'] as Polarity[]).flatMap((polarity) => {
+        if (!table[polarity]) return ['', '']; // this table lists only the other polarity
         const pattern = {
           id: patternId(subjectId, table.tense, polarity),
           subject: subjectId,

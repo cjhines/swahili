@@ -70,7 +70,11 @@ the quirks of particular verbs).
   `fixtures.yaml`.
 - **`fixtures.yaml`** holds known-correct forms, as tables per verb and tense. CI fails if the
   rules produce anything different. Set `verified: true` on a table once it has been checked
-  against a grammar reference. A tense isn't offered in the app until all its tables are verified.
+  against a grammar reference, and say which in its `note` (e.g. "Confirmed by Chris's tutor"). A
+  table can list only `pos` or only `neg` when that's all a reference confirmed. A tense isn't
+  offered in the app until all its tables are verified.
+- **Verb cards show the stem and kept ku- forms automatically.** They come from `rules.yaml`, so
+  don't type them into a card's `note`.
 - **`forms.md`** is the readable version: every table with English and the parts (*ha·tu·ku·soma*).
   Regenerate it with `npm run nani:forms`; CI checks it's current.
 

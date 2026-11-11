@@ -55,7 +55,11 @@ export const Study = ({
     [decks, nani.rules]
   );
   const view = useMemo(
-    () => viewFor(vocabView(indexCards(decks)), naniView(nani.rules, verbs)),
+    () =>
+      viewFor(
+        vocabView(indexCards(decks), nani.rules),
+        naniView(nani.rules, verbs)
+      ),
     [decks, nani.rules, verbs]
   );
   const [screen, setScreen] = useState<Screen>({ name: 'setup' });

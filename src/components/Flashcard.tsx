@@ -130,6 +130,12 @@ export const Flashcard = ({
               plural <span lang="sw">{answer.plural}</span>
             </p>
           )}
+          {answer.stem && (
+            <p className="flashcard-meta">
+              stem <span lang="sw">{answer.stem}</span>
+            </p>
+          )}
+          {answer.kept && <p className="flashcard-note muted">{answer.kept}</p>}
           {answer.example && (
             <blockquote className="flashcard-example">
               <p lang="sw">{answer.example.sw}</p>
