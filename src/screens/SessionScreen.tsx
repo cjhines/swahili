@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Flashcard } from '../components/Flashcard.tsx';
-import { answerFor, promptFor, type CardIndex } from '../content/display.ts';
 import type { Grade } from '../domain.ts';
 import { saveResume } from '../session/resume.ts';
 import {
@@ -11,15 +10,16 @@ import {
   sessionReducer,
   type SessionState,
 } from '../session/session.ts';
-import type { VocabSetup } from '../session/setup.ts';
+import type { SessionSetup } from '../session/setup.ts';
+import type { ViewOf } from '../session/views.ts';
 import type { ProgressStore } from '../storage/progress.ts';
 
 import './session.css';
 
 type Props = {
-  index: CardIndex;
+  view: ViewOf;
   store: ProgressStore;
-  setup: VocabSetup;
+  setup: SessionSetup;
   initial: SessionState;
   startedAt: Date;
   onFinish: (state: SessionState) => void;
@@ -27,7 +27,7 @@ type Props = {
 };
 
 export const SessionScreen = ({
-  index,
+  view,
   store,
   setup,
   initial,
@@ -115,8 +115,8 @@ export const SessionScreen = ({
   }, [flip, mark, onExit]);
 
   const item = currentItem(state);
-  const entry = item && index.get(item.cardId);
-  if (!item || !entry) return null;
+  const card = item && view(item);
+  if (!item || !card) return null;
 
   const done = state.finished.length;
   return (
@@ -133,7 +133,7 @@ export const SessionScreen = ({
         <div className="session-progress">
           <span className="muted">
             {setup.mode === 'practice' ? 'Practice' : 'Complete deck'} ·{' '}
-            {entry.deck.title}
+            {card.title}
           </span>
           <span
             className="session-count"
@@ -166,8 +166,8 @@ export const SessionScreen = ({
       <div className="session-card">
         <Flashcard
           key={state.position}
-          prompt={promptFor(entry.card, item.direction)}
-          answer={answerFor(entry.card, item.direction)}
+          prompt={card.prompt}
+          answer={card.answer}
           flipped={state.flipped}
           onFlip={flip}
           onSwipe={mark}

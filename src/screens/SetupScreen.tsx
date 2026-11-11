@@ -3,15 +3,23 @@ import { useState, type ReactNode } from 'react';
 import { Choice } from '../components/Choice.tsx';
 import type { VocabDeck } from '../content/schema.ts';
 import type { Direction, Mode } from '../domain.ts';
+import type { NaniTense } from '../nani/patterns.ts';
+import type { NaniRules } from '../nani/schema.ts';
 import { practiceSummary, type StateOf } from '../session/queue.ts';
 import type { ResumableRun } from '../session/resume.ts';
 import {
+  loadLastKind,
+  loadNaniSetup,
   loadVocabSetup,
   NEW_CAP_OPTIONS,
-  saveVocabSetup,
+  saveSetup,
+  type DeckKind,
+  type NaniSetup,
+  type SessionSetup,
   type VocabSetup,
 } from '../session/setup.ts';
-import { vocabItems } from '../session/start.ts';
+import { itemsFor, type VerbCard } from '../session/start.ts';
+import { NANI_TITLE } from '../session/views.ts';
 import { fromNow, plural } from '../ui/format.ts';
 
 import './setup.css';
@@ -30,7 +38,7 @@ const MODES = [
   {
     value: 'complete',
     label: 'Complete deck',
-    description: 'Every card in the chosen decks, once.',
+    description: 'Every card you’ve chosen, once.',
   },
 ] as const satisfies readonly {
   value: Mode;
@@ -42,20 +50,52 @@ const DECK_KINDS = [
   { value: 'vocab', label: 'Vocabulary' },
   {
     value: 'nani',
-    label: 'Nani na Lini?',
-    description: 'Coming soon.',
-    disabled: true,
+    label: NANI_TITLE,
+    description: 'Verb forms: who did it, and when.',
   },
-] as const;
+] as const satisfies readonly {
+  value: DeckKind;
+  label: string;
+  description?: string;
+}[];
+
+const TENSES: { value: NaniTense; label: string; example: string }[] = [
+  { value: 'present', label: 'Present', example: 'ninasoma · I am reading' },
+  { value: 'past', label: 'Past', example: 'nilisoma · I read' },
+  { value: 'future', label: 'Future', example: 'nitasoma · I will read' },
+  { value: 'perfect', label: 'Perfect', example: 'nimesoma · I have read' },
+  { value: 'have', label: 'Have / don’t have', example: 'nina · I have' },
+];
+
+const POLARITIES = [
+  { value: 'pos', label: 'Positive' },
+  { value: 'neg', label: 'Negative' },
+  { value: 'both', label: 'Both' },
+] as const satisfies readonly { value: NaniSetup['polarity']; label: string }[];
 
 export const directionLabel = (direction: Direction) =>
   DIRECTIONS.find((d) => d.value === direction)!.label;
 
+/** "Numbers, Time + dates" or "Nani na Lini?: Past, Present". */
+const describe = (setup: SessionSetup, decks: readonly VocabDeck[]) =>
+  setup.kind === 'vocab'
+    ? setup.deckIds
+        .map((id) => decks.find((deck) => deck.id === id)?.title)
+        .filter(Boolean)
+        .join(', ')
+    : `${NANI_TITLE}: ${TENSES.filter((t) => setup.tenses.includes(t.value))
+        .map((t) => t.label)
+        .join(', ')}`;
+
 type Props = {
   decks: readonly VocabDeck[];
+  rules: NaniRules;
+  /** Tenses whose forms have been checked against a grammar reference. Only these can be chosen. */
+  verifiedTenses: readonly NaniTense[];
+  verbs: readonly VerbCard[];
   stateOf: StateOf;
   resume: ResumableRun | undefined;
-  onStart: (setup: VocabSetup) => void;
+  onStart: (setup: SessionSetup) => void;
   onResume: (run: ResumableRun) => void;
   onDiscardResume: () => void;
   onSettings: () => void;
@@ -77,6 +117,9 @@ const SettingsIcon = () => (
 
 export const SetupScreen = ({
   decks,
+  rules,
+  verifiedTenses,
+  verbs,
   stateOf,
   resume,
   onStart,
@@ -85,29 +128,44 @@ export const SetupScreen = ({
   onSettings,
   notices,
 }: Props) => {
-  const [setup, setSetupState] = useState(() => loadVocabSetup(decks));
-  const setSetup = (next: VocabSetup) => {
-    setSetupState(next);
-    saveVocabSetup(next);
-  };
-  const update = <K extends keyof VocabSetup>(key: K, value: VocabSetup[K]) =>
-    setSetup({ ...setup, [key]: value });
+  // A verb tense needs verbs to fill it; "have" doesn't.
+  const available = verifiedTenses.filter(
+    (tense) => tense === 'have' || verbs.length > 0
+  );
 
-  const toggleDeck = (id: string) =>
-    update(
-      'deckIds',
-      setup.deckIds.includes(id)
-        ? setup.deckIds.filter((deckId) => deckId !== id)
-        : [...setup.deckIds, id]
-    );
-  const allSelected = setup.deckIds.length === decks.length;
+  const [kind, setKind] = useState<DeckKind>(loadLastKind);
+  const [vocab, setVocab] = useState(() => loadVocabSetup(decks));
+  const [nani, setNani] = useState(() => loadNaniSetup(available));
+  const setup: SessionSetup = kind === 'vocab' ? vocab : nani;
+
+  const change = (next: SessionSetup) => {
+    if (next.kind === 'vocab') setVocab(next);
+    else setNani(next);
+    saveSetup(next);
+  };
+  const update = <K extends keyof SessionSetup>(
+    key: K,
+    value: SessionSetup[K]
+  ) => change({ ...setup, [key]: value } as SessionSetup);
+  const updateVocab = (next: Partial<VocabSetup>) =>
+    change({ ...vocab, ...next });
+  const updateNani = (next: Partial<NaniSetup>) => change({ ...nani, ...next });
+  const switchKind = (next: DeckKind) => {
+    setKind(next);
+    saveSetup(next === 'vocab' ? vocab : nani);
+  };
 
   const now = new Date();
-  const items = vocabItems(decks, setup.deckIds, setup.direction);
+  const items = itemsFor(setup, { decks, rules });
   const summary = practiceSummary(items, stateOf, now);
   const newThisSession = Math.min(summary.new, setup.newCap);
   const count =
     setup.mode === 'practice' ? summary.due + newThisSession : items.length;
+  const unit = kind === 'vocab' ? 'card' : 'form';
+
+  const toggle = <T,>(list: readonly T[], value: T) =>
+    list.includes(value) ? list.filter((v) => v !== value) : [...list, value];
+  const allDecks = vocab.deckIds.length === decks.length;
 
   return (
     <main className="page setup">
@@ -133,11 +191,8 @@ export const SetupScreen = ({
           <p>
             <strong>Unfinished Complete deck run</strong>
             <span className="muted">
-              {resume.setup.deckIds
-                .map((id) => decks.find((deck) => deck.id === id)?.title)
-                .filter(Boolean)
-                .join(', ')}{' '}
-              · {directionLabel(resume.setup.direction)} ·{' '}
+              {describe(resume.setup, decks)} ·{' '}
+              {directionLabel(resume.setup.direction)} ·{' '}
               {resume.state.finished.length} of {resume.state.total} done
             </span>
           </p>
@@ -164,44 +219,96 @@ export const SetupScreen = ({
         <Choice
           legend="Deck type"
           options={DECK_KINDS}
-          value="vocab"
-          onChange={() => undefined}
+          value={kind}
+          onChange={switchKind}
         />
 
-        <fieldset className="decks">
-          <legend className="section-label">
-            Decks
-            <button
-              type="button"
-              className="link-btn"
-              onClick={() =>
-                update(
-                  'deckIds',
-                  allSelected ? [] : decks.map((deck) => deck.id)
-                )
-              }
-            >
-              {allSelected ? 'None' : 'All'}
-            </button>
-          </legend>
-          <ul>
-            {decks.map((deck) => (
-              <li key={deck.id}>
-                <label className="deck-row">
-                  <input
-                    type="checkbox"
-                    checked={setup.deckIds.includes(deck.id)}
-                    onChange={() => toggleDeck(deck.id)}
-                  />
-                  <span className="deck-title">{deck.title}</span>
-                  <span className="muted">
-                    {plural(deck.cards.length, 'card')}
-                  </span>
-                </label>
-              </li>
-            ))}
-          </ul>
-        </fieldset>
+        {kind === 'vocab' ? (
+          <fieldset className="decks">
+            <legend className="section-label">
+              Decks
+              <button
+                type="button"
+                className="link-btn"
+                onClick={() =>
+                  updateVocab({
+                    deckIds: allDecks ? [] : decks.map((deck) => deck.id),
+                  })
+                }
+              >
+                {allDecks ? 'None' : 'All'}
+              </button>
+            </legend>
+            <ul>
+              {decks.map((deck) => (
+                <li key={deck.id}>
+                  <label className="deck-row">
+                    <input
+                      type="checkbox"
+                      checked={vocab.deckIds.includes(deck.id)}
+                      onChange={() =>
+                        updateVocab({ deckIds: toggle(vocab.deckIds, deck.id) })
+                      }
+                    />
+                    <span className="deck-title">{deck.title}</span>
+                    <span className="muted">
+                      {plural(deck.cards.length, 'card')}
+                    </span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </fieldset>
+        ) : (
+          <>
+            <fieldset className="decks">
+              <legend className="section-label">Tenses</legend>
+              <ul>
+                {TENSES.map((tense) => {
+                  const open = available.includes(tense.value);
+                  const why = !verifiedTenses.includes(tense.value)
+                    ? 'Not checked against your grammar sheets yet'
+                    : 'Needs verbs in a Vocabulary deck';
+                  return (
+                    <li key={tense.value}>
+                      <label className={`deck-row${open ? '' : ' is-locked'}`}>
+                        <input
+                          type="checkbox"
+                          disabled={!open}
+                          checked={open && nani.tenses.includes(tense.value)}
+                          onChange={() =>
+                            updateNani({
+                              tenses: toggle(nani.tenses, tense.value),
+                            })
+                          }
+                        />
+                        <span className="deck-title">
+                          {tense.label}
+                          <small className="muted">
+                            {open ? tense.example : why}
+                          </small>
+                        </span>
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+              {available.length === 0 && (
+                <p className="setup-locked muted">
+                  Each tense unlocks once its forms have been checked against
+                  your grammar sheets.
+                </p>
+              )}
+            </fieldset>
+
+            <Choice
+              legend="Positive or negative"
+              options={POLARITIES}
+              value={nani.polarity}
+              onChange={(polarity) => updateNani({ polarity })}
+            />
+          </>
+        )}
 
         <Choice
           legend="Direction"
@@ -220,9 +327,9 @@ export const SetupScreen = ({
         {setup.mode === 'practice' && (
           <label className="field-row">
             <span>
-              New cards per session
+              New {unit}s per session
               <small className="muted">
-                New cards come back over the next few days, so add them
+                New {unit}s come back over the next few days, so add them
                 gradually.
               </small>
             </span>
@@ -241,9 +348,9 @@ export const SetupScreen = ({
 
         <label className="field-row">
           <span>
-            Repeat missed cards
+            Repeat missed {unit}s
             <small className="muted">
-              A missed card comes back a few cards later, until you get it.
+              A missed {unit} comes back a few cards later, until you get it.
             </small>
           </span>
           <input
@@ -257,17 +364,23 @@ export const SetupScreen = ({
       </div>
 
       <footer className="setup-footer">
-        {setup.deckIds.length === 0 ? (
-          <p className="setup-status muted">Choose at least one deck.</p>
+        {items.length === 0 ? (
+          <p className="setup-status muted">
+            {kind === 'vocab'
+              ? 'Choose at least one deck.'
+              : available.length === 0
+                ? 'No tenses to practise yet.'
+                : 'Choose at least one tense.'}
+          </p>
         ) : setup.mode === 'practice' && count === 0 ? (
           <div className="setup-status nothing-due">
             <p>
               <strong>Nothing due right now.</strong>{' '}
               {summary.nextDueAt && (
-                <>Next card due {fromNow(summary.nextDueAt, now)}. </>
+                <>Next one due {fromNow(summary.nextDueAt, now)}. </>
               )}
               {summary.new > 0 && setup.newCap === 0 && (
-                <>Set new cards above 0 to learn new ones. </>
+                <>Set new {unit}s above 0 to learn new ones. </>
               )}
             </p>
             <button
@@ -275,13 +388,13 @@ export const SetupScreen = ({
               className="btn btn-quiet btn-block"
               onClick={() => update('mode', 'complete')}
             >
-              Go through the whole deck instead
+              Go through them all instead
             </button>
           </div>
         ) : (
           setup.mode === 'practice' && (
             <p className="setup-status muted">
-              {plural(summary.due, 'card')} due · {newThisSession} new
+              {plural(summary.due, unit)} due · {newThisSession} new
             </p>
           )
         )}
@@ -291,7 +404,7 @@ export const SetupScreen = ({
           disabled={count === 0}
           onClick={() => onStart(setup)}
         >
-          Start · {plural(count, 'card')}
+          Start · {plural(count, unit)}
         </button>
       </footer>
     </main>

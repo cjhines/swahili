@@ -16,7 +16,7 @@ Requires Node 24.
 ```sh
 npm install
 npm run dev          # http://localhost:5173/swahili/
-npm test             # unit tests (Vitest)
+npm test             # unit + UI tests (Vitest; run via scripts/real-cwd.mjs so a c: vs C: shell on Windows works)
 npm run lint
 npm run typecheck
 npm run build        # → dist/

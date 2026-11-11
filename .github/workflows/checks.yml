@@ -30,7 +30,7 @@ jobs:
       - run: npm run typecheck
       - run: npm test
 
-      - name: Check decks (schema, duplicate IDs, ids.lock, generated JSON Schema)
+      - name: Check decks (schema, IDs, ids.lock, Nani na Lini? fixtures, generated files)
         run: npm run decks:check
 
       - name: Build

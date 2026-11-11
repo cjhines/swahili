@@ -66,7 +66,8 @@ test('backup round trip: save, wipe the browser, restore, and every card is back
   // Learn all of Time + dates.
   await page.goto('/swahili/');
   await page.getByRole('radio', { name: 'Complete deck' }).check();
-  await page.getByLabel(/^Numbers/).uncheck();
+  await page.getByRole('button', { name: 'None' }).click();
+  await page.getByLabel(/^Time \+ dates/).check();
   await page.getByRole('button', { name: /^Start/ }).click();
   for (let i = 0; i < 7; i++) {
     await page.keyboard.press(' ');

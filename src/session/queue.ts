@@ -7,6 +7,11 @@ export type ReviewItem = {
   key: ProgressKey;
   cardId: string;
   direction: Direction;
+  /**
+   * Nani na Lini? only: the verb card this pattern is shown with, chosen when the session is
+   * built. Progress is tracked by `key` (the pattern), never by the verb.
+   */
+  verbId?: string;
 };
 
 export type Random = () => number;

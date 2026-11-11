@@ -24,7 +24,7 @@ errors as you type.
 | --- | --- | --- |
 | `word` (numbers, days, adjectives, phrases…) | `id`, `sw`, `en` | `alt`, `example`, `hint`, `note` |
 | `noun` | `id`, `sw`, `en` | `plural`, `alt`, `example`, `hint`, `note` |
-| `verb` | `id`, `sw` (the ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `example` | `alt`, `hint`, `note` |
+| `verb` | `id`, `sw` (the ku- form), `en.base`, `en.past`, `en.participle`, `en.ing` | `en.meaning`, `en.stative` + `en.third`, `en.tenses`, `example`, `alt`, `hint`, `note` |
 
 - `alt`: other accepted Swahili forms, e.g. `alt: [alfu moja]` for *elfu moja*.
 - `hint`: shown on the front when going English → Swahili, to tell apart words with the same
@@ -41,7 +41,22 @@ errors as you type.
     example: { sw: Ninakula wali., en: I am eating rice. }
   ```
 
-A verb can sit in any themed deck. Nani na Lini? picks up every `kind: verb` card wherever it is.
+  The four forms describe **one** meaning, the one Nani na Lini? sentences use ("We didn't
+  call"). The optional fields cover verbs that don't fit that mould:
+
+  - `meaning`: what Vocabulary shows, if it's more than "to" + base:
+    `meaning: to call / to shout`.
+  - `stative: true` and `third`: for verbs that don't take "-ing" in the present. Their present
+    is "I want" / "He/she wants" / "I don't want", not "I am wanting":
+    `{ base: want, …, stative: true, third: wants }`.
+  - `tenses`: the verb's own English for any tense, for verbs nothing else fits. *Kuweza* uses
+    `present: { pos: can, neg: "can't" }`. Placeholders: `{be}` am/is/are, `{have}` have/has,
+    `{do}` do/does, `{was}` was/were, `{simple}` (base, or `third` after he/she/it), plus
+    `{base}`, `{past}`, `{participle}`, `{ing}`. See *kuweza* and *kuitwa* in
+    `decks/vocab/verbs.yaml`.
+
+A verb can sit in any themed deck. Nani na Lini? picks up every `kind: verb` card wherever it is,
+except those `rules.yaml` excludes (*kuwa*).
 
 ## Nani na Lini? grammar
 

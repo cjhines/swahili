@@ -205,7 +205,7 @@
                   "base": {
                     "type": "string",
                     "pattern": "^\\S(.*\\S)?$",
-                    "description": "e.g. read (shown as \"to read\")"
+                    "description": "e.g. read. Nani na Lini? builds its sentences from these four forms."
                   },
                   "past": {
                     "type": "string",
@@ -221,6 +221,100 @@
                     "type": "string",
                     "pattern": "^\\S(.*\\S)?$",
                     "description": "e.g. reading, eating"
+                  },
+                  "meaning": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "What Vocabulary shows, when it is more than \"to \" + base: e.g. \"to call / to shout\". Nani na Lini? sentences use the base form (\"We didn't call\")."
+                  },
+                  "stative": {
+                    "description": "The present is \"I want\" / \"He/she wants\", not \"I am wanting\". Needs `third`.",
+                    "type": "boolean",
+                    "const": true
+                  },
+                  "third": {
+                    "type": "string",
+                    "pattern": "^\\S(.*\\S)?$",
+                    "description": "The he/she form of the simple present: wants, knows."
+                  },
+                  "tenses": {
+                    "description": "The verb's own English for particular tenses, e.g. kuweza: present { pos: can, neg: \"can't\" }.",
+                    "type": "object",
+                    "properties": {
+                      "present": {
+                        "type": "object",
+                        "properties": {
+                          "pos": {
+                            "type": "string",
+                            "description": "e.g. can, {was} called, {have} been able to"
+                          },
+                          "neg": {
+                            "type": "string",
+                            "description": "e.g. can't, {was}n't called"
+                          }
+                        },
+                        "required": [
+                          "pos",
+                          "neg"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "past": {
+                        "type": "object",
+                        "properties": {
+                          "pos": {
+                            "type": "string",
+                            "description": "e.g. can, {was} called, {have} been able to"
+                          },
+                          "neg": {
+                            "type": "string",
+                            "description": "e.g. can't, {was}n't called"
+                          }
+                        },
+                        "required": [
+                          "pos",
+                          "neg"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "future": {
+                        "type": "object",
+                        "properties": {
+                          "pos": {
+                            "type": "string",
+                            "description": "e.g. can, {was} called, {have} been able to"
+                          },
+                          "neg": {
+                            "type": "string",
+                            "description": "e.g. can't, {was}n't called"
+                          }
+                        },
+                        "required": [
+                          "pos",
+                          "neg"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "perfect": {
+                        "type": "object",
+                        "properties": {
+                          "pos": {
+                            "type": "string",
+                            "description": "e.g. can, {was} called, {have} been able to"
+                          },
+                          "neg": {
+                            "type": "string",
+                            "description": "e.g. can't, {was}n't called"
+                          }
+                        },
+                        "required": [
+                          "pos",
+                          "neg"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
                   }
                 },
                 "required": [
@@ -229,8 +323,7 @@
                   "participle",
                   "ing"
                 ],
-                "additionalProperties": false,
-                "description": "Every English form, needed to build Nani na Lini? prompts like \"We didn't eat\"."
+                "additionalProperties": false
               },
               "example": {
                 "type": "object",
@@ -258,8 +351,7 @@
               "id",
               "kind",
               "sw",
-              "en",
-              "example"
+              "en"
             ],
             "additionalProperties": false
           }

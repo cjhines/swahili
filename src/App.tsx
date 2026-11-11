@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import decks from 'virtual:decks';
+import nani from 'virtual:nani';
 
 import { Study } from './Study.tsx';
 import { requestPersistentStorage } from './pwa/persistence.ts';
@@ -64,6 +65,6 @@ export const App = () => {
         </main>
       );
     case 'ready':
-      return <Study decks={decks} store={boot.store} />;
+      return <Study decks={decks} nani={nani} store={boot.store} />;
   }
 };

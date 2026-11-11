@@ -12,6 +12,7 @@ import type { VocabSetup } from './setup.ts';
 
 const START = new Date('2026-03-01T09:00:00Z');
 const complete: VocabSetup = {
+  kind: 'vocab',
   deckIds: ['numbers'],
   direction: 'sw-en',
   mode: 'complete',
@@ -88,7 +89,9 @@ test('expires a day after the last mark, not after the start', () => {
 
 test('a run naming a card that no longer exists is dropped', () => {
   saveResume({ setup: complete, state: midRun(), startedAt: START }, START);
-  expect(loadResume((id) => id !== 'vocab-tatu', START)).toBeUndefined();
+  expect(
+    loadResume((item) => item.cardId !== 'vocab-tatu', START)
+  ).toBeUndefined();
   expect(localStorage.length).toBe(0);
 });
 
@@ -105,4 +108,52 @@ test('clearResume removes it', () => {
   saveResume({ setup: complete, state: midRun(), startedAt: START }, START);
   clearResume();
   expect(loadResume(allExist, START)).toBeUndefined();
+});
+
+test('a Nani na Lini? run keeps the verb of each card', () => {
+  const nani = {
+    kind: 'nani',
+    tenses: ['past'],
+    polarity: 'neg',
+    direction: 'en-sw',
+    mode: 'complete',
+    newCap: 10,
+    repeatMisses: true,
+  } as const;
+  const state = startSession(
+    [
+      {
+        key: 'nani-we-past-neg:en-sw',
+        cardId: 'nani-we-past-neg',
+        direction: 'en-sw',
+        verbId: 'verb-kusoma',
+      },
+      {
+        key: 'nani-i-past-neg:en-sw',
+        cardId: 'nani-i-past-neg',
+        direction: 'en-sw',
+        verbId: 'verb-kula',
+      },
+    ],
+    { repeatMisses: true }
+  );
+  saveResume(
+    { setup: { ...nani, tenses: [...nani.tenses] }, state, startedAt: START },
+    START
+  );
+  expect(
+    loadResume(allExist, START)?.state.queue.map((item) => item.verbId)
+  ).toEqual(['verb-kusoma', 'verb-kula']);
+  // A verb that's since been removed makes the run unresumable.
+  expect(
+    loadResume((item) => item.verbId !== 'verb-kula', START)
+  ).toBeUndefined();
+});
+
+test('a vocabulary run saved before deck kinds existed still resumes', () => {
+  saveResume({ setup: complete, state: midRun(), startedAt: START }, START);
+  const saved = JSON.parse(localStorage.getItem('swahili:resume')!);
+  delete saved.setup.kind;
+  localStorage.setItem('swahili:resume', JSON.stringify(saved));
+  expect(loadResume(allExist, START)?.setup).toEqual(complete);
 });

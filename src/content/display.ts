@@ -1,5 +1,6 @@
 import type { Direction } from '../domain.ts';
-import type { VocabCard, VocabDeck } from './schema.ts';
+import type { VerbEnglish, VocabCard, VocabDeck } from './schema.ts';
+import type { Part } from '../nani/conjugate.ts';
 
 // What each side of a vocabulary card shows, as plain data. Kept out of the components so the
 // rules are tested directly.
@@ -21,11 +22,18 @@ export type Answer = {
   plural?: string;
   example?: { sw: string; en: string };
   note?: string;
+  /** Nani na Lini?: the form in coloured, labelled parts (ha·tu·ku·soma). */
+  breakdown?: Part[];
+  /** Nani na Lini?: which verb it was, e.g. "kusoma: to read". */
+  gloss?: string;
 };
 
-/** Verbs are learned as "to read", everything else as written. */
+/** How Vocabulary shows a verb: its own wording if it has one, else "to read". */
+export const meaningOf = (en: VerbEnglish) => en.meaning ?? `to ${en.base}`;
+
+/** Verbs are learned by meaning ("to read"), everything else as written. */
 export const englishOf = (card: VocabCard) =>
-  card.kind === 'verb' ? `to ${card.en.base}` : card.en;
+  card.kind === 'verb' ? meaningOf(card.en) : card.en;
 
 export const promptFor = (card: VocabCard, direction: Direction): Prompt =>
   direction === 'sw-en'

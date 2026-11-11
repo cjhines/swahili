@@ -1,5 +1,6 @@
 import type { Pattern } from './patterns.ts';
-import type { EnglishForms, NaniRules } from './schema.ts';
+import type { NaniRules } from './schema.ts';
+import type { VerbEnglish } from '../content/schema.ts';
 
 // Builds a Swahili verb form from rules.yaml, as labelled parts for the coloured breakdown:
 //
@@ -20,7 +21,7 @@ export type PartRole =
 export type Part = { text: string; role: PartRole; label: string };
 export type Form = { sw: string; parts: Part[] };
 
-export type NaniVerb = { sw: string; en: EnglishForms };
+export type NaniVerb = { sw: string; en: VerbEnglish };
 
 const VOWELS = /[aeiou]/g;
 

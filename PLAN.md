@@ -199,7 +199,17 @@ Card kinds, with required fields in **bold**:
 | `kind` | Fields |
 | --- | --- |
 | `noun` | **`id`, `sw`, `en`**, `plural`, `alt`, `example`, `hint`, `note` |
-| `verb` | **`id`, `sw` (ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `example`**, `alt`, `hint`, `note` |
+| `verb` | **`id`, `sw` (ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`**, `en.meaning`, `en.stative` + `en.third`, `en.tenses`, `example`, `alt`, `hint`, `note` |
+
+Verb English (added in milestone 7, when Chris's verbs arrived):
+
+- The four forms describe **one** meaning, the one Nani na Lini? sentences use. `meaning` is what
+  Vocabulary shows ("to call / to shout").
+- `stative` verbs (*kutaka*, *kujua*, *kuishi*) take the simple present: "I want", "He/she
+  wants". Their `third` form supplies the "-s".
+- `tenses` gives a verb its own English per tense when nothing else fits. *Kuweza*: can / could /
+  will be able to. *Kuitwa*: "{be} called", "{was} called".
+- `example` became optional for verbs, because Chris's verb list has none and the content is his.
 | `word` | **`id`, `sw`, `en`**, `alt`, `example`, `hint`, `note` (numbers, days, adjectives, adverbs, phrases, figures of speech) |
 
 - `alt` lists other accepted Swahili forms, such as `alt: [alfu moja]` for *elfu moja*. They're
@@ -228,13 +238,16 @@ file, not a code change. It has these sections:
   "not yet"). `kept` says what a kept *ku-* does in that tense: `keep` it (*ni·ta·ku·la*), `drop`
   it (*si·ja·la*), or `merge` it with a marker that is itself *ku* (*si·ku·la*).
 - `presentNegativeEnding`, `have`, `labels`.
-- `english`: the templates, e.g. `past: { pos: '{past}', neg: "didn't {base}" }`. A misspelt
-  placeholder fails the build.
+- `english`: the templates, e.g. `past: { pos: '{past}', neg: "didn't {base}" }`, plus
+  `stativePresent` for stative verbs. A misspelt placeholder fails the build. A verb's own
+  `en.tenses` override these (see the card kinds above).
 - `verbs`: quirks by ku- form: `keepKu` (*kwenda*, *kwisha*), `exclude` (*kuwa*), `stem`.
 
 The engine (`src/nani/conjugate.ts`, `english.ts`) is pure. It returns the word plus labelled,
 role-tagged parts (subject, negative, tense, ku, stem, ending, have) for the coloured breakdown.
-The app gets the validated rules as `virtual:nani-rules`. The fixtures never ship.
+The app gets `virtual:nani`: the validated rules plus `verifiedTenses`, the tenses whose fixture
+tables are all verified. The fixtures themselves never ship. The build re-proves the rules
+against the fixtures, so grammar that contradicts them can't be deployed.
 
 The rules the engine applies, each covered by fixtures:
 
@@ -363,9 +376,16 @@ isDue(state, now)       // has state and dueAt <= now
 - **Session state** is a pure reducer (`flip`, `mark`) over plain JSON-serialisable data, so a
   Complete deck run can be saved and resumed. Saving each mark is the caller's job.
 - **Complete deck queue:** every item in the selection, shuffled.
-- **Nani na Lini?:** the verb is chosen per card from eligible verbs, never the same verb twice in a
-  row. A verb is eligible if it has a `progress` record in either direction. If fewer than 5 are
-  eligible, every verb is used. Verbs with `nani.exclude` are always left out.
+- **Nani na Lini?:** the verb is chosen per card when the session is built (`ReviewItem.verbId`,
+  saved with a resumable run), never the same verb twice in a row. A verb is eligible if it has a
+  `progress` record in either direction. If fewer than 5 are eligible, every verb is used. Verbs
+  that `rules.yaml` excludes (*kuwa*) are always left out. A missed card comes back with the same
+  verb. Progress is the pattern's, never the verb's.
+- **Only verified tenses can be chosen.** The setup screen lists all five, and says why each
+  locked one is locked: "Not checked against your grammar sheets yet", or "Needs verbs in a
+  Vocabulary deck" (have / don't have needs none).
+- **Card views** (`session/views.ts`) turn any queue item into title + prompt + answer, so the
+  session and end screens don't care which deck kind they're showing.
 - **Missed card with repeat on:** the card is reinserted 3–5 cards later, or at the end if fewer
   remain.
 

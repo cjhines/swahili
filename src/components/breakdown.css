@@ -1,0 +1,81 @@
+/*
+ * Part colours. PLACEHOLDERS until Chris sends the colours from his grammar sheets:
+ * change them here and nowhere else.
+ */
+:root {
+  --part-subject: #2f6db5;
+  --part-negative: #b5452a;
+  --part-tense: #b8740f;
+  --part-ku: #7a6a9b;
+  --part-stem: var(--ink);
+  --part-ending: #b5452a;
+  --part-have: #1f7a4d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --part-subject: #7fb2f0;
+    --part-negative: #f08a6b;
+    --part-tense: #f0b75a;
+    --part-ku: #b7a8d9;
+    --part-ending: #f08a6b;
+    --part-have: #4cc38a;
+  }
+}
+
+.breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.15rem 0;
+  margin-top: 0.25rem;
+}
+
+.part {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 2.2rem;
+  padding: 0 0.3rem;
+}
+
+/* A thin separator between parts, like the · in ha·tu·ku·soma */
+.part + .part {
+  border-left: 1px dotted var(--line);
+}
+
+.part-text {
+  font-size: 1.25rem;
+  font-weight: 750;
+  line-height: 1.3;
+}
+
+.part-label {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.part-subject .part-text {
+  color: var(--part-subject);
+}
+.part-negative .part-text,
+.part-negative-subject .part-text {
+  color: var(--part-negative);
+}
+.part-tense .part-text {
+  color: var(--part-tense);
+}
+.part-ku .part-text {
+  color: var(--part-ku);
+}
+.part-stem .part-text {
+  color: var(--part-stem);
+}
+.part-ending .part-text {
+  color: var(--part-ending);
+}
+.part-have .part-text {
+  color: var(--part-have);
+}

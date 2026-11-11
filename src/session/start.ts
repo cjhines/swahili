@@ -1,14 +1,18 @@
 import type { VocabDeck } from '../content/schema.ts';
-import type { Direction } from '../domain.ts';
+import { progressKey, type Direction } from '../domain.ts';
 import {
   completeQueue,
   practiceQueue,
   reviewItems,
   type Random,
+  type ReviewItem,
   type StateOf,
 } from './queue.ts';
 import { startSession } from './session.ts';
-import type { VocabSetup } from './setup.ts';
+import type { NaniSetup, SessionSetup } from './setup.ts';
+import { verbInfo, type NaniVerb } from '../nani/conjugate.ts';
+import { allPatterns, type Pattern } from '../nani/patterns.ts';
+import type { NaniRules } from '../nani/schema.ts';
 
 /** Every card in the chosen decks, in the chosen direction. */
 export const vocabItems = (
@@ -23,16 +27,104 @@ export const vocabItems = (
     direction
   );
 
-export const buildVocabSession = (
-  setup: VocabSetup,
+/** A verb card Nani na Lini? can fill its patterns with. */
+export type VerbCard = { id: string; verb: NaniVerb };
+
+/** Every verb in every deck, except those rules.yaml says never to conjugate (kuwa). */
+export const naniVerbs = (
   decks: readonly VocabDeck[],
+  rules: NaniRules
+): VerbCard[] =>
+  decks
+    .flatMap((deck) => deck.cards)
+    .flatMap((card) =>
+      card.kind === 'verb' && !verbInfo(rules, card.sw).exclude
+        ? [{ id: card.id, verb: { sw: card.sw, en: card.en } }]
+        : []
+    );
+
+export const MIN_REVIEWED_VERBS = 5;
+
+/**
+ * Verbs you've already met in Vocabulary (either direction), so a miss means you didn't know
+ * the pattern, not the verb. With fewer than 5 of those, every verb, so there's enough variety.
+ */
+export const eligibleVerbs = (verbs: readonly VerbCard[], stateOf: StateOf) => {
+  const reviewed = verbs.filter(
+    (v) =>
+      stateOf(progressKey(v.id, 'sw-en')) !== undefined ||
+      stateOf(progressKey(v.id, 'en-sw')) !== undefined
+  );
+  return reviewed.length >= MIN_REVIEWED_VERBS ? reviewed : [...verbs];
+};
+
+/** The patterns matching the chosen tenses and positive/negative, in the chosen direction. */
+export const naniItems = (
+  rules: NaniRules,
+  setup: Pick<NaniSetup, 'tenses' | 'polarity' | 'direction'>
+) =>
+  allPatterns(rules)
+    .filter(
+      (p) =>
+        setup.tenses.includes(p.tense) &&
+        (setup.polarity === 'both' || p.polarity === setup.polarity)
+    )
+    .map((p): ReviewItem => ({
+      key: progressKey(p.id, setup.direction),
+      cardId: p.id,
+      direction: setup.direction,
+    }));
+
+/** Gives each verb pattern a random verb, never the same one twice in a row. "Have" needs none. */
+export const assignVerbs = (
+  queue: readonly ReviewItem[],
+  verbIds: readonly string[],
+  patterns: ReadonlyMap<string, Pattern>,
+  random: Random = Math.random
+): ReviewItem[] => {
+  let previous: string | undefined;
+  return queue.map((item) => {
+    if (patterns.get(item.cardId)?.tense === 'have' || verbIds.length === 0)
+      return item;
+    const choices =
+      verbIds.length > 1 ? verbIds.filter((id) => id !== previous) : verbIds;
+    const verbId = choices[Math.floor(random() * choices.length)]!;
+    previous = verbId;
+    return { ...item, verbId };
+  });
+};
+
+export const itemsFor = (
+  setup: SessionSetup,
+  { decks, rules }: { decks: readonly VocabDeck[]; rules: NaniRules }
+): ReviewItem[] =>
+  setup.kind === 'vocab'
+    ? vocabItems(decks, setup.deckIds, setup.direction)
+    : naniItems(rules, setup);
+
+export const buildSession = (
+  setup: SessionSetup,
+  content: {
+    decks: readonly VocabDeck[];
+    rules: NaniRules;
+    verbs: readonly VerbCard[];
+  },
   stateOf: StateOf,
   { now, random = Math.random }: { now: Date; random?: Random }
 ) => {
-  const items = vocabItems(decks, setup.deckIds, setup.direction);
-  const queue =
+  const items = itemsFor(setup, content);
+  let queue =
     setup.mode === 'practice'
       ? practiceQueue(items, stateOf, { now, newCap: setup.newCap, random })
       : completeQueue(items, random);
+  if (setup.kind === 'nani') {
+    const patterns = new Map(allPatterns(content.rules).map((p) => [p.id, p]));
+    queue = assignVerbs(
+      queue,
+      eligibleVerbs(content.verbs, stateOf).map((v) => v.id),
+      patterns,
+      random
+    );
+  }
   return startSession(queue, { repeatMisses: setup.repeatMisses });
 };

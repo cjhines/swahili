@@ -1,28 +1,23 @@
-import { answerFor, promptFor, type CardIndex } from '../content/display.ts';
 import type { SessionState } from '../session/session.ts';
+import type { ViewOf } from '../session/views.ts';
 import { plural } from '../ui/format.ts';
 
 import './end.css';
 
 type Props = {
-  index: CardIndex;
+  view: ViewOf;
   state: SessionState;
   onDone: () => void;
 };
 
-export const EndScreen = ({ index, state, onDone }: Props) => {
+export const EndScreen = ({ view, state, onDone }: Props) => {
   const missed = state.missed.flatMap((key) => {
-    const item = state.queue.find((queued) => queued.key === key);
-    const entry = item && index.get(item.cardId);
-    return item && entry
-      ? [
-          {
-            key,
-            prompt: promptFor(entry.card, item.direction),
-            answer: answerFor(entry.card, item.direction),
-          },
-        ]
-      : [];
+    // The copy you last saw: for Nani na Lini?, the pattern with the verb it was shown with.
+    const item = [...state.queue]
+      .reverse()
+      .find((queued) => queued.key === key);
+    const card = item && view(item);
+    return card ? [{ key, prompt: card.prompt, answer: card.answer }] : [];
   });
   const firstTime = state.total - state.missed.length;
 

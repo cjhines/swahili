@@ -6,7 +6,7 @@ Every form below is what the app will produce. Check each table against your gra
 when one is right, set `verified: true` on it in `fixtures.yaml` (or tell Claude which).
 If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows the correct forms.
 
-**0 of 20 tables checked.**
+**0 of 23 tables checked.**
 
 ## ⬜ kusoma (to read): Present (now)
 
@@ -206,3 +206,27 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | --- | --- | --- | --- | --- |
 | I | **ni·me·osha** | I have washed | **si·ja·osha** | I haven't washed yet |
 | he/she | **a·me·osha** | He/she has washed | **ha·ja·osha** | He/she hasn't washed yet |
+
+## ⬜ kujua (to know): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·jua** | I know | **si·ju·i** | I don't know |
+| he/she | **a·na·jua** | He/she knows | **ha·ju·i** | He/she doesn't know |
+| we | **tu·na·jua** | We know | **ha·tu·ju·i** | We don't know |
+
+## ⬜ kuishi (to live): Present (now)
+
+> Ends in -i, so the present negative keeps it (siishi), like kujibu.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·ishi** | I live | **si·ishi** | I don't live |
+| he/she | **a·na·ishi** | He/she lives | **ha·ishi** | He/she doesn't live |
+
+## ⬜ kuita (to call): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·ita** | I am calling | **si·it·i** | I am not calling |
+| he/she | **a·na·ita** | He/she is calling | **ha·it·i** | He/she is not calling |

@@ -2,6 +2,7 @@ import { useRef, useState, type PointerEvent } from 'react';
 
 import type { Answer, Prompt } from '../content/display.ts';
 import type { Grade } from '../domain.ts';
+import { Breakdown } from './Breakdown.tsx';
 
 import './flashcard.css';
 
@@ -136,6 +137,10 @@ export const Flashcard = ({
             </blockquote>
           )}
           {answer.note && <p className="flashcard-note muted">{answer.note}</p>}
+          {answer.breakdown && <Breakdown parts={answer.breakdown} />}
+          {answer.gloss && (
+            <p className="flashcard-note muted">{answer.gloss}</p>
+          )}
         </div>
       ) : (
         <p className="flashcard-cue muted" aria-hidden="true">

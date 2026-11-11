@@ -66,6 +66,80 @@ export const Word = z.strictObject({
   example: Example.optional(),
 });
 
+/**
+ * Placeholders an English template may use. Subject-dependent: be (am/is/are), have (have/has),
+ * do (do/does), was (was/were), simple (the verb's base, or its `third` form after he/she/it).
+ * From the verb: base, past, participle, ing.
+ */
+export const ENGLISH_PLACEHOLDERS = [
+  'be',
+  'have',
+  'do',
+  'was',
+  'simple',
+  'base',
+  'past',
+  'participle',
+  'ing',
+];
+
+export const englishTemplate = (description: string) =>
+  z
+    .string()
+    .refine(
+      (text) =>
+        [...text.matchAll(/\{(\w+)\}/g)].every(([, name]) =>
+          ENGLISH_PLACEHOLDERS.includes(name!)
+        ),
+      `placeholders must be one of {${ENGLISH_PLACEHOLDERS.join('}, {')}}`
+    )
+    .describe(description);
+
+const TenseEnglish = z.strictObject({
+  pos: englishTemplate('e.g. can, {was} called, {have} been able to'),
+  neg: englishTemplate("e.g. can't, {was}n't called"),
+});
+
+/** A verb's English: its forms, for Nani na Lini? sentences, and how Vocabulary shows it. */
+export const VerbEnglish = z
+  .strictObject({
+    base: text(
+      'e.g. read. Nani na Lini? builds its sentences from these four forms.'
+    ),
+    past: text('e.g. read, ate'),
+    participle: text('e.g. read, eaten'),
+    ing: text('e.g. reading, eating'),
+    meaning: text(
+      'What Vocabulary shows, when it is more than "to " + base: e.g. "to call / to shout". ' +
+        'Nani na Lini? sentences use the base form ("We didn\'t call").'
+    ).optional(),
+    stative: z
+      .literal(true)
+      .optional()
+      .describe(
+        'The present is "I want" / "He/she wants", not "I am wanting". Needs `third`.'
+      ),
+    third: text(
+      'The he/she form of the simple present: wants, knows.'
+    ).optional(),
+    tenses: z
+      .strictObject({
+        present: TenseEnglish.optional(),
+        past: TenseEnglish.optional(),
+        future: TenseEnglish.optional(),
+        perfect: TenseEnglish.optional(),
+      })
+      .optional()
+      .describe(
+        'The verb\'s own English for particular tenses, e.g. kuweza: present { pos: can, neg: "can\'t" }.'
+      ),
+  })
+  .refine((en) => !en.stative || en.third, {
+    message: 'a stative verb needs `third`',
+    path: ['third'],
+  });
+export type VerbEnglish = z.output<typeof VerbEnglish>;
+
 export const Verb = z.strictObject({
   id: z
     .string()
@@ -85,17 +159,8 @@ export const Verb = z.strictObject({
       'The ku- form, e.g. kusoma. Grammar quirks (kwenda keeping its kw-, kuwa never being ' +
         'conjugated) live in decks/nani-na-lini/rules.yaml, not here.'
     ),
-  en: z
-    .strictObject({
-      base: text('e.g. read (shown as "to read")'),
-      past: text('e.g. read, ate'),
-      participle: text('e.g. read, eaten'),
-      ing: text('e.g. reading, eating'),
-    })
-    .describe(
-      'Every English form, needed to build Nani na Lini? prompts like "We didn\'t eat".'
-    ),
-  example: Example,
+  en: VerbEnglish,
+  example: Example.optional(),
 });
 
 export const VocabCard = z.discriminatedUnion('kind', [Noun, Word, Verb], {

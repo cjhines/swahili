@@ -1,0 +1,127 @@
+# yaml-language-server: $schema=../../schema/vocab-deck.schema.json
+title: Verbs
+# `meaning` is what Vocabulary shows (Chris's wording). The four forms build Nani na Lini?
+# sentences, so they use one meaning: kuita gives "We didn't call", not "call / shout".
+cards:
+  - id: verb-kutaka
+    kind: verb
+    sw: kutaka
+    en: { base: want, past: wanted, participle: wanted, ing: wanting, stative: true, third: wants }
+
+  - id: verb-kuitwa
+    kind: verb
+    sw: kuitwa
+    en:
+      meaning: to be called / to be named
+      base: be called
+      past: was called
+      participle: been called
+      ing: being called
+      # Passive: "I am called" (ninaitwa), with was/were agreeing with the subject.
+      tenses:
+        present: { pos: '{be} called', neg: '{be} not called' }
+        past: { pos: '{was} called', neg: "{was}n't called" }
+        future: { pos: will be called, neg: "won't be called" }
+        perfect: { pos: '{have} been called', neg: "{have}n't been called yet" }
+
+  - id: verb-kuishi
+    kind: verb
+    sw: kuishi
+    en: { base: live, past: lived, participle: lived, ing: living, stative: true, third: lives }
+
+  - id: verb-kuita
+    kind: verb
+    sw: kuita
+    en: { meaning: to call / to shout, base: call, past: called, participle: called, ing: calling }
+
+  - id: verb-kuweza
+    kind: verb
+    sw: kuweza
+    en:
+      meaning: can / to be able to
+      base: be able
+      past: was able
+      participle: been able
+      ing: being able
+      # "can" has no -ing, no "to" and no past participle of its own.
+      tenses:
+        present: { pos: can, neg: "can't" }
+        past: { pos: could, neg: "couldn't" }
+        future: { pos: will be able to, neg: "won't be able to" }
+        perfect: { pos: '{have} been able to', neg: "{have}n't been able to yet" }
+
+  - id: verb-kuanza
+    kind: verb
+    sw: kuanza
+    en: { base: begin, past: began, participle: begun, ing: beginning }
+
+  - id: verb-kumaliza
+    kind: verb
+    sw: kumaliza
+    en: { base: finish, past: finished, participle: finished, ing: finishing }
+
+  - id: verb-kuogelea
+    kind: verb
+    sw: kuogelea
+    en: { base: swim, past: swam, participle: swum, ing: swimming }
+
+  - id: verb-kuoga
+    kind: verb
+    sw: kuoga
+    en: { meaning: to bathe / to shower, base: bathe, past: bathed, participle: bathed, ing: bathing }
+
+  - id: verb-kutunza
+    kind: verb
+    sw: kutunza
+    en:
+      meaning: to take care / to look after
+      base: look after
+      past: looked after
+      participle: looked after
+      ing: looking after
+
+  - id: verb-kukaa
+    kind: verb
+    sw: kukaa
+    en: { meaning: to stay / to sit / to live, base: stay, past: stayed, participle: stayed, ing: staying }
+
+  - id: verb-kuwa
+    kind: verb
+    sw: kuwa
+    # Never conjugated in Nani na Lini? (see rules.yaml); have / don't have covers kuwa na.
+    en: { meaning: to be / to become, base: be, past: was, participle: been, ing: being }
+
+  - id: verb-kunywa
+    kind: verb
+    sw: kunywa
+    en: { base: drink, past: drank, participle: drunk, ing: drinking }
+
+  - id: verb-kuonana
+    kind: verb
+    sw: kuonana
+    en: { meaning: to see each other / to meet, base: meet, past: met, participle: met, ing: meeting }
+
+  - id: verb-kuangalia
+    kind: verb
+    sw: kuangalia
+    en: { meaning: to look / to look at / to be careful, base: look, past: looked, participle: looked, ing: looking }
+
+  - id: verb-kuzungumza
+    kind: verb
+    sw: kuzungumza
+    en: { meaning: to talk / to chat, base: talk, past: talked, participle: talked, ing: talking }
+
+  - id: verb-kujua
+    kind: verb
+    sw: kujua
+    en: { base: know, past: knew, participle: known, ing: knowing, stative: true, third: knows }
+
+  - id: verb-kusikiliza
+    kind: verb
+    sw: kusikiliza
+    en: { base: listen, past: listened, participle: listened, ing: listening }
+
+  - id: verb-kuamka
+    kind: verb
+    sw: kuamka
+    en: { base: wake up, past: woke up, participle: woken up, ing: waking up }

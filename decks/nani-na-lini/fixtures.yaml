@@ -15,99 +15,52 @@ verbs:
   kwenda: { base: go, past: went, participle: gone, ing: going }
   kujibu: { base: answer, past: answered, participle: answered, ing: answering }
   kuosha: { base: wash, past: washed, participle: washed, ing: washing }
+  kujua: { base: know, past: knew, participle: known, ing: knowing, stative: true, third: knows }
+  kuishi: { base: live, past: lived, participle: lived, ing: living, stative: true, third: lives }
+  kuita: { base: call, past: called, participle: called, ing: calling }
+  kutaka: { base: want, past: wanted, participle: wanted, ing: wanting, stative: true, third: wants }
+  kuweza:
+    base: be able
+    past: was able
+    participle: been able
+    ing: being able
+    tenses:
+      present: { pos: can, neg: "can't" }
+      past: { pos: could, neg: "couldn't" }
+      future: { pos: will be able to, neg: "won't be able to" }
+      perfect: { pos: '{have} been able to', neg: "{have}n't been able to yet" }
+  kuitwa:
+    base: be called
+    past: was called
+    participle: been called
+    ing: being called
+    tenses:
+      present: { pos: '{be} called', neg: '{be} not called' }
+      past: { pos: '{was} called', neg: "{was}n't called" }
+      future: { pos: will be called, neg: "won't be called" }
+      perfect: { pos: '{have} been called', neg: "{have}n't been called yet" }
 
 paradigms:
   # A regular verb, in full.
   - verb: kusoma
     tense: present
-    pos:
-      [
-        ninasoma,
-        unasoma,
-        anasoma,
-        tunasoma,
-        mnasoma,
-        wanasoma,
-        inasoma,
-        zinasoma,
-      ]
-    neg:
-      [sisomi, husomi, hasomi, hatusomi, hamsomi, hawasomi, haisomi, hazisomi]
+    pos: [ninasoma, unasoma, anasoma, tunasoma, mnasoma, wanasoma, inasoma, zinasoma]
+    neg: [sisomi, husomi, hasomi, hatusomi, hamsomi, hawasomi, haisomi, hazisomi]
     verified: false
   - verb: kusoma
     tense: past
-    pos:
-      [
-        nilisoma,
-        ulisoma,
-        alisoma,
-        tulisoma,
-        mlisoma,
-        walisoma,
-        ilisoma,
-        zilisoma,
-      ]
-    neg:
-      [
-        sikusoma,
-        hukusoma,
-        hakusoma,
-        hatukusoma,
-        hamkusoma,
-        hawakusoma,
-        haikusoma,
-        hazikusoma,
-      ]
+    pos: [nilisoma, ulisoma, alisoma, tulisoma, mlisoma, walisoma, ilisoma, zilisoma]
+    neg: [sikusoma, hukusoma, hakusoma, hatukusoma, hamkusoma, hawakusoma, haikusoma, hazikusoma]
     verified: false
   - verb: kusoma
     tense: future
-    pos:
-      [
-        nitasoma,
-        utasoma,
-        atasoma,
-        tutasoma,
-        mtasoma,
-        watasoma,
-        itasoma,
-        zitasoma,
-      ]
-    neg:
-      [
-        sitasoma,
-        hutasoma,
-        hatasoma,
-        hatutasoma,
-        hamtasoma,
-        hawatasoma,
-        haitasoma,
-        hazitasoma,
-      ]
+    pos: [nitasoma, utasoma, atasoma, tutasoma, mtasoma, watasoma, itasoma, zitasoma]
+    neg: [sitasoma, hutasoma, hatasoma, hatutasoma, hamtasoma, hawatasoma, haitasoma, hazitasoma]
     verified: false
   - verb: kusoma
     tense: perfect
-    pos:
-      [
-        nimesoma,
-        umesoma,
-        amesoma,
-        tumesoma,
-        mmesoma,
-        wamesoma,
-        imesoma,
-        zimesoma,
-      ]
-    neg:
-      [
-        sijasoma,
-        hujasoma,
-        hajasoma,
-        hatujasoma,
-        hamjasoma,
-        hawajasoma,
-        haijasoma,
-        hazijasoma,
-      ]
+    pos: [nimesoma, umesoma, amesoma, tumesoma, mmesoma, wamesoma, imesoma, zimesoma]
+    neg: [sijasoma, hujasoma, hajasoma, hatujasoma, hamjasoma, hawajasoma, haijasoma, hazijasoma]
     verified: false
 
   # Have / don't have.
@@ -119,76 +72,24 @@ paradigms:
   # One syllable: keeps ku- in the positive tenses and the future negative, drops it elsewhere.
   - verb: kula
     tense: present
-    pos:
-      [
-        ninakula,
-        unakula,
-        anakula,
-        tunakula,
-        mnakula,
-        wanakula,
-        inakula,
-        zinakula,
-      ]
+    pos: [ninakula, unakula, anakula, tunakula, mnakula, wanakula, inakula, zinakula]
     neg: [sili, huli, hali, hatuli, hamli, hawali, haili, hazili]
     verified: false
   - verb: kula
     tense: past
-    pos:
-      [
-        nilikula,
-        ulikula,
-        alikula,
-        tulikula,
-        mlikula,
-        walikula,
-        ilikula,
-        zilikula,
-      ]
-    neg:
-      [sikula, hukula, hakula, hatukula, hamkula, hawakula, haikula, hazikula]
+    pos: [nilikula, ulikula, alikula, tulikula, mlikula, walikula, ilikula, zilikula]
+    neg: [sikula, hukula, hakula, hatukula, hamkula, hawakula, haikula, hazikula]
     verified: false
     note: The past-negative ku and kula's own ku are one and the same, so it's sikula, not sikukula.
   - verb: kula
     tense: future
-    pos:
-      [
-        nitakula,
-        utakula,
-        atakula,
-        tutakula,
-        mtakula,
-        watakula,
-        itakula,
-        zitakula,
-      ]
-    neg:
-      [
-        sitakula,
-        hutakula,
-        hatakula,
-        hatutakula,
-        hamtakula,
-        hawatakula,
-        haitakula,
-        hazitakula,
-      ]
+    pos: [nitakula, utakula, atakula, tutakula, mtakula, watakula, itakula, zitakula]
+    neg: [sitakula, hutakula, hatakula, hatutakula, hamtakula, hawatakula, haitakula, hazitakula]
     verified: false
   - verb: kula
     tense: perfect
-    pos:
-      [
-        nimekula,
-        umekula,
-        amekula,
-        tumekula,
-        mmekula,
-        wamekula,
-        imekula,
-        zimekula,
-      ]
-    neg:
-      [sijala, hujala, hajala, hatujala, hamjala, hawajala, haijala, hazijala]
+    pos: [nimekula, umekula, amekula, tumekula, mmekula, wamekula, imekula, zimekula]
+    neg: [sijala, hujala, hajala, hatujala, hamjala, hawajala, haijala, hazijala]
     verified: false
 
   # Another one-syllable verb, to check the detection isn't fooled by "nyw".
@@ -266,77 +167,52 @@ paradigms:
     neg: [sijaosha, hajaosha]
     verified: false
 
+  # From Chris's verbs deck: the famous sijui, a stem ending in -i, and a stem that's all vowels
+  # around one consonant.
+  - verb: kujua
+    tense: present
+    subjects: [i, heshe, we]
+    pos: [ninajua, anajua, tunajua]
+    neg: [sijui, hajui, hatujui]
+    verified: false
+  - verb: kuishi
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninaishi, anaishi]
+    neg: [siishi, haishi]
+    verified: false
+    note: Ends in -i, so the present negative keeps it (siishi), like kujibu.
+  - verb: kuita
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninaita, anaita]
+    neg: [siiti, haiti]
+    verified: false
+
 english:
-  - {
-      verb: kusoma,
-      subject: i,
-      tense: present,
-      polarity: pos,
-      en: I am reading,
-    }
-  - {
-      verb: kusoma,
-      subject: heshe,
-      tense: present,
-      polarity: neg,
-      en: He/she is not reading,
-    }
-  - {
-      verb: kusoma,
-      subject: we,
-      tense: past,
-      polarity: neg,
-      en: We didn't read,
-    }
-  - {
-      verb: kusoma,
-      subject: you,
-      tense: future,
-      polarity: pos,
-      en: You will read,
-    }
-  - {
-      verb: kula,
-      subject: youpl,
-      tense: past,
-      polarity: pos,
-      en: You (plural) ate,
-    }
+  - { verb: kusoma, subject: i, tense: present, polarity: pos, en: I am reading }
+  - { verb: kusoma, subject: heshe, tense: present, polarity: neg, en: He/she is not reading }
+  - { verb: kusoma, subject: we, tense: past, polarity: neg, en: We didn't read }
+  - { verb: kusoma, subject: you, tense: future, polarity: pos, en: You will read }
+  - { verb: kula, subject: youpl, tense: past, polarity: pos, en: You (plural) ate }
   - { verb: kula, subject: it, tense: future, polarity: neg, en: It won't eat }
-  - {
-      verb: kula,
-      subject: heshe,
-      tense: perfect,
-      polarity: pos,
-      en: He/she has eaten,
-    }
-  - {
-      verb: kunywa,
-      subject: they,
-      tense: perfect,
-      polarity: neg,
-      en: They haven't drunk yet,
-    }
-  - {
-      verb: kwenda,
-      subject: things,
-      tense: perfect,
-      polarity: neg,
-      en: They (things) haven't gone yet,
-    }
-  - {
-      verb: kwenda,
-      subject: things,
-      tense: present,
-      polarity: pos,
-      en: They (things) are going,
-    }
+  - { verb: kula, subject: heshe, tense: perfect, polarity: pos, en: He/she has eaten }
+  - { verb: kunywa, subject: they, tense: perfect, polarity: neg, en: They haven't drunk yet }
+  - { verb: kwenda, subject: things, tense: perfect, polarity: neg, en: They (things) haven't gone yet }
+  - { verb: kwenda, subject: things, tense: present, polarity: pos, en: They (things) are going }
   - { subject: i, tense: have, polarity: pos, en: I have }
   - { subject: heshe, tense: have, polarity: neg, en: He/she doesn't have }
   - { subject: it, tense: have, polarity: pos, en: It has }
-  - {
-      subject: things,
-      tense: have,
-      polarity: neg,
-      en: They (things) don't have,
-    }
+  - { subject: things, tense: have, polarity: neg, en: They (things) don't have }
+  # Stative verbs: no -ing in the present, and he/she/it take the -s form.
+  - { verb: kutaka, subject: heshe, tense: present, polarity: pos, en: He/she wants }
+  - { verb: kutaka, subject: i, tense: present, polarity: neg, en: I don't want }
+  - { verb: kujua, subject: it, tense: present, polarity: neg, en: It doesn't know }
+  - { verb: kutaka, subject: they, tense: past, polarity: pos, en: They wanted }
+  # Verbs with their own English.
+  - { verb: kuweza, subject: i, tense: present, polarity: neg, en: "I can't" }
+  - { verb: kuweza, subject: we, tense: past, polarity: pos, en: We could }
+  - { verb: kuweza, subject: heshe, tense: perfect, polarity: neg, en: "He/she hasn't been able to yet" }
+  - { verb: kuitwa, subject: we, tense: past, polarity: pos, en: We were called }
+  - { verb: kuitwa, subject: heshe, tense: past, polarity: neg, en: "He/she wasn't called" }
+  - { verb: kuitwa, subject: it, tense: present, polarity: pos, en: It is called }

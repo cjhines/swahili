@@ -1,7 +1,8 @@
 import 'fake-indexeddb/auto';
 
-import { render, screen, within } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import nani from 'virtual:nani';
 import {
   afterEach,
   beforeAll,
@@ -11,7 +12,7 @@ import {
   test,
 } from 'vitest';
 
-import { Study } from './Study.tsx';
+import { Study, type NaniContent } from './Study.tsx';
 import type { VocabDeck } from './content/schema.ts';
 import { createScheduler, type Scheduler } from './scheduler/scheduler.ts';
 import { ProgressStore } from './storage/progress.ts';
@@ -58,9 +59,15 @@ beforeEach(async () => {
 });
 afterEach(() => store.close());
 
-const setup = () => {
+// The real grammar, but with no tense unlocked: vocabulary tests don't need any.
+const noNani: NaniContent = { rules: nani.rules, verifiedTenses: [] };
+
+const setup = (
+  naniContent: NaniContent = noNani,
+  withDecks: VocabDeck[] = decks
+) => {
   const user = userEvent.setup();
-  render(<Study decks={decks} store={store} />);
+  render(<Study decks={withDecks} nani={naniContent} store={store} />);
   return user;
 };
 
@@ -256,4 +263,130 @@ test('ending a Practice session early keeps every answer given so far', async ()
   expect(
     screen.queryByRole('button', { name: /Resume/ })
   ).not.toBeInTheDocument(); // Practice isn't resumable
+});
+
+describe('Nani na Lini?', () => {
+  const verbs: VocabDeck = {
+    id: 'verbs',
+    title: 'Verbs',
+    cards: [
+      {
+        id: 'verb-kusoma',
+        kind: 'verb',
+        sw: 'kusoma',
+        en: { base: 'read', past: 'read', participle: 'read', ing: 'reading' },
+      },
+      // Never conjugated (rules.yaml), so never used.
+      {
+        id: 'verb-kuwa',
+        kind: 'verb',
+        sw: 'kuwa',
+        en: { base: 'be', past: 'was', participle: 'been', ing: 'being' },
+      },
+    ],
+  };
+  const unlocked: NaniContent = {
+    rules: nani.rules,
+    verifiedTenses: ['past', 'have'],
+  };
+  const pickNani = async (user: ReturnType<typeof userEvent.setup>) =>
+    user.click(screen.getByRole('radio', { name: 'Nani na Lini?' }));
+
+  test('only checked tenses can be chosen; the rest say why', async () => {
+    const user = setup(unlocked, [...decks, verbs]);
+    await pickNani(user);
+    expect(screen.getByLabelText(/^Past/)).toBeEnabled();
+    expect(screen.getByLabelText(/^Have/)).toBeEnabled();
+    expect(screen.getByLabelText(/^Present/)).toBeDisabled();
+    expect(
+      screen.getByLabelText(/^Present/).closest('label')
+    ).toHaveTextContent('Not checked against your grammar sheets yet');
+  });
+
+  test('with nothing checked yet, it says so and cannot start', async () => {
+    const user = setup(noNani, [...decks, verbs]);
+    await pickNani(user);
+    expect(
+      screen.getByText(/Each tense unlocks once its forms have been checked/)
+    ).toBeInTheDocument();
+    expect(start()).toBeDisabled();
+  });
+
+  test('a past-negative run: English prompt, Swahili answer with its breakdown', async () => {
+    const user = setup(unlocked, [...decks, verbs]);
+    await pickNani(user);
+    await user.click(screen.getByLabelText(/^Have/)); // past only
+    await user.click(screen.getByRole('radio', { name: 'Negative' }));
+    await user.click(screen.getByRole('radio', { name: 'Complete deck' }));
+    expect(start()).toHaveTextContent('Start · 8 forms');
+    await user.click(start());
+
+    const seen: string[] = [];
+    for (let i = 0; i < 8; i++) {
+      const prompt = promptText();
+      seen.push(prompt);
+      expect(prompt).toMatch(/didn't read$/);
+      await user.click(screen.getByRole('button', { name: 'Show answer' }));
+      const card = within(screen.getByTestId('flashcard'));
+      expect(card.getByText('kusoma: to read')).toBeInTheDocument();
+      expect(
+        card.getByRole('group', { name: 'Parts of the word' })
+      ).toHaveTextContent(/past/);
+      await user.click(screen.getByRole('button', { name: 'Got it' }));
+    }
+    expect(new Set(seen).size).toBe(8); // every subject once
+    expect(seen).toContain("We didn't read");
+    expect(
+      screen.getByRole('heading', { name: /Hongera!/ })
+    ).toBeInTheDocument();
+    // Progress belongs to the pattern, not the verb.
+    expect(store.stateOf('nani-we-past-neg:en-sw')?.reps).toBe(1);
+    expect(store.stateOf('verb-kusoma:en-sw')).toBeUndefined();
+  });
+
+  test('the answer shows the right form for the prompt', async () => {
+    const user = setup(unlocked, [...decks, verbs]);
+    await pickNani(user);
+    await user.click(screen.getByLabelText(/^Have/));
+    await user.click(screen.getByRole('radio', { name: 'Negative' }));
+    await user.click(screen.getByRole('radio', { name: 'Complete deck' }));
+    await user.click(start());
+    while (promptText() !== "We didn't read") {
+      await user.keyboard(' ');
+      await user.keyboard('{ArrowRight}');
+    }
+    await user.keyboard(' ');
+    expect(
+      within(screen.getByTestId('flashcard')).getByText('hatukusoma')
+    ).toBeInTheDocument();
+  });
+
+  test('have / don’t have needs no verbs at all', async () => {
+    const user = setup({ rules: nani.rules, verifiedTenses: ['have'] }, decks); // no verbs anywhere
+    await pickNani(user);
+    await user.click(screen.getByRole('radio', { name: 'Complete deck' }));
+    expect(start()).toHaveTextContent('Start · 16 forms');
+    await user.click(start());
+    await user.click(screen.getByRole('button', { name: 'Show answer' }));
+    expect(
+      within(screen.getByTestId('flashcard')).getByText('kuwa na: to have')
+    ).toBeInTheDocument();
+  });
+
+  test('verb tenses need verbs: without any, they say so', async () => {
+    const user = setup(unlocked, decks); // no verb cards
+    await pickNani(user);
+    expect(screen.getByLabelText(/^Past/)).toBeDisabled();
+    expect(screen.getByLabelText(/^Past/).closest('label')).toHaveTextContent(
+      'Needs verbs in a Vocabulary deck'
+    );
+  });
+
+  test('remembers Nani na Lini? as the last deck type', async () => {
+    const user = setup(unlocked, [...decks, verbs]);
+    await pickNani(user);
+    cleanup();
+    setup(unlocked, [...decks, verbs]);
+    expect(screen.getByRole('radio', { name: 'Nani na Lini?' })).toBeChecked();
+  });
 });

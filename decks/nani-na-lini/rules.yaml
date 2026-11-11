@@ -13,32 +13,16 @@
 
 subjects:
   # pos: the subject prefix. neg: the negative prefix, either one fused part (si, hu, ha)
-  # or "ha" + the subject prefix as two parts. be/have/do: for the English sentence.
-  - { id: i, en: I, be: am, have: have, do: do, pos: ni, neg: [si] }
-  - { id: you, en: you, be: are, have: have, do: do, pos: u, neg: [hu] }
-  - { id: heshe, en: he/she, be: is, have: has, do: does, pos: a, neg: [ha] }
-  - { id: we, en: we, be: are, have: have, do: do, pos: tu, neg: [ha, tu] }
-  - {
-      id: youpl,
-      en: you (plural),
-      be: are,
-      have: have,
-      do: do,
-      pos: m,
-      neg: [ha, m],
-    }
-  - { id: they, en: they, be: are, have: have, do: do, pos: wa, neg: [ha, wa] }
+  # or "ha" + the subject prefix as two parts. be/have/do/was: for the English sentence.
+  - { id: i, en: I, be: am, have: have, do: do, was: was, pos: ni, neg: [si] }
+  - { id: you, en: you, be: are, have: have, do: do, was: were, pos: u, neg: [hu] }
+  - { id: heshe, en: he/she, be: is, have: has, do: does, was: was, pos: a, neg: [ha] }
+  - { id: we, en: we, be: are, have: have, do: do, was: were, pos: tu, neg: [ha, tu] }
+  - { id: youpl, en: you (plural), be: are, have: have, do: do, was: were, pos: m, neg: [ha, m] }
+  - { id: they, en: they, be: are, have: have, do: do, was: were, pos: wa, neg: [ha, wa] }
   # i/zi: "it" and "they" for things in the N- class (nyumba, nyumba).
-  - { id: it, en: it, be: is, have: has, do: does, pos: i, neg: [ha, i] }
-  - {
-      id: things,
-      en: they (things),
-      be: are,
-      have: have,
-      do: do,
-      pos: zi,
-      neg: [ha, zi],
-    }
+  - { id: it, en: it, be: is, have: has, do: does, was: was, pos: i, neg: [ha, i] }
+  - { id: things, en: they (things), be: are, have: have, do: do, was: were, pos: zi, neg: [ha, zi] }
 
 tenses:
   # `kept` says what happens to the ku- of a verb that keeps it (one-syllable verbs like kula,
@@ -64,9 +48,13 @@ labels:
   keptKu: kept # the ku in ni·na·ku·la
 
 english:
-  # Put after the subject: "We" + "didn't read". The present is always "-ing", so a bare past
-  # like "We read" can only mean the past, even for verbs spelled the same in both.
+  # Put after the subject: "We" + "didn't read". The present is "-ing", so a bare past like
+  # "We read" can only mean the past, even for verbs spelled the same in both. Verbs can
+  # override any of these with their own English (in their deck card's `en.tenses`).
   present: { pos: '{be} {ing}', neg: '{be} not {ing}' }
+  # Stative verbs (want, know, live) don't take "-ing": "I want", "He/she wants", "I don't want".
+  # {simple} is the base form, or the verb's `third` (wants) after he/she/it.
+  stativePresent: { pos: '{simple}', neg: "{do}n't {base}" }
   past: { pos: '{past}', neg: "didn't {base}" }
   future: { pos: 'will {base}', neg: "won't {base}" }
   perfect: { pos: '{have} {participle}', neg: "{have}n't {participle} yet" }
