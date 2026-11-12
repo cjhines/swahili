@@ -99,7 +99,7 @@ swahili/
 │   └── nani-na-lini/
 │       ├── rules.yaml        # subjects, tenses, negatives, have, English templates, labels, verb quirks
 │       ├── fixtures.yaml     # known-correct forms that Chris checks against his sheets
-│       └── forms.md          # generated: every fixture with English and parts, for checking
+│       └── forms.md          # generated: every form the app can show, with English and parts, for review
 ├── schema/
 │   └── vocab-deck.schema.json   # generated from Zod; gives editor autocomplete in the YAML
 ├── assets/icons/             # SVG sources for the app icons
@@ -306,9 +306,16 @@ a verb not ending in *-a* (*kujibu*), and a vowel-initial verb (*kuosha*), plus 
 
 CI fails if the engine disagrees with **any** fixture, verified or not, and points at the
 file:line. Claude writes the fixtures; Chris checks each table against his sheets, and it's marked
-`verified: true`. **`forms.md`** (`npm run nani:forms`, kept current by CI) shows every table with
-its English and dotted parts, for that check. A tense doesn't ship in the app until all of its
-tables are verified.
+`verified: true`. **`forms.md`** (`npm run nani:forms`, kept current by CI) is the review
+document. It holds **everything** Nani na Lini? can show, so one review covers it all:
+- every verb card in all four tenses, all eight subjects, positive and negative, with English and dotted parts
+- have / don't have
+- what each verb's card says (meaning, stem, kept forms, note, example)
+- the verbs left out, with the `why` from `rules.yaml`
+- Claude's open `questions` from `fixtures.yaml`
+
+A new verb card adds its tables by itself. A table is ✅ only when a verified fixture covers all of
+it. A tense doesn't ship in the app until all of its fixture tables are verified.
 
 ### ID rules, enforced by `npm run decks:check` in CI
 

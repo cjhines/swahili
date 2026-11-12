@@ -366,7 +366,16 @@ cards:
   - id: verb-kujua
     kind: verb
     sw: kujua
-    en: { base: know, past: knew, participle: known, ing: knowing, stative: true, third: knows }
+    en:
+      base: know
+      past: knew
+      participle: known
+      ing: knowing
+      stative: true
+      third: knows
+      # Sijajua is "I don't know yet", and nimejua "I know now" (I've found out), not "I have known".
+      tenses:
+        perfect: { pos: '{simple} now', neg: "{do}n't know yet" }
 
   - id: verb-kusikiliza
     kind: verb

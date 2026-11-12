@@ -81,9 +81,9 @@ describe('kuacha: quitting, stopping doing something, leaving something behind',
     }
   });
 
-  test('forms.md heads its table "kuacha (to quit)"', () => {
+  test('forms.md heads its section with the full meaning', () => {
     expect(readFileSync('decks/nani-na-lini/forms.md', 'utf8')).toMatch(
-      /^## ⬜ kuacha \(to quit\): Present/m
+      /^## kuacha · to quit \/ to stop doing \/ to leave behind$/m
     );
   });
 });
@@ -202,9 +202,9 @@ describe('one table per verb and tense', () => {
   });
 });
 
-test('forms.md: the kuwa na heading says "(to have)" like the others', () => {
+test('forms.md: kuwa na is headed "to have" like the others', () => {
   expect(readFileSync('decks/nani-na-lini/forms.md', 'utf8')).toMatch(
-    /^## ⬜ kuwa na \(to have\): Have/m
+    /^## kuwa na · to have$/m
   );
 });
 
@@ -273,24 +273,18 @@ describe("each verb's tables sit together, in tense order", () => {
     }
   });
 
-  test('kuja and kunywa read as one block each in forms.md', () => {
-    const headings = readFileSync('decks/nani-na-lini/forms.md', 'utf8')
-      .split(/\r?\n/)
-      .filter((l) => l.startsWith('## '))
-      .map((l) => l.replace(/^## \S+ /, ''));
-    for (const [sw, tenses] of [
-      ['kuja', ['Present (now)', 'Past', 'Perfect (have done / not yet)']],
-      [
-        'kunywa',
-        ['Present (now)', 'Past', 'Future', 'Perfect (have done / not yet)'],
-      ],
-    ] as const) {
-      const first = headings.findIndex((h) => h.startsWith(`${sw} (`));
-      expect(
-        headings
-          .slice(first, first + tenses.length)
-          .map((h) => h.split(': ')[1])
-      ).toEqual(tenses);
-    }
-  });
+  // forms.md itself now lists every verb in all four tenses: see src/nani/forms.node.test.ts.
+});
+
+test('kujua perfect: sijajua is "I don\'t know yet", nimejua "I know now"', () => {
+  const kujua = { sw: 'kujua', en: verb('kujua').en };
+  expect(english(rules, p('i', 'perfect', 'neg'), kujua)).toBe(
+    "I don't know yet"
+  );
+  expect(english(rules, p('heshe', 'perfect', 'neg'), kujua)).toBe(
+    "He/she doesn't know yet"
+  );
+  expect(english(rules, p('heshe', 'perfect', 'pos'), kujua)).toBe(
+    'He/she knows now'
+  );
 });

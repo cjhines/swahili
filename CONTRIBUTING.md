@@ -84,8 +84,13 @@ the quirks of particular verbs).
   its tables are verified.
 - **Verb cards show the stem and kept ku- forms automatically.** They come from `rules.yaml`, so
   don't type them into a card's `note`.
-- **`forms.md`** is the readable version: every table with English and the parts (*ha·tu·ku·soma*).
-  Regenerate it with `npm run nani:forms`; CI checks it's current.
+- **`forms.md`** is the review document, and it holds **everything** Nani na Lini? can show, so a
+  review covers it all at once. That's every verb card in all four tenses, all eight subjects,
+  positive and negative, with the English and the parts (*ha·tu·ku·soma*). It also has what each
+  verb's card says, the verbs left out (with the `why` from `rules.yaml`), and the open
+  `questions` at the top of `fixtures.yaml`. A table is ✅ only when a verified fixture covers all
+  of it. When the reviewer confirms a whole table, copy it into `fixtures.yaml` with
+  `verified: true`. Regenerate it with `npm run nani:forms`; CI checks it's current.
 
 ## IDs: the one rule that matters
 

@@ -85,13 +85,13 @@ verbs:
   # Irregular: keeps kw- (ninakwenda, siendi, sikwenda, sitakwenda, sijaenda); ninaenda is common too.
   kwenda: { keepKu: true }
   kwisha: { keepKu: true }
-  # Excluded from Nani na Lini? (still on their vocabulary cards):
-  # kuwa: its present isn't "am/is/are" (that's ni: mimi ni mwalimu; ninakuwa = "I'm becoming"),
-  # so the patterns' English would mislead. Have / don't have covers kuwa na.
-  kuwa: { exclude: true }
-  # kuonana: "see each other" is reciprocal. It needs a plural subject or "na …", and "I saw
-  # each other" isn't English. (kukutana, "to meet", has no such problem.)
-  kuonana: { exclude: true }
-  # kupa: "give" always needs a marker for who receives it (nipe, give me). Bare, ninakupa reads
-  # as "I'm giving you" (ku = you), so it's left out, and its card lists no kept-ku forms.
-  kupa: { needsObject: true }
+  # Left out of Nani na Lini? (still on their vocabulary cards). `why` is printed in forms.md.
+  kuwa:
+    exclude: true
+    why: 'Its present isn''t "am/is/are" (that''s ni: mimi ni mwalimu; ninakuwa is "I''m becoming"), so the English would mislead. Have / don''t have covers kuwa na.'
+  kuonana:
+    exclude: true
+    why: '"See each other" needs a plural subject or "na …", and "I saw each other" isn''t English. (kukutana, "to meet", has no such problem.)'
+  kupa:
+    needsObject: true
+    why: 'It always needs a marker for who receives it (nipe, give me). Bare, ninakupa reads as "I''m giving you" (ku = you), so its card lists no kept-ku forms either.'

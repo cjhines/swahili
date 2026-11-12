@@ -31,9 +31,9 @@ if (errors.length) {
   if (result.errors.length) problems.push(formatErrors(result.errors));
   unverified = result.unverified;
 
-  if (read(FORMS_PATH) !== renderForms(rules.data!, fixtures.data!)) {
+  if (read(FORMS_PATH) !== renderForms(rules.data!, fixtures.data!, decks)) {
     problems.push(
-      `${FORMS_PATH} is out of date with rules.yaml / fixtures.yaml. Run \`npm run nani:forms\`.`
+      `${FORMS_PATH} is out of date with the decks, rules.yaml or fixtures.yaml. Run \`npm run nani:forms\`.`
     );
   }
 }

@@ -17,6 +17,12 @@
 # A follow-up the same day: kuacha's sentences say "quit", not "stop"; kunywa and kuja perfect
 # get the same textbook-versus-Nairobi warning as kula; and each verb's tables sit together.
 
+# Things Claude wasn't sure of, printed at the top of forms.md. Remove each once it's answered.
+questions:
+  - 'Stative verbs in the perfect. The English is nimetaka "I have wanted" / sijataka "I haven''t wanted yet", nimependa "I have liked" / sijapenda "I haven''t liked yet", nimehitaji "I have needed" / sijahitaji "I haven''t needed yet", nimefikiri "I have thought" / sijafikiri "I haven''t thought yet", and nimeishi "I have lived" / sijaishi "I haven''t lived yet". (Kujua now says nimejua "I know now", sijajua "I don''t know yet".) Are any of these unnatural in Swahili, and is there better English?'
+  - 'Verbs that take an object in English: "I am looking for", "I am looking after", "I am putting", "I haven''t put yet", "I am taking", "I am bringing", "I haven''t got yet". The Swahili (ninatafuta) is complete without one; the English isn''t. Would "I am looking for (something)" be better?'
+  - 'kuweza: "I will be able to", "I have been able to" and "I haven''t been able to yet" end in "to". Nimeweza is often "I''ve managed". Would "I have managed" / "I haven''t managed yet" be better?'
+
 verbs:
   kusoma: { base: read, past: read, participle: read, ing: reading }
   kula: { base: eat, past: ate, participle: eaten, ing: eating }
