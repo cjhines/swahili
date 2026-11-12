@@ -65,7 +65,7 @@ test.each([
   ['kuchukua', 'to take', 'chukua'],
   ['kuweka', 'to put / to place', 'weka'],
   ['kusaidia', 'to help', 'saidia'],
-  ['kutafuta', 'to look for', 'tafuta'],
+  ['kutafuta', 'to look for / to search', 'tafuta'],
   ['kungoja', 'to wait', 'ngoja'],
   ['kusubiri', 'to wait', 'subiri'],
   ['kupiga', 'to hit / to strike', 'piga'],
@@ -147,9 +147,11 @@ test('vowel stems: siulizi, siachi, siongei', () => {
   expect(form('kuongea', 'i', 'present', 'neg')).toBe('siongei');
 });
 
-test('put: "We put" can only be the past, because the present is "We are putting"', () => {
-  expect(say('kuweka', 'we', 'past', 'pos')).toBe('We put');
-  expect(say('kuweka', 'we', 'present', 'pos')).toBe('We are putting');
+test('put: "We put (something)" can only be the past, because the present is "We are putting (something)"', () => {
+  expect(say('kuweka', 'we', 'past', 'pos')).toBe('We put (something)');
+  expect(say('kuweka', 'we', 'present', 'pos')).toBe(
+    'We are putting (something)'
+  );
 });
 
 test('no verb is on two cards', () => {

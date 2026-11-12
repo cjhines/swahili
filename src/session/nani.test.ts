@@ -138,6 +138,42 @@ describe('assignVerbs', () => {
       )
     ).toBe(true);
   });
+
+  test('a verb not allowed for a pattern is never picked for it', () => {
+    const ids = verbs.map((v) => v.id);
+    const banned = ids[0]!;
+    const assigned = assignVerbs(
+      queue,
+      ids,
+      patterns,
+      seededRandom(7),
+      (id, pattern) => !(id === banned && pattern.polarity === 'neg')
+    );
+    const negatives = assigned.filter(
+      (i) => i.cardId.endsWith('-neg') && i.verbId
+    );
+    expect(negatives.length).toBeGreaterThan(0);
+    expect(negatives.every((i) => i.verbId !== banned)).toBe(true);
+    // ...but it's still used for the positives.
+    expect(
+      assigned.some((i) => i.cardId.endsWith('-pos') && i.verbId === banned)
+    ).toBe(true);
+  });
+
+  test('if every verb is ruled out for a pattern, it still gets one rather than no card', () => {
+    const assigned = assignVerbs(
+      queue,
+      ['verb-kusoma'],
+      patterns,
+      seededRandom(1),
+      () => false
+    );
+    expect(
+      assigned.every(
+        (i) => i.cardId.includes('-have-') || i.verbId === 'verb-kusoma'
+      )
+    ).toBe(true);
+  });
 });
 
 describe('naniView', () => {

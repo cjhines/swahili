@@ -6,7 +6,7 @@
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
 
-import { verbInfo } from '../nani/conjugate.ts';
+import { skipReason, verbInfo } from '../nani/conjugate.ts';
 import { english } from '../nani/english.ts';
 import { checkFixtures, VERIFIED_SOURCE } from '../nani/fixtures.ts';
 import {
@@ -17,7 +17,7 @@ import {
   type Polarity,
 } from '../nani/patterns.ts';
 import type { NaniFixtures, NaniRules } from '../nani/schema.ts';
-import { naniVerbs } from '../session/start.ts';
+import { buildSession, naniVerbs } from '../session/start.ts';
 import { naniView } from '../session/views.ts';
 import {
   loadDeckSources,
@@ -287,4 +287,136 @@ test('kujua perfect: sijajua is "I don\'t know yet", nimejua "I know now"', () =
   expect(english(rules, p('heshe', 'perfect', 'pos'), kujua)).toBe(
     'He/she knows now'
   );
+});
+
+// The full review of all 204 tables (2026-11-12): no wrong Swahili, so every change is English,
+// plus a few perfects left out because you'd rarely hear them.
+describe('full review: the English, verb by verb', () => {
+  const say = (
+    sw: string,
+    subject: string,
+    tense: NaniTense,
+    polarity: Polarity
+  ) => english(rules, p(subject, tense, polarity), { sw, en: verb(sw).en });
+
+  test.each([
+    // [verb, subject, tense, polarity, English]
+    ['kupenda', 'i', 'perfect', 'pos', 'I like it (now)'],
+    ['kupenda', 'heshe', 'perfect', 'pos', 'He/she likes it (now)'],
+    ['kufikiri', 'i', 'perfect', 'pos', 'I have thought about it'],
+    [
+      'kufikiri',
+      'heshe',
+      'perfect',
+      'neg',
+      "He/she hasn't thought about it yet",
+    ],
+    ['kuishi', 'i', 'perfect', 'pos', 'I have lived (there)'],
+    ['kuelewa', 'i', 'perfect', 'pos', 'I understand now'],
+    ['kuelewa', 'heshe', 'perfect', 'neg', "He/she doesn't understand yet"],
+    ['kusikia', 'i', 'perfect', 'pos', 'I have heard (got it)'],
+    ['kukaa', 'i', 'perfect', 'neg', "I haven't sat down yet"],
+    ['kukaa', 'heshe', 'perfect', 'pos', 'He/she has sat down'],
+    ['kutafuta', 'i', 'present', 'pos', 'I am searching'],
+    ['kutafuta', 'we', 'perfect', 'neg', "We haven't searched yet"],
+    ['kutunza', 'i', 'present', 'pos', 'I am looking after (something)'],
+    ['kuweka', 'i', 'perfect', 'neg', "I haven't put (something) yet"],
+    ['kuchukua', 'i', 'present', 'pos', 'I am taking'],
+    ['kuleta', 'i', 'present', 'pos', 'I am bringing'],
+    ['kupata', 'i', 'perfect', 'pos', 'I have got it'],
+    ['kupata', 'i', 'perfect', 'neg', "I haven't got it yet"],
+    ['kuweza', 'i', 'perfect', 'pos', 'I have managed'],
+    ['kuweza', 'heshe', 'perfect', 'neg', "He/she hasn't managed yet"],
+    ['kuweza', 'i', 'future', 'pos', 'I will be able to'],
+    ['kutoka', 'i', 'present', 'pos', 'I am going out / I come from'],
+    [
+      'kutoka',
+      'heshe',
+      'present',
+      'pos',
+      'He/she is going out / he/she comes from',
+    ],
+    [
+      'kutoka',
+      'heshe',
+      'present',
+      'neg',
+      "He/she is not going out / he/she doesn't come from",
+    ],
+    ['kutoka', 'i', 'past', 'pos', 'I went out'],
+  ] as const)('%s %s %s %s: "%s"', (sw, subject, tense, polarity, en) => {
+    expect(say(sw, subject, tense, polarity)).toBe(en);
+  });
+
+  test('kutafuta keeps "to look for" in its meaning, and adds "to search"', () => {
+    expect(verb('kutafuta').en.meaning).toBe('to look for / to search');
+  });
+});
+
+describe('full review: perfects you would rarely hear are left out', () => {
+  test.each([
+    ['kutaka', 'pos'],
+    ['kutaka', 'neg'],
+    ['kuhitaji', 'pos'],
+    ['kuhitaji', 'neg'],
+    ['kupenda', 'neg'],
+    ['kuishi', 'neg'],
+  ] as const)('%s perfect %s is skipped', (sw, polarity) => {
+    expect(skipReason(rules, sw, { tense: 'perfect', polarity })).toBeTruthy();
+  });
+
+  test('the rest of those verbs are still used', () => {
+    expect(
+      skipReason(rules, 'kupenda', { tense: 'perfect', polarity: 'pos' })
+    ).toBeUndefined();
+    expect(
+      skipReason(rules, 'kutaka', { tense: 'past', polarity: 'neg' })
+    ).toBeUndefined();
+    expect(
+      skipReason(rules, 'kusoma', { tense: 'perfect', polarity: 'neg' })
+    ).toBeUndefined();
+  });
+
+  test('a session never fills a skipped pattern with that verb', () => {
+    const verbs = naniVerbs(decks, rules);
+    const everyone = new Map(verbs.map((v) => [v.id, v.verb.sw]));
+    // Only the four verbs with skips have been met, plus one, so they're picked as often as possible.
+    const met = [
+      'verb-kutaka',
+      'verb-kuhitaji',
+      'verb-kupenda',
+      'verb-kuishi',
+      'verb-kujua',
+    ];
+    const stateOf = (key: string) =>
+      met.some((id) => key.startsWith(`${id}:`)) ? ({} as never) : undefined;
+    for (let seed = 0; seed < 20; seed++) {
+      let n = seed + 1;
+      const random = () => ((n = (n * 16807) % 2147483647) - 1) / 2147483646;
+      const session = buildSession(
+        {
+          kind: 'nani',
+          tenses: ['perfect'],
+          polarity: 'both',
+          direction: 'en-sw',
+          mode: 'complete',
+          newCap: 10,
+          repeatMisses: false,
+        },
+        { decks, rules, verbs },
+        stateOf,
+        { now: new Date('2026-11-12'), random }
+      );
+      for (const item of session.queue) {
+        const pattern = allPatterns(rules).find(
+          (pat) => pat.id === item.cardId
+        )!;
+        const sw = everyone.get(item.verbId!)!;
+        expect(
+          skipReason(rules, sw, pattern),
+          `${item.cardId} ${sw}`
+        ).toBeUndefined();
+      }
+    }
+  });
 });

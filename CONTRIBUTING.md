@@ -51,9 +51,10 @@ errors as you type.
     `{ base: want, …, stative: true, third: wants }`.
   - `tenses`: the verb's own English for any tense, for verbs nothing else fits. *Kuweza* uses
     `present: { pos: can, neg: "can't" }`. Placeholders: `{be}` am/is/are, `{have}` have/has,
-    `{do}` do/does, `{was}` was/were, `{simple}` (base, or `third` after he/she/it), plus
-    `{base}`, `{past}`, `{participle}`, `{ing}`. See *kuweza* and *kuitwa* in
-    `decks/vocab/verbs.yaml`.
+    `{do}` do/does, `{was}` was/were, `{simple}` (base, or `third` after he/she/it),
+    `{subject}` (I, he/she…, for a second clause) and `{s}` ("s" after he/she/it), plus
+    `{base}`, `{past}`, `{participle}`, `{ing}`. See *kuweza*, *kuitwa* and *kutoka* ("I am
+    going out / I come from") in `decks/vocab/verbs.yaml`.
 
 A verb can sit in any themed deck. Nani na Lini? picks up every `kind: verb` card wherever it is,
 except those `rules.yaml` excludes (*kuwa*).
@@ -71,6 +72,11 @@ the quirks of particular verbs).
     reciprocal *kuonana*.
   - `needsObject` for a verb that always takes a marker for who it's done to, like *kupa*
     (*nipe*, give me). It's excluded, and its card lists no kept-*ku-* forms.
+  - `why`: the reason an excluded verb is left out, printed in `forms.md`.
+  - `skip`: a tense (`perfect`) or one polarity of it (`perfect-neg`) the verb is never used in,
+    each with the reason. *Kutaka* skips the perfect (*nimetaka* is grammatical but almost never
+    heard), and *kupenda* skips `perfect-neg` (*sijapenda* is rare). Sessions never fill those
+    patterns with that verb, and `forms.md` shows them as not used.
 - **A rule is wrong:** fix it in `rules.yaml`, then correct or add the affected forms in
   `fixtures.yaml`.
 - **`fixtures.yaml`** holds known-correct forms, as tables per verb and tense. CI fails if the

@@ -43,6 +43,19 @@ export const verbInfo = (rules: NaniRules, sw: string) => {
   };
 };
 
+/**
+ * Why rules.yaml leaves this verb out of a tense or polarity ("Sijapenda is rare."), or undefined
+ * if it's used there. Such a pattern is never filled with this verb.
+ */
+export const skipReason = (
+  rules: NaniRules,
+  sw: string,
+  { tense, polarity }: Pick<Pattern, 'tense' | 'polarity'>
+) => {
+  const skip = rules.verbs[sw]?.skip;
+  return skip?.[tense] ?? skip?.[`${tense}-${polarity}`];
+};
+
 const subjectParts = (rules: NaniRules, pattern: Pattern): Part[] => {
   const subject = rules.subjects.find((s) => s.id === pattern.subject);
   if (!subject) throw new Error(`Unknown subject "${pattern.subject}"`);

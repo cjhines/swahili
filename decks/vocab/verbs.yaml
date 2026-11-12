@@ -41,7 +41,14 @@ cards:
   - id: verb-kupata
     kind: verb
     sw: kupata
-    en: { meaning: to get / to obtain, base: get, past: got, participle: got, ing: getting }
+    en:
+      meaning: to get / to obtain
+      base: get
+      past: got
+      participle: got
+      ing: getting
+      # Nimepata! is used exactly like "got it!"
+      tenses: { perfect: { pos: '{have} got it', neg: "{have}n't got it yet" } }
 
   - id: verb-kupa
     kind: verb
@@ -52,8 +59,7 @@ cards:
   - id: verb-kupenda
     kind: verb
     sw: kupenda
-    en:
-      {
+    en: {
         meaning: to like / to love,
         base: like,
         past: liked,
@@ -61,6 +67,8 @@ cards:
         ing: liking,
         stative: true,
         third: likes,
+        # Nimependa is a reaction ("I like it!"); sijapenda is rare, so rules.yaml skips it.
+        tenses: { perfect: { pos: '{simple} it (now)', neg: "{do}n't like it yet" } },
       }
 
   - id: verb-kuelewa
@@ -73,6 +81,8 @@ cards:
       ing: understanding
       stative: true
       third: understands
+      # Nimeelewa is the everyday "got it / I understand", like nimejua.
+      tenses: { perfect: { pos: '{simple} now', neg: "{do}n't understand yet" } }
     example: { sw: Sielewi., en: I don't understand. }
 
   - id: verb-kuhitaji
@@ -89,6 +99,11 @@ cards:
       past: went out
       participle: gone out
       ing: going out
+      # Unatoka wapi? / Ninatoka… is "Where are you from?" / "I'm from…", so the present covers both.
+      tenses:
+        present:
+          pos: '{be} going out / {subject} come{s} from'
+          neg: "{be} not going out / {subject} {do}n't come from"
 
   - id: verb-kurudi
     kind: verb
@@ -109,8 +124,7 @@ cards:
   - id: verb-kusikia
     kind: verb
     sw: kusikia
-    en:
-      {
+    en: {
         meaning: to hear / to feel,
         base: hear,
         past: heard,
@@ -118,6 +132,8 @@ cards:
         ing: hearing,
         stative: true,
         third: hears,
+        # Nimesikia is "noted / got it".
+        tenses: { perfect: { pos: '{have} heard (got it)', neg: "{have}n't heard yet" } },
       }
     example: { sw: Nasikia njaa., en: I feel hungry. }
     note: 'Nasikia is everyday speech for ninasikia. Compare kusikiliza: to listen.'
@@ -135,7 +151,14 @@ cards:
   - id: verb-kufikiri
     kind: verb
     sw: kufikiri
-    en: { base: think, past: thought, participle: thought, ing: thinking, stative: true, third: thinks }
+    en:
+      base: think
+      past: thought
+      participle: thought
+      ing: thinking
+      stative: true
+      third: thinks
+      tenses: { perfect: { pos: '{have} thought about it', neg: "{have}n't thought about it yet" } }
 
   - id: verb-kuongea
     kind: verb
@@ -167,7 +190,12 @@ cards:
   - id: verb-kuweka
     kind: verb
     sw: kuweka
-    en: { meaning: to put / to place, base: put, past: put, participle: put, ing: putting }
+    en:
+      meaning: to put / to place
+      base: put (something)
+      past: put (something)
+      participle: put (something)
+      ing: putting (something)
 
   - id: verb-kusaidia
     kind: verb
@@ -177,7 +205,8 @@ cards:
   - id: verb-kutafuta
     kind: verb
     sw: kutafuta
-    en: { base: look for, past: looked for, participle: looked for, ing: looking for }
+    # "Search" is complete English without an object; "I am looking for" isn't.
+    en: { meaning: to look for / to search, base: search, past: searched, participle: searched, ing: searching }
 
   # wait: two verbs with the same meaning. Each accepts the other as an answer.
   - id: verb-kungoja
@@ -234,7 +263,15 @@ cards:
     kind: verb
     sw: kuishi
     hint: (be alive, or reside)
-    en: { base: live, past: lived, participle: lived, ing: living, stative: true, third: lives }
+    en:
+      base: live
+      past: lived
+      participle: lived
+      ing: living
+      stative: true
+      third: lives
+      # Nimeishi needs a place or a time (nimeishi Nairobi miaka mitano); sijaishi is skipped.
+      tenses: { perfect: { pos: '{have} lived (there)', neg: "{have}n't lived (there) yet" } }
     note: 'To live: be alive, or reside. Compare kukaa: to stay or sit, also to reside.'
 
   # Chris's tutor: kuita is to call someone over, or call someone by a name. Shouting is
@@ -260,8 +297,10 @@ cards:
       tenses:
         present: { pos: can, neg: "can't" }
         past: { pos: could, neg: "couldn't" }
+        # Future keeps "to": kuweza is normally followed by another verb (nitaweza kuja).
         future: { pos: will be able to, neg: "won't be able to" }
-        perfect: { pos: '{have} been able to', neg: "{have}n't been able to yet" }
+        # Nimeweza is used like "I've managed".
+        perfect: { pos: '{have} managed', neg: "{have}n't managed yet" }
 
   - id: verb-kuanza
     kind: verb
@@ -288,15 +327,22 @@ cards:
     sw: kutunza
     en:
       meaning: to take care / to look after
-      base: look after
-      past: looked after
-      participle: looked after
-      ing: looking after
+      base: look after (something)
+      past: looked after (something)
+      participle: looked after (something)
+      ing: looking after (something)
 
   - id: verb-kukaa
     kind: verb
     sw: kukaa
-    en: { meaning: to stay / to sit / to live, base: stay, past: stayed, participle: stayed, ing: staying }
+    en:
+      meaning: to stay / to sit / to live
+      base: stay
+      past: stayed
+      participle: stayed
+      ing: staying
+      # Nimekaa / sijakaa: "I've sat down" / "I haven't sat down yet" reads better than "stayed".
+      tenses: { perfect: { pos: '{have} sat down', neg: "{have}n't sat down yet" } }
     example: { sw: Anakaa Nairobi., en: He lives in Nairobi. }
     note: 'To stay or sit; also to reside. Compare kuishi: to live, be alive or reside.'
 

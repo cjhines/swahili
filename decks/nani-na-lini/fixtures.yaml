@@ -16,12 +16,14 @@
 # standard it doesn't tick tables: ✅ still waits for the tutor or the grammar sheets.
 # A follow-up the same day: kuacha's sentences say "quit", not "stop"; kunywa and kuja perfect
 # get the same textbook-versus-Nairobi warning as kula; and each verb's tables sit together.
+# Then a full review of all 204 tables in forms.md: not one wrong Swahili form, including vowel
+# stems (siiti, siachi, huulizi), -i/-u stems (sisubiri, sijibu), sikukutana (the second ku is the
+# stem's) and the one-syllable verbs and kwenda. Only English changed (the verb cards' `tenses`),
+# plus `skip` in rules.yaml for perfects you'll rarely hear. Again, that doesn't tick tables.
 
 # Things Claude wasn't sure of, printed at the top of forms.md. Remove each once it's answered.
-questions:
-  - 'Stative verbs in the perfect. The English is nimetaka "I have wanted" / sijataka "I haven''t wanted yet", nimependa "I have liked" / sijapenda "I haven''t liked yet", nimehitaji "I have needed" / sijahitaji "I haven''t needed yet", nimefikiri "I have thought" / sijafikiri "I haven''t thought yet", and nimeishi "I have lived" / sijaishi "I haven''t lived yet". (Kujua now says nimejua "I know now", sijajua "I don''t know yet".) Are any of these unnatural in Swahili, and is there better English?'
-  - 'Verbs that take an object in English: "I am looking for", "I am looking after", "I am putting", "I haven''t put yet", "I am taking", "I am bringing", "I haven''t got yet". The Swahili (ninatafuta) is complete without one; the English isn''t. Would "I am looking for (something)" be better?'
-  - 'kuweza: "I will be able to", "I have been able to" and "I haven''t been able to yet" end in "to". Nimeweza is often "I''ve managed". Would "I have managed" / "I haven''t managed yet" be better?'
+# (The three from 2026-11-12 were answered by the full review the same day.)
+questions: []
 
 verbs:
   kusoma: { base: read, past: read, participle: read, ing: reading }
@@ -43,7 +45,7 @@ verbs:
       present: { pos: can, neg: "can't" }
       past: { pos: could, neg: "couldn't" }
       future: { pos: will be able to, neg: "won't be able to" }
-      perfect: { pos: '{have} been able to', neg: "{have}n't been able to yet" }
+      perfect: { pos: '{have} managed', neg: "{have}n't managed yet" }
   kuitwa:
     base: be called
     past: was called
@@ -376,7 +378,7 @@ english:
   # Verbs with their own English.
   - { verb: kuweza, subject: i, tense: present, polarity: neg, en: "I can't" }
   - { verb: kuweza, subject: we, tense: past, polarity: pos, en: We could }
-  - { verb: kuweza, subject: heshe, tense: perfect, polarity: neg, en: "He/she hasn't been able to yet" }
+  - { verb: kuweza, subject: heshe, tense: perfect, polarity: neg, en: "He/she hasn't managed yet" }
   - { verb: kuitwa, subject: we, tense: past, polarity: pos, en: We were called }
   - { verb: kuitwa, subject: heshe, tense: past, polarity: neg, en: "He/she wasn't called" }
   - { verb: kuitwa, subject: it, tense: present, polarity: pos, en: It (N-class) is called }

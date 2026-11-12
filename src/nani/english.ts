@@ -32,6 +32,9 @@ export const english = (
     have: subject.have,
     do: subject.do,
     was: subject.was,
+    // For a second clause with its own subject: "I am going out / I come from".
+    subject: subject.en,
+    s: subject.do === 'does' ? 's' : '',
     ...(verb && {
       base: verb.en.base,
       past: verb.en.past,

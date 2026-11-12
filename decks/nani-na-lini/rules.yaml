@@ -85,6 +85,15 @@ verbs:
   # Irregular: keeps kw- (ninakwenda, siendi, sikwenda, sitakwenda, sijaenda); ninaenda is common too.
   kwenda: { keepKu: true }
   kwisha: { keepKu: true }
+  # Never used in some tenses (review, 2026-11-12). `skip` gives the reason, printed in forms.md.
+  kutaka:
+    skip: { perfect: "Nimetaka and sijataka are grammatical, but you'll almost never hear them." }
+  kuhitaji:
+    skip: { perfect: "Nimehitaji and sijahitaji are grammatical, but you'll almost never hear them." }
+  kupenda:
+    skip: { perfect-neg: 'Sijapenda is rare.' }
+  kuishi:
+    skip: { perfect-neg: 'Sijaishi is odd. (Nimeishi needs a place or a time: nimeishi Nairobi miaka mitano.)' }
   # Left out of Nani na Lini? (still on their vocabulary cards). `why` is printed in forms.md.
   kuwa:
     exclude: true

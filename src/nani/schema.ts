@@ -68,6 +68,19 @@ export const NaniRules = z
           stem: Piece.optional(),
           // Why an excluded or needsObject verb is left out; printed in forms.md.
           why: z.string().min(1).optional(),
+          // Tenses (perfect) or one polarity of a tense (perfect-neg) this verb is never used in,
+          // each with the reason, e.g. nimetaka is grammatical but almost never heard.
+          skip: z
+            .record(
+              z
+                .string()
+                .regex(
+                  /^(present|past|future|perfect)(-(pos|neg))?$/,
+                  'a tense (perfect) or a tense and polarity (perfect-neg)'
+                ),
+              z.string().min(1)
+            )
+            .optional(),
         })
       )
       .default({}),

@@ -10,7 +10,7 @@ import {
 } from './queue.ts';
 import { startSession } from './session.ts';
 import type { NaniSetup, SessionSetup } from './setup.ts';
-import { verbInfo, type NaniVerb } from '../nani/conjugate.ts';
+import { skipReason, verbInfo, type NaniVerb } from '../nani/conjugate.ts';
 import { allPatterns, type Pattern } from '../nani/patterns.ts';
 import type { NaniRules } from '../nani/schema.ts';
 
@@ -75,19 +75,26 @@ export const naniItems = (
       direction: setup.direction,
     }));
 
-/** Gives each verb pattern a random verb, never the same one twice in a row. "Have" needs none. */
+/**
+ * Gives each verb pattern a random verb, never the same one twice in a row. "Have" needs none.
+ * `allowed` leaves out verbs rules.yaml skips for a pattern (no kutaka in the perfect).
+ */
 export const assignVerbs = (
   queue: readonly ReviewItem[],
   verbIds: readonly string[],
   patterns: ReadonlyMap<string, Pattern>,
-  random: Random = Math.random
+  random: Random = Math.random,
+  allowed: (verbId: string, pattern: Pattern) => boolean = () => true
 ): ReviewItem[] => {
   let previous: string | undefined;
   return queue.map((item) => {
-    if (patterns.get(item.cardId)?.tense === 'have' || verbIds.length === 0)
+    const pattern = patterns.get(item.cardId);
+    if (!pattern || pattern.tense === 'have' || verbIds.length === 0)
       return item;
+    const fits = verbIds.filter((id) => allowed(id, pattern));
+    const pool = fits.length > 0 ? fits : verbIds; // every verb skipped: better than no card
     const choices =
-      verbIds.length > 1 ? verbIds.filter((id) => id !== previous) : verbIds;
+      pool.length > 1 ? pool.filter((id) => id !== previous) : pool;
     const verbId = choices[Math.floor(random() * choices.length)]!;
     previous = verbId;
     return { ...item, verbId };
@@ -119,11 +126,13 @@ export const buildSession = (
       : completeQueue(items, random);
   if (setup.kind === 'nani') {
     const patterns = new Map(allPatterns(content.rules).map((p) => [p.id, p]));
+    const swOf = new Map(content.verbs.map((v) => [v.id, v.verb.sw]));
     queue = assignVerbs(
       queue,
       eligibleVerbs(content.verbs, stateOf).map((v) => v.id),
       patterns,
-      random
+      random,
+      (id, pattern) => !skipReason(content.rules, swOf.get(id) ?? '', pattern)
     );
   }
   return startSession(queue, { repeatMisses: setup.repeatMisses });

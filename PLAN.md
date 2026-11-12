@@ -265,7 +265,7 @@ file, not a code change. It has these sections:
 - `english`: the templates, e.g. `past: { pos: '{past}', neg: "didn't {base}" }`, plus
   `stativePresent` for stative verbs. A misspelt placeholder fails the build. A verb's own
   `en.tenses` override these (see the card kinds above).
-- `verbs`: quirks by ku- form: `keepKu` (*kwenda*, *kwisha*), `exclude` (*kuwa*, *kuonana*), `needsObject` (*kupa*: always needs a marker for who receives it, so it's excluded and its card lists no kept-ku forms), `stem`.
+- `verbs`: quirks by ku- form: `keepKu` (*kwenda*, *kwisha*), `exclude` (*kuwa*, *kuonana*), `needsObject` (*kupa*: always needs a marker for who receives it, so it's excluded and its card lists no kept-ku forms), `stem`, `why` (the reason an excluded verb is left out), `skip` (a tense or `perfect-neg` the verb is never used in, with the reason: *kutaka* and *kuhitaji* skip the perfect, *kupenda* and *kuishi* its negative).
 
 The engine (`src/nani/conjugate.ts`, `english.ts`) is pure. It returns the word plus labelled,
 role-tagged parts (subject, negative, tense, ku, stem, ending, have) for the coloured breakdown.

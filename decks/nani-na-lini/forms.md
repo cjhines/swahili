@@ -4,22 +4,14 @@
 
 This is everything Nani na Lini? can show: all 48 verbs in four tenses (present,
 past, future, perfect), for all eight subjects, positive and negative, plus have / don’t
-have. That’s 3,088 forms, each with its English and its parts
+have. That’s 3,040 forms, each with its English and its parts
 (*ha·tu·ku·soma*). Each verb also shows what its vocabulary card says: meaning, stem, note,
 example. Verbs the app leaves out of Nani na Lini? are listed too, with the reason.
 
 Please check every table, and say which forms or English are wrong. ✅ means Chris’s tutor
 (or his grammar sheets) has already confirmed that whole table.
 
-**4 of 204 tables checked.**
-
-## Questions from Claude
-
-Things Claude wasn’t sure of while writing these out. Please answer them along with the tables.
-
-1. Stative verbs in the perfect. The English is nimetaka "I have wanted" / sijataka "I haven't wanted yet", nimependa "I have liked" / sijapenda "I haven't liked yet", nimehitaji "I have needed" / sijahitaji "I haven't needed yet", nimefikiri "I have thought" / sijafikiri "I haven't thought yet", and nimeishi "I have lived" / sijaishi "I haven't lived yet". (Kujua now says nimejua "I know now", sijajua "I don't know yet".) Are any of these unnatural in Swahili, and is there better English?
-2. Verbs that take an object in English: "I am looking for", "I am looking after", "I am putting", "I haven't put yet", "I am taking", "I am bringing", "I haven't got yet". The Swahili (ninatafuta) is complete without one; the English isn't. Would "I am looking for (something)" be better?
-3. kuweza: "I will be able to", "I have been able to" and "I haven't been able to yet" end in "to". Nimeweza is often "I've managed". Would "I have managed" / "I haven't managed yet" be better?
+**4 of 202 tables checked.**
 
 **it (N-class), they (N-class):** i- and zi- are for N-class nouns like nyumba (nyumba ina vyumba vitatu, the house has three rooms). Other noun classes use ki-/vi-, li-/ya-, u- and so on, and animals usually take a-/wa- (mbwa anakula, the dog is eating).
 
@@ -356,14 +348,14 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·elewa** | I have understood | **si·ja·elewa** | I haven't understood yet |
-| you | **u·me·elewa** | You have understood | **hu·ja·elewa** | You haven't understood yet |
-| he/she | **a·me·elewa** | He/she has understood | **ha·ja·elewa** | He/she hasn't understood yet |
-| we | **tu·me·elewa** | We have understood | **ha·tu·ja·elewa** | We haven't understood yet |
-| you (plural) | **m·me·elewa** | You (plural) have understood | **ha·m·ja·elewa** | You (plural) haven't understood yet |
-| they | **wa·me·elewa** | They have understood | **ha·wa·ja·elewa** | They haven't understood yet |
-| it (N-class) | **i·me·elewa** | It (N-class) has understood | **ha·i·ja·elewa** | It (N-class) hasn't understood yet |
-| they (N-class) | **zi·me·elewa** | They (N-class) have understood | **ha·zi·ja·elewa** | They (N-class) haven't understood yet |
+| I | **ni·me·elewa** | I understand now | **si·ja·elewa** | I don't understand yet |
+| you | **u·me·elewa** | You understand now | **hu·ja·elewa** | You don't understand yet |
+| he/she | **a·me·elewa** | He/she understands now | **ha·ja·elewa** | He/she doesn't understand yet |
+| we | **tu·me·elewa** | We understand now | **ha·tu·ja·elewa** | We don't understand yet |
+| you (plural) | **m·me·elewa** | You (plural) understand now | **ha·m·ja·elewa** | You (plural) don't understand yet |
+| they | **wa·me·elewa** | They understand now | **ha·wa·ja·elewa** | They don't understand yet |
+| it (N-class) | **i·me·elewa** | It (N-class) understands now | **ha·i·ja·elewa** | It (N-class) doesn't understand yet |
+| they (N-class) | **zi·me·elewa** | They (N-class) understand now | **ha·zi·ja·elewa** | They (N-class) don't understand yet |
 
 ## kufanya · to do / to make
 
@@ -524,14 +516,14 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·fikiri** | I have thought | **si·ja·fikiri** | I haven't thought yet |
-| you | **u·me·fikiri** | You have thought | **hu·ja·fikiri** | You haven't thought yet |
-| he/she | **a·me·fikiri** | He/she has thought | **ha·ja·fikiri** | He/she hasn't thought yet |
-| we | **tu·me·fikiri** | We have thought | **ha·tu·ja·fikiri** | We haven't thought yet |
-| you (plural) | **m·me·fikiri** | You (plural) have thought | **ha·m·ja·fikiri** | You (plural) haven't thought yet |
-| they | **wa·me·fikiri** | They have thought | **ha·wa·ja·fikiri** | They haven't thought yet |
-| it (N-class) | **i·me·fikiri** | It (N-class) has thought | **ha·i·ja·fikiri** | It (N-class) hasn't thought yet |
-| they (N-class) | **zi·me·fikiri** | They (N-class) have thought | **ha·zi·ja·fikiri** | They (N-class) haven't thought yet |
+| I | **ni·me·fikiri** | I have thought about it | **si·ja·fikiri** | I haven't thought about it yet |
+| you | **u·me·fikiri** | You have thought about it | **hu·ja·fikiri** | You haven't thought about it yet |
+| he/she | **a·me·fikiri** | He/she has thought about it | **ha·ja·fikiri** | He/she hasn't thought about it yet |
+| we | **tu·me·fikiri** | We have thought about it | **ha·tu·ja·fikiri** | We haven't thought about it yet |
+| you (plural) | **m·me·fikiri** | You (plural) have thought about it | **ha·m·ja·fikiri** | You (plural) haven't thought about it yet |
+| they | **wa·me·fikiri** | They have thought about it | **ha·wa·ja·fikiri** | They haven't thought about it yet |
+| it (N-class) | **i·me·fikiri** | It (N-class) has thought about it | **ha·i·ja·fikiri** | It (N-class) hasn't thought about it yet |
+| they (N-class) | **zi·me·fikiri** | They (N-class) have thought about it | **ha·zi·ja·fikiri** | They (N-class) haven't thought about it yet |
 
 ## kuhitaji · to need
 
@@ -576,18 +568,9 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 | it (N-class) | **i·ta·hitaji** | It (N-class) will need | **ha·i·ta·hitaji** | It (N-class) won't need |
 | they (N-class) | **zi·ta·hitaji** | They (N-class) will need | **ha·zi·ta·hitaji** | They (N-class) won't need |
 
-### ⬜ Perfect (have done / not yet)
+### Perfect (have done / not yet): not used
 
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·me·hitaji** | I have needed | **si·ja·hitaji** | I haven't needed yet |
-| you | **u·me·hitaji** | You have needed | **hu·ja·hitaji** | You haven't needed yet |
-| he/she | **a·me·hitaji** | He/she has needed | **ha·ja·hitaji** | He/she hasn't needed yet |
-| we | **tu·me·hitaji** | We have needed | **ha·tu·ja·hitaji** | We haven't needed yet |
-| you (plural) | **m·me·hitaji** | You (plural) have needed | **ha·m·ja·hitaji** | You (plural) haven't needed yet |
-| they | **wa·me·hitaji** | They have needed | **ha·wa·ja·hitaji** | They haven't needed yet |
-| it (N-class) | **i·me·hitaji** | It (N-class) has needed | **ha·i·ja·hitaji** | It (N-class) hasn't needed yet |
-| they (N-class) | **zi·me·hitaji** | They (N-class) have needed | **ha·zi·ja·hitaji** | They (N-class) haven't needed yet |
+> Nimehitaji and sijahitaji are grammatical, but you'll almost never hear them.
 
 ## kuishi · to live
 
@@ -638,16 +621,18 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 ### ⬜ Perfect (have done / not yet)
 
+> Negative not used: Sijaishi is odd. (Nimeishi needs a place or a time: nimeishi Nairobi miaka mitano.)
+
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·ishi** | I have lived | **si·ja·ishi** | I haven't lived yet |
-| you | **u·me·ishi** | You have lived | **hu·ja·ishi** | You haven't lived yet |
-| he/she | **a·me·ishi** | He/she has lived | **ha·ja·ishi** | He/she hasn't lived yet |
-| we | **tu·me·ishi** | We have lived | **ha·tu·ja·ishi** | We haven't lived yet |
-| you (plural) | **m·me·ishi** | You (plural) have lived | **ha·m·ja·ishi** | You (plural) haven't lived yet |
-| they | **wa·me·ishi** | They have lived | **ha·wa·ja·ishi** | They haven't lived yet |
-| it (N-class) | **i·me·ishi** | It (N-class) has lived | **ha·i·ja·ishi** | It (N-class) hasn't lived yet |
-| they (N-class) | **zi·me·ishi** | They (N-class) have lived | **ha·zi·ja·ishi** | They (N-class) haven't lived yet |
+| I | **ni·me·ishi** | I have lived (there) |  |  |
+| you | **u·me·ishi** | You have lived (there) |  |  |
+| he/she | **a·me·ishi** | He/she has lived (there) |  |  |
+| we | **tu·me·ishi** | We have lived (there) |  |  |
+| you (plural) | **m·me·ishi** | You (plural) have lived (there) |  |  |
+| they | **wa·me·ishi** | They have lived (there) |  |  |
+| it (N-class) | **i·me·ishi** | It (N-class) has lived (there) |  |  |
+| they (N-class) | **zi·me·ishi** | They (N-class) have lived (there) |  |  |
 
 ## kuita · to call / to call out
 
@@ -986,14 +971,14 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·kaa** | I have stayed | **si·ja·kaa** | I haven't stayed yet |
-| you | **u·me·kaa** | You have stayed | **hu·ja·kaa** | You haven't stayed yet |
-| he/she | **a·me·kaa** | He/she has stayed | **ha·ja·kaa** | He/she hasn't stayed yet |
-| we | **tu·me·kaa** | We have stayed | **ha·tu·ja·kaa** | We haven't stayed yet |
-| you (plural) | **m·me·kaa** | You (plural) have stayed | **ha·m·ja·kaa** | You (plural) haven't stayed yet |
-| they | **wa·me·kaa** | They have stayed | **ha·wa·ja·kaa** | They haven't stayed yet |
-| it (N-class) | **i·me·kaa** | It (N-class) has stayed | **ha·i·ja·kaa** | It (N-class) hasn't stayed yet |
-| they (N-class) | **zi·me·kaa** | They (N-class) have stayed | **ha·zi·ja·kaa** | They (N-class) haven't stayed yet |
+| I | **ni·me·kaa** | I have sat down | **si·ja·kaa** | I haven't sat down yet |
+| you | **u·me·kaa** | You have sat down | **hu·ja·kaa** | You haven't sat down yet |
+| he/she | **a·me·kaa** | He/she has sat down | **ha·ja·kaa** | He/she hasn't sat down yet |
+| we | **tu·me·kaa** | We have sat down | **ha·tu·ja·kaa** | We haven't sat down yet |
+| you (plural) | **m·me·kaa** | You (plural) have sat down | **ha·m·ja·kaa** | You (plural) haven't sat down yet |
+| they | **wa·me·kaa** | They have sat down | **ha·wa·ja·kaa** | They haven't sat down yet |
+| it (N-class) | **i·me·kaa** | It (N-class) has sat down | **ha·i·ja·kaa** | It (N-class) hasn't sat down yet |
+| they (N-class) | **zi·me·kaa** | They (N-class) have sat down | **ha·zi·ja·kaa** | They (N-class) haven't sat down yet |
 
 ## kukutana · to meet
 
@@ -1826,14 +1811,14 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·pata** | I have got | **si·ja·pata** | I haven't got yet |
-| you | **u·me·pata** | You have got | **hu·ja·pata** | You haven't got yet |
-| he/she | **a·me·pata** | He/she has got | **ha·ja·pata** | He/she hasn't got yet |
-| we | **tu·me·pata** | We have got | **ha·tu·ja·pata** | We haven't got yet |
-| you (plural) | **m·me·pata** | You (plural) have got | **ha·m·ja·pata** | You (plural) haven't got yet |
-| they | **wa·me·pata** | They have got | **ha·wa·ja·pata** | They haven't got yet |
-| it (N-class) | **i·me·pata** | It (N-class) has got | **ha·i·ja·pata** | It (N-class) hasn't got yet |
-| they (N-class) | **zi·me·pata** | They (N-class) have got | **ha·zi·ja·pata** | They (N-class) haven't got yet |
+| I | **ni·me·pata** | I have got it | **si·ja·pata** | I haven't got it yet |
+| you | **u·me·pata** | You have got it | **hu·ja·pata** | You haven't got it yet |
+| he/she | **a·me·pata** | He/she has got it | **ha·ja·pata** | He/she hasn't got it yet |
+| we | **tu·me·pata** | We have got it | **ha·tu·ja·pata** | We haven't got it yet |
+| you (plural) | **m·me·pata** | You (plural) have got it | **ha·m·ja·pata** | You (plural) haven't got it yet |
+| they | **wa·me·pata** | They have got it | **ha·wa·ja·pata** | They haven't got it yet |
+| it (N-class) | **i·me·pata** | It (N-class) has got it | **ha·i·ja·pata** | It (N-class) hasn't got it yet |
+| they (N-class) | **zi·me·pata** | They (N-class) have got it | **ha·zi·ja·pata** | They (N-class) haven't got it yet |
 
 ## kupenda · to like / to love
 
@@ -1880,16 +1865,18 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 ### ⬜ Perfect (have done / not yet)
 
+> Negative not used: Sijapenda is rare.
+
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·penda** | I have liked | **si·ja·penda** | I haven't liked yet |
-| you | **u·me·penda** | You have liked | **hu·ja·penda** | You haven't liked yet |
-| he/she | **a·me·penda** | He/she has liked | **ha·ja·penda** | He/she hasn't liked yet |
-| we | **tu·me·penda** | We have liked | **ha·tu·ja·penda** | We haven't liked yet |
-| you (plural) | **m·me·penda** | You (plural) have liked | **ha·m·ja·penda** | You (plural) haven't liked yet |
-| they | **wa·me·penda** | They have liked | **ha·wa·ja·penda** | They haven't liked yet |
-| it (N-class) | **i·me·penda** | It (N-class) has liked | **ha·i·ja·penda** | It (N-class) hasn't liked yet |
-| they (N-class) | **zi·me·penda** | They (N-class) have liked | **ha·zi·ja·penda** | They (N-class) haven't liked yet |
+| I | **ni·me·penda** | I like it (now) |  |  |
+| you | **u·me·penda** | You like it (now) |  |  |
+| he/she | **a·me·penda** | He/she likes it (now) |  |  |
+| we | **tu·me·penda** | We like it (now) |  |  |
+| you (plural) | **m·me·penda** | You (plural) like it (now) |  |  |
+| they | **wa·me·penda** | They like it (now) |  |  |
+| it (N-class) | **i·me·penda** | It (N-class) likes it (now) |  |  |
+| they (N-class) | **zi·me·penda** | They (N-class) like it (now) |  |  |
 
 ## kupiga · to hit / to strike
 
@@ -2165,14 +2152,14 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·sikia** | I have heard | **si·ja·sikia** | I haven't heard yet |
-| you | **u·me·sikia** | You have heard | **hu·ja·sikia** | You haven't heard yet |
-| he/she | **a·me·sikia** | He/she has heard | **ha·ja·sikia** | He/she hasn't heard yet |
-| we | **tu·me·sikia** | We have heard | **ha·tu·ja·sikia** | We haven't heard yet |
-| you (plural) | **m·me·sikia** | You (plural) have heard | **ha·m·ja·sikia** | You (plural) haven't heard yet |
-| they | **wa·me·sikia** | They have heard | **ha·wa·ja·sikia** | They haven't heard yet |
-| it (N-class) | **i·me·sikia** | It (N-class) has heard | **ha·i·ja·sikia** | It (N-class) hasn't heard yet |
-| they (N-class) | **zi·me·sikia** | They (N-class) have heard | **ha·zi·ja·sikia** | They (N-class) haven't heard yet |
+| I | **ni·me·sikia** | I have heard (got it) | **si·ja·sikia** | I haven't heard yet |
+| you | **u·me·sikia** | You have heard (got it) | **hu·ja·sikia** | You haven't heard yet |
+| he/she | **a·me·sikia** | He/she has heard (got it) | **ha·ja·sikia** | He/she hasn't heard yet |
+| we | **tu·me·sikia** | We have heard (got it) | **ha·tu·ja·sikia** | We haven't heard yet |
+| you (plural) | **m·me·sikia** | You (plural) have heard (got it) | **ha·m·ja·sikia** | You (plural) haven't heard yet |
+| they | **wa·me·sikia** | They have heard (got it) | **ha·wa·ja·sikia** | They haven't heard yet |
+| it (N-class) | **i·me·sikia** | It (N-class) has heard (got it) | **ha·i·ja·sikia** | It (N-class) hasn't heard yet |
+| they (N-class) | **zi·me·sikia** | They (N-class) have heard (got it) | **ha·zi·ja·sikia** | They (N-class) haven't heard yet |
 
 ## kusikiliza · to listen
 
@@ -2344,7 +2331,7 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 | it (N-class) | **i·me·subiri** | It (N-class) has waited | **ha·i·ja·subiri** | It (N-class) hasn't waited yet |
 | they (N-class) | **zi·me·subiri** | They (N-class) have waited | **ha·zi·ja·subiri** | They (N-class) haven't waited yet |
 
-## kutafuta · to look for
+## kutafuta · to look for / to search
 
 - Stem: *tafuta*
 
@@ -2352,53 +2339,53 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·na·tafuta** | I am looking for | **si·tafut·i** | I am not looking for |
-| you | **u·na·tafuta** | You are looking for | **hu·tafut·i** | You are not looking for |
-| he/she | **a·na·tafuta** | He/she is looking for | **ha·tafut·i** | He/she is not looking for |
-| we | **tu·na·tafuta** | We are looking for | **ha·tu·tafut·i** | We are not looking for |
-| you (plural) | **m·na·tafuta** | You (plural) are looking for | **ha·m·tafut·i** | You (plural) are not looking for |
-| they | **wa·na·tafuta** | They are looking for | **ha·wa·tafut·i** | They are not looking for |
-| it (N-class) | **i·na·tafuta** | It (N-class) is looking for | **ha·i·tafut·i** | It (N-class) is not looking for |
-| they (N-class) | **zi·na·tafuta** | They (N-class) are looking for | **ha·zi·tafut·i** | They (N-class) are not looking for |
+| I | **ni·na·tafuta** | I am searching | **si·tafut·i** | I am not searching |
+| you | **u·na·tafuta** | You are searching | **hu·tafut·i** | You are not searching |
+| he/she | **a·na·tafuta** | He/she is searching | **ha·tafut·i** | He/she is not searching |
+| we | **tu·na·tafuta** | We are searching | **ha·tu·tafut·i** | We are not searching |
+| you (plural) | **m·na·tafuta** | You (plural) are searching | **ha·m·tafut·i** | You (plural) are not searching |
+| they | **wa·na·tafuta** | They are searching | **ha·wa·tafut·i** | They are not searching |
+| it (N-class) | **i·na·tafuta** | It (N-class) is searching | **ha·i·tafut·i** | It (N-class) is not searching |
+| they (N-class) | **zi·na·tafuta** | They (N-class) are searching | **ha·zi·tafut·i** | They (N-class) are not searching |
 
 ### ⬜ Past
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·li·tafuta** | I looked for | **si·ku·tafuta** | I didn't look for |
-| you | **u·li·tafuta** | You looked for | **hu·ku·tafuta** | You didn't look for |
-| he/she | **a·li·tafuta** | He/she looked for | **ha·ku·tafuta** | He/she didn't look for |
-| we | **tu·li·tafuta** | We looked for | **ha·tu·ku·tafuta** | We didn't look for |
-| you (plural) | **m·li·tafuta** | You (plural) looked for | **ha·m·ku·tafuta** | You (plural) didn't look for |
-| they | **wa·li·tafuta** | They looked for | **ha·wa·ku·tafuta** | They didn't look for |
-| it (N-class) | **i·li·tafuta** | It (N-class) looked for | **ha·i·ku·tafuta** | It (N-class) didn't look for |
-| they (N-class) | **zi·li·tafuta** | They (N-class) looked for | **ha·zi·ku·tafuta** | They (N-class) didn't look for |
+| I | **ni·li·tafuta** | I searched | **si·ku·tafuta** | I didn't search |
+| you | **u·li·tafuta** | You searched | **hu·ku·tafuta** | You didn't search |
+| he/she | **a·li·tafuta** | He/she searched | **ha·ku·tafuta** | He/she didn't search |
+| we | **tu·li·tafuta** | We searched | **ha·tu·ku·tafuta** | We didn't search |
+| you (plural) | **m·li·tafuta** | You (plural) searched | **ha·m·ku·tafuta** | You (plural) didn't search |
+| they | **wa·li·tafuta** | They searched | **ha·wa·ku·tafuta** | They didn't search |
+| it (N-class) | **i·li·tafuta** | It (N-class) searched | **ha·i·ku·tafuta** | It (N-class) didn't search |
+| they (N-class) | **zi·li·tafuta** | They (N-class) searched | **ha·zi·ku·tafuta** | They (N-class) didn't search |
 
 ### ⬜ Future
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·ta·tafuta** | I will look for | **si·ta·tafuta** | I won't look for |
-| you | **u·ta·tafuta** | You will look for | **hu·ta·tafuta** | You won't look for |
-| he/she | **a·ta·tafuta** | He/she will look for | **ha·ta·tafuta** | He/she won't look for |
-| we | **tu·ta·tafuta** | We will look for | **ha·tu·ta·tafuta** | We won't look for |
-| you (plural) | **m·ta·tafuta** | You (plural) will look for | **ha·m·ta·tafuta** | You (plural) won't look for |
-| they | **wa·ta·tafuta** | They will look for | **ha·wa·ta·tafuta** | They won't look for |
-| it (N-class) | **i·ta·tafuta** | It (N-class) will look for | **ha·i·ta·tafuta** | It (N-class) won't look for |
-| they (N-class) | **zi·ta·tafuta** | They (N-class) will look for | **ha·zi·ta·tafuta** | They (N-class) won't look for |
+| I | **ni·ta·tafuta** | I will search | **si·ta·tafuta** | I won't search |
+| you | **u·ta·tafuta** | You will search | **hu·ta·tafuta** | You won't search |
+| he/she | **a·ta·tafuta** | He/she will search | **ha·ta·tafuta** | He/she won't search |
+| we | **tu·ta·tafuta** | We will search | **ha·tu·ta·tafuta** | We won't search |
+| you (plural) | **m·ta·tafuta** | You (plural) will search | **ha·m·ta·tafuta** | You (plural) won't search |
+| they | **wa·ta·tafuta** | They will search | **ha·wa·ta·tafuta** | They won't search |
+| it (N-class) | **i·ta·tafuta** | It (N-class) will search | **ha·i·ta·tafuta** | It (N-class) won't search |
+| they (N-class) | **zi·ta·tafuta** | They (N-class) will search | **ha·zi·ta·tafuta** | They (N-class) won't search |
 
 ### ⬜ Perfect (have done / not yet)
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·tafuta** | I have looked for | **si·ja·tafuta** | I haven't looked for yet |
-| you | **u·me·tafuta** | You have looked for | **hu·ja·tafuta** | You haven't looked for yet |
-| he/she | **a·me·tafuta** | He/she has looked for | **ha·ja·tafuta** | He/she hasn't looked for yet |
-| we | **tu·me·tafuta** | We have looked for | **ha·tu·ja·tafuta** | We haven't looked for yet |
-| you (plural) | **m·me·tafuta** | You (plural) have looked for | **ha·m·ja·tafuta** | You (plural) haven't looked for yet |
-| they | **wa·me·tafuta** | They have looked for | **ha·wa·ja·tafuta** | They haven't looked for yet |
-| it (N-class) | **i·me·tafuta** | It (N-class) has looked for | **ha·i·ja·tafuta** | It (N-class) hasn't looked for yet |
-| they (N-class) | **zi·me·tafuta** | They (N-class) have looked for | **ha·zi·ja·tafuta** | They (N-class) haven't looked for yet |
+| I | **ni·me·tafuta** | I have searched | **si·ja·tafuta** | I haven't searched yet |
+| you | **u·me·tafuta** | You have searched | **hu·ja·tafuta** | You haven't searched yet |
+| he/she | **a·me·tafuta** | He/she has searched | **ha·ja·tafuta** | He/she hasn't searched yet |
+| we | **tu·me·tafuta** | We have searched | **ha·tu·ja·tafuta** | We haven't searched yet |
+| you (plural) | **m·me·tafuta** | You (plural) have searched | **ha·m·ja·tafuta** | You (plural) haven't searched yet |
+| they | **wa·me·tafuta** | They have searched | **ha·wa·ja·tafuta** | They haven't searched yet |
+| it (N-class) | **i·me·tafuta** | It (N-class) has searched | **ha·i·ja·tafuta** | It (N-class) hasn't searched yet |
+| they (N-class) | **zi·me·tafuta** | They (N-class) have searched | **ha·zi·ja·tafuta** | They (N-class) haven't searched yet |
 
 ## kutaka · to want
 
@@ -2443,18 +2430,9 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 | it (N-class) | **i·ta·taka** | It (N-class) will want | **ha·i·ta·taka** | It (N-class) won't want |
 | they (N-class) | **zi·ta·taka** | They (N-class) will want | **ha·zi·ta·taka** | They (N-class) won't want |
 
-### ⬜ Perfect (have done / not yet)
+### Perfect (have done / not yet): not used
 
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·me·taka** | I have wanted | **si·ja·taka** | I haven't wanted yet |
-| you | **u·me·taka** | You have wanted | **hu·ja·taka** | You haven't wanted yet |
-| he/she | **a·me·taka** | He/she has wanted | **ha·ja·taka** | He/she hasn't wanted yet |
-| we | **tu·me·taka** | We have wanted | **ha·tu·ja·taka** | We haven't wanted yet |
-| you (plural) | **m·me·taka** | You (plural) have wanted | **ha·m·ja·taka** | You (plural) haven't wanted yet |
-| they | **wa·me·taka** | They have wanted | **ha·wa·ja·taka** | They haven't wanted yet |
-| it (N-class) | **i·me·taka** | It (N-class) has wanted | **ha·i·ja·taka** | It (N-class) hasn't wanted yet |
-| they (N-class) | **zi·me·taka** | They (N-class) have wanted | **ha·zi·ja·taka** | They (N-class) haven't wanted yet |
+> Nimetaka and sijataka are grammatical, but you'll almost never hear them.
 
 ## kutoka · to go out / to come from / to leave
 
@@ -2464,14 +2442,14 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·na·toka** | I am going out | **si·tok·i** | I am not going out |
-| you | **u·na·toka** | You are going out | **hu·tok·i** | You are not going out |
-| he/she | **a·na·toka** | He/she is going out | **ha·tok·i** | He/she is not going out |
-| we | **tu·na·toka** | We are going out | **ha·tu·tok·i** | We are not going out |
-| you (plural) | **m·na·toka** | You (plural) are going out | **ha·m·tok·i** | You (plural) are not going out |
-| they | **wa·na·toka** | They are going out | **ha·wa·tok·i** | They are not going out |
-| it (N-class) | **i·na·toka** | It (N-class) is going out | **ha·i·tok·i** | It (N-class) is not going out |
-| they (N-class) | **zi·na·toka** | They (N-class) are going out | **ha·zi·tok·i** | They (N-class) are not going out |
+| I | **ni·na·toka** | I am going out / I come from | **si·tok·i** | I am not going out / I don't come from |
+| you | **u·na·toka** | You are going out / you come from | **hu·tok·i** | You are not going out / you don't come from |
+| he/she | **a·na·toka** | He/she is going out / he/she comes from | **ha·tok·i** | He/she is not going out / he/she doesn't come from |
+| we | **tu·na·toka** | We are going out / we come from | **ha·tu·tok·i** | We are not going out / we don't come from |
+| you (plural) | **m·na·toka** | You (plural) are going out / you (plural) come from | **ha·m·tok·i** | You (plural) are not going out / you (plural) don't come from |
+| they | **wa·na·toka** | They are going out / they come from | **ha·wa·tok·i** | They are not going out / they don't come from |
+| it (N-class) | **i·na·toka** | It (N-class) is going out / it (N-class) comes from | **ha·i·tok·i** | It (N-class) is not going out / it (N-class) doesn't come from |
+| they (N-class) | **zi·na·toka** | They (N-class) are going out / they (N-class) come from | **ha·zi·tok·i** | They (N-class) are not going out / they (N-class) don't come from |
 
 ### ⬜ Past
 
@@ -2520,53 +2498,53 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·na·tunza** | I am looking after | **si·tunz·i** | I am not looking after |
-| you | **u·na·tunza** | You are looking after | **hu·tunz·i** | You are not looking after |
-| he/she | **a·na·tunza** | He/she is looking after | **ha·tunz·i** | He/she is not looking after |
-| we | **tu·na·tunza** | We are looking after | **ha·tu·tunz·i** | We are not looking after |
-| you (plural) | **m·na·tunza** | You (plural) are looking after | **ha·m·tunz·i** | You (plural) are not looking after |
-| they | **wa·na·tunza** | They are looking after | **ha·wa·tunz·i** | They are not looking after |
-| it (N-class) | **i·na·tunza** | It (N-class) is looking after | **ha·i·tunz·i** | It (N-class) is not looking after |
-| they (N-class) | **zi·na·tunza** | They (N-class) are looking after | **ha·zi·tunz·i** | They (N-class) are not looking after |
+| I | **ni·na·tunza** | I am looking after (something) | **si·tunz·i** | I am not looking after (something) |
+| you | **u·na·tunza** | You are looking after (something) | **hu·tunz·i** | You are not looking after (something) |
+| he/she | **a·na·tunza** | He/she is looking after (something) | **ha·tunz·i** | He/she is not looking after (something) |
+| we | **tu·na·tunza** | We are looking after (something) | **ha·tu·tunz·i** | We are not looking after (something) |
+| you (plural) | **m·na·tunza** | You (plural) are looking after (something) | **ha·m·tunz·i** | You (plural) are not looking after (something) |
+| they | **wa·na·tunza** | They are looking after (something) | **ha·wa·tunz·i** | They are not looking after (something) |
+| it (N-class) | **i·na·tunza** | It (N-class) is looking after (something) | **ha·i·tunz·i** | It (N-class) is not looking after (something) |
+| they (N-class) | **zi·na·tunza** | They (N-class) are looking after (something) | **ha·zi·tunz·i** | They (N-class) are not looking after (something) |
 
 ### ⬜ Past
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·li·tunza** | I looked after | **si·ku·tunza** | I didn't look after |
-| you | **u·li·tunza** | You looked after | **hu·ku·tunza** | You didn't look after |
-| he/she | **a·li·tunza** | He/she looked after | **ha·ku·tunza** | He/she didn't look after |
-| we | **tu·li·tunza** | We looked after | **ha·tu·ku·tunza** | We didn't look after |
-| you (plural) | **m·li·tunza** | You (plural) looked after | **ha·m·ku·tunza** | You (plural) didn't look after |
-| they | **wa·li·tunza** | They looked after | **ha·wa·ku·tunza** | They didn't look after |
-| it (N-class) | **i·li·tunza** | It (N-class) looked after | **ha·i·ku·tunza** | It (N-class) didn't look after |
-| they (N-class) | **zi·li·tunza** | They (N-class) looked after | **ha·zi·ku·tunza** | They (N-class) didn't look after |
+| I | **ni·li·tunza** | I looked after (something) | **si·ku·tunza** | I didn't look after (something) |
+| you | **u·li·tunza** | You looked after (something) | **hu·ku·tunza** | You didn't look after (something) |
+| he/she | **a·li·tunza** | He/she looked after (something) | **ha·ku·tunza** | He/she didn't look after (something) |
+| we | **tu·li·tunza** | We looked after (something) | **ha·tu·ku·tunza** | We didn't look after (something) |
+| you (plural) | **m·li·tunza** | You (plural) looked after (something) | **ha·m·ku·tunza** | You (plural) didn't look after (something) |
+| they | **wa·li·tunza** | They looked after (something) | **ha·wa·ku·tunza** | They didn't look after (something) |
+| it (N-class) | **i·li·tunza** | It (N-class) looked after (something) | **ha·i·ku·tunza** | It (N-class) didn't look after (something) |
+| they (N-class) | **zi·li·tunza** | They (N-class) looked after (something) | **ha·zi·ku·tunza** | They (N-class) didn't look after (something) |
 
 ### ⬜ Future
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·ta·tunza** | I will look after | **si·ta·tunza** | I won't look after |
-| you | **u·ta·tunza** | You will look after | **hu·ta·tunza** | You won't look after |
-| he/she | **a·ta·tunza** | He/she will look after | **ha·ta·tunza** | He/she won't look after |
-| we | **tu·ta·tunza** | We will look after | **ha·tu·ta·tunza** | We won't look after |
-| you (plural) | **m·ta·tunza** | You (plural) will look after | **ha·m·ta·tunza** | You (plural) won't look after |
-| they | **wa·ta·tunza** | They will look after | **ha·wa·ta·tunza** | They won't look after |
-| it (N-class) | **i·ta·tunza** | It (N-class) will look after | **ha·i·ta·tunza** | It (N-class) won't look after |
-| they (N-class) | **zi·ta·tunza** | They (N-class) will look after | **ha·zi·ta·tunza** | They (N-class) won't look after |
+| I | **ni·ta·tunza** | I will look after (something) | **si·ta·tunza** | I won't look after (something) |
+| you | **u·ta·tunza** | You will look after (something) | **hu·ta·tunza** | You won't look after (something) |
+| he/she | **a·ta·tunza** | He/she will look after (something) | **ha·ta·tunza** | He/she won't look after (something) |
+| we | **tu·ta·tunza** | We will look after (something) | **ha·tu·ta·tunza** | We won't look after (something) |
+| you (plural) | **m·ta·tunza** | You (plural) will look after (something) | **ha·m·ta·tunza** | You (plural) won't look after (something) |
+| they | **wa·ta·tunza** | They will look after (something) | **ha·wa·ta·tunza** | They won't look after (something) |
+| it (N-class) | **i·ta·tunza** | It (N-class) will look after (something) | **ha·i·ta·tunza** | It (N-class) won't look after (something) |
+| they (N-class) | **zi·ta·tunza** | They (N-class) will look after (something) | **ha·zi·ta·tunza** | They (N-class) won't look after (something) |
 
 ### ⬜ Perfect (have done / not yet)
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·tunza** | I have looked after | **si·ja·tunza** | I haven't looked after yet |
-| you | **u·me·tunza** | You have looked after | **hu·ja·tunza** | You haven't looked after yet |
-| he/she | **a·me·tunza** | He/she has looked after | **ha·ja·tunza** | He/she hasn't looked after yet |
-| we | **tu·me·tunza** | We have looked after | **ha·tu·ja·tunza** | We haven't looked after yet |
-| you (plural) | **m·me·tunza** | You (plural) have looked after | **ha·m·ja·tunza** | You (plural) haven't looked after yet |
-| they | **wa·me·tunza** | They have looked after | **ha·wa·ja·tunza** | They haven't looked after yet |
-| it (N-class) | **i·me·tunza** | It (N-class) has looked after | **ha·i·ja·tunza** | It (N-class) hasn't looked after yet |
-| they (N-class) | **zi·me·tunza** | They (N-class) have looked after | **ha·zi·ja·tunza** | They (N-class) haven't looked after yet |
+| I | **ni·me·tunza** | I have looked after (something) | **si·ja·tunza** | I haven't looked after (something) yet |
+| you | **u·me·tunza** | You have looked after (something) | **hu·ja·tunza** | You haven't looked after (something) yet |
+| he/she | **a·me·tunza** | He/she has looked after (something) | **ha·ja·tunza** | He/she hasn't looked after (something) yet |
+| we | **tu·me·tunza** | We have looked after (something) | **ha·tu·ja·tunza** | We haven't looked after (something) yet |
+| you (plural) | **m·me·tunza** | You (plural) have looked after (something) | **ha·m·ja·tunza** | You (plural) haven't looked after (something) yet |
+| they | **wa·me·tunza** | They have looked after (something) | **ha·wa·ja·tunza** | They haven't looked after (something) yet |
+| it (N-class) | **i·me·tunza** | It (N-class) has looked after (something) | **ha·i·ja·tunza** | It (N-class) hasn't looked after (something) yet |
+| they (N-class) | **zi·me·tunza** | They (N-class) have looked after (something) | **ha·zi·ja·tunza** | They (N-class) haven't looked after (something) yet |
 
 ## kuuliza · to ask
 
@@ -2688,53 +2666,53 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·na·weka** | I am putting | **si·wek·i** | I am not putting |
-| you | **u·na·weka** | You are putting | **hu·wek·i** | You are not putting |
-| he/she | **a·na·weka** | He/she is putting | **ha·wek·i** | He/she is not putting |
-| we | **tu·na·weka** | We are putting | **ha·tu·wek·i** | We are not putting |
-| you (plural) | **m·na·weka** | You (plural) are putting | **ha·m·wek·i** | You (plural) are not putting |
-| they | **wa·na·weka** | They are putting | **ha·wa·wek·i** | They are not putting |
-| it (N-class) | **i·na·weka** | It (N-class) is putting | **ha·i·wek·i** | It (N-class) is not putting |
-| they (N-class) | **zi·na·weka** | They (N-class) are putting | **ha·zi·wek·i** | They (N-class) are not putting |
+| I | **ni·na·weka** | I am putting (something) | **si·wek·i** | I am not putting (something) |
+| you | **u·na·weka** | You are putting (something) | **hu·wek·i** | You are not putting (something) |
+| he/she | **a·na·weka** | He/she is putting (something) | **ha·wek·i** | He/she is not putting (something) |
+| we | **tu·na·weka** | We are putting (something) | **ha·tu·wek·i** | We are not putting (something) |
+| you (plural) | **m·na·weka** | You (plural) are putting (something) | **ha·m·wek·i** | You (plural) are not putting (something) |
+| they | **wa·na·weka** | They are putting (something) | **ha·wa·wek·i** | They are not putting (something) |
+| it (N-class) | **i·na·weka** | It (N-class) is putting (something) | **ha·i·wek·i** | It (N-class) is not putting (something) |
+| they (N-class) | **zi·na·weka** | They (N-class) are putting (something) | **ha·zi·wek·i** | They (N-class) are not putting (something) |
 
 ### ⬜ Past
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·li·weka** | I put | **si·ku·weka** | I didn't put |
-| you | **u·li·weka** | You put | **hu·ku·weka** | You didn't put |
-| he/she | **a·li·weka** | He/she put | **ha·ku·weka** | He/she didn't put |
-| we | **tu·li·weka** | We put | **ha·tu·ku·weka** | We didn't put |
-| you (plural) | **m·li·weka** | You (plural) put | **ha·m·ku·weka** | You (plural) didn't put |
-| they | **wa·li·weka** | They put | **ha·wa·ku·weka** | They didn't put |
-| it (N-class) | **i·li·weka** | It (N-class) put | **ha·i·ku·weka** | It (N-class) didn't put |
-| they (N-class) | **zi·li·weka** | They (N-class) put | **ha·zi·ku·weka** | They (N-class) didn't put |
+| I | **ni·li·weka** | I put (something) | **si·ku·weka** | I didn't put (something) |
+| you | **u·li·weka** | You put (something) | **hu·ku·weka** | You didn't put (something) |
+| he/she | **a·li·weka** | He/she put (something) | **ha·ku·weka** | He/she didn't put (something) |
+| we | **tu·li·weka** | We put (something) | **ha·tu·ku·weka** | We didn't put (something) |
+| you (plural) | **m·li·weka** | You (plural) put (something) | **ha·m·ku·weka** | You (plural) didn't put (something) |
+| they | **wa·li·weka** | They put (something) | **ha·wa·ku·weka** | They didn't put (something) |
+| it (N-class) | **i·li·weka** | It (N-class) put (something) | **ha·i·ku·weka** | It (N-class) didn't put (something) |
+| they (N-class) | **zi·li·weka** | They (N-class) put (something) | **ha·zi·ku·weka** | They (N-class) didn't put (something) |
 
 ### ⬜ Future
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·ta·weka** | I will put | **si·ta·weka** | I won't put |
-| you | **u·ta·weka** | You will put | **hu·ta·weka** | You won't put |
-| he/she | **a·ta·weka** | He/she will put | **ha·ta·weka** | He/she won't put |
-| we | **tu·ta·weka** | We will put | **ha·tu·ta·weka** | We won't put |
-| you (plural) | **m·ta·weka** | You (plural) will put | **ha·m·ta·weka** | You (plural) won't put |
-| they | **wa·ta·weka** | They will put | **ha·wa·ta·weka** | They won't put |
-| it (N-class) | **i·ta·weka** | It (N-class) will put | **ha·i·ta·weka** | It (N-class) won't put |
-| they (N-class) | **zi·ta·weka** | They (N-class) will put | **ha·zi·ta·weka** | They (N-class) won't put |
+| I | **ni·ta·weka** | I will put (something) | **si·ta·weka** | I won't put (something) |
+| you | **u·ta·weka** | You will put (something) | **hu·ta·weka** | You won't put (something) |
+| he/she | **a·ta·weka** | He/she will put (something) | **ha·ta·weka** | He/she won't put (something) |
+| we | **tu·ta·weka** | We will put (something) | **ha·tu·ta·weka** | We won't put (something) |
+| you (plural) | **m·ta·weka** | You (plural) will put (something) | **ha·m·ta·weka** | You (plural) won't put (something) |
+| they | **wa·ta·weka** | They will put (something) | **ha·wa·ta·weka** | They won't put (something) |
+| it (N-class) | **i·ta·weka** | It (N-class) will put (something) | **ha·i·ta·weka** | It (N-class) won't put (something) |
+| they (N-class) | **zi·ta·weka** | They (N-class) will put (something) | **ha·zi·ta·weka** | They (N-class) won't put (something) |
 
 ### ⬜ Perfect (have done / not yet)
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·weka** | I have put | **si·ja·weka** | I haven't put yet |
-| you | **u·me·weka** | You have put | **hu·ja·weka** | You haven't put yet |
-| he/she | **a·me·weka** | He/she has put | **ha·ja·weka** | He/she hasn't put yet |
-| we | **tu·me·weka** | We have put | **ha·tu·ja·weka** | We haven't put yet |
-| you (plural) | **m·me·weka** | You (plural) have put | **ha·m·ja·weka** | You (plural) haven't put yet |
-| they | **wa·me·weka** | They have put | **ha·wa·ja·weka** | They haven't put yet |
-| it (N-class) | **i·me·weka** | It (N-class) has put | **ha·i·ja·weka** | It (N-class) hasn't put yet |
-| they (N-class) | **zi·me·weka** | They (N-class) have put | **ha·zi·ja·weka** | They (N-class) haven't put yet |
+| I | **ni·me·weka** | I have put (something) | **si·ja·weka** | I haven't put (something) yet |
+| you | **u·me·weka** | You have put (something) | **hu·ja·weka** | You haven't put (something) yet |
+| he/she | **a·me·weka** | He/she has put (something) | **ha·ja·weka** | He/she hasn't put (something) yet |
+| we | **tu·me·weka** | We have put (something) | **ha·tu·ja·weka** | We haven't put (something) yet |
+| you (plural) | **m·me·weka** | You (plural) have put (something) | **ha·m·ja·weka** | You (plural) haven't put (something) yet |
+| they | **wa·me·weka** | They have put (something) | **ha·wa·ja·weka** | They haven't put (something) yet |
+| it (N-class) | **i·me·weka** | It (N-class) has put (something) | **ha·i·ja·weka** | It (N-class) hasn't put (something) yet |
+| they (N-class) | **zi·me·weka** | They (N-class) have put (something) | **ha·zi·ja·weka** | They (N-class) haven't put (something) yet |
 
 ## kuweza · can / to be able to
 
@@ -2783,14 +2761,14 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·weza** | I have been able to | **si·ja·weza** | I haven't been able to yet |
-| you | **u·me·weza** | You have been able to | **hu·ja·weza** | You haven't been able to yet |
-| he/she | **a·me·weza** | He/she has been able to | **ha·ja·weza** | He/she hasn't been able to yet |
-| we | **tu·me·weza** | We have been able to | **ha·tu·ja·weza** | We haven't been able to yet |
-| you (plural) | **m·me·weza** | You (plural) have been able to | **ha·m·ja·weza** | You (plural) haven't been able to yet |
-| they | **wa·me·weza** | They have been able to | **ha·wa·ja·weza** | They haven't been able to yet |
-| it (N-class) | **i·me·weza** | It (N-class) has been able to | **ha·i·ja·weza** | It (N-class) hasn't been able to yet |
-| they (N-class) | **zi·me·weza** | They (N-class) have been able to | **ha·zi·ja·weza** | They (N-class) haven't been able to yet |
+| I | **ni·me·weza** | I have managed | **si·ja·weza** | I haven't managed yet |
+| you | **u·me·weza** | You have managed | **hu·ja·weza** | You haven't managed yet |
+| he/she | **a·me·weza** | He/she has managed | **ha·ja·weza** | He/she hasn't managed yet |
+| we | **tu·me·weza** | We have managed | **ha·tu·ja·weza** | We haven't managed yet |
+| you (plural) | **m·me·weza** | You (plural) have managed | **ha·m·ja·weza** | You (plural) haven't managed yet |
+| they | **wa·me·weza** | They have managed | **ha·wa·ja·weza** | They haven't managed yet |
+| it (N-class) | **i·me·weza** | It (N-class) has managed | **ha·i·ja·weza** | It (N-class) hasn't managed yet |
+| they (N-class) | **zi·me·weza** | They (N-class) have managed | **ha·zi·ja·weza** | They (N-class) haven't managed yet |
 
 ## kuzungumza · to talk / to chat
 

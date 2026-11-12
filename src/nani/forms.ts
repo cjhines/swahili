@@ -1,4 +1,4 @@
-import { conjugate, verbInfo, type NaniVerb } from './conjugate.ts';
+import { conjugate, skipReason, verbInfo, type NaniVerb } from './conjugate.ts';
 import { english } from './english.ts';
 import { verbFacts } from './facts.ts';
 import { VERIFIED_SOURCE } from './fixtures.ts';
@@ -31,7 +31,8 @@ const TENSE_TITLES: Record<NaniTense, string> = {
 };
 
 type Table = NaniFixtures['paradigms'][number];
-type Rendered = { checked: boolean; lines: string[] };
+/** `counted: false` for a tense the verb is never used in: shown, but not a table to check. */
+type Rendered = { checked: boolean; lines: string[]; counted?: false };
 
 /** What a vocabulary card shows besides its headword, as a bullet list. */
 const cardLines = (rules: NaniRules, card: VocabCard) => {
@@ -107,7 +108,25 @@ export const renderForms = (
    * The full table for a verb (or "have") the app conjugates. ✅ only when a verified fixture
    * covers the whole of it; a partly confirmed one says which forms were confirmed.
    */
-  const fullTable = (tense: NaniTense, verb: NaniVerb | undefined) => {
+  const fullTable = (
+    tense: NaniTense,
+    verb: NaniVerb | undefined
+  ): Rendered => {
+    // rules.yaml `skip`: a tense or one polarity this verb is never used in.
+    const skipped = (polarity: Polarity) =>
+      verb && skipReason(rules, verb.sw, { tense, polarity });
+    const [skipPos, skipNeg] = [skipped('pos'), skipped('neg')];
+    if (skipPos && skipNeg)
+      return {
+        checked: false,
+        counted: false,
+        lines: [`### ${TENSE_TITLES[tense]}: not used`, '', `> ${skipPos}`, ''],
+      };
+    const skipNote = skipPos
+      ? `Positive not used: ${skipPos}`
+      : skipNeg
+        ? `Negative not used: ${skipNeg}`
+        : undefined;
     const fixture = fixtureFor(verb?.sw, tense);
     const whole =
       !!fixture?.verified &&
@@ -127,10 +146,10 @@ export const renderForms = (
       tense,
       verb,
       subjects.map((s) => s.id),
-      { pos: true, neg: true },
+      { pos: !skipPos, neg: !skipNeg },
       whole,
       '###',
-      note
+      [note, skipNote].filter(Boolean).join(' ') || undefined
     );
   };
 
@@ -204,14 +223,23 @@ export const renderForms = (
 
   sections.sort((a, b) => (a.sw < b.sw ? -1 : a.sw > b.sw ? 1 : 0));
 
-  const naniVerbCount = [...verbCards.values()].filter(
-    (c) => !verbInfo(rules, c.sw).exclude
-  ).length;
+  const naniVerbNames = [...verbCards.keys()].filter(
+    (sw) => !verbInfo(rules, sw).exclude
+  );
+  const naniVerbCount = naniVerbNames.length;
   const patterns = allPatterns(rules);
-  const verbPatterns = patterns.filter((p) => p.tense !== 'have').length;
-  const formCount =
-    naniVerbCount * verbPatterns + (patterns.length - verbPatterns);
-  const allTables = sections.flatMap((s) => s.tables);
+  // Every pattern for every verb, less the ones rules.yaml skips, plus have / don't have.
+  const formCount = patterns.reduce(
+    (sum, p) =>
+      sum +
+      (p.tense === 'have'
+        ? 1
+        : naniVerbNames.filter((sw) => !skipReason(rules, sw, p)).length),
+    0
+  );
+  const allTables = sections
+    .flatMap((s) => s.tables)
+    .filter((t) => t.counted !== false);
   const checked = allTables.filter((t) => t.checked).length;
   const notes = [
     ...new Set(subjects.flatMap((s) => (s.note ? [s.note] : []))),

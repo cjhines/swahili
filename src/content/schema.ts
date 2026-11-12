@@ -68,7 +68,8 @@ export const Word = z.strictObject({
 
 /**
  * Placeholders an English template may use. Subject-dependent: be (am/is/are), have (have/has),
- * do (do/does), was (was/were), simple (the verb's base, or its `third` form after he/she/it).
+ * do (do/does), was (was/were), simple (the verb's base, or its `third` form after he/she/it),
+ * subject (I, he/she…, for a second clause) and s ("s" after he/she/it: come{s}).
  * From the verb: base, past, participle, ing.
  */
 export const ENGLISH_PLACEHOLDERS = [
@@ -77,6 +78,8 @@ export const ENGLISH_PLACEHOLDERS = [
   'do',
   'was',
   'simple',
+  'subject',
+  's',
   'base',
   'past',
   'participle',

@@ -5,7 +5,7 @@
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
 
-import { conjugate, verbInfo } from './conjugate.ts';
+import { conjugate, skipReason, verbInfo } from './conjugate.ts';
 import { english } from './english.ts';
 import { FORMS_PATH, renderForms } from './forms.ts';
 import { allPatterns, TENSES } from './patterns.ts';
@@ -46,17 +46,25 @@ test('the file on disk is current', () => {
   expect(readFileSync(FORMS_PATH, 'utf8').replace(/\r\n/g, '\n')).toBe(md);
 });
 
-test('every verb the app conjugates is there, in all four tenses, in order', () => {
+const TITLES = {
+  present: 'Present (now)',
+  past: 'Past',
+  future: 'Future',
+  perfect: 'Perfect (have done / not yet)',
+} as const;
+/** Skipped for the whole tense (both polarities) in rules.yaml. */
+const tenseSkipped = (sw: string, tense: (typeof TENSES)[number]) =>
+  !!skipReason(rules, sw, { tense, polarity: 'pos' }) &&
+  !!skipReason(rules, sw, { tense, polarity: 'neg' });
+
+test('every verb the app conjugates is there, in all four tenses, in order (less any it skips)', () => {
   expect(verbs.length).toBeGreaterThan(40);
   for (const { verb } of verbs) {
     const s = section(md, verb.sw);
     expect(s, verb.sw).toBeDefined();
-    expect(tableHeadings(s!), verb.sw).toEqual([
-      'Present (now)',
-      'Past',
-      'Future',
-      'Perfect (have done / not yet)',
-    ]);
+    expect(tableHeadings(s!), verb.sw).toEqual(
+      TENSES.filter((t) => !tenseSkipped(verb.sw, t)).map((t) => TITLES[t])
+    );
   }
 });
 
@@ -65,16 +73,19 @@ test('every form the app can show is in it, with its English and parts, for all 
   let checked = 0;
   for (const { verb } of verbs) {
     const s = section(md, verb.sw)!;
-    expect(rows(s), verb.sw).toHaveLength(
-      TENSES.length * rules.subjects.length
-    );
+    const tables = TENSES.filter((t) => !tenseSkipped(verb.sw, t)).length;
+    expect(rows(s), verb.sw).toHaveLength(tables * rules.subjects.length);
     for (const pattern of patterns) {
       const parts = conjugate(rules, pattern, verb)
         .parts.map((p) => p.text)
         .join('·');
-      expect(s, `${verb.sw} ${pattern.id}`).toContain(
-        `**${parts}** | ${english(rules, pattern, verb)} |`
-      );
+      const cell = `**${parts}** | ${english(rules, pattern, verb)} |`;
+      if (skipReason(rules, verb.sw, pattern)) {
+        // Never shown in the app, so not in the tables either.
+        expect(s, `${verb.sw} ${pattern.id}`).not.toContain(cell);
+        continue;
+      }
+      expect(s, `${verb.sw} ${pattern.id}`).toContain(cell);
       checked++;
     }
   }
@@ -155,10 +166,39 @@ describe('✅ means the whole table was confirmed', () => {
     );
   });
 
-  test('the count covers every table', () => {
-    const all = md.match(/^### /gm)!.length;
+  test('the count covers every table (a tense that is not used is not a table)', () => {
+    const all = md.match(/^### (✅|⬜) /gm)!.length;
     const ticked = md.match(/^### ✅/gm)?.length ?? 0;
     expect(md).toContain(`**${ticked} of ${all} tables checked.**`);
+  });
+});
+
+describe('tenses and polarities rules.yaml skips are shown as not used, with the reason', () => {
+  test.each([
+    ['kutaka', /nimetaka and sijataka are grammatical/i],
+    ['kuhitaji', /nimehitaji and sijahitaji are grammatical/i],
+  ])('%s: no perfect table, just the reason', (sw, reason) => {
+    const s = section(md, sw)!;
+    expect(s).not.toMatch(/^### (✅|⬜) Perfect/m);
+    expect(s).toMatch(/^### Perfect \(have done \/ not yet\): not used$/m);
+    expect(s).toMatch(reason);
+  });
+
+  test.each([
+    [
+      'kupenda',
+      'Sijapenda is rare.',
+      '**ni·me·penda** | I like it (now) |  |  |',
+    ],
+    [
+      'kuishi',
+      'Sijaishi is odd.',
+      '**ni·me·ishi** | I have lived (there) |  |  |',
+    ],
+  ])('%s: the perfect positive only', (sw, reason, row) => {
+    const s = section(md, sw)!;
+    expect(s).toContain(`> Negative not used: ${reason}`);
+    expect(s).toContain(row);
   });
 });
 
@@ -188,9 +228,18 @@ test('a new verb card adds its four tables by itself', () => {
   expect(s).toContain("**ha·tu·ku·cheza** | We didn't play |");
 });
 
-test("Claude's open questions are at the top, numbered", () => {
-  expect(fixtures.questions.length).toBeGreaterThan(0);
-  const top = md.slice(0, md.indexOf('\nVerbs: '));
-  expect(top).toContain('## Questions from Claude');
-  fixtures.questions.forEach((q, i) => expect(top).toContain(`${i + 1}. ${q}`));
+describe("Claude's open questions", () => {
+  test('appear at the top, numbered', () => {
+    const data = structuredClone(fixtures);
+    data.questions = ['Is sijala right?', 'Is sikwenda right?'];
+    const out = renderForms(rules, data, decks);
+    const top = out.slice(0, out.indexOf('\nVerbs: '));
+    expect(top).toContain('## Questions from Claude');
+    expect(top).toContain('1. Is sijala right?\n2. Is sikwenda right?');
+  });
+
+  test('none left (all answered), so no section', () => {
+    expect(fixtures.questions).toEqual([]);
+    expect(md).not.toContain('## Questions from Claude');
+  });
 });
