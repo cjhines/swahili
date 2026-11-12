@@ -85,11 +85,17 @@ export const completeQueue = (
 ) => shuffle(items, random);
 
 /** What Practice would offer right now, for the setup screen and the "nothing due" message. */
+export type PracticeSummary = {
+  due: number;
+  new: number;
+  nextDueAt: Date | undefined;
+};
+
 export const practiceSummary = (
   items: readonly ReviewItem[],
   stateOf: StateOf,
   now: Date
-) => {
+): PracticeSummary => {
   let due = 0;
   let fresh = 0;
   let nextDueAt: Date | undefined;
