@@ -8,8 +8,8 @@ have. That’s 3,040 forms, each with its English and its parts
 (*ha·tu·ku·soma*). Each verb also shows what its vocabulary card says: meaning, stem, note,
 example. Verbs the app leaves out of Nani na Lini? are listed too, with the reason.
 
-Please check every table, and say which forms or English are wrong. ✅ means Chris’s tutor
-(or his grammar sheets) has already confirmed that whole table.
+Please check every table, and say which forms or English are wrong. ✅ marks a table
+that has already been confirmed.
 
 **4 of 202 tables checked.**
 
@@ -304,8 +304,6 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 - Example: *Sielewi.* I don't understand.
 
 ### ⬜ Present (now)
-
-> The core-verbs list gives sielewi, I don't understand.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -768,8 +766,6 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 | they (N-class) | **zi·na·ku·ja** | They (N-class) are coming | **ha·zi·j·i** | They (N-class) are not coming |
 
 ### ⬜ Past
-
-> The core-verbs list gives nilikuja.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -1470,7 +1466,7 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 ### ⬜ Future
 
-> Confirmed by Chris's tutor: nitakunywa. The rest still needs checking.
+> Chris's tutor confirmed nitakunywa; the rest still needs checking.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -1734,7 +1730,7 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 ## kuosha · to wash
 
-**Not in the app.** A test verb with no card: fixtures.yaml uses it to check the rules, so its tables still count.
+**Not in the app.** A test verb with no card: fixtures.yaml uses it to check the rules.
 
 ### ⬜ Present (now)
 
@@ -2220,7 +2216,7 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 ## kusoma · to read
 
-**Not in the app.** A test verb with no card: fixtures.yaml uses it to check the rules, so its tables still count.
+**Not in the app.** A test verb with no card: fixtures.yaml uses it to check the rules.
 
 ### ⬜ Present (now)
 
@@ -2607,7 +2603,7 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 - Stem: *wa*. One syllable, so it keeps ku-: ninakuwa · nilikuwa · nitakuwa · nimekuwa
 - Note: In the present, am/is/are is ni, not kuwa: mimi ni mwalimu, I'm a teacher. Ninakuwa means I'm becoming.
 
-**Not in Nani na Lini?** Its present isn't "am/is/are" (that's ni: mimi ni mwalimu; ninakuwa is "I'm becoming"), so the English would mislead. Have / don't have covers kuwa na. The forms below are the ones its card or the tutor gave.
+**Not in Nani na Lini?** Its present isn't "am/is/are" (that's ni: mimi ni mwalimu; ninakuwa is "I'm becoming"), so the English would mislead. Have / don't have covers kuwa na.
 
 ### ✅ Present (now)
 
@@ -2834,7 +2830,7 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 ### ⬜ Present (now)
 
-> Textbook forms (the core-verbs list also gives ninakwenda). Everyday speech also says ninaenda, nilienda, nimeenda.
+> Textbook forms. Everyday speech also says ninaenda, nilienda, nimeenda.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |

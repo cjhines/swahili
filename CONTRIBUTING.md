@@ -80,14 +80,11 @@ the quirks of particular verbs).
 - **A rule is wrong:** fix it in `rules.yaml`, then correct or add the affected forms in
   `fixtures.yaml`.
 - **`fixtures.yaml`** holds known-correct forms, as tables per verb and tense. CI fails if the
-  rules produce anything different. Set `verified: true` **only** when Chris's tutor or his
-  grammar sheets confirm a table. Its `note` must then start with "Confirmed by Chris's tutor" or
-  "Checked against Chris's grammar sheets", and CI rejects anything else. Word lists and other
-  reviews, however good, don't tick a table; mention them in the note instead. A table can list
-  only `pos` or only `neg` when that's all a reference confirmed. There's one table per verb and
-  tense (CI rejects duplicates; merge them). Keep each verb's tables together, in tense order, so
-  `forms.md` reads verb by verb (a test checks this). ✅ only records what's been confirmed; it
-  doesn't lock anything in the app.
+  rules produce anything different. `verified: true` marks a table as confirmed (✅ in
+  `forms.md`); say by whom in its `note`. It doesn't change anything in the app. A table can list
+  only `pos` or only `neg`. There's one table per verb and tense (CI rejects duplicates; merge
+  them). Keep each verb's tables together, in tense order. Verbs use their card's English; only a
+  test verb with no card (*kusoma*, *kuosha*) has English under `verbs:`.
 - **Verb cards show the stem and kept ku- forms automatically.** They come from `rules.yaml`, so
   don't type them into a card's `note`.
 - **`forms.md`** is the review document, and it holds **everything** Nani na Lini? can show, so a

@@ -222,19 +222,9 @@ show it ("One syllable, so it keeps ku-: ninakuwa · nilikuwa · nitakuwa · nim
 from the grammar engine (`src/nani/facts.ts`), never typed by hand, so a card can't contradict
 `rules.yaml`.
 
-**Tutor review (2026-11-11).** Chris's tutor reviewed the verbs deck. The result:
-
-- *kuwa* and *kunywa* got their stems shown and their kept-*ku-* forms.
-- *kuwa* got a note that "am/is/are" is *ni*.
-- *kuita* became "to call / to call out" (the tutor's "call by a name" sense is in its note), with the example *Wanamwita Chris*, linked to
-  its passive *kuitwa*.
-- *kuonana* became "to see each other", and *kukutana* ("to meet") was added.
-- *kuishi* and *kukaa* got notes that separate them.
-- A *kuwa na* card was added.
-- *kuonana* joined *kuwa* outside Nani na Lini?, because it's reciprocal.
-
-Every point is pinned by a test in `src/content/tutor.node.test.ts`. The forms the tutor gave are
-**verified** fixtures, noted as the tutor's.
+The verbs deck's content (meanings, notes, examples, kept forms) is pinned by
+`src/content/verbs.node.test.ts`, and the English Nani na Lini? builds from it by
+`src/nani/english.node.test.ts`.
 
 - `alt` lists other accepted Swahili forms, such as `alt: [alfu moja]` for *elfu moja*. They're
   shown on the answer side.
@@ -304,17 +294,17 @@ They cover a regular verb in full, have / don't have, one-syllable verbs (*kula*
 a verb not ending in *-a* (*kujibu*), and a vowel-initial verb (*kuosha*), plus English prompts.
 
 CI fails if the engine disagrees with **any** fixture, verified or not, and points at the
-file:line. Claude writes the fixtures; Chris checks each table against his sheets, and it's marked
-`verified: true`. **`forms.md`** (`npm run nani:forms`, kept current by CI) is the review
+file:line. A confirmed table is marked `verified: true`, with a note saying by whom. Verbs use
+their card's English; only test verbs with no card have English in `fixtures.yaml`. **`forms.md`** (`npm run nani:forms`, kept current by CI) is the review
 document. It holds **everything** Nani na Lini? can show, so one review covers it all:
 - every verb card in all four tenses, all eight subjects, positive and negative, with English and dotted parts
 - have / don't have
 - what each verb's card says (meaning, stem, kept forms, note, example)
 - the verbs left out, with the `why` from `rules.yaml`
-- Claude's open `questions` from `fixtures.yaml`
+- any open `questions` from `fixtures.yaml`
 
 A new verb card adds its tables by itself. A table is ✅ only when a verified fixture covers all of
-it. ✅ is a record of what's been confirmed; it never locks anything in the app.
+it. ✅ is a record; it never changes anything in the app.
 
 ### ID rules, enforced by `npm run decks:check` in CI
 

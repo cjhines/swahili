@@ -24,7 +24,7 @@ if (errors.length) {
   // Only meaningful once everything parses: a file that failed would look like deleted IDs.
   problems.push(...checkIds(ids, read(LOCK_PATH)));
 
-  const result = checkFixtures(rules.data!, fixtures.data!, {
+  const result = checkFixtures(rules.data!, fixtures.data!, decks, {
     path: fixtures.path,
     at: fixtures.at,
   });
@@ -57,6 +57,6 @@ console.log(
 console.log(
   `✓ Nani na Lini?: ${ids.length - cards} patterns; all ${tables} fixture tables match the rules` +
     (unverified.length
-      ? ` (${unverified.length} not yet checked against the grammar sheets).`
+      ? ` (${unverified.length} not yet confirmed).`
       : ', all checked.')
 );

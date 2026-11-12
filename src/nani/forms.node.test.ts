@@ -1,32 +1,19 @@
 // @vitest-environment node
 //
-// forms.md is the review document: it must hold EVERY form Nani na Lini? can show, so a review
-// covers everything in one go and nothing is drip-fed. Checked against the real decks and rules.
+// forms.md, the review document: it must hold every form Nani na Lini? can show, so one review
+// covers everything.
 import { readFileSync } from 'node:fs';
-import { beforeAll, describe, expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 import { conjugate, skipReason, verbInfo } from './conjugate.ts';
 import { english } from './english.ts';
 import { FORMS_PATH, renderForms } from './forms.ts';
 import { allPatterns, TENSES } from './patterns.ts';
-import type { NaniFixtures, NaniRules } from './schema.ts';
-import { loadContent } from '../content/node/content.ts';
+import { realContent } from '../content/node/real-content.ts';
 import type { VocabDeck } from '../content/schema.ts';
-import { naniVerbs, type VerbCard } from '../session/start.ts';
 
-let rules: NaniRules;
-let fixtures: NaniFixtures;
-let decks: VocabDeck[];
-let verbs: VerbCard[];
-let md: string;
-beforeAll(() => {
-  const content = loadContent(process.cwd());
-  rules = content.rules.data!;
-  fixtures = content.fixtures.data!;
-  decks = content.decks;
-  verbs = naniVerbs(decks, rules);
-  md = renderForms(rules, fixtures, decks);
-});
+const { decks, rules, fixtures, naniVerbs: verbs } = realContent();
+const md = renderForms(rules, fixtures, decks);
 
 /** The "## kusoma · to read" section, up to the next "## ". */
 const section = (text: string, sw: string) => {
@@ -144,7 +131,7 @@ describe('✅ means the whole table was confirmed', () => {
     const kunywa = section(md, 'kunywa')!;
     expect(kunywa).toMatch(/^### ⬜ Future$/m);
     expect(kunywa).toContain(
-      "> Confirmed by Chris's tutor: nitakunywa. The rest still needs checking."
+      "> Chris's tutor confirmed nitakunywa; the rest still needs checking."
     );
   });
 
@@ -154,7 +141,7 @@ describe('✅ means the whole table was confirmed', () => {
       (t) => t.verb === 'kula' && t.tense === 'past'
     )!;
     table.verified = true;
-    table.note = "Confirmed by Chris's tutor.";
+    table.note = 'Confirmed.';
     expect(section(renderForms(rules, data, decks), 'kula')).toMatch(
       /^### ✅ Past$/m
     );
@@ -228,18 +215,18 @@ test('a new verb card adds its four tables by itself', () => {
   expect(s).toContain("**ha·tu·ku·cheza** | We didn't play |");
 });
 
-describe("Claude's open questions", () => {
+describe('open questions', () => {
   test('appear at the top, numbered', () => {
     const data = structuredClone(fixtures);
     data.questions = ['Is sijala right?', 'Is sikwenda right?'];
     const out = renderForms(rules, data, decks);
     const top = out.slice(0, out.indexOf('\nVerbs: '));
-    expect(top).toContain('## Questions from Claude');
+    expect(top).toContain('## Open questions');
     expect(top).toContain('1. Is sijala right?\n2. Is sikwenda right?');
   });
 
   test('none left (all answered), so no section', () => {
     expect(fixtures.questions).toEqual([]);
-    expect(md).not.toContain('## Questions from Claude');
+    expect(md).not.toContain('## Open questions');
   });
 });

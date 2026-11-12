@@ -21,8 +21,10 @@ const MODULES = {
     const fixtures = loadNaniFixtures(root);
     if (!rules.data || !fixtures.data)
       return { data: undefined, errors: [...rules.errors, ...fixtures.errors] };
-    // Never ship grammar that contradicts the known-correct forms.
-    const { errors } = checkFixtures(rules.data, fixtures.data, {
+    // Never ship grammar that contradicts the known-correct forms. (Deck errors are reported by
+    // virtual:decks; the fixtures only need the verb cards' English.)
+    const { decks } = parseDecks(loadDeckSources(root));
+    const { errors } = checkFixtures(rules.data, fixtures.data, decks, {
       path: fixtures.path,
       at: fixtures.at,
     });

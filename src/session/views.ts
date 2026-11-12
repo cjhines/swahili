@@ -10,7 +10,7 @@ import {
 } from '../content/display.ts';
 import { conjugate } from '../nani/conjugate.ts';
 import { english } from '../nani/english.ts';
-import { verbFacts, type VerbFacts } from '../nani/facts.ts';
+import { keptLine, verbFacts } from '../nani/facts.ts';
 import { allPatterns } from '../nani/patterns.ts';
 import type { NaniRules } from '../nani/schema.ts';
 
@@ -25,11 +25,6 @@ export type CardView = {
 };
 
 export type ViewOf = (item: ReviewItem) => CardView | undefined;
-
-/** "One syllable, so it keeps ku-: ninakuwa · nilikuwa · nitakuwa · nimekuwa". */
-export const keptLine = ({ prefix, kept }: VerbFacts) =>
-  kept &&
-  `${kept.oneSyllable ? 'One syllable, so it keeps' : 'Keeps'} ${prefix}-: ${kept.forms.join(' · ')}`;
 
 /**
  * A vocabulary card. Verbs also show their stem, and, if they keep their ku-, the forms that show

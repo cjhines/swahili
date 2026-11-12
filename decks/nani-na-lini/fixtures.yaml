@@ -2,100 +2,22 @@
 #
 # Each table lists one verb in one tense, subjects in rules.yaml order:
 #   I, you, he/she, we, you (plural), they, it (N-class), they (N-class)
-# unless `subjects` picks a few.
+# unless `subjects` picks a few. One table per verb and tense; keep a verb's tables together, in
+# tense order, so forms.md reads verb by verb.
 #
-# Written by Claude. `verified: true` ONLY when Chris's tutor or his grammar sheets confirm a table,
-# and its note must say which ("Confirmed by Chris's tutor" / "Checked against Chris's grammar
-# sheets"); CI enforces that. Word lists, however good, don't count.
-# ✅ only records what's been confirmed; every tense is open in the app regardless.
-# Readable version, with English and the part breakdown: forms.md (`npm run nani:forms`).
-#
-# 2026-11-12: a second review of forms.md found every conjugation correct, including the
-# one-syllable irregulars (sili, sikula, sijala, sinywi, sikwenda, sijaenda, siji, hajaja) and the
-# vowel and -i/-u endings (siiti, siishi, sihitaji, sijibu, siongei). By that reviewer's own
-# standard it doesn't tick tables: ✅ still waits for the tutor or the grammar sheets.
-# A follow-up the same day: kuacha's sentences say "quit", not "stop"; kunywa and kuja perfect
-# get the same textbook-versus-Nairobi warning as kula; and each verb's tables sit together.
-# Then a full review of all 204 tables in forms.md: not one wrong Swahili form, including vowel
-# stems (siiti, siachi, huulizi), -i/-u stems (sisubiri, sijibu), sikukutana (the second ku is the
-# stem's) and the one-syllable verbs and kwenda. Only English changed (the verb cards' `tenses`),
-# plus `skip` in rules.yaml for perfects you'll rarely hear. Again, that doesn't tick tables.
+# `verified: true` marks a table as confirmed (✅ in forms.md); the note says by whom. It doesn't
+# change anything in the app. Readable version of everything: forms.md (`npm run nani:forms`).
 
-# Things Claude wasn't sure of, printed at the top of forms.md. Remove each once it's answered.
-# (The three from 2026-11-12 were answered by the full review the same day.)
+# Open questions for the reviewer, printed at the top of forms.md.
 questions: []
 
+# English for verbs that have no card. Every other verb uses its card's English.
 verbs:
   kusoma: { base: read, past: read, participle: read, ing: reading }
-  kula: { base: eat, past: ate, participle: eaten, ing: eating }
-  kunywa: { base: drink, past: drank, participle: drunk, ing: drinking }
-  kwenda: { base: go, past: went, participle: gone, ing: going }
-  kujibu: { base: answer, past: answered, participle: answered, ing: answering }
   kuosha: { base: wash, past: washed, participle: washed, ing: washing }
-  kujua: { base: know, past: knew, participle: known, ing: knowing, stative: true, third: knows }
-  kuishi: { base: live, past: lived, participle: lived, ing: living, stative: true, third: lives }
-  kuita: { base: call, past: called, participle: called, ing: calling }
-  kutaka: { base: want, past: wanted, participle: wanted, ing: wanting, stative: true, third: wants }
-  kuweza:
-    base: be able
-    past: was able
-    participle: been able
-    ing: being able
-    tenses:
-      present: { pos: can, neg: "can't" }
-      past: { pos: could, neg: "couldn't" }
-      future: { pos: will be able to, neg: "won't be able to" }
-      perfect: { pos: '{have} managed', neg: "{have}n't managed yet" }
-  kuitwa:
-    base: be called
-    past: was called
-    participle: been called
-    ing: being called
-    tenses:
-      present: { pos: '{be} called', neg: '{be} not called' }
-      past: { pos: '{was} called', neg: "{was}n't called" }
-      future: { pos: will be called, neg: "won't be called" }
-      perfect: { pos: '{have} been called', neg: "{have}n't been called yet" }
-  # Chris's tutor: the present isn't "am/is/are" (that's ni: mimi ni mwalimu); ninakuwa means
-  # "I'm becoming".
-  kuwa:
-    base: be
-    past: was
-    participle: been
-    ing: being
-    tenses:
-      present: { pos: '{be} becoming', neg: '{be} not becoming' }
-      past: { pos: '{was}', neg: "{was}n't" }
-      future: { pos: will be, neg: "won't be" }
-      perfect: { pos: '{have} become', neg: "{have}n't become yet" }
-  kuja: { base: come, past: came, participle: come, ing: coming }
-  kuona: { base: see, past: saw, participle: seen, ing: seeing, stative: true, third: sees }
-  kupenda: { base: like, past: liked, participle: liked, ing: liking, stative: true, third: likes }
-  kuelewa:
-    {
-      base: understand,
-      past: understood,
-      participle: understood,
-      ing: understanding,
-      stative: true,
-      third: understands,
-    }
-  kuhitaji: { base: need, past: needed, participle: needed, ing: needing, stative: true, third: needs }
-  kurudi: { base: return, past: returned, participle: returned, ing: returning }
-  kufikiri: { base: think, past: thought, participle: thought, ing: thinking, stative: true, third: thinks }
-  kuuliza: { base: ask, past: asked, participle: asked, ing: asking }
-  kuacha: { base: quit, past: quit, participle: quit, ing: quitting }
-  kuongea: { base: talk, past: talked, participle: talked, ing: talking }
-  kusikia: { base: hear, past: heard, participle: heard, ing: hearing, stative: true, third: hears }
-  kuweka: { base: put, past: put, participle: put, ing: putting }
 
 paradigms:
-  # Confirmed by Chris's tutor (2026-11-11): one-syllable verbs keep ku- in the na, li, ta and
-  # me tenses. Only the forms the tutor gave, so these tables list positives only. The tutor's
-  # nitakunywa is the kunywa future table below, next to the other kunywa tables.
-  #
-  # Each verb's tables sit together, in tense order, so forms.md reads verb by verb (a test
-  # checks this).
+  # kuwa isn't in Nani na Lini?; these are the forms its card shows.
   - verb: kuwa
     tense: present
     subjects: [i]
@@ -193,7 +115,7 @@ paradigms:
     subjects: [i]
     pos: [nitakunywa]
     verified: true
-    note: Confirmed by Chris's tutor.
+    note: Chris's tutor confirmed nitakunywa; the rest still needs checking.
   - verb: kunywa
     tense: perfect
     subjects: [i, heshe]
@@ -209,7 +131,7 @@ paradigms:
     pos: [ninakwenda, anakwenda]
     neg: [siendi, haendi]
     verified: false
-    note: Textbook forms (the core-verbs list also gives ninakwenda). Everyday speech also says ninaenda, nilienda, nimeenda.
+    note: Textbook forms. Everyday speech also says ninaenda, nilienda, nimeenda.
   - verb: kwenda
     tense: past
     subjects: [i, heshe]
@@ -258,8 +180,7 @@ paradigms:
     neg: [sijaosha, hajaosha]
     verified: false
 
-  # From Chris's verbs deck: the famous sijui, a stem ending in -i, and a stem that's all vowels
-  # around one consonant.
+  # The famous sijui, a stem ending in -i, and a stem that's all vowels around one consonant.
   - verb: kujua
     tense: present
     subjects: [i, heshe, we]
@@ -280,9 +201,8 @@ paradigms:
     neg: [siiti, haiti]
     verified: false
 
-  # Core verbs (2026-11-11): one-syllable kuja, a vowel stem (kuona), and stems ending in -i,
-  # which keep it in the present negative (sihitaji, sirudi). The core-verbs list gave
-  # nilikuja and sielewi; a word list isn't a checked reference, so those tables start unticked.
+  # One-syllable kuja, a vowel stem (kuona), and stems ending in -i, which keep it in the present
+  # negative (sihitaji, sirudi).
   - verb: kuja
     tense: present
     subjects: [i, heshe]
@@ -295,7 +215,6 @@ paradigms:
     pos: [nilikuja, alikuja]
     neg: [sikuja, hakuja]
     verified: false
-    note: The core-verbs list gives nilikuja.
   - verb: kuja
     tense: perfect
     subjects: [i, heshe]
@@ -309,7 +228,6 @@ paradigms:
     pos: [ninaelewa, anaelewa]
     neg: [sielewi, haelewi]
     verified: false
-    note: The core-verbs list gives sielewi, I don't understand.
   - verb: kuona
     tense: present
     subjects: [i, heshe]
@@ -329,7 +247,7 @@ paradigms:
     neg: [sirudi, harudi]
     verified: false
 
-  # More everyday verbs (2026-11-11): another stem ending in -i (sifikiri), and vowel stems.
+  # Another stem ending in -i (sifikiri), and vowel stems.
   - verb: kufikiri
     tense: present
     subjects: [i, heshe]
@@ -382,22 +300,21 @@ english:
   - { verb: kuitwa, subject: we, tense: past, polarity: pos, en: We were called }
   - { verb: kuitwa, subject: heshe, tense: past, polarity: neg, en: "He/she wasn't called" }
   - { verb: kuitwa, subject: it, tense: present, polarity: pos, en: It (N-class) is called }
-  # kuwa, as Chris's tutor explained it (it's excluded from Nani na Lini?, but its card shows these forms).
+  # kuwa: not in Nani na Lini?, but its card shows these forms.
   - { verb: kuwa, subject: i, tense: present, polarity: pos, en: I am becoming }
   - { verb: kuwa, subject: i, tense: past, polarity: pos, en: I was }
   - { verb: kuwa, subject: they, tense: future, polarity: neg, en: "They won't be" }
-  # Core verbs: stative ones take the simple present.
+  # More stative verbs.
   - { verb: kuona, subject: heshe, tense: present, polarity: pos, en: He/she sees }
   - { verb: kupenda, subject: i, tense: present, polarity: neg, en: "I don't like" }
   - { verb: kuelewa, subject: i, tense: present, polarity: neg, en: "I don't understand" }
   - { verb: kuhitaji, subject: heshe, tense: present, polarity: pos, en: He/she needs }
   - { verb: kuja, subject: we, tense: past, polarity: pos, en: We came }
-  # More everyday verbs: stative ones, and "put", whose past is spelled like its base.
+  # Stative kusikia, and "put", whose past is spelled like its base.
   - { verb: kusikia, subject: heshe, tense: present, polarity: pos, en: He/she hears }
   - { verb: kufikiri, subject: i, tense: present, polarity: neg, en: "I don't think" }
-  - { verb: kuweka, subject: we, tense: past, polarity: pos, en: We put }
-  - { verb: kuweka, subject: we, tense: present, polarity: pos, en: We are putting }
-  # kuacha: its sentences say "quit". "Stopping" sounds like coming to a halt (kusimama), and
-  # "leaving" like going away (kuondoka).
+  - { verb: kuweka, subject: we, tense: past, polarity: pos, en: We put (something) }
+  - { verb: kuweka, subject: we, tense: present, polarity: pos, en: We are putting (something) }
+  # kuacha says "quit": "stopping" would read as coming to a halt (kusimama).
   - { verb: kuacha, subject: i, tense: present, polarity: pos, en: I am quitting }
   - { verb: kuacha, subject: we, tense: past, polarity: neg, en: "We didn't quit" }

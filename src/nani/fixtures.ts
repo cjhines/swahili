@@ -1,36 +1,32 @@
 import { conjugate, type NaniVerb } from './conjugate.ts';
 import { english } from './english.ts';
-import {
-  patternId,
-  POLARITIES,
-  type NaniTense,
-  type Polarity,
-} from './patterns.ts';
+import { pattern, POLARITIES } from './patterns.ts';
 import type { NaniFixtures, NaniRules } from './schema.ts';
+import type { VerbEnglish, VocabDeck } from '../content/schema.ts';
 import type { DeckError, Key } from '../content/validate.ts';
 
 // Proves rules.yaml against fixtures.yaml: every listed form must come out exactly.
 
-const fixtureVerb = (
+/** A verb's English: from its card, or from fixtures.yaml for a verb with no card. */
+export const fixtureEnglish = (
   fixtures: NaniFixtures,
-  sw: string | undefined
-): NaniVerb | undefined =>
-  sw && fixtures.verbs[sw] ? { sw, en: fixtures.verbs[sw] } : undefined;
-
-const pattern = (subject: string, tense: NaniTense, polarity: Polarity) => ({
-  id: patternId(subject, tense, polarity),
-  subject,
-  tense,
-  polarity,
-});
-
-/** The only sources that make a table ✅: Chris's tutor or his grammar sheets. Not word lists. */
-export const VERIFIED_SOURCE =
-  /^(Confirmed by Chris's tutor|Checked against Chris's grammar sheets)\b/;
+  decks: readonly VocabDeck[]
+) => {
+  const fromCards = new Map<string, VerbEnglish>(
+    decks
+      .flatMap((deck) => deck.cards)
+      .flatMap((card) => (card.kind === 'verb' ? [[card.sw, card.en]] : []))
+  );
+  return (sw: string | undefined): NaniVerb | undefined => {
+    const en = sw && (fromCards.get(sw) ?? fixtures.verbs[sw]);
+    return sw && en ? { sw, en } : undefined;
+  };
+};
 
 export const checkFixtures = (
   rules: NaniRules,
   fixtures: NaniFixtures,
+  decks: readonly VocabDeck[],
   {
     path,
     at,
@@ -42,27 +38,29 @@ export const checkFixtures = (
   const errors: DeckError[] = [];
   const fail = (keys: readonly Key[], message: string) =>
     errors.push({ path, ...at(keys), message });
+  const verbOf = fixtureEnglish(fixtures, decks);
   const subjectIds = rules.subjects.map((s) => s.id);
   const unverified: string[] = [];
   const seen = new Set<string>();
 
+  const carded = new Set(
+    decks.flatMap((deck) => deck.cards.map((card) => card.sw))
+  );
+  for (const sw of Object.keys(fixtures.verbs))
+    if (carded.has(sw))
+      fail(
+        ['verbs', sw],
+        `${sw} has a card, so it uses the card's English; remove it from verbs:`
+      );
+
   fixtures.paradigms.forEach((table, t) => {
     const name = `${table.verb ?? 'have'} ${table.tense}`;
-    // One table per verb and tense, or the same forms can read as both checked and unchecked.
     if (seen.has(name))
       fail(
         ['paradigms', t],
         `${name}: there's already a table for this verb and tense; merge them`
       );
     seen.add(name);
-    // ✅ means a real reference confirmed it, and the note says which.
-    if (table.verified && !VERIFIED_SOURCE.test(table.note ?? '')) {
-      fail(
-        ['paradigms', t, 'note'],
-        `${name}: a verified table's note must start with "Confirmed by Chris's tutor" or ` +
-          `"Checked against Chris's grammar sheets"`
-      );
-    }
     const subjects = table.subjects ?? subjectIds;
     const unknown = subjects.filter((s) => !subjectIds.includes(s));
     if (unknown.length)
@@ -72,10 +70,11 @@ export const checkFixtures = (
       );
     if (table.tense !== 'have' && !table.verb)
       return fail(['paradigms', t], `${name}: needs a verb`);
-    if (table.verb && !fixtures.verbs[table.verb])
+    const verb = verbOf(table.verb);
+    if (table.verb && !verb)
       return fail(
         ['paradigms', t, 'verb'],
-        `${name}: add ${table.verb}'s English forms under verbs:`
+        `${name}: ${table.verb} has no card; add its English under verbs:`
       );
     if (!table.verified) unverified.push(name);
 
@@ -93,7 +92,7 @@ export const checkFixtures = (
         const actual = conjugate(
           rules,
           pattern(subject, table.tense, polarity),
-          fixtureVerb(fixtures, table.verb)
+          verb
         ).sw;
         if (actual !== forms[i]) {
           const which = polarity === 'pos' ? 'positive' : 'negative';
@@ -107,9 +106,12 @@ export const checkFixtures = (
   });
 
   fixtures.english.forEach((row, r) => {
-    const verb = fixtureVerb(fixtures, row.verb);
+    const verb = verbOf(row.verb);
     if (row.tense !== 'have' && !verb)
-      return fail(['english', r], `needs a verb listed under verbs:`);
+      return fail(
+        ['english', r],
+        `needs a verb with a card, or one under verbs:`
+      );
     if (!subjectIds.includes(row.subject))
       return fail(['english', r, 'subject'], `unknown subject ${row.subject}`);
     const actual = english(

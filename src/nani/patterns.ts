@@ -25,15 +25,21 @@ export const patternId = (
   polarity: Polarity
 ) => `nani-${subject}-${tense}-${polarity}`;
 
+export const pattern = (
+  subject: string,
+  tense: NaniTense,
+  polarity: Polarity
+): Pattern => ({
+  id: patternId(subject, tense, polarity),
+  subject,
+  tense,
+  polarity,
+});
+
 /** Every pattern: subjects × (4 tenses + have) × positive/negative. 80 with 8 subjects. */
 export const allPatterns = (rules: Pick<NaniRules, 'subjects'>): Pattern[] =>
   rules.subjects.flatMap((subject) =>
     NANI_TENSES.flatMap((tense) =>
-      POLARITIES.map((polarity) => ({
-        id: patternId(subject.id, tense, polarity),
-        subject: subject.id,
-        tense,
-        polarity,
-      }))
+      POLARITIES.map((polarity) => pattern(subject.id, tense, polarity))
     )
   );

@@ -1,5 +1,5 @@
 import { conjugate, verbInfo } from './conjugate.ts';
-import { patternId, TENSES } from './patterns.ts';
+import { pattern, TENSES } from './patterns.ts';
 import type { NaniRules } from './schema.ts';
 
 export type VerbFacts = {
@@ -28,16 +28,13 @@ export const verbFacts = (rules: NaniRules, sw: string): VerbFacts => {
   const first = rules.subjects[0]!.id; // "I", first in rules.yaml
   const forms = TENSES.map(
     (tense) =>
-      conjugate(
-        rules,
-        {
-          id: patternId(first, tense, 'pos'),
-          subject: first,
-          tense,
-          polarity: 'pos',
-        },
-        { sw, en: { base: '' } }
-      ).sw
+      conjugate(rules, pattern(first, tense, 'pos'), { sw, en: { base: '' } })
+        .sw
   );
   return { stem, prefix, kept: { oneSyllable, forms } };
 };
+
+/** "One syllable, so it keeps ku-: ninakuwa · nilikuwa · nitakuwa · nimekuwa". */
+export const keptLine = ({ prefix, kept }: VerbFacts) =>
+  kept &&
+  `${kept.oneSyllable ? 'One syllable, so it keeps' : 'Keeps'} ${prefix}-: ${kept.forms.join(' · ')}`;

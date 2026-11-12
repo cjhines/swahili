@@ -1,29 +1,22 @@
 // @vitest-environment node
+//
+// The grammar engine against the real rules.yaml: forms, their parts, and the English.
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
 
 import { conjugate, verbInfo, type NaniVerb } from './conjugate.ts';
 import { english } from './english.ts';
-import { verbFacts } from './facts.ts';
-import { checkFixtures } from './fixtures.ts';
-import {
-  allPatterns,
-  patternId,
-  type NaniTense,
-  type Polarity,
-} from './patterns.ts';
-import { NaniRules, type NaniFixtures } from './schema.ts';
-import { loadNaniFixtures, loadNaniRules } from '../content/node/load.ts';
+import { keptLine, verbFacts } from './facts.ts';
+import { allPatterns, pattern as p } from './patterns.ts';
+import { NaniRules } from './schema.ts';
+import { loadNaniRules } from '../content/node/load.ts';
 import { parseYaml } from '../content/validate.ts';
-import { keptLine } from '../session/views.ts';
 
 let rules: NaniRules;
-let fixtures: ReturnType<typeof loadNaniFixtures>;
 beforeAll(() => {
   const loaded = loadNaniRules(process.cwd());
   if (!loaded.data) throw new Error(JSON.stringify(loaded.errors));
   rules = loaded.data;
-  fixtures = loadNaniFixtures(process.cwd());
 });
 
 const soma: NaniVerb = {
@@ -39,23 +32,8 @@ const kwenda: NaniVerb = {
   en: { base: 'go', past: 'went', participle: 'gone', ing: 'going' },
 };
 
-const p = (subject: string, tense: NaniTense, polarity: Polarity) => ({
-  id: patternId(subject, tense, polarity),
-  subject,
-  tense,
-  polarity,
-});
 const breakdown = (form: ReturnType<typeof conjugate>) =>
   form.parts.map((part) => `${part.text}:${part.label}`);
-
-test('every fixture in fixtures.yaml comes out exactly', () => {
-  expect(fixtures.errors).toEqual([]);
-  const result = checkFixtures(rules, fixtures.data!, {
-    path: fixtures.path,
-    at: fixtures.at,
-  });
-  expect(result.errors).toEqual([]);
-});
 
 describe('the part breakdown', () => {
   test('ha · tu · ku · soma = not · we · past · read', () => {
@@ -155,52 +133,6 @@ describe('patterns', () => {
       /needs a verb/
     );
     expect(() => english(rules, p('i', 'past', 'pos'))).toThrow(/needs a verb/);
-  });
-});
-
-describe('checkFixtures', () => {
-  /** A table by verb and tense, in a copy of the fixtures that a test can tamper with. */
-  const tableIn = (data: NaniFixtures, verb: string, tense: string) => {
-    const table = data.paradigms.find(
-      (t) => t.verb === verb && t.tense === tense && t.pos && t.neg
-    );
-    if (!table) throw new Error(`no full ${verb} ${tense} table`);
-    return table as typeof table & { pos: string[]; neg: string[] };
-  };
-
-  test('a wrong fixture is reported with its line', () => {
-    const data = structuredClone(fixtures.data!) as NaniFixtures;
-    tableIn(data, 'kusoma', 'present').neg[3] = 'hatusomu';
-    const result = checkFixtures(rules, data, {
-      path: fixtures.path,
-      at: fixtures.at,
-    });
-    expect(result.errors).toEqual([
-      expect.objectContaining({
-        path: 'decks/nani-na-lini/fixtures.yaml',
-        line: expect.any(Number),
-        message:
-          'kusoma present negative (we): fixture says hatusomu, rules give hatusomi',
-      }),
-    ]);
-  });
-
-  test('lists the tables not yet verified', () => {
-    const data = structuredClone(fixtures.data!) as NaniFixtures;
-    data.paradigms.forEach((table) => (table.verified = true));
-    tableIn(data, 'kusoma', 'past').verified = false;
-    expect(
-      checkFixtures(rules, data, { path: '', at: () => ({}) }).unverified
-    ).toEqual(['kusoma past']);
-  });
-
-  test('a table with the wrong number of forms is reported', () => {
-    const data = structuredClone(fixtures.data!) as NaniFixtures;
-    tableIn(data, 'kusoma', 'present').pos.pop();
-    expect(
-      checkFixtures(rules, data, { path: '', at: () => ({}) }).errors[0]!
-        .message
-    ).toMatch(/7 forms for 8 subjects/);
   });
 });
 
