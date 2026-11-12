@@ -86,8 +86,8 @@ the quirks of particular verbs).
   reviews, however good, don't tick a table; mention them in the note instead. A table can list
   only `pos` or only `neg` when that's all a reference confirmed. There's one table per verb and
   tense (CI rejects duplicates; merge them). Keep each verb's tables together, in tense order, so
-  `forms.md` reads verb by verb (a test checks this). A tense isn't offered in the app until all
-  its tables are verified.
+  `forms.md` reads verb by verb (a test checks this). ✅ only records what's been confirmed; it
+  doesn't lock anything in the app.
 - **Verb cards show the stem and kept ku- forms automatically.** They come from `rules.yaml`, so
   don't type them into a card's `note`.
 - **`forms.md`** is the review document, and it holds **everything** Nani na Lini? can show, so a

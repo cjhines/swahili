@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { normalizePath, type Plugin } from 'vite';
 
-import { checkFixtures, verifiedTenses } from '../../nani/fixtures.ts';
+import { checkFixtures } from '../../nani/fixtures.ts';
 import { formatErrors, parseDecks } from '../validate.ts';
 import {
   loadDeckSources,
@@ -27,10 +27,7 @@ const MODULES = {
       at: fixtures.at,
     });
     return {
-      data: {
-        rules: rules.data,
-        verifiedTenses: verifiedTenses(fixtures.data),
-      },
+      data: { rules: rules.data },
       errors,
     };
   },
@@ -41,8 +38,7 @@ const isVirtual = (id: string): id is VirtualId => id in MODULES;
 /**
  * Serves validated content as virtual modules:
  *   import decks from 'virtual:decks'   every vocabulary deck
- *   import nani from 'virtual:nani'     { rules, verifiedTenses }: the Nani na Lini? grammar and
- *                                       which tenses have been checked (fixtures stay out)
+ *   import nani from 'virtual:nani'     { rules }: the Nani na Lini? grammar (fixtures stay out)
  * An invalid file, or rules that contradict a fixture, fails `vite build` (and shows the error
  * overlay in dev) with file:line, so broken content can never be deployed. Editing any of it
  * reloads the page.

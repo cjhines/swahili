@@ -7,7 +7,7 @@
 # Written by Claude. `verified: true` ONLY when Chris's tutor or his grammar sheets confirm a table,
 # and its note must say which ("Confirmed by Chris's tutor" / "Checked against Chris's grammar
 # sheets"); CI enforces that. Word lists, however good, don't count.
-# A tense isn't offered in the app until every table for it is verified.
+# ✅ only records what's been confirmed; every tense is open in the app regardless.
 # Readable version, with English and the part breakdown: forms.md (`npm run nani:forms`).
 #
 # 2026-11-12: a second review of forms.md found every conjugation correct, including the

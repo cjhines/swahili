@@ -1,7 +1,6 @@
 import { conjugate, type NaniVerb } from './conjugate.ts';
 import { english } from './english.ts';
 import {
-  NANI_TENSES,
   patternId,
   POLARITIES,
   type NaniTense,
@@ -127,13 +126,3 @@ export const checkFixtures = (
 
   return { errors, unverified };
 };
-
-/**
- * Tenses whose fixture tables are all verified. Only these are offered in the app: a tense is
- * never taught until its forms have been checked against a grammar reference.
- */
-export const verifiedTenses = (fixtures: NaniFixtures): NaniTense[] =>
-  NANI_TENSES.filter((tense) => {
-    const tables = fixtures.paradigms.filter((table) => table.tense === tense);
-    return tables.length > 0 && tables.every((table) => table.verified);
-  });

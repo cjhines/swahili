@@ -90,8 +90,6 @@ const describe = (setup: SessionSetup, decks: readonly VocabDeck[]) =>
 type Props = {
   decks: readonly VocabDeck[];
   rules: NaniRules;
-  /** Tenses whose forms have been checked against a grammar reference. Only these can be chosen. */
-  verifiedTenses: readonly NaniTense[];
   verbs: readonly VerbCard[];
   stateOf: StateOf;
   resume: ResumableRun | undefined;
@@ -118,7 +116,6 @@ const SettingsIcon = () => (
 export const SetupScreen = ({
   decks,
   rules,
-  verifiedTenses,
   verbs,
   stateOf,
   resume,
@@ -129,7 +126,7 @@ export const SetupScreen = ({
   notices,
 }: Props) => {
   // A verb tense needs verbs to fill it; "have" doesn't.
-  const available = verifiedTenses.filter(
+  const available = TENSES.map((t) => t.value).filter(
     (tense) => tense === 'have' || verbs.length > 0
   );
 
@@ -266,9 +263,6 @@ export const SetupScreen = ({
               <ul>
                 {TENSES.map((tense) => {
                   const open = available.includes(tense.value);
-                  const why = !verifiedTenses.includes(tense.value)
-                    ? 'Not checked against your grammar sheets yet'
-                    : 'Needs verbs in a Vocabulary deck';
                   return (
                     <li key={tense.value}>
                       <label className={`deck-row${open ? '' : ' is-locked'}`}>
@@ -285,7 +279,9 @@ export const SetupScreen = ({
                         <span className="deck-title">
                           {tense.label}
                           <small className="muted">
-                            {open ? tense.example : why}
+                            {open
+                              ? tense.example
+                              : 'Needs verbs in a Vocabulary deck'}
                           </small>
                         </span>
                       </label>
@@ -293,12 +289,6 @@ export const SetupScreen = ({
                   );
                 })}
               </ul>
-              {available.length === 0 && (
-                <p className="setup-locked muted">
-                  Each tense unlocks once its forms have been checked against
-                  your grammar sheets.
-                </p>
-              )}
             </fieldset>
 
             <Choice
@@ -368,9 +358,7 @@ export const SetupScreen = ({
           <p className="setup-status muted">
             {kind === 'vocab'
               ? 'Choose at least one deck.'
-              : available.length === 0
-                ? 'No tenses to practise yet.'
-                : 'Choose at least one tense.'}
+              : 'Choose at least one tense.'}
           </p>
         ) : setup.mode === 'practice' && count === 0 ? (
           <div className="setup-status nothing-due">

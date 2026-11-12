@@ -120,19 +120,15 @@ test('leaving mid-run with the Back button returns to setup and offers to resume
   await expect(page.getByText('1/7')).toBeVisible();
 });
 
-test('Nani na Lini?: the verbs are in, and tenses stay locked until checked', async ({
+test('Nani na Lini?: every tense can be chosen, and a session starts', async ({
   page,
 }) => {
   await page.goto('/swahili/');
-  await expect(page.getByLabel(/^Verbs/)).toBeVisible(); // the new vocabulary deck
+  await expect(page.getByLabel(/^Verbs/)).toBeVisible(); // the vocabulary deck
   await page.getByRole('radio', { name: 'Nani na Lini?' }).check();
-  await expect(page.getByLabel(/^Past/)).toBeVisible();
-  // Whichever tenses are verified in fixtures.yaml are enabled; the rest say why they aren't.
-  const locked = page.getByText('Not checked against your grammar sheets yet');
-  const enabled = await page
-    .locator('.decks input[type="checkbox"]:enabled')
-    .count();
-  expect((await locked.count()) + enabled).toBe(5);
-  if (enabled === 0)
-    await expect(page.getByRole('button', { name: /^Start/ })).toBeDisabled();
+  for (const tense of [/^Present/, /^Past/, /^Future/, /^Perfect/, /^Have/])
+    await expect(page.getByLabel(tense)).toBeEnabled();
+  await expect(page.getByText(/grammar sheets/)).toHaveCount(0);
+  await page.getByRole('button', { name: /^Start/ }).click();
+  await expect(page.getByTestId('flashcard')).toBeVisible();
 });

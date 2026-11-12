@@ -59,8 +59,8 @@ beforeEach(async () => {
 });
 afterEach(() => store.close());
 
-// The real grammar, but with no tense unlocked: vocabulary tests don't need any.
-const noNani: NaniContent = { rules: nani.rules, verifiedTenses: [] };
+// The real grammar.
+const noNani: NaniContent = { rules: nani.rules };
 
 const setup = (
   naniContent: NaniContent = noNani,
@@ -285,37 +285,26 @@ describe('Nani na Lini?', () => {
       },
     ],
   };
-  const unlocked: NaniContent = {
-    rules: nani.rules,
-    verifiedTenses: ['past', 'have'],
-  };
+  const unlocked: NaniContent = { rules: nani.rules };
   const pickNani = async (user: ReturnType<typeof userEvent.setup>) =>
     user.click(screen.getByRole('radio', { name: 'Nani na Lini?' }));
 
-  test('only checked tenses can be chosen; the rest say why', async () => {
+  test('every tense can be chosen, and all are ticked to start with', async () => {
     const user = setup(unlocked, [...decks, verbs]);
     await pickNani(user);
-    expect(screen.getByLabelText(/^Past/)).toBeEnabled();
-    expect(screen.getByLabelText(/^Have/)).toBeEnabled();
-    expect(screen.getByLabelText(/^Present/)).toBeDisabled();
-    expect(
-      screen.getByLabelText(/^Present/).closest('label')
-    ).toHaveTextContent('Not checked against your grammar sheets yet');
-  });
-
-  test('with nothing checked yet, it says so and cannot start', async () => {
-    const user = setup(noNani, [...decks, verbs]);
-    await pickNani(user);
-    expect(
-      screen.getByText(/Each tense unlocks once its forms have been checked/)
-    ).toBeInTheDocument();
-    expect(start()).toBeDisabled();
+    for (const label of [/^Present/, /^Past/, /^Future/, /^Perfect/, /^Have/]) {
+      expect(screen.getByLabelText(label)).toBeEnabled();
+      expect(screen.getByLabelText(label)).toBeChecked();
+    }
+    expect(screen.queryByText(/grammar sheets/)).not.toBeInTheDocument();
+    expect(start()).toBeEnabled();
   });
 
   test('a past-negative run: English prompt, Swahili answer with its breakdown', async () => {
     const user = setup(unlocked, [...decks, verbs]);
     await pickNani(user);
-    await user.click(screen.getByLabelText(/^Have/)); // past only
+    for (const other of [/^Present/, /^Future/, /^Perfect/, /^Have/])
+      await user.click(screen.getByLabelText(other)); // past only
     await user.click(screen.getByRole('radio', { name: 'Negative' }));
     await user.click(screen.getByRole('radio', { name: 'Complete deck' }));
     expect(start()).toHaveTextContent('Start · 8 forms');
@@ -362,7 +351,7 @@ describe('Nani na Lini?', () => {
   });
 
   test('have / don’t have needs no verbs at all', async () => {
-    const user = setup({ rules: nani.rules, verifiedTenses: ['have'] }, decks); // no verbs anywhere
+    const user = setup(unlocked, decks); // no verbs anywhere, so only have / don't have
     await pickNani(user);
     await user.click(screen.getByRole('radio', { name: 'Complete deck' }));
     expect(start()).toHaveTextContent('Start · 16 forms');

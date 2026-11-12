@@ -269,8 +269,7 @@ file, not a code change. It has these sections:
 
 The engine (`src/nani/conjugate.ts`, `english.ts`) is pure. It returns the word plus labelled,
 role-tagged parts (subject, negative, tense, ku, stem, ending, have) for the coloured breakdown.
-The app gets `virtual:nani`: the validated rules plus `verifiedTenses`, the tenses whose fixture
-tables are all verified. The fixtures themselves never ship. The build re-proves the rules
+The app gets `virtual:nani`: the validated rules. The fixtures themselves never ship. The build re-proves the rules
 against the fixtures, so grammar that contradicts them can't be deployed.
 
 The rules the engine applies, each covered by fixtures:
@@ -315,7 +314,7 @@ document. It holds **everything** Nani na Lini? can show, so one review covers i
 - Claude's open `questions` from `fixtures.yaml`
 
 A new verb card adds its tables by itself. A table is ✅ only when a verified fixture covers all of
-it. A tense doesn't ship in the app until all of its fixture tables are verified.
+it. ✅ is a record of what's been confirmed; it never locks anything in the app.
 
 ### ID rules, enforced by `npm run decks:check` in CI
 
@@ -412,9 +411,10 @@ isDue(state, now)       // has state and dueAt <= now
   `progress` record in either direction. If fewer than 5 are eligible, every verb is used. Verbs
   that `rules.yaml` excludes (*kuwa*) are always left out. A missed card comes back with the same
   verb. Progress is the pattern's, never the verb's.
-- **Only verified tenses can be chosen.** The setup screen lists all five, and says why each
-  locked one is locked: "Not checked against your grammar sheets yet", or "Needs verbs in a
-  Vocabulary deck" (have / don't have needs none).
+- **Every tense can be chosen.** The setup screen lists all five. The only one ever disabled is a
+  verb tense when there are no verb cards ("Needs verbs in a Vocabulary deck"); have / don't have
+  needs none. (Tenses used to stay locked until their fixtures were verified; Chris dropped
+  that on 2026-11-12.)
 - **Card views** (`session/views.ts`) turn any queue item into title + prompt + answer, so the
   session and end screens don't care which deck kind they're showing.
 - **Missed card with repeat on:** the card is reinserted 3–5 cards later, or at the end if fewer

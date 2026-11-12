@@ -3,7 +3,6 @@ import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import { Notices } from './components/Notices.tsx';
 import { indexCards } from './content/display.ts';
 import type { VocabDeck } from './content/schema.ts';
-import type { NaniTense } from './nani/patterns.ts';
 import type { NaniRules } from './nani/schema.ts';
 import { EndScreen } from './screens/EndScreen.tsx';
 import { SessionScreen } from './screens/SessionScreen.tsx';
@@ -31,10 +30,7 @@ type Screen =
   | { name: 'end'; state: SessionState }
   | { name: 'settings' };
 
-export type NaniContent = {
-  rules: NaniRules;
-  verifiedTenses: readonly NaniTense[];
-};
+export type NaniContent = { rules: NaniRules };
 
 /**
  * Setup → session → end (or setup → settings), with no router (GitHub Pages can't rewrite URLs).
@@ -97,7 +93,6 @@ export const Study = ({
         <SetupScreen
           decks={decks}
           rules={nani.rules}
-          verifiedTenses={nani.verifiedTenses}
           verbs={verbs}
           stateOf={store.stateOf}
           resume={resume}

@@ -223,8 +223,3 @@
 .deck-row.is-locked .deck-title {
   color: var(--muted);
 }
-
-.setup-locked {
-  margin: 0.6rem 0 0;
-  font-size: 0.9rem;
-}
