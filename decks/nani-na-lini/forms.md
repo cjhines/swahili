@@ -40,14 +40,6 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | --- | --- | --- | --- | --- |
 | I | **ni·me·ku·wa** | I have become |  |  |
 
-## ✅ kunywa (to drink): Future
-
-> Confirmed by Chris's tutor.
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·ta·ku·nywa** | I will drink |  |  |
-
 ## ⬜ kusoma (to read): Present (now)
 
 | | Positive | | Negative | |
@@ -187,7 +179,17 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | I | **ni·li·ku·nywa** | I drank | **si·ku·nywa** | I didn't drink |
 | he/she | **a·li·ku·nywa** | He/she drank | **ha·ku·nywa** | He/she didn't drink |
 
+## ✅ kunywa (to drink): Future
+
+> Confirmed by Chris's tutor.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·ta·ku·nywa** | I will drink |  |  |
+
 ## ⬜ kunywa (to drink): Perfect (have done / not yet)
+
+> Textbook forms. In Nairobi you'll often hear sijakunywa and hajakunywa; check with your tutor before ticking.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -279,6 +281,13 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | I | **ni·na·ita** | I am calling | **si·it·i** | I am not calling |
 | he/she | **a·na·ita** | He/she is calling | **ha·it·i** | He/she is not calling |
 
+## ⬜ kuja (to come): Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·ku·ja** | I am coming | **si·j·i** | I am not coming |
+| he/she | **a·na·ku·ja** | He/she is coming | **ha·j·i** | He/she is not coming |
+
 ## ⬜ kuja (to come): Past
 
 > The core-verbs list gives nilikuja.
@@ -288,6 +297,15 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | I | **ni·li·ku·ja** | I came | **si·ku·ja** | I didn't come |
 | he/she | **a·li·ku·ja** | He/she came | **ha·ku·ja** | He/she didn't come |
 
+## ⬜ kuja (to come): Perfect (have done / not yet)
+
+> Textbook forms. In Nairobi you'll often hear sijakuja and hajakuja; check with your tutor before ticking.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·me·ku·ja** | I have come | **si·ja·ja** | I haven't come yet |
+| he/she | **a·me·ku·ja** | He/she has come | **ha·ja·ja** | He/she hasn't come yet |
+
 ## ⬜ kuelewa (to understand): Present (now)
 
 > The core-verbs list gives sielewi, I don't understand.
@@ -296,20 +314,6 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | --- | --- | --- | --- | --- |
 | I | **ni·na·elewa** | I understand | **si·elew·i** | I don't understand |
 | he/she | **a·na·elewa** | He/she understands | **ha·elew·i** | He/she doesn't understand |
-
-## ⬜ kuja (to come): Present (now)
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·na·ku·ja** | I am coming | **si·j·i** | I am not coming |
-| he/she | **a·na·ku·ja** | He/she is coming | **ha·j·i** | He/she is not coming |
-
-## ⬜ kuja (to come): Perfect (have done / not yet)
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·me·ku·ja** | I have come | **si·ja·ja** | I haven't come yet |
-| he/she | **a·me·ku·ja** | He/she has come | **ha·ja·ja** | He/she hasn't come yet |
 
 ## ⬜ kuona (to see): Present (now)
 
@@ -346,12 +350,12 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | I | **ni·na·uliza** | I am asking | **si·uliz·i** | I am not asking |
 | he/she | **a·na·uliza** | He/she is asking | **ha·uliz·i** | He/she is not asking |
 
-## ⬜ kuacha (to stop): Present (now)
+## ⬜ kuacha (to quit): Present (now)
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·na·acha** | I am stopping | **si·ach·i** | I am not stopping |
-| he/she | **a·na·acha** | He/she is stopping | **ha·ach·i** | He/she is not stopping |
+| I | **ni·na·acha** | I am quitting | **si·ach·i** | I am not quitting |
+| he/she | **a·na·acha** | He/she is quitting | **ha·ach·i** | He/she is not quitting |
 
 ## ⬜ kuongea (to talk): Present (now)
 

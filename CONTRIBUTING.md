@@ -79,8 +79,9 @@ the quirks of particular verbs).
   "Checked against Chris's grammar sheets", and CI rejects anything else. Word lists and other
   reviews, however good, don't tick a table; mention them in the note instead. A table can list
   only `pos` or only `neg` when that's all a reference confirmed. There's one table per verb and
-  tense (CI rejects duplicates; merge them). A tense isn't offered in the app until all its tables
-  are verified.
+  tense (CI rejects duplicates; merge them). Keep each verb's tables together, in tense order, so
+  `forms.md` reads verb by verb (a test checks this). A tense isn't offered in the app until all
+  its tables are verified.
 - **Verb cards show the stem and kept ku- forms automatically.** They come from `rules.yaml`, so
   don't type them into a card's `note`.
 - **`forms.md`** is the readable version: every table with English and the parts (*ha·tu·ku·soma*).

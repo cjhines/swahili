@@ -198,14 +198,15 @@ cards:
     en: { meaning: to hit / to strike, base: hit, past: hit, participle: hit, ing: hitting }
     note: 'Used in lots of fixed phrases: piga simu, phone someone; piga picha, take a photo; piga kelele, shout.'
 
-  # Review (2026-11-11): "I'm leaving" in English usually means going away, which is kuondoka.
-  # Kuacha needs an object: leaving something behind, or quitting / stopping. So the meaning
-  # says "(behind)", and Nani na Lini? sentences use "stop" ("I am stopping"), never "leaving".
+  # Reviews (2026-11-11, 2026-11-12): kuacha is stopping doing something, quitting, or leaving
+  # something behind. "I'm leaving" in English usually means going away (kuondoka), and "I'm
+  # stopping" means coming to a halt (kusimama). So Nani na Lini? sentences say "quit" ("I am
+  # quitting"), never "stop" or "leave".
   - id: verb-kuacha
     kind: verb
     sw: kuacha
-    en: { meaning: to leave (behind) / to stop / to let, base: stop, past: stopped, participle: stopped, ing: stopping }
-    note: 'Needs an object: ninaacha kazi, I''m quitting my job. "I''m leaving" (going away) is ninaondoka.'
+    en: { meaning: to quit / to stop doing / to leave behind, base: quit, past: quit, participle: quit, ing: quitting }
+    note: 'Needs an object: ninaacha kazi, I''m quitting my job. Also "to let": mwache aende, let him/her go. To come to a halt (like a car) is kusimama, and "I''m leaving" (going away) is ninaondoka.'
 
   - id: verb-kutaka
     kind: verb

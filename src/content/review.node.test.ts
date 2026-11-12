@@ -1,14 +1,17 @@
 // @vitest-environment node
 //
-// Review of forms.md and the verbs (2026-11-11). Each point is pinned here against the real
-// deck files, rules.yaml and fixtures.yaml, so no later edit can quietly undo it.
+// Reviews of forms.md and the verbs (2026-11-11, and the follow-up on 2026-11-12). Each point is
+// pinned here against the real deck files, rules.yaml and fixtures.yaml, so no later edit can
+// quietly undo it.
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
 
+import { verbInfo } from '../nani/conjugate.ts';
 import { english } from '../nani/english.ts';
 import { checkFixtures, VERIFIED_SOURCE } from '../nani/fixtures.ts';
 import {
   allPatterns,
+  NANI_TENSES,
   patternId,
   type NaniTense,
   type Polarity,
@@ -45,32 +48,43 @@ const p = (subject: string, tense: NaniTense, polarity: Polarity) => ({
 });
 const noErrors = { path: '', at: () => ({}) };
 
-describe('kuacha: leaving something behind, or stopping; not going away', () => {
-  test('the meaning says "(behind)"', () => {
+describe('kuacha: quitting, stopping doing something, leaving something behind', () => {
+  test('the meaning says "quit" and "stop doing", not a bare "stop"', () => {
     expect(verb('kuacha').en.meaning).toBe(
-      'to leave (behind) / to stop / to let'
+      'to quit / to stop doing / to leave behind'
     );
   });
 
-  test('the note: it needs an object (ninaacha kazi), and going away is ninaondoka', () => {
-    expect(verb('kuacha').note).toMatch(
-      /Needs an object: ninaacha kazi, I'm quitting my job/
-    );
-    expect(verb('kuacha').note).toMatch(
-      /"I'm leaving" \(going away\) is ninaondoka/
-    );
+  test('the note: it needs an object (ninaacha kazi), "to let", and the verbs it is not', () => {
+    const note = verb('kuacha').note;
+    expect(note).toMatch(/Needs an object: ninaacha kazi, I'm quitting my job/);
+    expect(note).toMatch(/"to let": mwache aende, let him\/her go/);
+    expect(note).toMatch(/To come to a halt \(like a car\) is kusimama/);
+    expect(note).toMatch(/"I'm leaving" \(going away\) is ninaondoka/);
   });
 
-  test('Nani na Lini? sentences say "stop", never "leaving"', () => {
+  test('Nani na Lini? sentences say "quit", never "stop" (a halt) or "leave" (going away)', () => {
     const kuacha = { sw: 'kuacha', en: verb('kuacha').en };
     expect(english(rules, p('i', 'present', 'pos'), kuacha)).toBe(
-      'I am stopping'
+      'I am quitting'
+    );
+    expect(english(rules, p('heshe', 'past', 'neg'), kuacha)).toBe(
+      "He/she didn't quit"
     );
     for (const pattern of allPatterns(rules).filter(
       (pat) => pat.tense !== 'have'
     )) {
-      expect(english(rules, pattern, kuacha)).not.toMatch(/leav|left/);
+      expect(english(rules, pattern, kuacha), pattern.id).toMatch(/quit/);
+      expect(english(rules, pattern, kuacha), pattern.id).not.toMatch(
+        /stop|leav|left/
+      );
     }
+  });
+
+  test('forms.md heads its table "kuacha (to quit)"', () => {
+    expect(readFileSync('decks/nani-na-lini/forms.md', 'utf8')).toMatch(
+      /^## ⬜ kuacha \(to quit\): Present/m
+    );
   });
 });
 
@@ -194,9 +208,12 @@ test('forms.md: the kuwa na heading says "(to have)" like the others', () => {
   );
 });
 
-describe('sijala and sikwenda: textbook forms, but Nairobi often says otherwise', () => {
+describe('sijala, sijanywa, sijaja, sikwenda: textbook forms, but Nairobi often says otherwise', () => {
   test.each([
     ['kula', 'perfect', 'sijala', 'sijakula'],
+    ['kunywa', 'perfect', 'sijanywa', 'sijakunywa'],
+    ['kuja', 'perfect', 'sijaja', 'sijakuja'],
+    ['kuja', 'perfect', 'hajaja', 'hajakuja'],
     ['kwenda', 'past', 'sikwenda', 'sikuenda'],
   ])(
     '%s %s: %s is in the table, with a note about %s, and it is not ticked',
@@ -206,9 +223,74 @@ describe('sijala and sikwenda: textbook forms, but Nairobi often says otherwise'
       )!;
       expect(table.neg).toContain(textbook);
       expect(table.note).toMatch(
-        new RegExp(`you'll often hear ${everyday}; check with your tutor`)
+        new RegExp(
+          `you'll often hear (\\w+ and )?${everyday}( and \\w+)?; check with your tutor before ticking`
+        )
       );
       expect(table.verified).toBe(false);
     }
   );
+
+  test('every unticked one-syllable perfect negative carries the warning, so a new one cannot miss it', () => {
+    const tables = fixtures.paradigms.filter(
+      (t) =>
+        t.verb &&
+        t.tense === 'perfect' &&
+        t.neg &&
+        !t.verified &&
+        verbInfo(rules, t.verb).oneSyllable
+    );
+    expect(tables.map((t) => t.verb)).toEqual(['kula', 'kunywa', 'kuja']);
+    for (const table of tables) {
+      // The everyday form puts the ku- back: sijala → sijakula, sijaja → sijakuja.
+      const everyday = table.neg![0]!.replace('ja', 'jaku');
+      expect(table.note, table.verb).toMatch(
+        new RegExp(`you'll often hear ${everyday}\\b.*check with your tutor`)
+      );
+    }
+  });
+});
+
+describe("each verb's tables sit together, in tense order", () => {
+  const key = (t: NaniFixtures['paradigms'][number]) => t.verb ?? 'kuwa na';
+
+  test('no verb comes back after another verb’s tables', () => {
+    const verbs = fixtures.paradigms.map(key);
+    const runs = verbs.filter((v, i) => v !== verbs[i - 1]);
+    expect(runs.filter((v, i) => runs.indexOf(v) !== i)).toEqual([]);
+  });
+
+  test('within a verb: present, past, future, perfect', () => {
+    for (const v of new Set(fixtures.paradigms.map(key))) {
+      const tenses = fixtures.paradigms
+        .filter((t) => key(t) === v)
+        .map((t) => t.tense);
+      expect(tenses, v).toEqual(
+        [...tenses].sort(
+          (a, b) => NANI_TENSES.indexOf(a) - NANI_TENSES.indexOf(b)
+        )
+      );
+    }
+  });
+
+  test('kuja and kunywa read as one block each in forms.md', () => {
+    const headings = readFileSync('decks/nani-na-lini/forms.md', 'utf8')
+      .split(/\r?\n/)
+      .filter((l) => l.startsWith('## '))
+      .map((l) => l.replace(/^## \S+ /, ''));
+    for (const [sw, tenses] of [
+      ['kuja', ['Present (now)', 'Past', 'Perfect (have done / not yet)']],
+      [
+        'kunywa',
+        ['Present (now)', 'Past', 'Future', 'Perfect (have done / not yet)'],
+      ],
+    ] as const) {
+      const first = headings.findIndex((h) => h.startsWith(`${sw} (`));
+      expect(
+        headings
+          .slice(first, first + tenses.length)
+          .map((h) => h.split(': ')[1])
+      ).toEqual(tenses);
+    }
+  });
 });

@@ -14,6 +14,8 @@
 # one-syllable irregulars (sili, sikula, sijala, sinywi, sikwenda, sijaenda, siji, hajaja) and the
 # vowel and -i/-u endings (siiti, siishi, sihitaji, sijibu, siongei). By that reviewer's own
 # standard it doesn't tick tables: ✅ still waits for the tutor or the grammar sheets.
+# A follow-up the same day: kuacha's sentences say "quit", not "stop"; kunywa and kuja perfect
+# get the same textbook-versus-Nairobi warning as kula; and each verb's tables sit together.
 
 verbs:
   kusoma: { base: read, past: read, participle: read, ing: reading }
@@ -74,15 +76,18 @@ verbs:
   kurudi: { base: return, past: returned, participle: returned, ing: returning }
   kufikiri: { base: think, past: thought, participle: thought, ing: thinking, stative: true, third: thinks }
   kuuliza: { base: ask, past: asked, participle: asked, ing: asking }
-  kuacha: { base: stop, past: stopped, participle: stopped, ing: stopping }
+  kuacha: { base: quit, past: quit, participle: quit, ing: quitting }
   kuongea: { base: talk, past: talked, participle: talked, ing: talking }
   kusikia: { base: hear, past: heard, participle: heard, ing: hearing, stative: true, third: hears }
   kuweka: { base: put, past: put, participle: put, ing: putting }
 
 paradigms:
   # Confirmed by Chris's tutor (2026-11-11): one-syllable verbs keep ku- in the na, li, ta and
-  # me tenses. Only the forms the tutor gave, so these tables list positives only. (The tutor's
-  # ninakunywa and nilikunywa are noted in the full kunywa tables below, not repeated here.)
+  # me tenses. Only the forms the tutor gave, so these tables list positives only. The tutor's
+  # nitakunywa is the kunywa future table below, next to the other kunywa tables.
+  #
+  # Each verb's tables sit together, in tense order, so forms.md reads verb by verb (a test
+  # checks this).
   - verb: kuwa
     tense: present
     subjects: [i]
@@ -105,12 +110,6 @@ paradigms:
     tense: perfect
     subjects: [i]
     pos: [nimekuwa]
-    verified: true
-    note: Confirmed by Chris's tutor.
-  - verb: kunywa
-    tense: future
-    subjects: [i]
-    pos: [nitakunywa]
     verified: true
     note: Confirmed by Chris's tutor.
 
@@ -182,11 +181,18 @@ paradigms:
     verified: false
     note: Chris's tutor confirmed nilikunywa; the rest still needs checking.
   - verb: kunywa
+    tense: future
+    subjects: [i]
+    pos: [nitakunywa]
+    verified: true
+    note: Confirmed by Chris's tutor.
+  - verb: kunywa
     tense: perfect
     subjects: [i, heshe]
     pos: [nimekunywa, amekunywa]
     neg: [sijanywa, hajanywa]
     verified: false
+    note: Textbook forms. In Nairobi you'll often hear sijakunywa and hajakunywa; check with your tutor before ticking.
 
   # kwenda behaves like a one-syllable verb, with kw- instead of ku-.
   - verb: kwenda
@@ -270,12 +276,25 @@ paradigms:
   # which keep it in the present negative (sihitaji, sirudi). The core-verbs list gave
   # nilikuja and sielewi; a word list isn't a checked reference, so those tables start unticked.
   - verb: kuja
+    tense: present
+    subjects: [i, heshe]
+    pos: [ninakuja, anakuja]
+    neg: [siji, haji]
+    verified: false
+  - verb: kuja
     tense: past
     subjects: [i, heshe]
     pos: [nilikuja, alikuja]
     neg: [sikuja, hakuja]
     verified: false
     note: The core-verbs list gives nilikuja.
+  - verb: kuja
+    tense: perfect
+    subjects: [i, heshe]
+    pos: [nimekuja, amekuja]
+    neg: [sijaja, hajaja]
+    verified: false
+    note: Textbook forms. In Nairobi you'll often hear sijakuja and hajakuja; check with your tutor before ticking.
   - verb: kuelewa
     tense: present
     subjects: [i, heshe]
@@ -283,18 +302,6 @@ paradigms:
     neg: [sielewi, haelewi]
     verified: false
     note: The core-verbs list gives sielewi, I don't understand.
-  - verb: kuja
-    tense: present
-    subjects: [i, heshe]
-    pos: [ninakuja, anakuja]
-    neg: [siji, haji]
-    verified: false
-  - verb: kuja
-    tense: perfect
-    subjects: [i, heshe]
-    pos: [nimekuja, amekuja]
-    neg: [sijaja, hajaja]
-    verified: false
   - verb: kuona
     tense: present
     subjects: [i, heshe]
@@ -382,5 +389,7 @@ english:
   - { verb: kufikiri, subject: i, tense: present, polarity: neg, en: "I don't think" }
   - { verb: kuweka, subject: we, tense: past, polarity: pos, en: We put }
   - { verb: kuweka, subject: we, tense: present, polarity: pos, en: We are putting }
-  # kuacha needs an object; its sentences use "stop", never "leaving" (which means going away).
-  - { verb: kuacha, subject: i, tense: present, polarity: pos, en: I am stopping }
+  # kuacha: its sentences say "quit". "Stopping" sounds like coming to a halt (kusimama), and
+  # "leaving" like going away (kuondoka).
+  - { verb: kuacha, subject: i, tense: present, polarity: pos, en: I am quitting }
+  - { verb: kuacha, subject: we, tense: past, polarity: neg, en: "We didn't quit" }
