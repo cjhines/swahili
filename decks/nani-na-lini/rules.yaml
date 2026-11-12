@@ -85,7 +85,7 @@ verbs:
   # Irregular: keeps kw- (ninakwenda, siendi, sikwenda, sitakwenda, sijaenda); ninaenda is common too.
   kwenda: { keepKu: true }
   kwisha: { keepKu: true }
-  # Never used in some tenses (review, 2026-11-12). `skip` gives the reason, printed in forms.md.
+  # Tenses (or one polarity) a verb is never used in. `skip` gives the reason, printed in forms.md.
   kutaka:
     skip: { perfect: "Nimetaka and sijataka are grammatical, but you'll almost never hear them." }
   kuhitaji:

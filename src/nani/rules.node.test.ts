@@ -69,7 +69,7 @@ describe('perfects you would rarely hear are skipped', () => {
         },
         { decks, rules, verbs: naniVerbs },
         stateOf,
-        { now: new Date('2026-11-12'), random: seededRandom(seed) }
+        { now: new Date('2026-01-01'), random: seededRandom(seed) }
       );
       for (const item of queue) {
         const sw = swOf.get(item.verbId!)!;

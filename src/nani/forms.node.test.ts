@@ -108,7 +108,7 @@ describe('verbs left out of Nani na Lini? are listed with the reason', () => {
     expect(s).toContain(`**Not in Nani na Lini?** ${rules.verbs[sw]!.why!}`);
   });
 
-  test('kuwa keeps its tutor-confirmed tables', () => {
+  test('kuwa shows its confirmed tables', () => {
     const s = section(md, 'kuwa')!;
     expect(s).toMatch(/^### ✅ Present \(now\)$/m);
     expect(s).toContain('**ni·na·ku·wa** | I am becoming |');

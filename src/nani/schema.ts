@@ -100,7 +100,7 @@ export type Subject = NaniRules['subjects'][number];
 export const NaniFixtures = z.strictObject({
   /** Open questions for the reviewer, printed at the top of forms.md. Remove each once answered. */
   questions: z.array(z.string().min(1)).default([]),
-  /** English forms for every verb used below (deck verbs aren't needed: fixtures stand alone). */
+  /** English for test verbs with no card. Verbs with a card use the card's English. */
   verbs: z.record(VerbKu, VerbEnglish),
   /** Known-correct forms, one table per verb and tense. Subjects in rules.yaml order. */
   paradigms: z.array(

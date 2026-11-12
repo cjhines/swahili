@@ -1,11 +1,11 @@
 # yaml-language-server: $schema=../../schema/vocab-deck.schema.json
 title: Verbs
-# `meaning` is what Vocabulary shows (Chris's wording). The four forms build Nani na Lini?
+# `meaning` is what Vocabulary shows. The four forms build Nani na Lini?
 # sentences, so they use one meaning: kuita gives "We didn't call", not "call / call out".
 # Stems and kept ku- forms are shown on each card automatically (from rules.yaml): don't
 # repeat them in notes.
 cards:
-  # Core verbs, roughly most frequent first (2026-11-11). "have" (kuwa na) is further down.
+  # Core verbs, roughly most frequent first. "have" (kuwa na) is further down.
   - id: verb-kwenda
     kind: verb
     sw: kwenda
@@ -120,7 +120,7 @@ cards:
     sw: kulala
     en: { meaning: to sleep / to lie down, base: sleep, past: slept, participle: slept, ing: sleeping }
 
-  # More everyday verbs (2026-11-11). "meet" (kukutana) was already in, from the tutor's review.
+  # More everyday verbs. "meet" (kukutana) is further down.
   - id: verb-kusikia
     kind: verb
     sw: kusikia
@@ -227,10 +227,9 @@ cards:
     en: { meaning: to hit / to strike, base: hit, past: hit, participle: hit, ing: hitting }
     note: 'Used in lots of fixed phrases: piga simu, phone someone; piga picha, take a photo; piga kelele, shout.'
 
-  # Reviews (2026-11-11, 2026-11-12): kuacha is stopping doing something, quitting, or leaving
-  # something behind. "I'm leaving" in English usually means going away (kuondoka), and "I'm
-  # stopping" means coming to a halt (kusimama). So Nani na Lini? sentences say "quit" ("I am
-  # quitting"), never "stop" or "leave".
+  # kuacha is stopping doing something, quitting, or leaving something behind. "I'm leaving"
+  # would mean going away (kuondoka) and "I'm stopping" coming to a halt (kusimama), so its
+  # sentences say "quit".
   - id: verb-kuacha
     kind: verb
     sw: kuacha
@@ -274,9 +273,8 @@ cards:
       tenses: { perfect: { pos: '{have} lived (there)', neg: "{have}n't lived (there) yet" } }
     note: 'To live: be alive, or reside. Compare kukaa: to stay or sit, also to reside.'
 
-  # Chris's tutor: kuita is to call someone over, or call someone by a name. Shouting is
-  # usually kupiga kelele. The tutor's "name" sense is calling someone BY a name (the example),
-  # not naming someone, so it lives in the note rather than the meaning (Chris, 2026-11-11).
+  # kuita is to call someone over, or call someone by a name (the example), not to name someone,
+  # so that sense is in the note. Shouting is usually kupiga kelele.
   - id: verb-kuita
     kind: verb
     sw: kuita
@@ -346,8 +344,7 @@ cards:
     example: { sw: Anakaa Nairobi., en: He lives in Nairobi. }
     note: 'To stay or sit; also to reside. Compare kuishi: to live, be alive or reside.'
 
-  # Chris's tutor: one syllable (stem wa), so it keeps its ku- (nilikuwa, nitakuwa, nimekuwa);
-  # the card shows those forms automatically. Not conjugated in Nani na Lini? (rules.yaml).
+  # Not in Nani na Lini? (see rules.yaml). Its `tenses` English is for fixtures.yaml.
   - id: verb-kuwa
     kind: verb
     sw: kuwa
@@ -364,22 +361,18 @@ cards:
         perfect: { pos: '{have} become', neg: "{have}n't become yet" }
     note: "In the present, am/is/are is ni, not kuwa: mimi ni mwalimu, I'm a teacher. Ninakuwa means I'm becoming."
 
-  # Chris's tutor: kuwa na is everywhere, so it gets its own card.
   - id: vocab-kuwa-na
     kind: word
     sw: kuwa na
     en: to have
     note: "nina, I have · sina, I don't have · nilikuwa na, I had · nitakuwa na, I will have"
 
-  # Chris's tutor: stem nywa, one syllable, so it keeps its ku- (ninakunywa, nilikunywa,
-  # nitakunywa). The card shows the stem and those forms automatically.
   - id: verb-kunywa
     kind: verb
     sw: kunywa
     en: { base: drink, past: drank, participle: drunk, ing: drinking }
 
-  # Chris's tutor: kuonana leans toward "see each other" (tuonane baadaye, see you later);
-  # the everyday "meet" is kukutana. Not in Nani na Lini? (rules.yaml: it's reciprocal).
+  # kuonana is "see each other" (tuonane baadaye, see you later); "meet" is kukutana.
   - id: verb-kuonana
     kind: verb
     sw: kuonana

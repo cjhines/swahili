@@ -40,7 +40,7 @@ export const SessionSetup = z.discriminatedUnion('kind', [
 ]);
 export type SessionSetup = VocabSetup | NaniSetup;
 
-/** Setups saved before deck kinds existed (milestone 4) were vocabulary ones without `kind`. */
+/** Setups saved before deck kinds existed were vocabulary ones without `kind`. */
 export const withKind = (value: unknown) =>
   value && typeof value === 'object' && !('kind' in value) && 'deckIds' in value
     ? { kind: 'vocab', ...value }
