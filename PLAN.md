@@ -113,7 +113,7 @@ swahili/
 │   ├── App.tsx               # boot: opens the progress store, then <Study>
 │   ├── Study.tsx             # screen state machine (setup → session → end); no router
 │   ├── domain.ts             # Direction, Grade, Mode, ProgressKey
-│   ├── screens/              # SetupScreen, SessionScreen, EndScreen; Settings (export/import) in M5
+│   ├── screens/              # SetupScreen (its parts in setup/), SessionScreen, EndScreen, SettingsScreen
 │   ├── components/           # Flashcard (tap + swipe), Choice (segmented radios)
 │   ├── ui/format.ts          # "in 3 hours", plurals
 │   ├── content/
