@@ -3,7 +3,7 @@ import type { Pattern } from './patterns.ts';
 import type { NaniRules } from './schema.ts';
 
 /**
- * The English side: "We didn't read", "He/she wants", "They (things) don't have".
+ * The English side: "We didn't read", "He/she wants", "They (N-class) don't have".
  *
  * Subject + a template, chosen in this order:
  *   1. the verb's own English for that tense (kuweza: "can" / "can't")

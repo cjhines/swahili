@@ -20,9 +20,28 @@ subjects:
   - { id: we, en: we, be: are, have: have, do: do, was: were, pos: tu, neg: [ha, tu] }
   - { id: youpl, en: you (plural), be: are, have: have, do: do, was: were, pos: m, neg: [ha, m] }
   - { id: they, en: they, be: are, have: have, do: do, was: were, pos: wa, neg: [ha, wa] }
-  # i/zi: "it" and "they" for things in the N- class (nyumba, nyumba).
-  - { id: it, en: it, be: is, have: has, do: does, was: was, pos: i, neg: [ha, i] }
-  - { id: things, en: they (things), be: are, have: have, do: do, was: were, pos: zi, neg: [ha, zi] }
+  # i/zi are NOT the general "it/they": only N-class nouns take them (nyumba ina vyumba vitatu,
+  # the house has three rooms). Other classes use ki-/vi-, li-/ya-, u- and so on, and animals in
+  # the N class usually take a-/wa- (mbwa anakula, the dog is eating). So the label says N-class,
+  # and `note` is shown on the answer side of every card with these subjects.
+  - id: it
+    en: it (N-class)
+    be: is
+    have: has
+    do: does
+    was: was
+    pos: i
+    neg: [ha, i]
+    note: &nclass 'i- and zi- are for N-class nouns like nyumba (nyumba ina vyumba vitatu, the house has three rooms). Other noun classes use ki-/vi-, li-/ya-, u- and so on, and animals usually take a-/wa- (mbwa anakula, the dog is eating).'
+  - id: things
+    en: they (N-class)
+    be: are
+    have: have
+    do: do
+    was: were
+    pos: zi
+    neg: [ha, zi]
+    note: *nclass
 
 tenses:
   # `kept` says what happens to the ku- of a verb that keeps it (one-syllable verbs like kula,

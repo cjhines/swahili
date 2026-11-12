@@ -206,7 +206,8 @@ test('every Nani na Lini? verb in the decks gives a Swahili form and English for
         /^[a-z]+$/
       );
       const en = english(rules, pattern, v);
-      expect(en, `${v.sw} ${pattern.id}`).toMatch(/^[A-Z][a-z/ ()']+$/);
+      // Letters, spaces, / ( ) ' and - (for "(N-class)"); never a leftover {placeholder}.
+      expect(en, `${v.sw} ${pattern.id}`).toMatch(/^[A-Z][A-Za-z/ ()'-]+$/);
       expect(en, `${v.sw} ${pattern.id}`).not.toMatch(/undefined|\{/);
     }
   }

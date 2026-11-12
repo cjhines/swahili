@@ -6,39 +6,7 @@ Every form below is what the app will produce. Check each table against your gra
 when one is right, set `verified: true` on it in `fixtures.yaml` (or tell Claude which).
 If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows the correct forms.
 
-**11 of 43 tables checked.**
-
-## ✅ kwenda (to go): Present (now)
-
-> From Chris's core-verbs list. Keeps kw-; ninaenda is common too.
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·na·kw·enda** | I am going |  |  |
-
-## ✅ kuja (to come): Past
-
-> From Chris's core-verbs list.
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·li·ku·ja** | I came |  |  |
-
-## ✅ kula (to eat): Present (now)
-
-> From Chris's core-verbs list.
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·na·ku·la** | I am eating |  |  |
-
-## ✅ kuelewa (to understand): Present (now)
-
-> From Chris's core-verbs list. Sielewi, I don't understand.
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I |  |  | **si·elew·i** | I don't understand |
+**5 of 39 tables checked.**
 
 ## ✅ kuwa (to be): Present (now)
 
@@ -72,22 +40,6 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | --- | --- | --- | --- | --- |
 | I | **ni·me·ku·wa** | I have become |  |  |
 
-## ✅ kunywa (to drink): Present (now)
-
-> Confirmed by Chris's tutor.
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·na·ku·nywa** | I am drinking |  |  |
-
-## ✅ kunywa (to drink): Past
-
-> Confirmed by Chris's tutor.
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·li·ku·nywa** | I drank |  |  |
-
 ## ✅ kunywa (to drink): Future
 
 > Confirmed by Chris's tutor.
@@ -106,8 +58,8 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | we | **tu·na·soma** | We are reading | **ha·tu·som·i** | We are not reading |
 | you (plural) | **m·na·soma** | You (plural) are reading | **ha·m·som·i** | You (plural) are not reading |
 | they | **wa·na·soma** | They are reading | **ha·wa·som·i** | They are not reading |
-| it | **i·na·soma** | It is reading | **ha·i·som·i** | It is not reading |
-| they (things) | **zi·na·soma** | They (things) are reading | **ha·zi·som·i** | They (things) are not reading |
+| it (N-class) | **i·na·soma** | It (N-class) is reading | **ha·i·som·i** | It (N-class) is not reading |
+| they (N-class) | **zi·na·soma** | They (N-class) are reading | **ha·zi·som·i** | They (N-class) are not reading |
 
 ## ⬜ kusoma (to read): Past
 
@@ -119,8 +71,8 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | we | **tu·li·soma** | We read | **ha·tu·ku·soma** | We didn't read |
 | you (plural) | **m·li·soma** | You (plural) read | **ha·m·ku·soma** | You (plural) didn't read |
 | they | **wa·li·soma** | They read | **ha·wa·ku·soma** | They didn't read |
-| it | **i·li·soma** | It read | **ha·i·ku·soma** | It didn't read |
-| they (things) | **zi·li·soma** | They (things) read | **ha·zi·ku·soma** | They (things) didn't read |
+| it (N-class) | **i·li·soma** | It (N-class) read | **ha·i·ku·soma** | It (N-class) didn't read |
+| they (N-class) | **zi·li·soma** | They (N-class) read | **ha·zi·ku·soma** | They (N-class) didn't read |
 
 ## ⬜ kusoma (to read): Future
 
@@ -132,8 +84,8 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | we | **tu·ta·soma** | We will read | **ha·tu·ta·soma** | We won't read |
 | you (plural) | **m·ta·soma** | You (plural) will read | **ha·m·ta·soma** | You (plural) won't read |
 | they | **wa·ta·soma** | They will read | **ha·wa·ta·soma** | They won't read |
-| it | **i·ta·soma** | It will read | **ha·i·ta·soma** | It won't read |
-| they (things) | **zi·ta·soma** | They (things) will read | **ha·zi·ta·soma** | They (things) won't read |
+| it (N-class) | **i·ta·soma** | It (N-class) will read | **ha·i·ta·soma** | It (N-class) won't read |
+| they (N-class) | **zi·ta·soma** | They (N-class) will read | **ha·zi·ta·soma** | They (N-class) won't read |
 
 ## ⬜ kusoma (to read): Perfect (have done / not yet)
 
@@ -145,10 +97,10 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | we | **tu·me·soma** | We have read | **ha·tu·ja·soma** | We haven't read yet |
 | you (plural) | **m·me·soma** | You (plural) have read | **ha·m·ja·soma** | You (plural) haven't read yet |
 | they | **wa·me·soma** | They have read | **ha·wa·ja·soma** | They haven't read yet |
-| it | **i·me·soma** | It has read | **ha·i·ja·soma** | It hasn't read yet |
-| they (things) | **zi·me·soma** | They (things) have read | **ha·zi·ja·soma** | They (things) haven't read yet |
+| it (N-class) | **i·me·soma** | It (N-class) has read | **ha·i·ja·soma** | It (N-class) hasn't read yet |
+| they (N-class) | **zi·me·soma** | They (N-class) have read | **ha·zi·ja·soma** | They (N-class) haven't read yet |
 
-## ⬜ kuwa na: Have / don’t have
+## ⬜ kuwa na (to have): Have / don’t have
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -158,8 +110,8 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | we | **tu·na** | We have | **ha·tu·na** | We don't have |
 | you (plural) | **m·na** | You (plural) have | **ha·m·na** | You (plural) don't have |
 | they | **wa·na** | They have | **ha·wa·na** | They don't have |
-| it | **i·na** | It has | **ha·i·na** | It doesn't have |
-| they (things) | **zi·na** | They (things) have | **ha·zi·na** | They (things) don't have |
+| it (N-class) | **i·na** | It (N-class) has | **ha·i·na** | It (N-class) doesn't have |
+| they (N-class) | **zi·na** | They (N-class) have | **ha·zi·na** | They (N-class) don't have |
 
 ## ⬜ kula (to eat): Present (now)
 
@@ -171,8 +123,8 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | we | **tu·na·ku·la** | We are eating | **ha·tu·l·i** | We are not eating |
 | you (plural) | **m·na·ku·la** | You (plural) are eating | **ha·m·l·i** | You (plural) are not eating |
 | they | **wa·na·ku·la** | They are eating | **ha·wa·l·i** | They are not eating |
-| it | **i·na·ku·la** | It is eating | **ha·i·l·i** | It is not eating |
-| they (things) | **zi·na·ku·la** | They (things) are eating | **ha·zi·l·i** | They (things) are not eating |
+| it (N-class) | **i·na·ku·la** | It (N-class) is eating | **ha·i·l·i** | It (N-class) is not eating |
+| they (N-class) | **zi·na·ku·la** | They (N-class) are eating | **ha·zi·l·i** | They (N-class) are not eating |
 
 ## ⬜ kula (to eat): Past
 
@@ -186,8 +138,8 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | we | **tu·li·ku·la** | We ate | **ha·tu·ku·la** | We didn't eat |
 | you (plural) | **m·li·ku·la** | You (plural) ate | **ha·m·ku·la** | You (plural) didn't eat |
 | they | **wa·li·ku·la** | They ate | **ha·wa·ku·la** | They didn't eat |
-| it | **i·li·ku·la** | It ate | **ha·i·ku·la** | It didn't eat |
-| they (things) | **zi·li·ku·la** | They (things) ate | **ha·zi·ku·la** | They (things) didn't eat |
+| it (N-class) | **i·li·ku·la** | It (N-class) ate | **ha·i·ku·la** | It (N-class) didn't eat |
+| they (N-class) | **zi·li·ku·la** | They (N-class) ate | **ha·zi·ku·la** | They (N-class) didn't eat |
 
 ## ⬜ kula (to eat): Future
 
@@ -199,10 +151,12 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | we | **tu·ta·ku·la** | We will eat | **ha·tu·ta·ku·la** | We won't eat |
 | you (plural) | **m·ta·ku·la** | You (plural) will eat | **ha·m·ta·ku·la** | You (plural) won't eat |
 | they | **wa·ta·ku·la** | They will eat | **ha·wa·ta·ku·la** | They won't eat |
-| it | **i·ta·ku·la** | It will eat | **ha·i·ta·ku·la** | It won't eat |
-| they (things) | **zi·ta·ku·la** | They (things) will eat | **ha·zi·ta·ku·la** | They (things) won't eat |
+| it (N-class) | **i·ta·ku·la** | It (N-class) will eat | **ha·i·ta·ku·la** | It (N-class) won't eat |
+| they (N-class) | **zi·ta·ku·la** | They (N-class) will eat | **ha·zi·ta·ku·la** | They (N-class) won't eat |
 
 ## ⬜ kula (to eat): Perfect (have done / not yet)
+
+> Textbook forms. In Nairobi you'll often hear sijakula; check with your tutor before ticking.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -212,10 +166,12 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | we | **tu·me·ku·la** | We have eaten | **ha·tu·ja·la** | We haven't eaten yet |
 | you (plural) | **m·me·ku·la** | You (plural) have eaten | **ha·m·ja·la** | You (plural) haven't eaten yet |
 | they | **wa·me·ku·la** | They have eaten | **ha·wa·ja·la** | They haven't eaten yet |
-| it | **i·me·ku·la** | It has eaten | **ha·i·ja·la** | It hasn't eaten yet |
-| they (things) | **zi·me·ku·la** | They (things) have eaten | **ha·zi·ja·la** | They (things) haven't eaten yet |
+| it (N-class) | **i·me·ku·la** | It (N-class) has eaten | **ha·i·ja·la** | It (N-class) hasn't eaten yet |
+| they (N-class) | **zi·me·ku·la** | They (N-class) have eaten | **ha·zi·ja·la** | They (N-class) haven't eaten yet |
 
 ## ⬜ kunywa (to drink): Present (now)
+
+> Chris's tutor confirmed ninakunywa; the rest still needs checking.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -223,6 +179,8 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | he/she | **a·na·ku·nywa** | He/she is drinking | **ha·nyw·i** | He/she is not drinking |
 
 ## ⬜ kunywa (to drink): Past
+
+> Chris's tutor confirmed nilikunywa; the rest still needs checking.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -238,7 +196,7 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 
 ## ⬜ kwenda (to go): Present (now)
 
-> Textbook forms (Chris's list confirms ninakwenda). Everyday speech also says ninaenda, nilienda, nimeenda.
+> Textbook forms (the core-verbs list also gives ninakwenda). Everyday speech also says ninaenda, nilienda, nimeenda.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -246,6 +204,8 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | he/she | **a·na·kw·enda** | He/she is going | **ha·end·i** | He/she is not going |
 
 ## ⬜ kwenda (to go): Past
+
+> Textbook forms. In Nairobi you'll often hear sikuenda; check with your tutor before ticking.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
@@ -319,6 +279,24 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | I | **ni·na·ita** | I am calling | **si·it·i** | I am not calling |
 | he/she | **a·na·ita** | He/she is calling | **ha·it·i** | He/she is not calling |
 
+## ⬜ kuja (to come): Past
+
+> The core-verbs list gives nilikuja.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·li·ku·ja** | I came | **si·ku·ja** | I didn't come |
+| he/she | **a·li·ku·ja** | He/she came | **ha·ku·ja** | He/she didn't come |
+
+## ⬜ kuelewa (to understand): Present (now)
+
+> The core-verbs list gives sielewi, I don't understand.
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·elewa** | I understand | **si·elew·i** | I don't understand |
+| he/she | **a·na·elewa** | He/she understands | **ha·elew·i** | He/she doesn't understand |
+
 ## ⬜ kuja (to come): Present (now)
 
 | | Positive | | Negative | |
@@ -368,12 +346,12 @@ If one is wrong, say which: the fix goes in `rules.yaml`, and the table shows th
 | I | **ni·na·uliza** | I am asking | **si·uliz·i** | I am not asking |
 | he/she | **a·na·uliza** | He/she is asking | **ha·uliz·i** | He/she is not asking |
 
-## ⬜ kuacha (to leave): Present (now)
+## ⬜ kuacha (to stop): Present (now)
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·na·acha** | I am leaving | **si·ach·i** | I am not leaving |
-| he/she | **a·na·acha** | He/she is leaving | **ha·ach·i** | He/she is not leaving |
+| I | **ni·na·acha** | I am stopping | **si·ach·i** | I am not stopping |
+| he/she | **a·na·acha** | He/she is stopping | **ha·ach·i** | He/she is not stopping |
 
 ## ⬜ kuongea (to talk): Present (now)
 

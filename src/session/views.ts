@@ -79,9 +79,14 @@ export const naniView = (
       text: english(rules, pattern, verb),
       lang: 'en',
     } as const;
+    // e.g. for it/they (N-class): what i-/zi- are for, so they're not taken as the general "it".
+    const subjectNote = rules.subjects.find(
+      (s) => s.id === pattern.subject
+    )?.note;
     const extras = {
       breakdown: form.parts,
       gloss: verb ? `${verb.sw}: ${meaningOf(verb.en)}` : 'kuwa na: to have',
+      ...(subjectNote && { note: subjectNote }),
     };
     return item.direction === 'sw-en'
       ? {

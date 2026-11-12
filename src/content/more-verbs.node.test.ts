@@ -69,7 +69,7 @@ test.each([
   ['kungoja', 'to wait', 'ngoja'],
   ['kusubiri', 'to wait', 'subiri'],
   ['kupiga', 'to hit / to strike', 'piga'],
-  ['kuacha', 'to leave / to stop / to let', 'acha'],
+  ['kuacha', 'to leave (behind) / to stop / to let', 'acha'],
 ])('%s: "%s", stem %s, and used in Nani na Lini?', (sw, meaning, stem) => {
   expect(view(sw, 'sw-en').answer.text).toBe(meaning);
   expect(view(sw, 'en-sw').answer).toMatchObject({ text: sw, stem });

@@ -72,8 +72,13 @@ The colours come from a single theme file and should match Chris's grammar sheet
 placeholders until he sends his colours.
 
 **Labels for ambiguous English subjects:** a short label is added only where English is
-ambiguous, as in "You (plural) didn't read" and "They (things) didn't read". The label never shows
-the prefix, because that would give the answer away.
+ambiguous, as in "You (plural) didn't read" and "They (N-class) didn't read". The label never
+shows the prefix, because that would give the answer away.
+
+**i-/zi- are N-class only** (review, 2026-11-11). They're not the general "it/they": other noun
+classes use *ki-/vi-*, *li-/ya-*, *u-* and so on, and animals in the N class usually take *a-/wa-*
+(*mbwa anakula*). So those subjects are labelled "it (N-class)" and "they (N-class)", and every
+Nani na Lini? answer with them carries a note saying so, with *nyumba ina vyumba vitatu*.
 
 ---
 

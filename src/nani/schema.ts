@@ -21,6 +21,8 @@ const Subject = z.strictObject({
   was: z.enum(['was', 'were']),
   pos: Piece,
   neg: z.array(Piece).min(1).max(2),
+  /** Shown on the answer side of every card with this subject, e.g. what i-/zi- are for. */
+  note: z.string().min(1).optional(),
 });
 
 const Marker = z.strictObject({

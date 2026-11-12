@@ -38,7 +38,7 @@ export const renderForms = (rules: NaniRules, fixtures: NaniFixtures) => {
     const verb = table.verb
       ? { sw: table.verb, en: fixtures.verbs[table.verb]! }
       : undefined;
-    const title = `${verb ? `${verb.sw} (to ${verb.en.base})` : 'kuwa na'}: ${TENSE_TITLES[table.tense]}`;
+    const title = `${verb ? `${verb.sw} (to ${verb.en.base})` : 'kuwa na (to have)'}: ${TENSE_TITLES[table.tense]}`;
     out.push(`## ${table.verified ? '✅' : '⬜'} ${title}`, '');
     if (table.note) out.push(`> ${table.note}`, '');
     out.push(

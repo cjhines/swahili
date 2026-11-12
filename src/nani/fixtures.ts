@@ -25,6 +25,10 @@ const pattern = (subject: string, tense: NaniTense, polarity: Polarity) => ({
   polarity,
 });
 
+/** The only sources that make a table ✅: Chris's tutor or his grammar sheets. Not word lists. */
+export const VERIFIED_SOURCE =
+  /^(Confirmed by Chris's tutor|Checked against Chris's grammar sheets)\b/;
+
 export const checkFixtures = (
   rules: NaniRules,
   fixtures: NaniFixtures,
@@ -41,9 +45,25 @@ export const checkFixtures = (
     errors.push({ path, ...at(keys), message });
   const subjectIds = rules.subjects.map((s) => s.id);
   const unverified: string[] = [];
+  const seen = new Set<string>();
 
   fixtures.paradigms.forEach((table, t) => {
     const name = `${table.verb ?? 'have'} ${table.tense}`;
+    // One table per verb and tense, or the same forms can read as both checked and unchecked.
+    if (seen.has(name))
+      fail(
+        ['paradigms', t],
+        `${name}: there's already a table for this verb and tense; merge them`
+      );
+    seen.add(name);
+    // ✅ means a real reference confirmed it, and the note says which.
+    if (table.verified && !VERIFIED_SOURCE.test(table.note ?? '')) {
+      fail(
+        ['paradigms', t, 'note'],
+        `${name}: a verified table's note must start with "Confirmed by Chris's tutor" or ` +
+          `"Checked against Chris's grammar sheets"`
+      );
+    }
     const subjects = table.subjects ?? subjectIds;
     const unknown = subjects.filter((s) => !subjectIds.includes(s));
     if (unknown.length)
