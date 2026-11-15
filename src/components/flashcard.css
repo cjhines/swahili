@@ -21,13 +21,21 @@
 }
 
 .flashcard.is-flipped {
+  gap: 1rem;
   cursor: grab;
-  justify-content: flex-start;
 }
 
 .flashcard.is-dragging {
   cursor: grabbing;
   transition: none;
+}
+
+.flashcard-question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .flashcard-prompt {
@@ -60,21 +68,40 @@
 }
 
 /*
+ * The back, top to bottom: the question as a grey reminder with a line under it, the answer, then
+ * the extras. The question and the extras share the card's spare height equally, so the answer
+ * sits in the middle of the card, where the question was on the front, and in the same place on
+ * every card. Extras too tall for their half push the answer up only as far as they need to.
+ *
  * Two spacings only: the answer and its own details (stem, plural, "also") sit tight together
  * in .flashcard-answer-head; every extra after it (kept forms, example, note, breakdown) is one
- * even step further down. The answer starts a fixed distance below the line, not centred in
- * whatever space is left, so it's in the same place on every card.
+ * even step further down.
  */
+.is-flipped .flashcard-question {
+  flex: 1 1 0;
+}
+
+/* The line under the reminder. A margin, not padding, so the question's flex basis stays 0, the
+   same as the extras', and the answer is exactly centred. */
+.is-flipped .flashcard-question::after {
+  content: '';
+  align-self: stretch;
+  margin-bottom: 0.5rem;
+  border-top: 1px solid var(--line);
+}
+
+/* Only a wrapper for the screen reader announcement: its children are laid out by the card. */
 .flashcard-answer {
+  display: contents;
+}
+
+.flashcard-extras {
   display: flex;
-  flex: 1;
+  flex: 1 1 0;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   gap: 1rem;
   width: 100%;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
 }
 
 .flashcard-answer-head {

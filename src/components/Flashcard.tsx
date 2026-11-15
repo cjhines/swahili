@@ -114,13 +114,17 @@ export const Flashcard = ({
         </div>
       )}
 
-      <div
-        className={`flashcard-prompt${isLong(prompt.text) ? ' is-long' : ''}`}
-        lang={prompt.lang}
-      >
-        {prompt.text}
+      <div className="flashcard-question">
+        <div
+          className={`flashcard-prompt${isLong(prompt.text) ? ' is-long' : ''}`}
+          lang={prompt.lang}
+        >
+          {prompt.text}
+        </div>
+        {prompt.hint && (
+          <div className="flashcard-hint muted">{prompt.hint}</div>
+        )}
       </div>
-      {prompt.hint && <div className="flashcard-hint muted">{prompt.hint}</div>}
 
       {flipped ? (
         <div className="flashcard-answer" aria-live="polite">
@@ -149,18 +153,26 @@ export const Flashcard = ({
               </p>
             )}
           </div>
-          {answer.kept && <p className="flashcard-note muted">{answer.kept}</p>}
-          {answer.example && (
-            <blockquote className="flashcard-example">
-              <p lang="sw">{answer.example.sw}</p>
-              <p className="muted">{answer.example.en}</p>
-            </blockquote>
-          )}
-          {answer.note && <p className="flashcard-note muted">{answer.note}</p>}
-          {answer.breakdown && <Breakdown parts={answer.breakdown} />}
-          {answer.gloss && (
-            <p className="flashcard-note muted">{answer.gloss}</p>
-          )}
+          {/* Always rendered, even empty: it balances the question above, which centres the
+              answer on the card. */}
+          <div className="flashcard-extras">
+            {answer.kept && (
+              <p className="flashcard-note muted">{answer.kept}</p>
+            )}
+            {answer.example && (
+              <blockquote className="flashcard-example">
+                <p lang="sw">{answer.example.sw}</p>
+                <p className="muted">{answer.example.en}</p>
+              </blockquote>
+            )}
+            {answer.note && (
+              <p className="flashcard-note muted">{answer.note}</p>
+            )}
+            {answer.breakdown && <Breakdown parts={answer.breakdown} />}
+            {answer.gloss && (
+              <p className="flashcard-note muted">{answer.gloss}</p>
+            )}
+          </div>
         </div>
       ) : (
         <p className="flashcard-cue muted" aria-hidden="true">
