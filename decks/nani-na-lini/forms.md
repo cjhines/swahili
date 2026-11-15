@@ -2,20 +2,20 @@
 
 <!-- Generated from the decks, rules.yaml and fixtures.yaml by `npm run nani:forms`. Do not edit. -->
 
-This is everything Nani na Lini? can show: all 48 verbs in four tenses (present,
+This is everything Nani na Lini? can show: all 47 verbs in four tenses (present,
 past, future, perfect), for all eight subjects, positive and negative, plus have / don’t
-have. That’s 3,040 forms, each with its English and its parts
+have. That’s 2,976 forms, each with its English and its parts
 (*ha·tu·ku·soma*). Each verb also shows what its vocabulary card says: meaning, stem, note,
 example. Verbs the app leaves out of Nani na Lini? are listed too, with the reason.
 
 Please check every table, and say which forms or English are wrong. ✅ marks a table
 that has already been confirmed.
 
-**4 of 202 tables checked.**
+**4 of 198 tables checked.**
 
 **it (N-class), they (N-class):** i- and zi- are for N-class nouns like nyumba (nyumba ina vyumba vitatu, the house has three rooms). Other noun classes use ki-/vi-, li-/ya-, u- and so on, and animals usually take a-/wa- (mbwa anakula, the dog is eating).
 
-Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya · kufika · kufikiri · kuhitaji · kuishi · kuita · kuitwa · kuja · kujibu · kujua · kukaa · kukutana · kula · kulala · kuleta · kulipa · kumaliza · kungoja · kununua · kunywa · kuoga · kuogelea · kuona · kuonana · kuongea · kuosha · kupa · kupata · kupenda · kupiga · kurudi · kusaidia · kusema · kusikia · kusikiliza · kusoma · kusubiri · kutafuta · kutaka · kutoka · kutunza · kuuliza · kuwa · kuwa na · kuweka · kuweza · kuzungumza · kwenda
+Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya · kufika · kufikiri · kuhitaji · kuishi · kuita · kuitwa · kuja · kujibu · kujua · kukaa · kukutana · kula · kulala · kuleta · kulipa · kumaliza · kungoja · kununua · kunywa · kuoga · kuogelea · kuona · kuonana · kuongea · kuosha · kupa · kupata · kupenda · kupiga · kurudi · kusaidia · kusema · kusikia · kusikiliza · kusoma · kusubiri · kutafuta · kutaka · kutoka · kutunza · kuuliza · kuwa · kuwa na · kuweka · kuweza · kwenda
 
 ## kuacha · to quit / to stop doing / to leave behind
 
@@ -1673,8 +1673,7 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 ## kuongea · to talk
 
 - Stem: *ongea*
-- Hint (English → Swahili): (everyday, especially in Kenya)
-- Note: More everyday in Kenya than kuzungumza.
+- Note: Kuzungumza also means to talk or to chat. Kuongea is the more everyday word, especially in Kenya.
 
 ### ⬜ Present (now)
 
@@ -2765,63 +2764,6 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 | they | **wa·me·weza** | They have managed | **ha·wa·ja·weza** | They haven't managed yet |
 | it (N-class) | **i·me·weza** | It (N-class) has managed | **ha·i·ja·weza** | It (N-class) hasn't managed yet |
 | they (N-class) | **zi·me·weza** | They (N-class) have managed | **ha·zi·ja·weza** | They (N-class) haven't managed yet |
-
-## kuzungumza · to talk / to chat
-
-- Stem: *zungumza*
-- Note: Compare kuongea: also to talk, and more everyday in Kenya.
-
-### ⬜ Present (now)
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·na·zungumza** | I am talking | **si·zungumz·i** | I am not talking |
-| you | **u·na·zungumza** | You are talking | **hu·zungumz·i** | You are not talking |
-| he/she | **a·na·zungumza** | He/she is talking | **ha·zungumz·i** | He/she is not talking |
-| we | **tu·na·zungumza** | We are talking | **ha·tu·zungumz·i** | We are not talking |
-| you (plural) | **m·na·zungumza** | You (plural) are talking | **ha·m·zungumz·i** | You (plural) are not talking |
-| they | **wa·na·zungumza** | They are talking | **ha·wa·zungumz·i** | They are not talking |
-| it (N-class) | **i·na·zungumza** | It (N-class) is talking | **ha·i·zungumz·i** | It (N-class) is not talking |
-| they (N-class) | **zi·na·zungumza** | They (N-class) are talking | **ha·zi·zungumz·i** | They (N-class) are not talking |
-
-### ⬜ Past
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·li·zungumza** | I talked | **si·ku·zungumza** | I didn't talk |
-| you | **u·li·zungumza** | You talked | **hu·ku·zungumza** | You didn't talk |
-| he/she | **a·li·zungumza** | He/she talked | **ha·ku·zungumza** | He/she didn't talk |
-| we | **tu·li·zungumza** | We talked | **ha·tu·ku·zungumza** | We didn't talk |
-| you (plural) | **m·li·zungumza** | You (plural) talked | **ha·m·ku·zungumza** | You (plural) didn't talk |
-| they | **wa·li·zungumza** | They talked | **ha·wa·ku·zungumza** | They didn't talk |
-| it (N-class) | **i·li·zungumza** | It (N-class) talked | **ha·i·ku·zungumza** | It (N-class) didn't talk |
-| they (N-class) | **zi·li·zungumza** | They (N-class) talked | **ha·zi·ku·zungumza** | They (N-class) didn't talk |
-
-### ⬜ Future
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·ta·zungumza** | I will talk | **si·ta·zungumza** | I won't talk |
-| you | **u·ta·zungumza** | You will talk | **hu·ta·zungumza** | You won't talk |
-| he/she | **a·ta·zungumza** | He/she will talk | **ha·ta·zungumza** | He/she won't talk |
-| we | **tu·ta·zungumza** | We will talk | **ha·tu·ta·zungumza** | We won't talk |
-| you (plural) | **m·ta·zungumza** | You (plural) will talk | **ha·m·ta·zungumza** | You (plural) won't talk |
-| they | **wa·ta·zungumza** | They will talk | **ha·wa·ta·zungumza** | They won't talk |
-| it (N-class) | **i·ta·zungumza** | It (N-class) will talk | **ha·i·ta·zungumza** | It (N-class) won't talk |
-| they (N-class) | **zi·ta·zungumza** | They (N-class) will talk | **ha·zi·ta·zungumza** | They (N-class) won't talk |
-
-### ⬜ Perfect (have done / not yet)
-
-| | Positive | | Negative | |
-| --- | --- | --- | --- | --- |
-| I | **ni·me·zungumza** | I have talked | **si·ja·zungumza** | I haven't talked yet |
-| you | **u·me·zungumza** | You have talked | **hu·ja·zungumza** | You haven't talked yet |
-| he/she | **a·me·zungumza** | He/she has talked | **ha·ja·zungumza** | He/she hasn't talked yet |
-| we | **tu·me·zungumza** | We have talked | **ha·tu·ja·zungumza** | We haven't talked yet |
-| you (plural) | **m·me·zungumza** | You (plural) have talked | **ha·m·ja·zungumza** | You (plural) haven't talked yet |
-| they | **wa·me·zungumza** | They have talked | **ha·wa·ja·zungumza** | They haven't talked yet |
-| it (N-class) | **i·me·zungumza** | It (N-class) has talked | **ha·i·ja·zungumza** | It (N-class) hasn't talked yet |
-| they (N-class) | **zi·me·zungumza** | They (N-class) have talked | **ha·zi·ja·zungumza** | They (N-class) haven't talked yet |
 
 ## kwenda · to go
 

@@ -46,7 +46,6 @@ test.each([
   ['kujibu', 'to answer', 'jibu'],
   ['kufikiri', 'to think', 'fikiri'],
   ['kuongea', 'to talk', 'ongea'],
-  ['kuzungumza', 'to talk / to chat', 'zungumza'],
   ['kununua', 'to buy', 'nunua'],
   ['kulipa', 'to pay', 'lipa'],
   ['kuleta', 'to bring', 'leta'],
@@ -139,8 +138,8 @@ test.each([
   ['kusikia', /Nasikia is everyday speech for ninasikia/],
   ['kusikia', /Compare kusikiliza: to listen/],
   ['kusikiliza', /Compare kusikia: to hear/],
-  ['kuongea', /More everyday in Kenya than kuzungumza/],
-  ['kuzungumza', /Compare kuongea/],
+  ['kuongea', /Kuzungumza also means to talk or to chat/],
+  ['kuongea', /more everyday word, especially in Kenya/],
   ['kupiga', /piga simu, phone someone/],
   ['kupiga', /piga picha, take a photo/],
   ['kupiga', /piga kelele, shout/],
@@ -163,12 +162,17 @@ test.each([
 });
 
 describe('verbs with the same English are told apart', () => {
-  test('kuishi and kuongea have hints on the English side', () => {
+  test('kuishi has a hint on the English side', () => {
     expect(view('kuishi', 'en-sw').prompt.hint).toBe('(be alive, or reside)');
+  });
+
+  test('kuongea is the only "to talk", so it needs no hint', () => {
+    expect(
+      verbCards.filter((c) => c.en.base === 'talk').map((c) => c.sw)
+    ).toEqual(['kuongea']);
     expect(view('kuongea', 'en-sw').prompt).toEqual({
       text: 'to talk',
       lang: 'en',
-      hint: '(everyday, especially in Kenya)',
     });
   });
 

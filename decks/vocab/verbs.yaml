@@ -163,9 +163,8 @@ cards:
   - id: verb-kuongea
     kind: verb
     sw: kuongea
-    hint: (everyday, especially in Kenya)
     en: { base: talk, past: talked, participle: talked, ing: talking }
-    note: 'More everyday in Kenya than kuzungumza.'
+    note: 'Kuzungumza also means to talk or to chat. Kuongea is the more everyday word, especially in Kenya.'
 
   - id: verb-kununua
     kind: verb
@@ -395,12 +394,6 @@ cards:
     kind: verb
     sw: kuangalia
     en: { meaning: to look / to look at / to be careful, base: look, past: looked, participle: looked, ing: looking }
-
-  - id: verb-kuzungumza
-    kind: verb
-    sw: kuzungumza
-    en: { meaning: to talk / to chat, base: talk, past: talked, participle: talked, ing: talking }
-    note: 'Compare kuongea: also to talk, and more everyday in Kenya.'
 
   - id: verb-kujua
     kind: verb
