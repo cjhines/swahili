@@ -100,15 +100,17 @@ describe('Nani na Lini?', () => {
           accepted(nani(item(p.id, 'sw-en', verb?.id))),
         ])
       );
-      for (const a of patterns)
+      for (const a of patterns) {
+        const typed = nani(item(a.id, 'en-sw', verb?.id))!.prompt.text;
+        const typedKeys = keysOf(typed, 'en');
         for (const b of patterns) {
           if (a.tense === b.tense && a.polarity === b.polarity) continue;
-          const typed = nani(item(a.id, 'en-sw', verb?.id))!.prompt.text;
-          if (keysOf(typed, 'en').some((key) => keys.get(b.id)!.has(key)))
+          if (typedKeys.some((key) => keys.get(b.id)!.has(key)))
             overlaps.add(
               `${verb?.verb.sw}: "${typed}" (${a.tense}-${a.polarity}) for ${b.tense}-${b.polarity}`
             );
         }
+      }
     }
     // Chose on purpose (2026-11-16): "we hit" counts for tunapiga, though it's also the past.
     // Only verbs whose past is spelled like their base can do this.

@@ -375,7 +375,7 @@ describe('Nani na Lini?', () => {
     expect(
       within(screen.getByTestId('flashcard')).getByText('hatukusoma')
     ).toBeInTheDocument();
-  });
+  }, 15_000); // up to 32 cards: slow on CI runners
 
   test('have / don’t have needs no verbs at all', async () => {
     const user = setup(unlocked, decks); // no verbs anywhere, so only have / don't have
@@ -555,11 +555,13 @@ describe('typing mode', () => {
       await user.click(screen.getByLabelText(other)); // past only
     await user.click(screen.getByRole('radio', { name: 'Negative' }));
     await user.click(screen.getByRole('radio', { name: 'Complete deck' }));
+    // Skipping a form misses it; with repeats off it doesn't come back, so this takes 8 at most.
+    await choose(user, /^Repeat missed/);
     await user.click(start());
 
-    while (promptText() !== "We didn't read") {
-      await user.keyboard('{Enter}{Enter}');
-    }
+    for (let i = 0; i < 8 && promptText() !== "We didn't read"; i++)
+      await user.keyboard('{Enter}{Enter}'); // give up, move on
+    expect(promptText()).toBe("We didn't read");
     await user.keyboard('hatukusona{Enter}');
     const card = within(screen.getByTestId('flashcard'));
     expect(typedLine()).toHaveTextContent('✗');
@@ -568,5 +570,5 @@ describe('typing mode', () => {
     expect(
       card.getByRole('group', { name: 'Parts of the word' })
     ).toBeInTheDocument();
-  });
+  }, 15_000); // up to 8 cards of typing: slow on CI runners
 });
