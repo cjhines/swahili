@@ -229,8 +229,6 @@ mark {
 
 .mark-wrong {
   background: var(--mark-wrong);
-  text-decoration: underline wavy var(--missed);
-  text-underline-offset: 0.2em;
 }
 
 .mark-right {
