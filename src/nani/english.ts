@@ -11,21 +11,43 @@ import type { NaniRules } from './schema.ts';
  *   3. rules.english[tense]
  * filled from the subject (am/is/are, have/has, do/does, was/were) and the verb's forms.
  */
-export const english = (
+export const english = (rules: NaniRules, pattern: Pattern, verb?: NaniVerb) =>
+  fill(rules, pattern, verb, template(rules, pattern, verb).sentence);
+
+/**
+ * Every English sentence that counts as right in typing mode: the card's own sentence first, then
+ * rules.english.accept ("We read" for tunasoma), which applies only when the sentence comes from
+ * the plain tense template (3 above).
+ */
+export const englishAnswers = (
   rules: NaniRules,
   pattern: Pattern,
   verb?: NaniVerb
 ) => {
-  const subject = rules.subjects.find((s) => s.id === pattern.subject);
-  if (!subject) throw new Error(`Unknown subject "${pattern.subject}"`);
+  const { sentence, plain } = template(rules, pattern, verb);
+  const extra = plain
+    ? (rules.english.accept[pattern.tense]?.[pattern.polarity] ?? [])
+    : [];
+  return [sentence, ...extra].map((t) => fill(rules, pattern, verb, t));
+};
 
+const template = (rules: NaniRules, pattern: Pattern, verb?: NaniVerb) => {
   const { tense, polarity } = pattern;
   const own = tense === 'have' ? undefined : verb?.en.tenses?.[tense];
-  const template =
-    own?.[polarity] ??
-    (tense === 'present' && verb?.en.stative
-      ? rules.english.stativePresent
-      : rules.english[tense])[polarity];
+  if (own) return { sentence: own[polarity], plain: false };
+  if (tense === 'present' && verb?.en.stative)
+    return { sentence: rules.english.stativePresent[polarity], plain: false };
+  return { sentence: rules.english[tense][polarity], plain: true };
+};
+
+const fill = (
+  rules: NaniRules,
+  pattern: Pattern,
+  verb: NaniVerb | undefined,
+  template: string
+) => {
+  const subject = rules.subjects.find((s) => s.id === pattern.subject);
+  if (!subject) throw new Error(`Unknown subject "${pattern.subject}"`);
 
   const values: Record<string, string | undefined> = {
     be: subject.be,

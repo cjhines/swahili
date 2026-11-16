@@ -24,7 +24,13 @@ const kusoma: Verb = {
   id: 'verb-kusoma',
   kind: 'verb',
   sw: 'kusoma',
-  en: { base: 'read', past: 'read', participle: 'read', ing: 'reading' },
+  en: {
+    base: 'read',
+    past: 'read',
+    participle: 'read',
+    ing: 'reading',
+    third: 'reads',
+  },
   example: { sw: 'Ninasoma kitabu.', en: 'I am reading a book.' },
 };
 

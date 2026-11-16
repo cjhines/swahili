@@ -28,7 +28,7 @@ const decks: VocabDeck[] = [
 beforeEach(() => localStorage.clear());
 
 describe('vocabulary', () => {
-  test('defaults: every deck, Swahili → English, Practice, 10 new, repeat misses', () => {
+  test('defaults: every deck, Swahili → English, Practice, 10 new, repeat misses, typing', () => {
     expect(loadVocabSetup(decks)).toEqual({
       kind: 'vocab',
       deckIds: ['numbers', 'time'],
@@ -36,6 +36,7 @@ describe('vocabulary', () => {
       mode: 'practice',
       newCap: 10,
       repeatMisses: true,
+      typing: true,
     });
   });
 
@@ -47,6 +48,7 @@ describe('vocabulary', () => {
       mode: 'complete',
       newCap: 5,
       repeatMisses: false,
+      typing: false,
     };
     saveSetup(setup);
     expect(loadVocabSetup(decks)).toEqual(setup);
@@ -81,12 +83,22 @@ describe('vocabulary', () => {
       repeatMisses: false,
     };
     localStorage.setItem('swahili:setup', JSON.stringify({ vocab: old }));
-    expect(loadVocabSetup(decks)).toEqual({ kind: 'vocab', ...old });
+    expect(loadVocabSetup(decks)).toEqual({
+      kind: 'vocab',
+      ...old,
+      typing: true,
+    });
+  });
+
+  test('choices saved before typing mode existed are kept, with typing on', () => {
+    const { typing: _, ...old } = { ...defaultVocabSetup(decks), newCap: 5 };
+    localStorage.setItem('swahili:setup', JSON.stringify({ vocab: old }));
+    expect(loadVocabSetup(decks)).toEqual({ ...old, typing: true });
   });
 });
 
 describe('Nani na Lini?', () => {
-  test('defaults: every available tense, both, English → Swahili', () => {
+  test('defaults: every available tense, both, English → Swahili, typing', () => {
     expect(loadNaniSetup(['present', 'past'])).toEqual({
       kind: 'nani',
       tenses: ['present', 'past'],
@@ -95,6 +107,7 @@ describe('Nani na Lini?', () => {
       mode: 'practice',
       newCap: 10,
       repeatMisses: true,
+      typing: true,
     });
   });
 

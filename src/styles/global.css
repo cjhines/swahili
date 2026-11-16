@@ -13,6 +13,8 @@
   --got-ink: #ffffff;
   --missed: #b5452a;
   --missed-ink: #ffffff;
+  --mark-wrong: rgb(181 69 42 / 0.18);
+  --mark-right: rgb(31 122 77 / 0.2);
   --focus: #d98c2b;
   --shadow: 0 1px 2px rgb(29 36 33 / 0.06), 0 8px 24px rgb(29 36 33 / 0.08);
 
@@ -47,6 +49,8 @@
     --got-ink: #0b1a15;
     --missed: #f08a6b;
     --missed-ink: #1f0d07;
+    --mark-wrong: rgb(240 138 107 / 0.25);
+    --mark-right: rgb(76 195 138 / 0.25);
     --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
   }
 }

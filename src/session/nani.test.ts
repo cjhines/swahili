@@ -21,7 +21,13 @@ const verb = (sw: string, base: string): VerbCard => ({
   id: `verb-${sw}`,
   verb: {
     sw,
-    en: { base, past: `${base}ed`, participle: `${base}ed`, ing: `${base}ing` },
+    en: {
+      base,
+      past: `${base}ed`,
+      participle: `${base}ed`,
+      ing: `${base}ing`,
+      third: `${base}s`,
+    },
   },
 });
 const verbs = [
@@ -70,13 +76,20 @@ describe('naniVerbs', () => {
               past: 'read',
               participle: 'read',
               ing: 'reading',
+              third: 'reads',
             },
           },
           {
             id: 'verb-kuwa',
             kind: 'verb',
             sw: 'kuwa',
-            en: { base: 'be', past: 'was', participle: 'been', ing: 'being' },
+            en: {
+              base: 'be',
+              past: 'was',
+              participle: 'been',
+              ing: 'being',
+              third: 'is',
+            },
           },
           { id: 'vocab-kesho', kind: 'word', sw: 'kesho', en: 'tomorrow' },
         ],

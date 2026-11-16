@@ -78,6 +78,12 @@ english:
   future: { pos: 'will {base}', neg: "won't {base}" }
   perfect: { pos: '{have} {participle}', neg: "{have}n't {participle} yet" }
   have: { pos: '{have}', neg: "{do}n't have" }
+  # Typing mode: other English that also counts as right, for verbs whose sentence comes from
+  # the templates above (not stative verbs, and not a verb's own English for that tense).
+  # "We read" for tunasoma, "He/she doesn't read" for hasomi. Contractions, "yet" after
+  # haven't/hasn't, and he or she for he/she are accepted everywhere (src/typing/english.ts).
+  accept:
+    present: { pos: ['{simple}'], neg: ["{do}n't {base}"] }
 
 verbs:
   # Quirks of particular verbs, keyed by their ku- form. One-syllable stems (kula, kunywa, kuja)

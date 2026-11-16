@@ -21,15 +21,33 @@ beforeAll(() => {
 
 const soma: NaniVerb = {
   sw: 'kusoma',
-  en: { base: 'read', past: 'read', participle: 'read', ing: 'reading' },
+  en: {
+    base: 'read',
+    past: 'read',
+    participle: 'read',
+    ing: 'reading',
+    third: 'reads',
+  },
 };
 const kula: NaniVerb = {
   sw: 'kula',
-  en: { base: 'eat', past: 'ate', participle: 'eaten', ing: 'eating' },
+  en: {
+    base: 'eat',
+    past: 'ate',
+    participle: 'eaten',
+    ing: 'eating',
+    third: 'eats',
+  },
 };
 const kwenda: NaniVerb = {
   sw: 'kwenda',
-  en: { base: 'go', past: 'went', participle: 'gone', ing: 'going' },
+  en: {
+    base: 'go',
+    past: 'went',
+    participle: 'gone',
+    ing: 'going',
+    third: 'goes',
+  },
 };
 
 const breakdown = (form: ReturnType<typeof conjugate>) =>

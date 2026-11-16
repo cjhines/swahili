@@ -70,6 +70,7 @@ describe('checkFixtures', () => {
       past: 'ate',
       participle: 'eaten',
       ing: 'eating',
+      third: 'eats',
     };
     expect(check(data).errors.map((e) => e.message)).toContain(
       "kula has a card, so it uses the card's English; remove it from verbs:"

@@ -2,6 +2,7 @@ import type { ReviewItem } from './queue.ts';
 import type { VerbCard } from './start.ts';
 import {
   answerFor,
+  englishOf,
   meaningOf,
   promptFor,
   type Answer,
@@ -9,10 +10,11 @@ import {
   type Prompt,
 } from '../content/display.ts';
 import { conjugate } from '../nani/conjugate.ts';
-import { english } from '../nani/english.ts';
+import { english, englishAnswers } from '../nani/english.ts';
 import { keptLine, verbFacts } from '../nani/facts.ts';
 import { allPatterns } from '../nani/patterns.ts';
 import type { NaniRules } from '../nani/schema.ts';
+import type { Expected } from '../typing/check.ts';
 
 // What's on screen for a queue item, whatever the deck kind. The session and end screens only
 // ever see this, so they don't care whether a card is vocabulary or Nani na Lini?.
@@ -22,6 +24,8 @@ export type CardView = {
   title: string;
   prompt: Prompt;
   answer: Answer;
+  /** Typing mode: what counts as right. */
+  expected: Expected;
 };
 
 export type ViewOf = (item: ReviewItem) => CardView | undefined;
@@ -47,6 +51,17 @@ export const vocabView =
       title: entry.deck.title,
       prompt: promptFor(card, item.direction),
       answer,
+      expected:
+        item.direction === 'en-sw'
+          ? { lang: 'sw', answers: [card.sw, ...(card.alt ?? [])] }
+          : {
+              lang: 'en',
+              answers: [englishOf(card)],
+              others: () =>
+                [...index.values()]
+                  .filter((other) => other.card.id !== card.id)
+                  .map((other) => englishOf(other.card)),
+            },
     };
   };
 
@@ -61,7 +76,8 @@ export const naniView = (
   rules: NaniRules,
   verbs: readonly VerbCard[]
 ): ViewOf => {
-  const patterns = new Map(allPatterns(rules).map((p) => [p.id, p]));
+  const all = allPatterns(rules);
+  const patterns = new Map(all.map((p) => [p.id, p]));
   const verbById = new Map(verbs.map((v) => [v.id, v.verb]));
   return (item) => {
     const pattern = patterns.get(item.cardId);
@@ -78,6 +94,22 @@ export const naniView = (
     const subjectNote = rules.subjects.find(
       (s) => s.id === pattern.subject
     )?.note;
+    const expected: Expected =
+      item.direction === 'en-sw'
+        ? { lang: 'sw', answers: [form.sw] }
+        : {
+            lang: 'en',
+            answers: englishAnswers(rules, pattern, verb),
+            // The same verb's other forms ("have" forms have no verb: just each other).
+            others: () =>
+              all
+                .filter(
+                  (other) =>
+                    other.id !== pattern.id &&
+                    (verb !== undefined || other.tense === 'have')
+                )
+                .flatMap((other) => englishAnswers(rules, other, verb)),
+          };
     const extras = {
       breakdown: form.parts,
       gloss: verb ? `${verb.sw}: ${meaningOf(verb.en)}` : 'kuwa na: to have',
@@ -88,11 +120,13 @@ export const naniView = (
           title: NANI_TITLE,
           prompt: swahili,
           answer: { ...englishSide, ...extras },
+          expected,
         }
       : {
           title: NANI_TITLE,
           prompt: englishSide,
           answer: { ...swahili, ...extras },
+          expected,
         };
   };
 };

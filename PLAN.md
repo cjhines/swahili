@@ -32,14 +32,19 @@ The setup screen remembers your last choices.
 | Mode | Practice or Complete deck | same |
 | New cards per session | Practice only, default 10 | same |
 | Repeat missed cards | On by default | same |
+| Type your answer | On by default | same |
 
 - **Practice** shows the cards that are due, most overdue first. Up to *N* new cards, picked at
   random, are mixed in among them. If nothing is due and there are no new cards, the app says so
   and offers a Complete deck run.
 - **Complete deck** goes through every card in the selection, shuffled.
-- **Marking:** you say the answer out loud, tap to flip, then press **Got it** or **Missed it**.
-  On desktop: Space flips, → is Got it, ← is Missed it. On a phone you can also swipe right for
-  Got it and left for Missed it. There's no typing.
+- **Marking, with Type your answer on** (the default): you type the answer and press Enter. The
+  app checks it and records **Got it** or **Missed it** at once, and its verdict is final. Enter
+  (or **Next**) moves on. Enter on an empty box is giving up: it shows the answer as Missed it.
+  What counts as right is under [Typing mode](#typing-mode-what-counts-as-right).
+- **Marking, with it off:** you say the answer out loud, tap to flip, then press **Got it** or
+  **Missed it**. On desktop: Space flips, → is Got it, ← is Missed it. On a phone you can also
+  swipe right for Got it and left for Missed it.
 - **Every mark counts towards scheduling, in both modes.** FSRS accounts for when you last saw the
   card, so extra Complete deck runs can't distort Practice.
 - **Repeat missed cards:** a missed card goes back into the pile a few cards later, and the session
@@ -80,6 +85,39 @@ classes use *ki-/vi-*, *li-/ya-*, *u-* and so on, and animals in the N class usu
 (*mbwa anakula*). So those subjects are labelled "it (N-class)" and "they (N-class)", and every
 Nani na Lini? answer with them carries a note saying so, with *nyumba ina vyumba vitatu*.
 
+### Typing mode: what counts as right
+
+Decided with Chris on 2026-11-16. The checker is `src/typing/`. Each rule is tested on its own
+in `check.test.ts`, and against every real card, verb and form in `answers.node.test.ts`.
+
+- **Swahili must be letter-perfect.** Capitals, punctuation and extra spaces are ignored, and the
+  card's `alt` forms count (*kusubiri* for *kungoja*). Nothing else, because one letter is often the
+  grammar: *sisomi*, not *sisoma*.
+- **English allows one slip:** one letter wrong, missing, extra or swapped with its neighbour
+  ("wiat" for "wait"), in one word of four letters or more. Shorter words must be exact, because
+  there one letter makes a different word: "he read" is not "we read". A slip that spells another
+  card's answer exactly isn't a slip: "he arrived" for *anafika* is *alifika*.
+- **English also accepts:**
+  - any one meaning, where " / " separates them ("to look at" for "to look / to look at / to be
+    careful"), or all of it
+  - no leading "to", "a", "an" or "the"
+  - contractions either way, with or without the apostrophe ("did not", "didnt")
+  - "he", "she" or "he or she" for "He/she"
+  - bracketed parts left out ("(plural)", "(N-class)", "(something)"), and "you all" for "You
+    (plural)"
+  - "yet" left out after haven't / hasn't ("We haven't read"), but not after don't: "I don't
+    know" is *sijui*, not *sijajua*
+  - numbers in digits ("22")
+  - in the Nani na Lini? present, the simple present ("We eat", "He/she eats") and "don't" ("We
+    don't eat"), from `english.accept` in `rules.yaml`. So "We hit" counts for *tunapiga*,
+    though it's also the past. Only verbs whose past is spelled like their base (*kupiga*,
+    *kuacha*, *kuweka*) overlap like this. Verbs with their own English for the present (*kutoka*,
+    *kuitwa*, *kuweza*) accept their own wording.
+- **The answer side** shows what you typed, with ✓ or ✗. When it's close to a right answer, the
+  letters that differ are highlighted in both.
+- There's no swiping and there are no Got it / Missed it buttons, because the app has already
+  marked the card. Autocorrect, auto-capitals and spellcheck are off in the answer box.
+
 ---
 
 ## Repo layout
@@ -114,7 +152,10 @@ swahili/
 │   ├── Study.tsx             # screen state machine (setup → session → end); no router
 │   ├── domain.ts             # Direction, Grade, Mode, ProgressKey
 │   ├── screens/              # SetupScreen (its parts in setup/), SessionScreen, EndScreen, SettingsScreen
-│   ├── components/           # Flashcard (tap + swipe), Choice (segmented radios)
+│   ├── components/           # Flashcard (tap + swipe), Choice (segmented radios), Marked (letter highlights)
+│   ├── typing/
+│   │   ├── forms.ts          # pure: every accepted way of writing an answer, and the keys they're compared by
+│   │   └── check.ts          # pure: typed answer → right / wrong, nearest answer, letters that differ
 │   ├── ui/format.ts          # "in 3 hours", plurals
 │   ├── content/
 │   │   ├── schema.ts         # Zod schemas, the source of truth for deck shape
@@ -204,15 +245,17 @@ Card kinds, with required fields in **bold**:
 | `kind` | Fields |
 | --- | --- |
 | `noun` | **`id`, `sw`, `en`**, `plural`, `alt`, `example`, `hint`, `note` |
-| `verb` | **`id`, `sw` (ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`**, `en.meaning`, `en.stative` + `en.third`, `en.tenses`, `example`, `alt`, `hint`, `note` |
+| `verb` | **`id`, `sw` (ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `en.third`**, `en.meaning`, `en.stative`, `en.tenses`, `example`, `alt`, `hint`, `note` |
 | `word` | **`id`, `sw`, `en`**, `alt`, `example`, `hint`, `note` (numbers, days, adjectives, adverbs, phrases, figures of speech) |
 
 Verb English (added in milestone 7, when Chris's verbs arrived):
 
 - The four forms describe **one** meaning, the one Nani na Lini? sentences use. `meaning` is what
   Vocabulary shows ("to call / to call out").
+- `third` is the he/she form of the simple present: "reads", "goes out", "is called". Every verb
+  has one (added 2026-11-16 for typing mode, which accepts "He/she reads" for *anasoma*).
 - `stative` verbs (*kutaka*, *kujua*, *kuishi*) take the simple present: "I want", "He/she
-  wants". Their `third` form supplies the "-s".
+  wants", using their `third` form.
 - `tenses` gives a verb its own English per tense when nothing else fits. *Kuweza*: can / could /
   will be able to. *Kuitwa*: "{be} called", "{was} called".
 - `example` became optional for verbs, because Chris's verb list has none and the content is his.
@@ -254,7 +297,9 @@ file, not a code change. It has these sections:
 - `presentNegativeEnding`, `have`, `labels`.
 - `english`: the templates, e.g. `past: { pos: '{past}', neg: "didn't {base}" }`, plus
   `stativePresent` for stative verbs. A misspelt placeholder fails the build. A verb's own
-  `en.tenses` override these (see the card kinds above).
+  `en.tenses` override these (see the card kinds above). `accept` lists other English that
+  typing mode counts as right for verbs using the plain templates: "We read" and "We don't read"
+  in the present.
 - `verbs`: quirks by ku- form: `keepKu` (*kwenda*, *kwisha*), `exclude` (*kuwa*, *kuonana*), `needsObject` (*kupa*: always needs a marker for who receives it, so it's excluded and its card lists no kept-ku forms), `stem`, `why` (the reason an excluded verb is left out), `skip` (a tense or `perfect-neg` the verb is never used in, with the reason: *kutaka* and *kuhitaji* skip the perfect, *kupenda* and *kuishi* its negative).
 
 The engine (`src/nani/conjugate.ts`, `english.ts`) is pure. It returns the word plus labelled,
@@ -381,7 +426,8 @@ isDue(state, now)       // has state and dueAt <= now
 
 ### localStorage, all keys prefixed `swahili:`
 
-- `swahili:setup`: the last setup-screen choices, one set per deck kind.
+- `swahili:setup`: the last setup-screen choices, one set per deck kind. Choices saved before
+  typing mode existed are kept, with typing on.
 - `swahili:resume`: an unfinished Complete deck run, holding the queue (card IDs, plus the chosen
   verb for Nani na Lini?), the position, `startedAt` and `savedAt`. It's deleted 24 hours after the
   **last mark** (not the start), or if any card in it no longer exists. It always resumes on the
@@ -405,8 +451,10 @@ isDue(state, now)       // has state and dueAt <= now
   verb tense when there are no verb cards ("Needs verbs in a Vocabulary deck"); have / don't have
   needs none. (Tenses used to stay locked until their fixtures were verified; Chris dropped
   that on 2026-11-12.)
-- **Card views** (`session/views.ts`) turn any queue item into title + prompt + answer, so the
-  session and end screens don't care which deck kind they're showing.
+- **Card views** (`session/views.ts`) turn any queue item into title + prompt + answer, plus what
+  typing mode accepts, so the session and end screens don't care which deck kind they're showing.
+- **Typing mode** checks an answer and saves its mark in one step, then shows the answer side
+  until you move on. A run left at that point resumes on the next card.
 - **Missed card with repeat on:** the card is reinserted 3–5 cards later, or at the end if fewer
   remain.
 
@@ -567,7 +615,6 @@ protections in place.
 - Accounts, login, or any server-side storage.
 - Syncing progress across devices. Export/import covers moving progress by hand. Later options are a
   small endpoint on Chris's server, or Firebase.
-- Typed answers.
 - A stats screen. The review log is stored so one can be added later.
 - Noun classes other than *i/zi* in Nani na Lini?.
 - Moving the main cjhin.es site to GitHub Pages.

@@ -77,6 +77,9 @@ const promptText = () =>
     (_, el) => el?.classList.contains('flashcard-prompt') ?? false
   ).textContent!;
 
+/** The typing switch: on by default, so turning it off means marking yourself. */
+const SELF_MARK = /^Type your answer/;
+
 /** Picks options on the setup screen. */
 const choose = async (
   user: ReturnType<typeof userEvent.setup>,
@@ -118,7 +121,7 @@ describe('setup', () => {
 describe('a Complete deck run', () => {
   test('flip, mark every card, see the summary, return to setup; progress is saved', async () => {
     const user = setup();
-    await choose(user, 'Complete deck', /^Days/);
+    await choose(user, 'Complete deck', /^Days/, SELF_MARK);
     await user.click(start());
 
     for (let i = 0; i < 3; i++) {
@@ -156,7 +159,7 @@ describe('a Complete deck run', () => {
 
   test('the answer side shows alternative spellings', async () => {
     const user = setup();
-    await choose(user, 'Complete deck', /^Days/);
+    await choose(user, 'Complete deck', /^Days/, SELF_MARK);
     await user.click(start());
     while (promptText() !== 'elfu moja') {
       await user.click(screen.getByRole('button', { name: 'Show answer' }));
@@ -168,7 +171,7 @@ describe('a Complete deck run', () => {
 
   test('a missed card comes back until it is got, and is listed at the end', async () => {
     const user = setup();
-    await choose(user, 'Complete deck', /^Numbers/); // just Days: one card
+    await choose(user, 'Complete deck', /^Numbers/, SELF_MARK); // just Days: one card
     await user.click(start());
 
     await user.click(screen.getByRole('button', { name: 'Show answer' }));
@@ -192,7 +195,7 @@ describe('a Complete deck run', () => {
 
   test('leaving half-way offers to resume, and resuming carries on where it stopped', async () => {
     const user = setup();
-    await choose(user, 'Complete deck', /^Days/);
+    await choose(user, 'Complete deck', /^Days/, SELF_MARK);
     await user.click(start());
     await user.click(screen.getByRole('button', { name: 'Show answer' }));
     await user.click(screen.getByRole('button', { name: 'Got it' }));
@@ -207,7 +210,7 @@ describe('a Complete deck run', () => {
 
   test('a resumable run can be discarded', async () => {
     const user = setup();
-    await choose(user, 'Complete deck', /^Days/);
+    await choose(user, 'Complete deck', /^Days/, SELF_MARK);
     await user.click(start());
     await user.click(screen.getByRole('button', { name: 'Show answer' }));
     await user.click(screen.getByRole('button', { name: 'Got it' }));
@@ -223,7 +226,7 @@ describe('a Complete deck run', () => {
 
 test('keyboard: Space flips, → is Got it, ← is Missed it', async () => {
   const user = setup();
-  await choose(user, 'Complete deck', /^Days/);
+  await choose(user, 'Complete deck', /^Days/, SELF_MARK);
   await user.click(start());
 
   const first = promptText();
@@ -245,7 +248,13 @@ test('keyboard: Space flips, → is Got it, ← is Missed it', async () => {
 
 test('English → Swahili shows the English first', async () => {
   const user = setup();
-  await choose(user, 'English → Swahili', 'Complete deck', /^Numbers/);
+  await choose(
+    user,
+    'English → Swahili',
+    'Complete deck',
+    /^Numbers/,
+    SELF_MARK
+  );
   await user.click(start());
   expect(promptText()).toBe('Monday');
   await user.click(screen.getByRole('button', { name: 'Show answer' }));
@@ -254,6 +263,7 @@ test('English → Swahili shows the English first', async () => {
 
 test('ending a Practice session early keeps every answer given so far', async () => {
   const user = setup();
+  await choose(user, SELF_MARK);
   await user.click(start());
   await user.click(screen.getByRole('button', { name: 'Show answer' }));
   await user.click(screen.getByRole('button', { name: 'Got it' }));
@@ -274,20 +284,37 @@ describe('Nani na Lini?', () => {
         id: 'verb-kusoma',
         kind: 'verb',
         sw: 'kusoma',
-        en: { base: 'read', past: 'read', participle: 'read', ing: 'reading' },
+        en: {
+          base: 'read',
+          past: 'read',
+          participle: 'read',
+          ing: 'reading',
+          third: 'reads',
+        },
       },
       // Never conjugated (rules.yaml), so never used.
       {
         id: 'verb-kuwa',
         kind: 'verb',
         sw: 'kuwa',
-        en: { base: 'be', past: 'was', participle: 'been', ing: 'being' },
+        en: {
+          base: 'be',
+          past: 'was',
+          participle: 'been',
+          ing: 'being',
+          third: 'is',
+        },
       },
     ],
   };
   const unlocked: NaniContent = { rules: nani.rules };
-  const pickNani = async (user: ReturnType<typeof userEvent.setup>) =>
-    user.click(screen.getByRole('radio', { name: 'Nani na Lini?' }));
+  const pickNani = async (
+    user: ReturnType<typeof userEvent.setup>,
+    { typing = false } = {}
+  ) => {
+    await user.click(screen.getByRole('radio', { name: 'Nani na Lini?' }));
+    if (!typing) await choose(user, SELF_MARK);
+  };
 
   test('every tense can be chosen, and all are ticked to start with', async () => {
     const user = setup(unlocked, [...decks, verbs]);
@@ -377,5 +404,169 @@ describe('Nani na Lini?', () => {
     cleanup();
     setup(unlocked, [...decks, verbs]);
     expect(screen.getByRole('radio', { name: 'Nani na Lini?' })).toBeChecked();
+  });
+});
+
+describe('typing mode', () => {
+  const answerBox = () => screen.getByRole('textbox', { name: 'Your answer' });
+  const typedLine = () =>
+    within(screen.getByTestId('flashcard')).getByText(
+      (_, el) => el?.classList.contains('flashcard-typed') ?? false
+    );
+
+  /** Complete deck, Days only: Jumatatu, one card. */
+  const startMonday = async (...more: (string | RegExp)[]) => {
+    const user = setup();
+    await choose(user, 'Complete deck', /^Numbers/, ...more);
+    await user.click(start());
+    return user;
+  };
+
+  test('is on by default and remembered per deck type', async () => {
+    const user = setup();
+    expect(screen.getByLabelText(SELF_MARK)).toBeChecked();
+    await choose(user, SELF_MARK);
+    expect(
+      JSON.parse(localStorage.getItem('swahili:setup')!).vocab.typing
+    ).toBe(false);
+    await user.click(screen.getByRole('radio', { name: 'Nani na Lini?' }));
+    expect(screen.getByLabelText(SELF_MARK)).toBeChecked();
+  });
+
+  test('Enter checks the answer and marks it; Enter again moves on', async () => {
+    const user = await startMonday();
+    expect(answerBox()).toHaveFocus();
+    expect(answerBox()).toHaveAttribute('placeholder', 'Type the English');
+    expect(screen.queryByText('Say it out loud, then tap')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Got it' })).toBeNull();
+
+    await user.keyboard('monday{Enter}');
+    expect(typedLine()).toHaveTextContent('✓Right: you typed monday');
+    expect(
+      within(screen.getByTestId('flashcard')).getByText('Monday')
+    ).toBeInTheDocument();
+    // Marked as soon as it's checked, before moving on.
+    expect(
+      (await store.reviewsOf('vocab-jumatatu:sw-en')).map((r) => r.grade)
+    ).toEqual(['got']);
+    expect(screen.getByRole('button', { name: 'Next' })).toBeInTheDocument();
+    expect(answerBox()).toHaveValue('');
+
+    // Arrow keys and typing do nothing now: the mark is final.
+    await user.keyboard('{ArrowLeft}x');
+    expect(answerBox()).toHaveValue('');
+
+    await user.keyboard('{Enter}');
+    expect(
+      screen.getByRole('heading', { name: /Hongera!/ })
+    ).toBeInTheDocument();
+    expect(
+      (await store.reviewsOf('vocab-jumatatu:sw-en')).map((r) => r.grade)
+    ).toEqual(['got']);
+  });
+
+  test('a wrong answer is Missed it, shows the right one, and comes back', async () => {
+    const user = await startMonday();
+    await user.keyboard('Sunday{Enter}');
+    expect(typedLine()).toHaveTextContent('✗Wrong: you typed Sunday');
+    expect(
+      (await store.reviewsOf('vocab-jumatatu:sw-en')).map((r) => r.grade)
+    ).toEqual(['missed']);
+
+    await user.click(screen.getByRole('button', { name: 'Next' }));
+    expect(promptText()).toBe('Jumatatu'); // back again, with an empty box
+    expect(answerBox()).toHaveValue('');
+    expect(answerBox()).toHaveFocus();
+
+    await user.keyboard('Mondya{Enter}'); // one slip in English is fine
+    expect(typedLine()).toHaveTextContent('✓');
+    expect(
+      within(screen.getByTestId('flashcard')).getAllByText('ay')[0]
+    ).toHaveClass('mark-right');
+    await user.keyboard('{Enter}');
+    expect(
+      screen.getByRole('heading', { name: 'Missed 1 card' })
+    ).toBeInTheDocument();
+  });
+
+  test('Enter on an empty box shows the answer as Missed it', async () => {
+    const user = await startMonday();
+    expect(
+      screen.getByRole('button', { name: 'Show answer' })
+    ).toBeInTheDocument();
+    await user.type(answerBox(), 'M');
+    expect(screen.getByRole('button', { name: 'Check' })).toBeInTheDocument();
+    await user.clear(answerBox());
+    await user.keyboard('{Enter}');
+    expect(typedLine()).toHaveTextContent('No answer');
+    expect(
+      (await store.reviewsOf('vocab-jumatatu:sw-en')).map((r) => r.grade)
+    ).toEqual(['missed']);
+  });
+
+  test('English → Swahili: type the Swahili, letter-perfect', async () => {
+    const user = await startMonday('English → Swahili');
+    expect(promptText()).toBe('Monday');
+    expect(answerBox()).toHaveAttribute('placeholder', 'Type the Swahili');
+    await user.keyboard('jumatato{Enter}');
+    expect(typedLine()).toHaveTextContent('✗');
+    // The wrong letter, marked in what was typed and in the answer.
+    const card = within(screen.getByTestId('flashcard'));
+    expect(card.getByText('o')).toHaveClass('mark-wrong');
+    expect(card.getByText('u', { selector: 'mark' })).toHaveClass('mark-right');
+  });
+
+  test('leaving after checking resumes on the next card', async () => {
+    const user = setup();
+    await choose(user, 'Complete deck', /^Days/);
+    await user.click(start());
+    const first = promptText();
+    await user.keyboard('x{Enter}');
+    await user.click(screen.getByRole('button', { name: 'End session' }));
+    await user.click(
+      await screen.findByRole('button', { name: 'Resume (0/3)' })
+    );
+    // The missed card went back into the pile, so the next one is on screen.
+    expect(promptText()).not.toBe(first);
+  });
+
+  test('Nani na Lini?: type the form; a wrong letter is marked', async () => {
+    const verbs: VocabDeck = {
+      id: 'verbs',
+      title: 'Verbs',
+      cards: [
+        {
+          id: 'verb-kusoma',
+          kind: 'verb',
+          sw: 'kusoma',
+          en: {
+            base: 'read',
+            past: 'read',
+            participle: 'read',
+            ing: 'reading',
+            third: 'reads',
+          },
+        },
+      ],
+    };
+    const user = setup(noNani, [...decks, verbs]);
+    await user.click(screen.getByRole('radio', { name: 'Nani na Lini?' }));
+    for (const other of [/^Present/, /^Future/, /^Perfect/, /^Have/])
+      await user.click(screen.getByLabelText(other)); // past only
+    await user.click(screen.getByRole('radio', { name: 'Negative' }));
+    await user.click(screen.getByRole('radio', { name: 'Complete deck' }));
+    await user.click(start());
+
+    while (promptText() !== "We didn't read") {
+      await user.keyboard('{Enter}{Enter}');
+    }
+    await user.keyboard('hatukusona{Enter}');
+    const card = within(screen.getByTestId('flashcard'));
+    expect(typedLine()).toHaveTextContent('✗');
+    expect(card.getByText('n')).toHaveClass('mark-wrong');
+    expect(card.getByText('m', { selector: 'mark' })).toHaveClass('mark-right');
+    expect(
+      card.getByRole('group', { name: 'Parts of the word' })
+    ).toBeInTheDocument();
   });
 });

@@ -204,6 +204,23 @@ export const SetupScreen = ({
             onChange={(event) => update('repeatMisses', event.target.checked)}
           />
         </label>
+
+        <label className="field-row">
+          <span>
+            Type your answer
+            <small className="muted">
+              The app checks it and marks it for you. Off: say it out loud and
+              mark yourself.
+            </small>
+          </span>
+          <input
+            type="checkbox"
+            role="switch"
+            className="switch"
+            checked={setup.typing}
+            onChange={(event) => update('typing', event.target.checked)}
+          />
+        </label>
       </div>
 
       <StartFooter

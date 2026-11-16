@@ -3,6 +3,8 @@ import { useRef, useState, type PointerEvent } from 'react';
 import type { Answer, Prompt } from '../content/display.ts';
 import type { Grade } from '../domain.ts';
 import { Breakdown } from './Breakdown.tsx';
+import { Marked } from './Marked.tsx';
+import type { Check } from '../typing/check.ts';
 
 import './flashcard.css';
 
@@ -18,12 +20,18 @@ type Props = {
   answer: Answer;
   flipped: boolean;
   onFlip: () => void;
-  onSwipe: (grade: Grade) => void;
+  /** Absent in typing mode: the app has already marked the card, so there's nothing to swipe. */
+  onSwipe?: (grade: Grade) => void;
+  /** Typing mode, once checked: what was typed, right or wrong, shown above the answer. */
+  check?: Check;
 };
 
 /**
  * Tap anywhere on the card to see the answer. Once flipped, swipe right for "Got it" and left for
  * "Missed it". The buttons below the card do the same, so swiping is optional.
+ *
+ * In typing mode the answer box sits below the card, and the back shows what you typed: ✓ or ✗,
+ * with the letters that differ from the nearest right answer marked in both.
  */
 export const Flashcard = ({
   prompt,
@@ -31,6 +39,7 @@ export const Flashcard = ({
   flipped,
   onFlip,
   onSwipe,
+  check,
 }: Props) => {
   const [dx, setDxState] = useState(0);
   // Mirrored in a ref so the release handler always sees the latest position, not a stale render's.
@@ -53,7 +62,7 @@ export const Flashcard = ({
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     pressed.current = true;
     moved.current = false;
-    if (!flipped || event.button !== 0) return;
+    if (!flipped || !onSwipe || event.button !== 0) return;
     drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY };
   };
 
@@ -82,15 +91,17 @@ export const Flashcard = ({
     const distance = dxRef.current;
     setDx(0);
     if (Math.abs(distance) >= SWIPE_THRESHOLD)
-      onSwipe(distance > 0 ? 'got' : 'missed');
+      onSwipe?.(distance > 0 ? 'got' : 'missed');
   };
 
   const strength = Math.min(Math.abs(dx) / SWIPE_THRESHOLD, 1);
   const leaning = dx > 0 ? 'got' : dx < 0 ? 'missed' : undefined;
+  // The nearest right answer is marked in place when it's the answer shown, else on its own line.
+  const marksInAnswer = check?.nearest === answer.text;
 
   return (
     <div
-      className={`flashcard${flipped ? ' is-flipped' : ''}${dx ? ' is-dragging' : ''}`}
+      className={`flashcard${flipped ? ' is-flipped' : ''}${dx ? ' is-dragging' : ''}${onSwipe ? '' : ' is-typing'}`}
       data-leaning={leaning}
       style={{
         transform: dx
@@ -131,12 +142,22 @@ export const Flashcard = ({
           {/* The answer and the details that belong to the word itself, kept tight together.
               Everything after it is an extra, spaced evenly below. */}
           <div className="flashcard-answer-head">
+            {check && <Typed check={check} lang={answer.lang} />}
             <div
               className={`flashcard-answer-text${isLong(answer.text) ? ' is-long' : ''}`}
               lang={answer.lang}
             >
-              {answer.text}
+              {marksInAnswer ? (
+                <Marked text={answer.text} marks={check.nearestMarks} />
+              ) : (
+                answer.text
+              )}
             </div>
+            {check?.nearest !== undefined && !marksInAnswer && (
+              <p className="flashcard-nearest" lang={answer.lang}>
+                <Marked text={check.nearest} marks={check.nearestMarks} />
+              </p>
+            )}
             {answer.alt && (
               <p className="flashcard-meta">
                 also <span lang="sw">{answer.alt.join(', ')}</span>
@@ -175,10 +196,31 @@ export const Flashcard = ({
           </div>
         </div>
       ) : (
-        <p className="flashcard-cue muted" aria-hidden="true">
-          Say it out loud, then tap
-        </p>
+        onSwipe && (
+          <p className="flashcard-cue muted" aria-hidden="true">
+            Say it out loud, then tap
+          </p>
+        )
       )}
     </div>
   );
 };
+
+/** "✗ sisoma", with the wrong letter marked; "✗ No answer" after giving up. */
+const Typed = ({ check, lang }: { check: Check; lang: Answer['lang'] }) => (
+  <p className={`flashcard-typed ${check.correct ? 'is-right' : 'is-wrong'}`}>
+    <span className="flashcard-verdict" aria-hidden="true">
+      {check.correct ? '✓' : '✗'}
+    </span>
+    <span className="visually-hidden">
+      {check.correct ? 'Right: you typed' : 'Wrong: you typed'}
+    </span>{' '}
+    {check.typed ? (
+      <span lang={lang}>
+        <Marked text={check.typed} marks={check.typedMarks} wrong />
+      </span>
+    ) : (
+      <span className="muted">No answer</span>
+    )}
+  </p>
+);

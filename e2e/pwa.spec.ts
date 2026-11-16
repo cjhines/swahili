@@ -54,6 +54,7 @@ test('works offline once loaded', async ({ page, context }) => {
 
   // A whole card, offline: the FSRS model chunk must have been precached too.
   await page.getByRole('radio', { name: 'Complete deck' }).check();
+  await page.getByLabel(/^Type your answer/).uncheck(); // mark by hand
   await page.getByRole('button', { name: /^Start/ }).click();
   await page.keyboard.press(' ');
   await page.keyboard.press('ArrowRight');
@@ -68,6 +69,7 @@ test('backup round trip: save, wipe the browser, restore, and every card is back
   await page.getByRole('radio', { name: 'Complete deck' }).check();
   await page.getByRole('button', { name: 'None' }).click();
   await page.getByLabel(/^Time \+ dates/).check();
+  await page.getByLabel(/^Type your answer/).uncheck(); // mark by hand
   await page.getByRole('button', { name: /^Start/ }).click();
   for (let i = 0; i < 7; i++) {
     await page.keyboard.press(' ');

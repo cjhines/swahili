@@ -64,6 +64,7 @@ describe('perfects you would rarely hear are skipped', () => {
           polarity: 'both',
           direction: 'en-sw',
           mode: 'complete',
+          typing: true,
           newCap: 10,
           repeatMisses: false,
         },

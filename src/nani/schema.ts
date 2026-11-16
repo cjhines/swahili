@@ -33,6 +33,10 @@ const Marker = z.strictObject({
 
 const TenseRule = z.strictObject({ pos: Marker, neg: Marker.nullable() });
 const English = z.strictObject({ pos: Template, neg: Template });
+const Accept = z.strictObject({
+  pos: z.array(Template).optional(),
+  neg: z.array(Template).optional(),
+});
 
 export const NaniRules = z
   .strictObject({
@@ -54,6 +58,16 @@ export const NaniRules = z
       have: English,
       /** For stative verbs (want, know): "I want", not "I am wanting". */
       stativePresent: English,
+      /** Typing mode: other sentences that count as right, e.g. "We read" for tunasoma. */
+      accept: z
+        .strictObject({
+          present: Accept.optional(),
+          past: Accept.optional(),
+          future: Accept.optional(),
+          perfect: Accept.optional(),
+          have: Accept.optional(),
+        })
+        .default({}),
     }),
     verbs: z
       .record(

@@ -119,7 +119,7 @@ cards:
   - id: verb-kwenda
     kind: verb
     sw: kwenda
-    en: { base: go, past: went, participle: gone, ing: going }
+    en: { base: go, past: went, participle: gone, ing: going, third: goes }
     example: { sw: Ninakwenda sokoni., en: I am going to the market. }
 `;
     expect(parseDecks([deck('verbs.yaml', verb)]).errors).toEqual([]);

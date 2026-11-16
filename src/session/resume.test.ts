@@ -18,6 +18,7 @@ const complete: VocabSetup = {
   mode: 'complete',
   newCap: 10,
   repeatMisses: true,
+  typing: true,
 };
 const allExist = () => true;
 
@@ -119,6 +120,7 @@ test('a Nani na Lini? run keeps the verb of each card', () => {
     mode: 'complete',
     newCap: 10,
     repeatMisses: true,
+    typing: true,
   } as const;
   const state = startSession(
     [
@@ -156,4 +158,15 @@ test('a vocabulary run saved before deck kinds existed still resumes', () => {
   delete saved.setup.kind;
   localStorage.setItem('swahili:resume', JSON.stringify(saved));
   expect(loadResume(allExist, START)?.setup).toEqual(complete);
+});
+
+test('a run saved before typing mode existed resumes with typing on', () => {
+  saveResume({ setup: complete, state: midRun(), startedAt: START }, START);
+  const saved = JSON.parse(localStorage.getItem('swahili:resume')!);
+  delete saved.setup.typing;
+  localStorage.setItem('swahili:resume', JSON.stringify(saved));
+  expect(loadResume(allExist, START)?.setup).toEqual({
+    ...complete,
+    typing: true,
+  });
 });

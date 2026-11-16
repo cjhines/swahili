@@ -184,3 +184,55 @@
     transition: none;
   }
 }
+
+/* Typing mode: nothing to tap or swipe. */
+.flashcard.is-typing,
+.flashcard.is-typing.is-flipped {
+  cursor: default;
+}
+
+/* What you typed, above the answer: "✓ wait" or "✗ sisoma". */
+.flashcard-typed {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.flashcard-verdict {
+  font-weight: 800;
+}
+
+.flashcard-typed.is-right .flashcard-verdict {
+  color: var(--got);
+}
+
+.flashcard-typed.is-wrong .flashcard-verdict {
+  color: var(--missed);
+}
+
+/* The nearest right answer, when it isn't the one shown above it (a slip, an alternative). */
+.flashcard-nearest {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Letters that differ: wrong in what you typed, right in the answer. */
+mark {
+  border-radius: 3px;
+  padding: 0 0.05em;
+  color: inherit;
+}
+
+.mark-wrong {
+  background: var(--mark-wrong);
+  text-decoration: underline wavy var(--missed);
+  text-underline-offset: 0.2em;
+}
+
+.mark-right {
+  background: var(--mark-right);
+}

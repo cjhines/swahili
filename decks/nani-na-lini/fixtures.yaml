@@ -13,8 +13,8 @@ questions: []
 
 # English for verbs that have no card. Every other verb uses its card's English.
 verbs:
-  kusoma: { base: read, past: read, participle: read, ing: reading }
-  kuosha: { base: wash, past: washed, participle: washed, ing: washing }
+  kusoma: { base: read, past: read, participle: read, ing: reading, third: reads }
+  kuosha: { base: wash, past: washed, participle: washed, ing: washing, third: washes }
 
 paradigms:
   # kuwa isn't in Nani na Lini?; these are the forms its card shows.

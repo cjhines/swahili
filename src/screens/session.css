@@ -76,3 +76,37 @@
 .btn-wide {
   grid-column: 1 / -1;
 }
+
+/* Typing mode: the answer box and its button, in the same place as the answer buttons. */
+.session-typing {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.answer-input {
+  min-width: 0;
+  min-height: 3.75rem;
+  padding: 0 1rem;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  /* 16px or more, or iPhone Safari zooms in on focus. */
+  font-size: 1.25rem;
+}
+
+.answer-input:focus {
+  border-color: var(--brand);
+  outline: none;
+}
+
+.session-typing .btn {
+  min-height: 3.75rem;
+  font-size: 1.1rem;
+}
+
+/* A shorter card leaves room for a phone's keyboard below the answer box. */
+.session.is-typing .flashcard {
+  min-height: min(40dvh, 22rem);
+}

@@ -203,6 +203,7 @@ test('a new verb card adds its four tables by itself', () => {
           past: 'played',
           participle: 'played',
           ing: 'playing',
+          third: 'plays',
         },
       },
     ],

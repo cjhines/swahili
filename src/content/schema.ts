@@ -104,43 +104,37 @@ const TenseEnglish = z.strictObject({
 });
 
 /** A verb's English: its forms, for Nani na Lini? sentences, and how Vocabulary shows it. */
-export const VerbEnglish = z
-  .strictObject({
-    base: text(
-      'e.g. read. Nani na Lini? builds its sentences from these four forms.'
+export const VerbEnglish = z.strictObject({
+  base: text(
+    'e.g. read. Nani na Lini? builds its sentences from these four forms.'
+  ),
+  past: text('e.g. read, ate'),
+  participle: text('e.g. read, eaten'),
+  ing: text('e.g. reading, eating'),
+  meaning: text(
+    'What Vocabulary shows, when it is more than "to " + base: e.g. "to call / to shout". ' +
+      'Nani na Lini? sentences use the base form ("We didn\'t call").'
+  ).optional(),
+  third: text(
+    'The he/she form of the simple present: reads, goes out, is called. Stative verbs use it ' +
+      'for the present ("He/she wants"); typing mode accepts "He/she reads" for anasoma.'
+  ),
+  stative: z
+    .literal(true)
+    .optional()
+    .describe('The present is "I want" / "He/she wants", not "I am wanting".'),
+  tenses: z
+    .strictObject({
+      present: TenseEnglish.optional(),
+      past: TenseEnglish.optional(),
+      future: TenseEnglish.optional(),
+      perfect: TenseEnglish.optional(),
+    })
+    .optional()
+    .describe(
+      'The verb\'s own English for particular tenses, e.g. kuweza: present { pos: can, neg: "can\'t" }.'
     ),
-    past: text('e.g. read, ate'),
-    participle: text('e.g. read, eaten'),
-    ing: text('e.g. reading, eating'),
-    meaning: text(
-      'What Vocabulary shows, when it is more than "to " + base: e.g. "to call / to shout". ' +
-        'Nani na Lini? sentences use the base form ("We didn\'t call").'
-    ).optional(),
-    stative: z
-      .literal(true)
-      .optional()
-      .describe(
-        'The present is "I want" / "He/she wants", not "I am wanting". Needs `third`.'
-      ),
-    third: text(
-      'The he/she form of the simple present: wants, knows.'
-    ).optional(),
-    tenses: z
-      .strictObject({
-        present: TenseEnglish.optional(),
-        past: TenseEnglish.optional(),
-        future: TenseEnglish.optional(),
-        perfect: TenseEnglish.optional(),
-      })
-      .optional()
-      .describe(
-        'The verb\'s own English for particular tenses, e.g. kuweza: present { pos: can, neg: "can\'t" }.'
-      ),
-  })
-  .refine((en) => !en.stative || en.third, {
-    message: 'a stative verb needs `third`',
-    path: ['third'],
-  });
+});
 export type VerbEnglish = z.output<typeof VerbEnglish>;
 
 export const Verb = z.strictObject({

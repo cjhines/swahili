@@ -9,29 +9,29 @@ cards:
   - id: verb-kwenda
     kind: verb
     sw: kwenda
-    en: { base: go, past: went, participle: gone, ing: going }
+    en: { base: go, past: went, participle: gone, ing: going, third: goes }
     note: 'Ninaenda is common too. Command: nenda!'
 
   - id: verb-kuja
     kind: verb
     sw: kuja
-    en: { base: come, past: came, participle: come, ing: coming }
+    en: { base: come, past: came, participle: come, ing: coming, third: comes }
     note: 'Command: njoo!'
 
   - id: verb-kula
     kind: verb
     sw: kula
-    en: { base: eat, past: ate, participle: eaten, ing: eating }
+    en: { base: eat, past: ate, participle: eaten, ing: eating, third: eats }
 
   - id: verb-kufanya
     kind: verb
     sw: kufanya
-    en: { meaning: to do / to make, base: do, past: did, participle: done, ing: doing }
+    en: { meaning: to do / to make, base: do, past: did, participle: done, ing: doing, third: does }
 
   - id: verb-kusema
     kind: verb
     sw: kusema
-    en: { base: say, past: said, participle: said, ing: saying }
+    en: { base: say, past: said, participle: said, ing: saying, third: says }
 
   - id: verb-kuona
     kind: verb
@@ -47,13 +47,14 @@ cards:
       past: got
       participle: got
       ing: getting
+      third: gets
       # Nimepata! is used exactly like "got it!"
       tenses: { perfect: { pos: '{have} got it', neg: "{have}n't got it yet" } }
 
   - id: verb-kupa
     kind: verb
     sw: kupa
-    en: { base: give, past: gave, participle: given, ing: giving }
+    en: { base: give, past: gave, participle: given, ing: giving, third: gives }
     note: 'Always needs a marker for who receives it: nipe, give me.'
 
   - id: verb-kupenda
@@ -99,6 +100,7 @@ cards:
       past: went out
       participle: gone out
       ing: going out
+      third: goes out
       # Unatoka wapi? / Ninatoka… is "Where are you from?" / "I'm from…", so the present covers both.
       tenses:
         present:
@@ -108,17 +110,17 @@ cards:
   - id: verb-kurudi
     kind: verb
     sw: kurudi
-    en: { meaning: to return / to come back, base: return, past: returned, participle: returned, ing: returning }
+    en: { meaning: to return / to come back, base: return, past: returned, participle: returned, ing: returning, third: returns }
 
   - id: verb-kufika
     kind: verb
     sw: kufika
-    en: { base: arrive, past: arrived, participle: arrived, ing: arriving }
+    en: { base: arrive, past: arrived, participle: arrived, ing: arriving, third: arrives }
 
   - id: verb-kulala
     kind: verb
     sw: kulala
-    en: { meaning: to sleep / to lie down, base: sleep, past: slept, participle: slept, ing: sleeping }
+    en: { meaning: to sleep / to lie down, base: sleep, past: slept, participle: slept, ing: sleeping, third: sleeps }
 
   # More everyday verbs. "meet" (kukutana) is further down.
   - id: verb-kusikia
@@ -141,12 +143,12 @@ cards:
   - id: verb-kuuliza
     kind: verb
     sw: kuuliza
-    en: { base: ask, past: asked, participle: asked, ing: asking }
+    en: { base: ask, past: asked, participle: asked, ing: asking, third: asks }
 
   - id: verb-kujibu
     kind: verb
     sw: kujibu
-    en: { base: answer, past: answered, participle: answered, ing: answering }
+    en: { base: answer, past: answered, participle: answered, ing: answering, third: answers }
 
   - id: verb-kufikiri
     kind: verb
@@ -163,28 +165,28 @@ cards:
   - id: verb-kuongea
     kind: verb
     sw: kuongea
-    en: { base: talk, past: talked, participle: talked, ing: talking }
+    en: { base: talk, past: talked, participle: talked, ing: talking, third: talks }
     note: 'Kuzungumza also means to talk or to chat. Kuongea is the more everyday word, especially in Kenya.'
 
   - id: verb-kununua
     kind: verb
     sw: kununua
-    en: { base: buy, past: bought, participle: bought, ing: buying }
+    en: { base: buy, past: bought, participle: bought, ing: buying, third: buys }
 
   - id: verb-kulipa
     kind: verb
     sw: kulipa
-    en: { base: pay, past: paid, participle: paid, ing: paying }
+    en: { base: pay, past: paid, participle: paid, ing: paying, third: pays }
 
   - id: verb-kuleta
     kind: verb
     sw: kuleta
-    en: { base: bring, past: brought, participle: brought, ing: bringing }
+    en: { base: bring, past: brought, participle: brought, ing: bringing, third: brings }
 
   - id: verb-kuchukua
     kind: verb
     sw: kuchukua
-    en: { base: take, past: took, participle: taken, ing: taking }
+    en: { base: take, past: took, participle: taken, ing: taking, third: takes }
 
   - id: verb-kuweka
     kind: verb
@@ -195,35 +197,36 @@ cards:
       past: put (something)
       participle: put (something)
       ing: putting (something)
+      third: puts (something)
 
   - id: verb-kusaidia
     kind: verb
     sw: kusaidia
-    en: { base: help, past: helped, participle: helped, ing: helping }
+    en: { base: help, past: helped, participle: helped, ing: helping, third: helps }
 
   - id: verb-kutafuta
     kind: verb
     sw: kutafuta
     # "Search" is complete English without an object; "I am looking for" isn't.
-    en: { meaning: to look for / to search, base: search, past: searched, participle: searched, ing: searching }
+    en: { meaning: to look for / to search, base: search, past: searched, participle: searched, ing: searching, third: searches }
 
   # wait: two verbs with the same meaning. Each accepts the other as an answer.
   - id: verb-kungoja
     kind: verb
     sw: kungoja
     alt: [kusubiri]
-    en: { base: wait, past: waited, participle: waited, ing: waiting }
+    en: { base: wait, past: waited, participle: waited, ing: waiting, third: waits }
 
   - id: verb-kusubiri
     kind: verb
     sw: kusubiri
     alt: [kungoja]
-    en: { base: wait, past: waited, participle: waited, ing: waiting }
+    en: { base: wait, past: waited, participle: waited, ing: waiting, third: waits }
 
   - id: verb-kupiga
     kind: verb
     sw: kupiga
-    en: { meaning: to hit / to strike, base: hit, past: hit, participle: hit, ing: hitting }
+    en: { meaning: to hit / to strike, base: hit, past: hit, participle: hit, ing: hitting, third: hits }
     note: 'Used in lots of fixed phrases: piga simu, phone someone; piga picha, take a photo; piga kelele, shout.'
 
   # kuacha is stopping doing something, quitting, or leaving something behind. "I'm leaving"
@@ -232,7 +235,7 @@ cards:
   - id: verb-kuacha
     kind: verb
     sw: kuacha
-    en: { meaning: to quit / to stop doing / to leave behind, base: quit, past: quit, participle: quit, ing: quitting }
+    en: { meaning: to quit / to stop doing / to leave behind, base: quit, past: quit, participle: quit, ing: quitting, third: quits }
     note: 'Needs an object: ninaacha kazi, I''m quitting my job. Also "to let": mwache aende, let him/her go. To come to a halt (like a car) is kusimama, and "I''m leaving" (going away) is ninaondoka.'
 
   - id: verb-kutaka
@@ -249,6 +252,7 @@ cards:
       past: was called
       participle: been called
       ing: being called
+      third: is called
       # Passive: "I am called" (ninaitwa), with was/were agreeing with the subject.
       tenses:
         present: { pos: '{be} called', neg: '{be} not called' }
@@ -277,7 +281,7 @@ cards:
   - id: verb-kuita
     kind: verb
     sw: kuita
-    en: { meaning: to call / to call out, base: call, past: called, participle: called, ing: calling }
+    en: { meaning: to call / to call out, base: call, past: called, participle: called, ing: calling, third: calls }
     example: { sw: Wanamwita Chris., en: They call him Chris. }
     note: 'Also to call someone by a name, as in the example. Its passive is kuitwa (to be called). To shout is usually kupiga kelele.'
 
@@ -290,6 +294,7 @@ cards:
       past: was able
       participle: been able
       ing: being able
+      third: is able
       # "can" has no -ing, no "to" and no past participle of its own.
       tenses:
         present: { pos: can, neg: "can't" }
@@ -302,22 +307,22 @@ cards:
   - id: verb-kuanza
     kind: verb
     sw: kuanza
-    en: { base: begin, past: began, participle: begun, ing: beginning }
+    en: { base: begin, past: began, participle: begun, ing: beginning, third: begins }
 
   - id: verb-kumaliza
     kind: verb
     sw: kumaliza
-    en: { base: finish, past: finished, participle: finished, ing: finishing }
+    en: { base: finish, past: finished, participle: finished, ing: finishing, third: finishes }
 
   - id: verb-kuogelea
     kind: verb
     sw: kuogelea
-    en: { base: swim, past: swam, participle: swum, ing: swimming }
+    en: { base: swim, past: swam, participle: swum, ing: swimming, third: swims }
 
   - id: verb-kuoga
     kind: verb
     sw: kuoga
-    en: { meaning: to bathe / to shower, base: bathe, past: bathed, participle: bathed, ing: bathing }
+    en: { meaning: to bathe / to shower, base: bathe, past: bathed, participle: bathed, ing: bathing, third: bathes }
 
   - id: verb-kutunza
     kind: verb
@@ -328,6 +333,7 @@ cards:
       past: looked after (something)
       participle: looked after (something)
       ing: looking after (something)
+      third: looks after (something)
 
   - id: verb-kukaa
     kind: verb
@@ -338,6 +344,7 @@ cards:
       past: stayed
       participle: stayed
       ing: staying
+      third: stays
       # Nimekaa / sijakaa: "I've sat down" / "I haven't sat down yet" reads better than "stayed".
       tenses: { perfect: { pos: '{have} sat down', neg: "{have}n't sat down yet" } }
     example: { sw: Anakaa Nairobi., en: He lives in Nairobi. }
@@ -353,6 +360,7 @@ cards:
       past: was
       participle: been
       ing: being
+      third: is
       tenses:
         present: { pos: '{be} becoming', neg: '{be} not becoming' }
         past: { pos: '{was}', neg: "{was}n't" }
@@ -369,7 +377,7 @@ cards:
   - id: verb-kunywa
     kind: verb
     sw: kunywa
-    en: { base: drink, past: drank, participle: drunk, ing: drinking }
+    en: { base: drink, past: drank, participle: drunk, ing: drinking, third: drinks }
 
   # kuonana is "see each other" (tuonane baadaye, see you later); "meet" is kukutana.
   - id: verb-kuonana
@@ -381,19 +389,20 @@ cards:
       past: saw each other
       participle: seen each other
       ing: seeing each other
+      third: sees each other
     example: { sw: Tuonane baadaye., en: See you later. }
     note: 'For "to meet", the everyday word is kukutana.'
 
   - id: verb-kukutana
     kind: verb
     sw: kukutana
-    en: { base: meet, past: met, participle: met, ing: meeting }
+    en: { base: meet, past: met, participle: met, ing: meeting, third: meets }
     note: 'Compare kuonana: to see each other.'
 
   - id: verb-kuangalia
     kind: verb
     sw: kuangalia
-    en: { meaning: to look / to look at / to be careful, base: look, past: looked, participle: looked, ing: looking }
+    en: { meaning: to look / to look at / to be careful, base: look, past: looked, participle: looked, ing: looking, third: looks }
 
   - id: verb-kujua
     kind: verb
@@ -412,10 +421,10 @@ cards:
   - id: verb-kusikiliza
     kind: verb
     sw: kusikiliza
-    en: { base: listen, past: listened, participle: listened, ing: listening }
+    en: { base: listen, past: listened, participle: listened, ing: listening, third: listens }
     note: 'Compare kusikia: to hear, or to feel.'
 
   - id: verb-kuamka
     kind: verb
     sw: kuamka
-    en: { base: wake up, past: woke up, participle: woken up, ing: waking up }
+    en: { base: wake up, past: woke up, participle: woken up, ing: waking up, third: wakes up }

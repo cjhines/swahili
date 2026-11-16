@@ -16,6 +16,8 @@ const shared = {
   mode: z.enum(['practice', 'complete']),
   newCap: z.int().check(z.minimum(0), z.maximum(100)),
   repeatMisses: z.boolean(),
+  /** Type the answer and the app marks it. Setups saved before typing mode get it on. */
+  typing: z._default(z.boolean(), true),
 };
 
 export const VocabSetup = z.object({
@@ -59,6 +61,7 @@ export const defaultVocabSetup = (decks: readonly VocabDeck[]): VocabSetup => ({
   mode: 'practice',
   newCap: 10,
   repeatMisses: true,
+  typing: true,
 });
 
 export const defaultNaniSetup = (
@@ -72,6 +75,7 @@ export const defaultNaniSetup = (
   mode: 'practice',
   newCap: 10,
   repeatMisses: true,
+  typing: true,
 });
 
 /** Last vocabulary choices, minus decks that no longer exist. Unreadable falls back to defaults. */

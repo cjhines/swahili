@@ -24,9 +24,12 @@ errors as you type.
 | --- | --- | --- |
 | `word` (numbers, days, adjectives, phrases…) | `id`, `sw`, `en` | `alt`, `example`, `hint`, `note` |
 | `noun` | `id`, `sw`, `en` | `plural`, `alt`, `example`, `hint`, `note` |
-| `verb` | `id`, `sw` (the ku- form), `en.base`, `en.past`, `en.participle`, `en.ing` | `en.meaning`, `en.stative` + `en.third`, `en.tenses`, `example`, `alt`, `hint`, `note` |
+| `verb` | `id`, `sw` (the ku- form), `en.base`, `en.past`, `en.participle`, `en.ing`, `en.third` | `en.meaning`, `en.stative`, `en.tenses`, `example`, `alt`, `hint`, `note` |
 
-- `alt`: other accepted Swahili forms, e.g. `alt: [alfu moja]` for *elfu moja*.
+- `alt`: other accepted Swahili forms, e.g. `alt: [alfu moja]` for *elfu moja*. Typing mode
+  accepts them too.
+- `en`: separate meanings with " / " (`to look / to look at`). Typing mode accepts any one of
+  them; a comma doesn't separate meanings.
 - `hint`: shown on the front when going English → Swahili, to tell apart words with the same
   English, e.g. `hint: (for someone)`.
 - `example`: `{ sw: Ninasoma kitabu., en: I am reading a book. }`
@@ -37,18 +40,21 @@ errors as you type.
   - id: verb-kula
     kind: verb
     sw: kula
-    en: { base: eat, past: ate, participle: eaten, ing: eating }
+    en: { base: eat, past: ate, participle: eaten, ing: eating, third: eats }
     example: { sw: Ninakula wali., en: I am eating rice. }
   ```
 
-  The four forms describe **one** meaning, the one Nani na Lini? sentences use ("We didn't
+  `third` is the he/she form ("eats", "goes out"). Typing mode accepts "He/she eats" for
+  *anakula*, and stative verbs use it for their present.
+
+  The forms describe **one** meaning, the one Nani na Lini? sentences use ("We didn't
   call"). The optional fields cover verbs that don't fit that mould:
 
   - `meaning`: what Vocabulary shows, if it's more than "to" + base:
     `meaning: to call / to shout`.
-  - `stative: true` and `third`: for verbs that don't take "-ing" in the present. Their present
-    is "I want" / "He/she wants" / "I don't want", not "I am wanting":
-    `{ base: want, …, stative: true, third: wants }`.
+  - `stative: true`: for verbs that don't take "-ing" in the present. Their present is "I want"
+    / "He/she wants" / "I don't want", not "I am wanting":
+    `{ base: want, …, third: wants, stative: true }`.
   - `tenses`: the verb's own English for any tense, for verbs nothing else fits. *Kuweza* uses
     `present: { pos: can, neg: "can't" }`. Placeholders: `{be}` am/is/are, `{have}` have/has,
     `{do}` do/does, `{was}` was/were, `{simple}` (base, or `third` after he/she/it),

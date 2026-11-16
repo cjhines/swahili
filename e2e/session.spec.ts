@@ -18,12 +18,13 @@ const swipe = async (page: Page, direction: 'right' | 'left') => {
   await page.mouse.up();
 };
 
-/** Setup: Complete deck, Time + dates only (7 cards). */
-const startTimeAndDates = async (page: Page) => {
+/** Setup: Complete deck, Time + dates only (7 cards), marking by hand unless `typing`. */
+const startTimeAndDates = async (page: Page, { typing = false } = {}) => {
   await page.goto('/swahili/');
   await page.getByRole('radio', { name: 'Complete deck' }).check();
   await page.getByRole('button', { name: 'None' }).click();
   await page.getByLabel(/^Time \+ dates/).check();
+  await page.getByLabel(/^Type your answer/).setChecked(typing);
   await expect(page.getByRole('button', { name: /^Start/ })).toHaveText(
     'Start · 7 cards'
   );
@@ -131,4 +132,66 @@ test('Nani na Lini?: every tense can be chosen, and a session starts', async ({
   await expect(page.getByText(/grammar sheets/)).toHaveCount(0);
   await page.getByRole('button', { name: /^Start/ }).click();
   await expect(page.getByTestId('flashcard')).toBeVisible();
+});
+
+const DAYS: Record<string, string> = {
+  Jumatatu: 'Monday',
+  Jumanne: 'Tuesday',
+  Jumatano: 'Wednesday',
+  Alhamisi: 'Thursday',
+  Ijumaa: 'Friday',
+  Jumamosi: 'Saturday',
+  Jumapili: 'Sunday',
+};
+const answerBox = (page: Page) =>
+  page.getByRole('textbox', { name: 'Your answer' });
+
+test('typing: a whole run from the keyboard, and the answer box keeps focus throughout', async ({
+  page,
+}) => {
+  await startTimeAndDates(page, { typing: true });
+  for (let i = 0; i < 7; i++) {
+    await expect(page.getByText(`${i}/7`)).toBeVisible();
+    await expect(answerBox(page)).toBeFocused();
+    const sw = (await card(page).locator('.flashcard-prompt').textContent())!;
+    await page.keyboard.type(DAYS[sw]!.toLowerCase());
+    await page.keyboard.press('Enter');
+    await expect(card(page).locator('.flashcard-typed')).toContainText('✓');
+    await expect(page.getByRole('button', { name: 'Next' })).toBeVisible();
+    await page.keyboard.press('Enter');
+  }
+  await expect(page.getByRole('heading', { name: /Hongera!/ })).toBeVisible();
+  await expect(page.getByText('Got first time').locator('..')).toContainText(
+    '7'
+  );
+});
+
+test('typing: tapping Check and Next keeps focus in the answer box', async ({
+  page,
+}) => {
+  await startTimeAndDates(page, { typing: true });
+  await answerBox(page).fill('nonsense');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(card(page).locator('.flashcard-typed')).toContainText('✗');
+  await expect(answerBox(page)).toBeFocused();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await expect(answerBox(page)).toBeFocused();
+  await expect(answerBox(page)).toHaveValue('');
+});
+
+test('typing: with a phone keyboard up, the question and the answer box both fit', async ({
+  page,
+}) => {
+  // Roughly what's left of an iPhone screen with the keyboard open.
+  await page.setViewportSize({ width: 390, height: 480 });
+  await startTimeAndDates(page, { typing: true });
+  for (const target of [
+    card(page).locator('.flashcard-prompt'),
+    answerBox(page),
+  ])
+    await expect(target).toBeInViewport({ ratio: 1 });
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - window.innerWidth
+  );
+  expect(overflow).toBeLessThanOrEqual(0);
 });

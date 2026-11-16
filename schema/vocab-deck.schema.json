@@ -227,15 +227,15 @@
                     "pattern": "^\\S(.*\\S)?$",
                     "description": "What Vocabulary shows, when it is more than \"to \" + base: e.g. \"to call / to shout\". Nani na Lini? sentences use the base form (\"We didn't call\")."
                   },
-                  "stative": {
-                    "description": "The present is \"I want\" / \"He/she wants\", not \"I am wanting\". Needs `third`.",
-                    "type": "boolean",
-                    "const": true
-                  },
                   "third": {
                     "type": "string",
                     "pattern": "^\\S(.*\\S)?$",
-                    "description": "The he/she form of the simple present: wants, knows."
+                    "description": "The he/she form of the simple present: reads, goes out, is called. Stative verbs use it for the present (\"He/she wants\"); typing mode accepts \"He/she reads\" for anasoma."
+                  },
+                  "stative": {
+                    "description": "The present is \"I want\" / \"He/she wants\", not \"I am wanting\".",
+                    "type": "boolean",
+                    "const": true
                   },
                   "tenses": {
                     "description": "The verb's own English for particular tenses, e.g. kuweza: present { pos: can, neg: \"can't\" }.",
@@ -321,7 +321,8 @@
                   "base",
                   "past",
                   "participle",
-                  "ing"
+                  "ing",
+                  "third"
                 ],
                 "additionalProperties": false
               },
