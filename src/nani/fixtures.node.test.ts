@@ -116,7 +116,6 @@ describe('the file', () => {
     ['kula', 'perfect', 'sijala', 'sijakula'],
     ['kunywa', 'perfect', 'sijanywa', 'sijakunywa'],
     ['kuja', 'perfect', 'sijaja', 'sijakuja'],
-    ['kwenda', 'past', 'sikwenda', 'sikuenda'],
   ])(
     '%s %s: the textbook %s, with a note that Nairobi often says %s',
     (sw, tense, textbook, everyday) => {

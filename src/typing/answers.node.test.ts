@@ -165,6 +165,25 @@ describe('Nani na Lini?', () => {
     }
   );
 
+  test('kwenda: the everyday form is shown, and the textbook one counts too', () => {
+    const going = naniCard('i', 'present', 'pos', 'kwenda', 'en-sw');
+    expect(going.answer).toMatchObject({
+      text: 'ninaenda',
+      alt: ['ninakwenda'],
+    });
+    expect(checkAnswer('ninaenda', going.expected).correct).toBe(true);
+    expect(checkAnswer('ninakwenda', going.expected).correct).toBe(true);
+
+    const didntGo = naniCard('heshe', 'past', 'neg', 'kwenda', 'en-sw');
+    expect(didntGo.answer.text).toBe('hakuenda');
+    expect(checkAnswer('hakwenda', didntGo.expected).correct).toBe(true);
+
+    // Going Swahili → English, the prompt is the everyday form.
+    expect(
+      naniCard('heshe', 'present', 'pos', 'kwenda', 'sw-en').prompt.text
+    ).toBe('anaenda');
+  });
+
   test('Swahili is exact: the form, nothing else', () => {
     const view = naniCard('i', 'present', 'neg', 'kula', 'en-sw');
     expect(view.answer.text).toBe('sili');

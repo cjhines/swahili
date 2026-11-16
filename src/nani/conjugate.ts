@@ -38,6 +38,7 @@ export const verbInfo = (rules: NaniRules, sw: string) => {
     stem,
     oneSyllable,
     keepKu: quirks.keepKu ?? oneSyllable,
+    textbookKeepsKu: quirks.textbookKeepsKu ?? false,
     needsObject: quirks.needsObject ?? false,
     exclude: (quirks.exclude ?? false) || (quirks.needsObject ?? false),
   };
@@ -76,10 +77,15 @@ const subjectParts = (rules: NaniRules, pattern: Pattern): Part[] => {
       ];
 };
 
+/**
+ * `keepKu` overrides the verb's own behaviour: textbookForm uses it to build the textbook form of
+ * a verb shown the everyday way.
+ */
 export const conjugate = (
   rules: NaniRules,
   pattern: Pattern,
-  verb?: ConjugatableVerb
+  verb?: ConjugatableVerb,
+  { keepKu: keepKuOverride }: { keepKu?: boolean } = {}
 ): Form => {
   const parts = subjectParts(rules, pattern);
 
@@ -91,7 +97,9 @@ export const conjugate = (
     });
   } else {
     if (!verb) throw new Error(`"${pattern.id}" needs a verb`);
-    const { prefix, stem, keepKu } = verbInfo(rules, verb.sw);
+    const info = verbInfo(rules, verb.sw);
+    const { prefix, stem } = info;
+    const keepKu = keepKuOverride ?? info.keepKu;
     const stemPart = (text: string): Part => ({
       text,
       role: 'stem',
@@ -132,4 +140,19 @@ export const conjugate = (
   }
 
   return { sw: parts.map((part) => part.text).join(''), parts };
+};
+
+/**
+ * For a verb shown the everyday way (rules.yaml `textbookKeepsKu`), the textbook form when it's
+ * different: ninakwenda for ninaenda, sikwenda for sikuenda. Typing mode accepts it too.
+ */
+export const textbookForm = (
+  rules: NaniRules,
+  pattern: Pattern,
+  verb?: ConjugatableVerb
+) => {
+  if (!verb || pattern.tense === 'have') return undefined;
+  if (!verbInfo(rules, verb.sw).textbookKeepsKu) return undefined;
+  const textbook = conjugate(rules, pattern, verb, { keepKu: true }).sw;
+  return textbook === conjugate(rules, pattern, verb).sw ? undefined : textbook;
 };

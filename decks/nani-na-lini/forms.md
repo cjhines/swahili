@@ -13,6 +13,12 @@ that has already been confirmed.
 
 **4 of 198 tables checked.**
 
+## Open questions
+
+Please answer these along with the tables.
+
+1. kwenda now shows the everyday forms: ninaenda, nilienda, nitaenda, nimeenda. The textbook ones (ninakwenda, nilikwenda…) are accepted too. Its negatives follow the same pattern: sikuenda for "I didn't go" (textbook sikwenda) and sitaenda for "I won't go" (textbook sitakwenda). Are those what you'd say?
+
 **it (N-class), they (N-class):** i- and zi- are for N-class nouns like nyumba (nyumba ina vyumba vitatu, the house has three rooms). Other noun classes use ki-/vi-, li-/ya-, u- and so on, and animals usually take a-/wa- (mbwa anakula, the dog is eating).
 
 Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya · kufika · kufikiri · kuhitaji · kuishi · kuita · kuitwa · kuja · kujibu · kujua · kukaa · kukutana · kula · kulala · kuleta · kulipa · kumaliza · kungoja · kununua · kunywa · kuoga · kuogelea · kuona · kuonana · kuongea · kuosha · kupa · kupata · kupenda · kupiga · kurudi · kusaidia · kusema · kusikia · kusikiliza · kusoma · kusubiri · kutafuta · kutaka · kutoka · kutunza · kuuliza · kuwa · kuwa na · kuweka · kuweza · kwenda
@@ -2767,61 +2773,65 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 ## kwenda · to go
 
-- Stem: *enda*. Keeps kw-: ninakwenda · nilikwenda · nitakwenda · nimekwenda
-- Note: Ninaenda is common too. Command: nenda!
+- Stem: *enda*. Textbooks keep kw-: ninakwenda · nilikwenda · nitakwenda · nimekwenda
+- Note: Everyday speech drops the kw- (ninaenda). Command: nenda!
 
 ### ⬜ Present (now)
 
-> Textbook forms. Everyday speech also says ninaenda, nilienda, nimeenda.
+> Everyday forms. Textbooks say ninakwenda, anakwenda.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·na·kw·enda** | I am going | **si·end·i** | I am not going |
-| you | **u·na·kw·enda** | You are going | **hu·end·i** | You are not going |
-| he/she | **a·na·kw·enda** | He/she is going | **ha·end·i** | He/she is not going |
-| we | **tu·na·kw·enda** | We are going | **ha·tu·end·i** | We are not going |
-| you (plural) | **m·na·kw·enda** | You (plural) are going | **ha·m·end·i** | You (plural) are not going |
-| they | **wa·na·kw·enda** | They are going | **ha·wa·end·i** | They are not going |
-| it (N-class) | **i·na·kw·enda** | It (N-class) is going | **ha·i·end·i** | It (N-class) is not going |
-| they (N-class) | **zi·na·kw·enda** | They (N-class) are going | **ha·zi·end·i** | They (N-class) are not going |
+| I | **ni·na·enda** | I am going | **si·end·i** | I am not going |
+| you | **u·na·enda** | You are going | **hu·end·i** | You are not going |
+| he/she | **a·na·enda** | He/she is going | **ha·end·i** | He/she is not going |
+| we | **tu·na·enda** | We are going | **ha·tu·end·i** | We are not going |
+| you (plural) | **m·na·enda** | You (plural) are going | **ha·m·end·i** | You (plural) are not going |
+| they | **wa·na·enda** | They are going | **ha·wa·end·i** | They are not going |
+| it (N-class) | **i·na·enda** | It (N-class) is going | **ha·i·end·i** | It (N-class) is not going |
+| they (N-class) | **zi·na·enda** | They (N-class) are going | **ha·zi·end·i** | They (N-class) are not going |
 
 ### ⬜ Past
 
-> Textbook forms. In Nairobi you'll often hear sikuenda; check with your tutor before ticking.
+> Everyday forms. Textbooks say nilikwenda and sikwenda; check the negative with your tutor before ticking.
 
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·li·kw·enda** | I went | **si·kw·enda** | I didn't go |
-| you | **u·li·kw·enda** | You went | **hu·kw·enda** | You didn't go |
-| he/she | **a·li·kw·enda** | He/she went | **ha·kw·enda** | He/she didn't go |
-| we | **tu·li·kw·enda** | We went | **ha·tu·kw·enda** | We didn't go |
-| you (plural) | **m·li·kw·enda** | You (plural) went | **ha·m·kw·enda** | You (plural) didn't go |
-| they | **wa·li·kw·enda** | They went | **ha·wa·kw·enda** | They didn't go |
-| it (N-class) | **i·li·kw·enda** | It (N-class) went | **ha·i·kw·enda** | It (N-class) didn't go |
-| they (N-class) | **zi·li·kw·enda** | They (N-class) went | **ha·zi·kw·enda** | They (N-class) didn't go |
+| I | **ni·li·enda** | I went | **si·ku·enda** | I didn't go |
+| you | **u·li·enda** | You went | **hu·ku·enda** | You didn't go |
+| he/she | **a·li·enda** | He/she went | **ha·ku·enda** | He/she didn't go |
+| we | **tu·li·enda** | We went | **ha·tu·ku·enda** | We didn't go |
+| you (plural) | **m·li·enda** | You (plural) went | **ha·m·ku·enda** | You (plural) didn't go |
+| they | **wa·li·enda** | They went | **ha·wa·ku·enda** | They didn't go |
+| it (N-class) | **i·li·enda** | It (N-class) went | **ha·i·ku·enda** | It (N-class) didn't go |
+| they (N-class) | **zi·li·enda** | They (N-class) went | **ha·zi·ku·enda** | They (N-class) didn't go |
 
 ### ⬜ Future
 
+> Everyday forms. Textbooks say nitakwenda and sitakwenda; check the negative with your tutor before ticking.
+
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·ta·kw·enda** | I will go | **si·ta·kw·enda** | I won't go |
-| you | **u·ta·kw·enda** | You will go | **hu·ta·kw·enda** | You won't go |
-| he/she | **a·ta·kw·enda** | He/she will go | **ha·ta·kw·enda** | He/she won't go |
-| we | **tu·ta·kw·enda** | We will go | **ha·tu·ta·kw·enda** | We won't go |
-| you (plural) | **m·ta·kw·enda** | You (plural) will go | **ha·m·ta·kw·enda** | You (plural) won't go |
-| they | **wa·ta·kw·enda** | They will go | **ha·wa·ta·kw·enda** | They won't go |
-| it (N-class) | **i·ta·kw·enda** | It (N-class) will go | **ha·i·ta·kw·enda** | It (N-class) won't go |
-| they (N-class) | **zi·ta·kw·enda** | They (N-class) will go | **ha·zi·ta·kw·enda** | They (N-class) won't go |
+| I | **ni·ta·enda** | I will go | **si·ta·enda** | I won't go |
+| you | **u·ta·enda** | You will go | **hu·ta·enda** | You won't go |
+| he/she | **a·ta·enda** | He/she will go | **ha·ta·enda** | He/she won't go |
+| we | **tu·ta·enda** | We will go | **ha·tu·ta·enda** | We won't go |
+| you (plural) | **m·ta·enda** | You (plural) will go | **ha·m·ta·enda** | You (plural) won't go |
+| they | **wa·ta·enda** | They will go | **ha·wa·ta·enda** | They won't go |
+| it (N-class) | **i·ta·enda** | It (N-class) will go | **ha·i·ta·enda** | It (N-class) won't go |
+| they (N-class) | **zi·ta·enda** | They (N-class) will go | **ha·zi·ta·enda** | They (N-class) won't go |
 
 ### ⬜ Perfect (have done / not yet)
 
+> Everyday forms. Textbooks say nimekwenda.
+
 | | Positive | | Negative | |
 | --- | --- | --- | --- | --- |
-| I | **ni·me·kw·enda** | I have gone | **si·ja·enda** | I haven't gone yet |
-| you | **u·me·kw·enda** | You have gone | **hu·ja·enda** | You haven't gone yet |
-| he/she | **a·me·kw·enda** | He/she has gone | **ha·ja·enda** | He/she hasn't gone yet |
-| we | **tu·me·kw·enda** | We have gone | **ha·tu·ja·enda** | We haven't gone yet |
-| you (plural) | **m·me·kw·enda** | You (plural) have gone | **ha·m·ja·enda** | You (plural) haven't gone yet |
-| they | **wa·me·kw·enda** | They have gone | **ha·wa·ja·enda** | They haven't gone yet |
-| it (N-class) | **i·me·kw·enda** | It (N-class) has gone | **ha·i·ja·enda** | It (N-class) hasn't gone yet |
-| they (N-class) | **zi·me·kw·enda** | They (N-class) have gone | **ha·zi·ja·enda** | They (N-class) haven't gone yet |
+| I | **ni·me·enda** | I have gone | **si·ja·enda** | I haven't gone yet |
+| you | **u·me·enda** | You have gone | **hu·ja·enda** | You haven't gone yet |
+| he/she | **a·me·enda** | He/she has gone | **ha·ja·enda** | He/she hasn't gone yet |
+| we | **tu·me·enda** | We have gone | **ha·tu·ja·enda** | We haven't gone yet |
+| you (plural) | **m·me·enda** | You (plural) have gone | **ha·m·ja·enda** | You (plural) haven't gone yet |
+| they | **wa·me·enda** | They have gone | **ha·wa·ja·enda** | They haven't gone yet |
+| it (N-class) | **i·me·enda** | It (N-class) has gone | **ha·i·ja·enda** | It (N-class) hasn't gone yet |
+| they (N-class) | **zi·me·enda** | They (N-class) have gone | **ha·zi·ja·enda** | They (N-class) haven't gone yet |

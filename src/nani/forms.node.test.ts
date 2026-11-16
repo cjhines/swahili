@@ -226,8 +226,10 @@ describe('open questions', () => {
     expect(top).toContain('1. Is sijala right?\n2. Is sikwenda right?');
   });
 
-  test('none left (all answered), so no section', () => {
-    expect(fixtures.questions).toEqual([]);
-    expect(md).not.toContain('## Open questions');
+  test("the real file's questions are listed (there's no section once all are answered)", () => {
+    expect(md.includes('## Open questions')).toBe(
+      fixtures.questions.length > 0
+    );
+    for (const question of fixtures.questions) expect(md).toContain(question);
   });
 });

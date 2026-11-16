@@ -177,7 +177,7 @@
               "sw": {
                 "type": "string",
                 "pattern": "^k[uw][a-z]+$",
-                "description": "The ku- form, e.g. kusoma. Grammar quirks (kwenda keeping its kw-, kuwa never being conjugated) live in decks/nani-na-lini/rules.yaml, not here."
+                "description": "The ku- form, e.g. kusoma. Grammar quirks (kwenda dropping its kw-, kuwa never being conjugated) live in decks/nani-na-lini/rules.yaml, not here."
               },
               "alt": {
                 "description": "Other accepted Swahili forms, e.g. alfu moja for elfu moja. Shown on the answer side.",

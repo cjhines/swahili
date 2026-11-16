@@ -10,7 +10,7 @@ cards:
     kind: verb
     sw: kwenda
     en: { base: go, past: went, participle: gone, ing: going, third: goes }
-    note: 'Ninaenda is common too. Command: nenda!'
+    note: 'Everyday speech drops the kw- (ninaenda). Command: nenda!'
 
   - id: verb-kuja
     kind: verb
@@ -110,7 +110,13 @@ cards:
   - id: verb-kurudi
     kind: verb
     sw: kurudi
-    en: { meaning: to return / to come back, base: return, past: returned, participle: returned, ing: returning, third: returns }
+    en:
+      meaning: to return / to come back
+      base: return
+      past: returned
+      participle: returned
+      ing: returning
+      third: returns
 
   - id: verb-kufika
     kind: verb
@@ -208,7 +214,13 @@ cards:
     kind: verb
     sw: kutafuta
     # "Search" is complete English without an object; "I am looking for" isn't.
-    en: { meaning: to look for / to search, base: search, past: searched, participle: searched, ing: searching, third: searches }
+    en:
+      meaning: to look for / to search
+      base: search
+      past: searched
+      participle: searched
+      ing: searching
+      third: searches
 
   # wait: two verbs with the same meaning. Each accepts the other as an answer.
   - id: verb-kungoja
@@ -235,7 +247,13 @@ cards:
   - id: verb-kuacha
     kind: verb
     sw: kuacha
-    en: { meaning: to quit / to stop doing / to leave behind, base: quit, past: quit, participle: quit, ing: quitting, third: quits }
+    en:
+      meaning: to quit / to stop doing / to leave behind
+      base: quit
+      past: quit
+      participle: quit
+      ing: quitting
+      third: quits
     note: 'Needs an object: ninaacha kazi, I''m quitting my job. Also "to let": mwache aende, let him/her go. To come to a halt (like a car) is kusimama, and "I''m leaving" (going away) is ninaondoka.'
 
   - id: verb-kutaka
@@ -402,7 +420,13 @@ cards:
   - id: verb-kuangalia
     kind: verb
     sw: kuangalia
-    en: { meaning: to look / to look at / to be careful, base: look, past: looked, participle: looked, ing: looking, third: looks }
+    en:
+      meaning: to look / to look at / to be careful
+      base: look
+      past: looked
+      participle: looked
+      ing: looking
+      third: looks
 
   - id: verb-kujua
     kind: verb

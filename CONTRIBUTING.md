@@ -73,7 +73,10 @@ the quirks of particular verbs).
 
 - **A verb behaves oddly**: add it under `verbs:` in `rules.yaml`. One-syllable verbs (*kula*,
   *kunywa*) are detected automatically. The quirks are:
-  - `keepKu` for a verb that keeps its *ku-/kw-* anyway, like *kwenda*.
+  - `keepKu` for a verb that keeps its *ku-/kw-* anyway, like *kwisha*.
+  - `textbookKeepsKu` for a verb that textbooks conjugate with its *ku-/kw-* but everyday speech
+    doesn't, like *kwenda*. The app shows the everyday forms (*ninaenda*) and accepts the textbook
+    ones (*ninakwenda*) when typing.
   - `exclude` to keep a verb out of Nani na Lini?: *kuwa*, whose present isn't am/is/are, and
     reciprocal *kuonana*.
   - `needsObject` for a verb that always takes a marker for who it's done to, like *kupa*

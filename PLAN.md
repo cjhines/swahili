@@ -91,7 +91,8 @@ Decided with Chris on 2026-11-16. The checker is `src/typing/`. Each rule is tes
 in `check.test.ts`, and against every real card, verb and form in `answers.node.test.ts`.
 
 - **Swahili must be letter-perfect.** Capitals, punctuation and extra spaces are ignored, and the
-  card's `alt` forms count (*kusubiri* for *kungoja*). Nothing else, because one letter is often the
+  card's `alt` forms count (*kusubiri* for *kungoja*), as do *kwenda*'s textbook forms
+  (*ninakwenda* for *ninaenda*). Nothing else, because one letter is often the
   grammar: *sisomi*, not *sisoma*.
 - **English allows one slip:** one letter wrong, missing, extra or swapped with its neighbour
   ("wiat" for "wait"), in one word of four letters or more. Shorter words must be exact, because
@@ -275,7 +276,7 @@ The verbs deck's content (meanings, notes, examples, kept forms) is pinned by
 
 - `hint` is shown on the **front** to tell apart words with the same English, e.g.
   `hint: (for someone)`.
-- A verb's grammar quirks (*kwenda* keeping its *kw-*, *kuwa* never being conjugated) are facts
+- A verb's grammar quirks (*kwenda* keeping its *kw-* only in textbooks, *kuwa* never being conjugated) are facts
   about Swahili, not about a deck, so they live in `rules.yaml` under `verbs:`, keyed by the ku-
   form. They don't go on the card. (The draft plan had `stem` and `nani` fields here. They were
   never used, and were removed in milestone 6.)
@@ -300,7 +301,7 @@ file, not a code change. It has these sections:
   `en.tenses` override these (see the card kinds above). `accept` lists other English that
   typing mode counts as right for verbs using the plain templates: "We read" and "We don't read"
   in the present.
-- `verbs`: quirks by ku- form: `keepKu` (*kwenda*, *kwisha*), `exclude` (*kuwa*, *kuonana*), `needsObject` (*kupa*: always needs a marker for who receives it, so it's excluded and its card lists no kept-ku forms), `stem`, `why` (the reason an excluded verb is left out), `skip` (a tense or `perfect-neg` the verb is never used in, with the reason: *kutaka* and *kuhitaji* skip the perfect, *kupenda* and *kuishi* its negative).
+- `verbs`: quirks by ku- form: `keepKu` (*kwisha*), `textbookKeepsKu` (*kwenda*: shown the everyday way, *ninaenda*, *sikuenda*, while the textbook *ninakwenda*, *sikwenda* count when typing and show as "also"; Chris, 2026-11-16), `exclude` (*kuwa*, *kuonana*), `needsObject` (*kupa*: always needs a marker for who receives it, so it's excluded and its card lists no kept-ku forms), `stem`, `why` (the reason an excluded verb is left out), `skip` (a tense or `perfect-neg` the verb is never used in, with the reason: *kutaka* and *kuhitaji* skip the perfect, *kupenda* and *kuishi* its negative).
 
 The engine (`src/nani/conjugate.ts`, `english.ts`) is pure. It returns the word plus labelled,
 role-tagged parts (subject, negative, tense, ku, stem, ending, have) for the coloured breakdown.
@@ -335,7 +336,7 @@ way a grammar sheet does:
   verified: false
 ```
 
-They cover a regular verb in full, have / don't have, one-syllable verbs (*kula*, *kunywa*), *kwenda*,
+They cover a regular verb in full, have / don't have, one-syllable verbs (*kula*, *kunywa*), *kwenda* (its everyday forms),
 a verb not ending in *-a* (*kujibu*), and a vowel-initial verb (*kuosha*), plus English prompts.
 
 CI fails if the engine disagrees with **any** fixture, verified or not, and points at the

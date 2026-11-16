@@ -4,10 +4,20 @@
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, test } from 'vitest';
 
-import { conjugate, verbInfo, type NaniVerb } from './conjugate.ts';
+import {
+  conjugate,
+  textbookForm,
+  verbInfo,
+  type NaniVerb,
+} from './conjugate.ts';
 import { english } from './english.ts';
 import { keptLine, verbFacts } from './facts.ts';
-import { allPatterns, pattern as p } from './patterns.ts';
+import {
+  allPatterns,
+  pattern as p,
+  type NaniTense,
+  type Polarity,
+} from './patterns.ts';
 import { NaniRules } from './schema.ts';
 import { loadNaniRules } from '../content/node/load.ts';
 import { parseYaml } from '../content/validate.ts';
@@ -83,13 +93,30 @@ describe('the part breakdown', () => {
     expect(form.parts[2]!.role).toBe('ku');
   });
 
-  test("past negative: the verb's ku/kw is the marker: si · ku · la, si · kw · enda", () => {
+  test("past negative: the verb's ku is the marker: si · ku · la", () => {
     expect(breakdown(conjugate(rules, p('i', 'past', 'neg'), kula))).toEqual([
       'si:not + I',
       'ku:past',
       'la:eat',
     ]);
-    expect(conjugate(rules, p('i', 'past', 'neg'), kwenda).sw).toBe('sikwenda');
+  });
+
+  test('kwenda is shown the everyday way; the textbook form, keeping kw-, counts too', () => {
+    const forms = (tense: NaniTense, polarity: Polarity) => [
+      conjugate(rules, p('i', tense, polarity), kwenda).sw,
+      textbookForm(rules, p('i', tense, polarity), kwenda),
+    ];
+    expect(forms('present', 'pos')).toEqual(['ninaenda', 'ninakwenda']);
+    expect(forms('past', 'pos')).toEqual(['nilienda', 'nilikwenda']);
+    expect(forms('future', 'pos')).toEqual(['nitaenda', 'nitakwenda']);
+    expect(forms('perfect', 'pos')).toEqual(['nimeenda', 'nimekwenda']);
+    expect(forms('present', 'neg')).toEqual(['siendi', undefined]);
+    expect(forms('past', 'neg')).toEqual(['sikuenda', 'sikwenda']);
+    expect(forms('future', 'neg')).toEqual(['sitaenda', 'sitakwenda']);
+    expect(forms('perfect', 'neg')).toEqual(['sijaenda', undefined]);
+    // Every other verb has just the one form.
+    expect(textbookForm(rules, p('i', 'past', 'pos'), kula)).toBeUndefined();
+    expect(textbookForm(rules, p('i', 'past', 'pos'), soma)).toBeUndefined();
   });
 
   test('have: tu · na = we · have', () => {
@@ -119,7 +146,7 @@ describe('verbInfo', () => {
     ['kuja', 'ja', true],
     ['kusoma', 'soma', false],
     ['kuosha', 'osha', false],
-    ['kwenda', 'enda', true], // listed in rules.yaml
+    ['kwenda', 'enda', false], // textbookKeepsKu in rules.yaml: only textbooks keep it
   ])('%s: stem %s, keeps ku: %s', (sw, stem, keepKu) => {
     expect(verbInfo(rules, sw)).toMatchObject({ stem, keepKu });
   });
@@ -178,18 +205,19 @@ describe('verbFacts (what a verb card shows about the verb)', () => {
     expect(verbFacts(rules, 'kusoma')).toEqual({ stem: 'soma', prefix: 'ku' });
   });
 
-  test('a verb that keeps kw- by rule, not by syllables', () => {
+  test('a verb only textbooks conjugate with its kw-: the card lists those forms', () => {
     const facts = verbFacts(rules, 'kwenda');
     expect(facts).toEqual({
       stem: 'enda',
       prefix: 'kw',
       kept: {
         oneSyllable: false,
+        textbook: true,
         forms: ['ninakwenda', 'nilikwenda', 'nitakwenda', 'nimekwenda'],
       },
     });
     expect(keptLine(facts)).toBe(
-      'Keeps kw-: ninakwenda · nilikwenda · nitakwenda · nimekwenda'
+      'Textbooks keep kw-: ninakwenda · nilikwenda · nitakwenda · nimekwenda'
     );
   });
 });

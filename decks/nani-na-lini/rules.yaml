@@ -88,8 +88,11 @@ english:
 verbs:
   # Quirks of particular verbs, keyed by their ku- form. One-syllable stems (kula, kunywa, kuja)
   # are detected automatically and keep their ku-; list only what can't be worked out.
-  # Irregular: keeps kw- (ninakwenda, siendi, sikwenda, sitakwenda, sijaenda); ninaenda is common too.
-  kwenda: { keepKu: true }
+  # Shown the everyday way, like a regular verb: ninaenda, nilienda, nitaenda, nimeenda, siendi,
+  # sikuenda, sitaenda, sijaenda. Textbooks keep kw- (ninakwenda, sikwenda, sitakwenda); typing
+  # mode accepts those too, and the answer side shows them as "also". Chris, 2026-11-16: his tutor
+  # says nobody says anakwenda.
+  kwenda: { textbookKeepsKu: true }
   kwisha: { keepKu: true }
   # Tenses (or one polarity) a verb is never used in. `skip` gives the reason, printed in forms.md.
   kutaka:

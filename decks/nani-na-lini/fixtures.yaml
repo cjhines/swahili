@@ -9,7 +9,8 @@
 # change anything in the app. Readable version of everything: forms.md (`npm run nani:forms`).
 
 # Open questions for the reviewer, printed at the top of forms.md.
-questions: []
+questions:
+  - 'kwenda now shows the everyday forms: ninaenda, nilienda, nitaenda, nimeenda. The textbook ones (ninakwenda, nilikwenda…) are accepted too. Its negatives follow the same pattern: sikuenda for "I didn''t go" (textbook sikwenda) and sitaenda for "I won''t go" (textbook sitakwenda). Are those what you''d say?'
 
 # English for verbs that have no card. Every other verb uses its card's English.
 verbs:
@@ -124,33 +125,36 @@ paradigms:
     verified: false
     note: Textbook forms. In Nairobi you'll often hear sijakunywa and hajakunywa; check with your tutor before ticking.
 
-  # kwenda behaves like a one-syllable verb, with kw- instead of ku-.
+  # kwenda is shown the everyday way, like a regular verb. Textbooks keep its kw- (ninakwenda,
+  # sikwenda, sitakwenda): typing mode accepts those too (src/nani/nani.node.test.ts pins them).
   - verb: kwenda
     tense: present
     subjects: [i, heshe]
-    pos: [ninakwenda, anakwenda]
+    pos: [ninaenda, anaenda]
     neg: [siendi, haendi]
     verified: false
-    note: Textbook forms. Everyday speech also says ninaenda, nilienda, nimeenda.
+    note: Everyday forms. Textbooks say ninakwenda, anakwenda.
   - verb: kwenda
     tense: past
     subjects: [i, heshe]
-    note: Textbook forms. In Nairobi you'll often hear sikuenda; check with your tutor before ticking.
-    pos: [nilikwenda, alikwenda]
-    neg: [sikwenda, hakwenda]
+    pos: [nilienda, alienda]
+    neg: [sikuenda, hakuenda]
     verified: false
+    note: Everyday forms. Textbooks say nilikwenda and sikwenda; check the negative with your tutor before ticking.
   - verb: kwenda
     tense: future
     subjects: [i, heshe]
-    pos: [nitakwenda, atakwenda]
-    neg: [sitakwenda, hatakwenda]
+    pos: [nitaenda, ataenda]
+    neg: [sitaenda, hataenda]
     verified: false
+    note: Everyday forms. Textbooks say nitakwenda and sitakwenda; check the negative with your tutor before ticking.
   - verb: kwenda
     tense: perfect
     subjects: [i, heshe]
-    pos: [nimekwenda, amekwenda]
+    pos: [nimeenda, ameenda]
     neg: [sijaenda, hajaenda]
     verified: false
+    note: Everyday forms. Textbooks say nimekwenda.
 
   # Ends in -u (from Arabic): the present negative keeps it.
   - verb: kujibu

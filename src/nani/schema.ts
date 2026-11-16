@@ -74,6 +74,9 @@ export const NaniRules = z
         VerbKu,
         z.strictObject({
           keepKu: z.literal(true).optional(),
+          // Shown the everyday way, as a regular verb (kwenda: ninaenda, nilienda). Textbooks
+          // keep the ku-/kw- (ninakwenda, nilikwenda); typing mode accepts those forms too.
+          textbookKeepsKu: z.literal(true).optional(),
           exclude: z.literal(true).optional(),
           // Always takes a marker for who it's done to (kupa: nipe, give me). Its bare forms
           // would be misread (ninakupa = "I'm giving you"), so it's left out of Nani na Lini?

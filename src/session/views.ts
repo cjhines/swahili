@@ -9,7 +9,7 @@ import {
   type CardIndex,
   type Prompt,
 } from '../content/display.ts';
-import { conjugate } from '../nani/conjugate.ts';
+import { conjugate, textbookForm } from '../nani/conjugate.ts';
 import { english, englishAnswers } from '../nani/english.ts';
 import { keptLine, verbFacts } from '../nani/facts.ts';
 import { allPatterns } from '../nani/patterns.ts';
@@ -85,6 +85,8 @@ export const naniView = (
     if (!pattern || (pattern.tense !== 'have' && !verb)) return undefined;
 
     const form = conjugate(rules, pattern, verb);
+    // kwenda: ninaenda, and the textbook ninakwenda counts too.
+    const textbook = textbookForm(rules, pattern, verb);
     const swahili = { text: form.sw, lang: 'sw' } as const;
     const englishSide = {
       text: english(rules, pattern, verb),
@@ -96,7 +98,7 @@ export const naniView = (
     )?.note;
     const expected: Expected =
       item.direction === 'en-sw'
-        ? { lang: 'sw', answers: [form.sw] }
+        ? { lang: 'sw', answers: [form.sw, ...(textbook ? [textbook] : [])] }
         : {
             lang: 'en',
             answers: englishAnswers(rules, pattern, verb),
@@ -111,6 +113,7 @@ export const naniView = (
                 .flatMap((other) => englishAnswers(rules, other, verb)),
           };
     const extras = {
+      ...(textbook && { alt: [textbook] }),
       breakdown: form.parts,
       gloss: verb ? `${verb.sw}: ${meaningOf(verb.en)}` : 'kuwa na: to have',
       ...(subjectNote && { note: subjectNote }),

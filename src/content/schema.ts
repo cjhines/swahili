@@ -153,7 +153,7 @@ export const Verb = z.strictObject({
     .string()
     .regex(/^k[uw][a-z]+$/, 'must be the ku- form in lowercase, e.g. kusoma')
     .describe(
-      'The ku- form, e.g. kusoma. Grammar quirks (kwenda keeping its kw-, kuwa never being ' +
+      'The ku- form, e.g. kusoma. Grammar quirks (kwenda dropping its kw-, kuwa never being ' +
         'conjugated) live in decks/nani-na-lini/rules.yaml, not here.'
     ),
   en: VerbEnglish,

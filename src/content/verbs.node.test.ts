@@ -89,7 +89,10 @@ test('Nani na Lini? uses every verb but kuwa, kuonana and kupa', () => {
 
 describe('verbs that keep their ku- list the forms that show it', () => {
   test.each([
-    ['kwenda', 'Keeps kw-: ninakwenda · nilikwenda · nitakwenda · nimekwenda'],
+    [
+      'kwenda',
+      'Textbooks keep kw-: ninakwenda · nilikwenda · nitakwenda · nimekwenda',
+    ],
     [
       'kuja',
       'One syllable, so it keeps ku-: ninakuja · nilikuja · nitakuja · nimekuja',
@@ -120,7 +123,7 @@ describe('verbs that keep their ku- list the forms that show it', () => {
 });
 
 test.each([
-  ['kwenda', /Ninaenda is common too/],
+  ['kwenda', /Everyday speech drops the kw- \(ninaenda\)/],
   ['kwenda', /nenda!/],
   ['kuja', /njoo!/],
   ['kupa', /marker for who receives it: nipe, give me/],
