@@ -66,25 +66,140 @@ cards:
     sw: kumi na mbili
     en: twelve
 
+  - id: vocab-kumi-na-tatu
+    kind: word
+    sw: kumi na tatu
+    en: thirteen
+
+  - id: vocab-kumi-na-nne
+    kind: word
+    sw: kumi na nne
+    en: fourteen
+
+  - id: vocab-kumi-na-tano
+    kind: word
+    sw: kumi na tano
+    en: fifteen
+
+  - id: vocab-kumi-na-sita
+    kind: word
+    sw: kumi na sita
+    en: sixteen
+
+  - id: vocab-kumi-na-saba
+    kind: word
+    sw: kumi na saba
+    en: seventeen
+
+  - id: vocab-kumi-na-nane
+    kind: word
+    sw: kumi na nane
+    en: eighteen
+
+  - id: vocab-kumi-na-tisa
+    kind: word
+    sw: kumi na tisa
+    en: nineteen
+
   - id: vocab-ishirini
     kind: word
     sw: ishirini
     en: twenty
+
+  - id: vocab-ishirini-na-moja
+    kind: word
+    sw: ishirini na moja
+    en: twenty-one
 
   - id: vocab-ishirini-na-mbili
     kind: word
     sw: ishirini na mbili
     en: twenty-two
 
+  - id: vocab-ishirini-na-tatu
+    kind: word
+    sw: ishirini na tatu
+    en: twenty-three
+
+  - id: vocab-ishirini-na-nne
+    kind: word
+    sw: ishirini na nne
+    en: twenty-four
+
+  - id: vocab-ishirini-na-tano
+    kind: word
+    sw: ishirini na tano
+    en: twenty-five
+
+  - id: vocab-ishirini-na-sita
+    kind: word
+    sw: ishirini na sita
+    en: twenty-six
+
+  - id: vocab-ishirini-na-saba
+    kind: word
+    sw: ishirini na saba
+    en: twenty-seven
+
+  - id: vocab-ishirini-na-nane
+    kind: word
+    sw: ishirini na nane
+    en: twenty-eight
+
+  - id: vocab-ishirini-na-tisa
+    kind: word
+    sw: ishirini na tisa
+    en: twenty-nine
+
   - id: vocab-thelathini
     kind: word
     sw: thelathini
     en: thirty
 
+  - id: vocab-thelathini-na-moja
+    kind: word
+    sw: thelathini na moja
+    en: thirty-one
+
+  - id: vocab-thelathini-na-mbili
+    kind: word
+    sw: thelathini na mbili
+    en: thirty-two
+
   - id: vocab-thelathini-na-tatu
     kind: word
     sw: thelathini na tatu
     en: thirty-three
+
+  - id: vocab-thelathini-na-nne
+    kind: word
+    sw: thelathini na nne
+    en: thirty-four
+
+  - id: vocab-thelathini-na-tano
+    kind: word
+    sw: thelathini na tano
+    en: thirty-five
+
+  - id: vocab-thelathini-na-sita
+    kind: word
+    sw: thelathini na sita
+    en: thirty-six
+
+  - id: vocab-thelathini-na-saba
+    kind: word
+    sw: thelathini na saba
+    en: thirty-seven
+
+  - id: vocab-thelathini-na-nane
+    kind: word
+    sw: thelathini na nane
+    en: thirty-eight
+
+  - id: vocab-thelathini-na-tisa
+    kind: word
+    sw: thelathini na tisa
+    en: thirty-nine
 
   - id: vocab-arobaini
     kind: word
@@ -92,30 +207,309 @@ cards:
     alt: [arubaini]
     en: forty
 
+  - id: vocab-arobaini-na-moja
+    kind: word
+    sw: arobaini na moja
+    alt: [arubaini na moja]
+    en: forty-one
+
+  - id: vocab-arobaini-na-mbili
+    kind: word
+    sw: arobaini na mbili
+    alt: [arubaini na mbili]
+    en: forty-two
+
+  - id: vocab-arobaini-na-tatu
+    kind: word
+    sw: arobaini na tatu
+    alt: [arubaini na tatu]
+    en: forty-three
+
+  - id: vocab-arobaini-na-nne
+    kind: word
+    sw: arobaini na nne
+    alt: [arubaini na nne]
+    en: forty-four
+
+  - id: vocab-arobaini-na-tano
+    kind: word
+    sw: arobaini na tano
+    alt: [arubaini na tano]
+    en: forty-five
+
+  - id: vocab-arobaini-na-sita
+    kind: word
+    sw: arobaini na sita
+    alt: [arubaini na sita]
+    en: forty-six
+
+  - id: vocab-arobaini-na-saba
+    kind: word
+    sw: arobaini na saba
+    alt: [arubaini na saba]
+    en: forty-seven
+
+  - id: vocab-arobaini-na-nane
+    kind: word
+    sw: arobaini na nane
+    alt: [arubaini na nane]
+    en: forty-eight
+
+  - id: vocab-arobaini-na-tisa
+    kind: word
+    sw: arobaini na tisa
+    alt: [arubaini na tisa]
+    en: forty-nine
+
   - id: vocab-hamsini
     kind: word
     sw: hamsini
     en: fifty
+
+  - id: vocab-hamsini-na-moja
+    kind: word
+    sw: hamsini na moja
+    en: fifty-one
+
+  - id: vocab-hamsini-na-mbili
+    kind: word
+    sw: hamsini na mbili
+    en: fifty-two
+
+  - id: vocab-hamsini-na-tatu
+    kind: word
+    sw: hamsini na tatu
+    en: fifty-three
+
+  - id: vocab-hamsini-na-nne
+    kind: word
+    sw: hamsini na nne
+    en: fifty-four
+
+  - id: vocab-hamsini-na-tano
+    kind: word
+    sw: hamsini na tano
+    en: fifty-five
+
+  - id: vocab-hamsini-na-sita
+    kind: word
+    sw: hamsini na sita
+    en: fifty-six
+
+  - id: vocab-hamsini-na-saba
+    kind: word
+    sw: hamsini na saba
+    en: fifty-seven
+
+  - id: vocab-hamsini-na-nane
+    kind: word
+    sw: hamsini na nane
+    en: fifty-eight
+
+  - id: vocab-hamsini-na-tisa
+    kind: word
+    sw: hamsini na tisa
+    en: fifty-nine
 
   - id: vocab-sitini
     kind: word
     sw: sitini
     en: sixty
 
+  - id: vocab-sitini-na-moja
+    kind: word
+    sw: sitini na moja
+    en: sixty-one
+
+  - id: vocab-sitini-na-mbili
+    kind: word
+    sw: sitini na mbili
+    en: sixty-two
+
+  - id: vocab-sitini-na-tatu
+    kind: word
+    sw: sitini na tatu
+    en: sixty-three
+
+  - id: vocab-sitini-na-nne
+    kind: word
+    sw: sitini na nne
+    en: sixty-four
+
+  - id: vocab-sitini-na-tano
+    kind: word
+    sw: sitini na tano
+    en: sixty-five
+
+  - id: vocab-sitini-na-sita
+    kind: word
+    sw: sitini na sita
+    en: sixty-six
+
+  - id: vocab-sitini-na-saba
+    kind: word
+    sw: sitini na saba
+    en: sixty-seven
+
+  - id: vocab-sitini-na-nane
+    kind: word
+    sw: sitini na nane
+    en: sixty-eight
+
+  - id: vocab-sitini-na-tisa
+    kind: word
+    sw: sitini na tisa
+    en: sixty-nine
+
   - id: vocab-sabini
     kind: word
     sw: sabini
     en: seventy
+
+  - id: vocab-sabini-na-moja
+    kind: word
+    sw: sabini na moja
+    en: seventy-one
+
+  - id: vocab-sabini-na-mbili
+    kind: word
+    sw: sabini na mbili
+    en: seventy-two
+
+  - id: vocab-sabini-na-tatu
+    kind: word
+    sw: sabini na tatu
+    en: seventy-three
+
+  - id: vocab-sabini-na-nne
+    kind: word
+    sw: sabini na nne
+    en: seventy-four
+
+  - id: vocab-sabini-na-tano
+    kind: word
+    sw: sabini na tano
+    en: seventy-five
+
+  - id: vocab-sabini-na-sita
+    kind: word
+    sw: sabini na sita
+    en: seventy-six
+
+  - id: vocab-sabini-na-saba
+    kind: word
+    sw: sabini na saba
+    en: seventy-seven
+
+  - id: vocab-sabini-na-nane
+    kind: word
+    sw: sabini na nane
+    en: seventy-eight
+
+  - id: vocab-sabini-na-tisa
+    kind: word
+    sw: sabini na tisa
+    en: seventy-nine
 
   - id: vocab-themanini
     kind: word
     sw: themanini
     en: eighty
 
+  - id: vocab-themanini-na-moja
+    kind: word
+    sw: themanini na moja
+    en: eighty-one
+
+  - id: vocab-themanini-na-mbili
+    kind: word
+    sw: themanini na mbili
+    en: eighty-two
+
+  - id: vocab-themanini-na-tatu
+    kind: word
+    sw: themanini na tatu
+    en: eighty-three
+
+  - id: vocab-themanini-na-nne
+    kind: word
+    sw: themanini na nne
+    en: eighty-four
+
+  - id: vocab-themanini-na-tano
+    kind: word
+    sw: themanini na tano
+    en: eighty-five
+
+  - id: vocab-themanini-na-sita
+    kind: word
+    sw: themanini na sita
+    en: eighty-six
+
+  - id: vocab-themanini-na-saba
+    kind: word
+    sw: themanini na saba
+    en: eighty-seven
+
+  - id: vocab-themanini-na-nane
+    kind: word
+    sw: themanini na nane
+    en: eighty-eight
+
+  - id: vocab-themanini-na-tisa
+    kind: word
+    sw: themanini na tisa
+    en: eighty-nine
+
   - id: vocab-tisini
     kind: word
     sw: tisini
     en: ninety
+
+  - id: vocab-tisini-na-moja
+    kind: word
+    sw: tisini na moja
+    en: ninety-one
+
+  - id: vocab-tisini-na-mbili
+    kind: word
+    sw: tisini na mbili
+    en: ninety-two
+
+  - id: vocab-tisini-na-tatu
+    kind: word
+    sw: tisini na tatu
+    en: ninety-three
+
+  - id: vocab-tisini-na-nne
+    kind: word
+    sw: tisini na nne
+    en: ninety-four
+
+  - id: vocab-tisini-na-tano
+    kind: word
+    sw: tisini na tano
+    en: ninety-five
+
+  - id: vocab-tisini-na-sita
+    kind: word
+    sw: tisini na sita
+    en: ninety-six
+
+  - id: vocab-tisini-na-saba
+    kind: word
+    sw: tisini na saba
+    en: ninety-seven
+
+  - id: vocab-tisini-na-nane
+    kind: word
+    sw: tisini na nane
+    en: ninety-eight
+
+  - id: vocab-tisini-na-tisa
+    kind: word
+    sw: tisini na tisa
+    en: ninety-nine
 
   - id: vocab-mia-moja
     kind: word

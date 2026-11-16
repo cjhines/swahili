@@ -133,8 +133,9 @@ swahili/
 │   ├── LICENSE               # CC BY-SA 4.0
 │   ├── ids.lock              # every ID ever published (see "ID rules")
 │   ├── vocab/                # one file per themed deck
-│   │   ├── numbers.yaml
-│   │   └── time-and-dates.yaml
+│   │   ├── numbers.yaml      # 0–100 and 1,000
+│   │   ├── time-and-dates.yaml
+│   │   └── verbs.yaml
 │   └── nani-na-lini/
 │       ├── rules.yaml        # subjects, tenses, negatives, have, English templates, labels, verb quirks
 │       ├── fixtures.yaml     # known-correct forms that Chris checks against his sheets
