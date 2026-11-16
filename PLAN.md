@@ -492,7 +492,10 @@ The app shares the `https://cjhin.es` origin with the main site, so everything b
   `navigateFallbackAllowlist` is `[/^\/swahili\//]`.
 - **Updates:** `registerType: 'prompt'`. A waiting update shows "Update now" on the setup screen,
   never during a session, or takes over at the next full relaunch. Update checks run on launch
-  and hourly. `docs/deploy.md` has the details and the **kill switch** for a broken worker.
+  and hourly. **Update now** first fetches anything newer than the waiting version (showing
+  "Updating…"). Otherwise a version that sat waiting through later deploys is reloaded into, the
+  newer one is found at once, and the banner is straight back, so the tap seems to do nothing
+  (seen 2026-11-16). `docs/deploy.md` has the details and the **kill switch** for a broken worker.
 - **`navigator.storage.persist()`** is asked once in a browser tab and once more after installing
   to the home screen, where Safari is likelier to agree. It's never asked on every launch, because
   Firefox shows a prompt each time. The result is recorded in `meta` and shown in Settings.

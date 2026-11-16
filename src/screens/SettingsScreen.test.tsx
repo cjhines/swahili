@@ -184,4 +184,6 @@ test('an update waiting shows "Update now", which applies it', async () => {
     .setup()
     .click(screen.getByRole('button', { name: 'Update now' }));
   expect(apply).toHaveBeenCalledOnce();
+  // Fetching the newest version can take a moment: the button says so.
+  expect(screen.getByRole('button', { name: 'Updating…' })).toBeDisabled();
 });

@@ -26,6 +26,8 @@ const ShareIcon = () => (
 /** Shown on the setup screen only, never during a session. */
 export const Notices = () => {
   const updateWaiting = useUpdateWaiting();
+  // Fetching the newest version can take a few seconds: show it's happening.
+  const [updating, setUpdating] = useState(false);
   const [nudge, setNudge] = useState(() => shouldNudgeInstall(new Date()));
 
   return (
@@ -41,9 +43,13 @@ export const Notices = () => {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={applyWaitingUpdate}
+            disabled={updating}
+            onClick={() => {
+              setUpdating(true);
+              applyWaitingUpdate().catch(() => setUpdating(false));
+            }}
           >
-            Update now
+            {updating ? 'Updating…' : 'Update now'}
           </button>
         </section>
       )}
