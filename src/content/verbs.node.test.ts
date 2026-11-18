@@ -32,7 +32,7 @@ test.each([
   ['kufanya', 'to do / to make', 'fanya'],
   ['kusema', 'to say', 'sema'],
   ['kuona', 'to see', 'ona'],
-  ['kupata', 'to get / to obtain', 'pata'],
+  ['kupata', 'to get (receive) / to receive / to find', 'pata'],
   ['kupa', 'to give', 'pa'],
   ['kupenda', 'to like / to love', 'penda'],
   ['kuelewa', 'to understand', 'elewa'],

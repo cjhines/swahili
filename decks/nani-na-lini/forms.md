@@ -1823,7 +1823,7 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 
 **Not in Nani na Lini?** It always needs a marker for who receives it (nipe, give me). Bare, ninakupa reads as "I'm giving you" (ku = you), so its card lists no kept-ku forms either.
 
-## kupata · to get / to obtain
+## kupata · to get (receive) / to receive / to find
 
 - Stem: *pata*
 
