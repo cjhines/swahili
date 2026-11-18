@@ -2,16 +2,16 @@
 
 <!-- Generated from the decks, rules.yaml and fixtures.yaml by `npm run nani:forms`. Do not edit. -->
 
-This is everything Nani na Lini? can show: all 47 verbs in four tenses (present,
+This is everything Nani na Lini? can show: all 48 verbs in four tenses (present,
 past, future, perfect), for all eight subjects, positive and negative, plus have / don’t
-have. That’s 2,976 forms, each with its English and its parts
+have. That’s 3,040 forms, each with its English and its parts
 (*ha·tu·ku·soma*). Each verb also shows what its vocabulary card says: meaning, stem, note,
 example. Verbs the app leaves out of Nani na Lini? are listed too, with the reason.
 
 Please check every table, and say which forms or English are wrong. ✅ marks a table
 that has already been confirmed.
 
-**4 of 198 tables checked.**
+**4 of 202 tables checked.**
 
 ## Open questions
 
@@ -21,7 +21,7 @@ Please answer these along with the tables.
 
 **it (N-class), they (N-class):** i- and zi- are for N-class nouns like nyumba (nyumba ina vyumba vitatu, the house has three rooms). Other noun classes use ki-/vi-, li-/ya-, u- and so on, and animals usually take a-/wa- (mbwa anakula, the dog is eating).
 
-Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya · kufika · kufikiri · kuhitaji · kuishi · kuita · kuitwa · kuja · kujibu · kujua · kukaa · kukutana · kula · kulala · kuleta · kulipa · kumaliza · kungoja · kununua · kunywa · kuoga · kuogelea · kuona · kuonana · kuongea · kuosha · kupa · kupata · kupenda · kupiga · kurudi · kusaidia · kusema · kusikia · kusikiliza · kusoma · kusubiri · kutafuta · kutaka · kutoka · kutunza · kuuliza · kuwa · kuwa na · kuweka · kuweza · kwenda
+Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya · kufika · kufikiri · kuhitaji · kuishi · kuita · kuitwa · kuja · kujibu · kujua · kukaa · kukata · kukutana · kula · kulala · kuleta · kulipa · kumaliza · kungoja · kununua · kunywa · kuoga · kuogelea · kuona · kuonana · kuongea · kuosha · kupa · kupata · kupenda · kupiga · kurudi · kusaidia · kusema · kusikia · kusikiliza · kusoma · kusubiri · kutafuta · kutaka · kutoka · kutunza · kuuliza · kuwa · kuwa na · kuweka · kuweza · kwenda
 
 ## kuacha · to quit / to stop doing / to leave behind
 
@@ -248,9 +248,10 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 | it (N-class) | **i·me·anza** | It (N-class) has begun | **ha·i·ja·anza** | It (N-class) hasn't begun yet |
 | they (N-class) | **zi·me·anza** | They (N-class) have begun | **ha·zi·ja·anza** | They (N-class) haven't begun yet |
 
-## kuchukua · to take
+## kuchukua · to get (fetch) / to take / to pick up
 
 - Stem: *chukua*
+- Example: *Nitaenda kuchukua mkasi.* I'll go get the scissors.
 
 ### ⬜ Present (now)
 
@@ -981,6 +982,63 @@ Verbs: kuacha · kuamka · kuangalia · kuanza · kuchukua · kuelewa · kufanya
 | they | **wa·me·kaa** | They have sat down | **ha·wa·ja·kaa** | They haven't sat down yet |
 | it (N-class) | **i·me·kaa** | It (N-class) has sat down | **ha·i·ja·kaa** | It (N-class) hasn't sat down yet |
 | they (N-class) | **zi·me·kaa** | They (N-class) have sat down | **ha·zi·ja·kaa** | They (N-class) haven't sat down yet |
+
+## kukata · to cut
+
+- Stem: *kata*
+- Example: *Ninakata karatasi kwa mkasi.* I'm cutting paper with scissors.
+
+### ⬜ Present (now)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·na·kata** | I am cutting | **si·kat·i** | I am not cutting |
+| you | **u·na·kata** | You are cutting | **hu·kat·i** | You are not cutting |
+| he/she | **a·na·kata** | He/she is cutting | **ha·kat·i** | He/she is not cutting |
+| we | **tu·na·kata** | We are cutting | **ha·tu·kat·i** | We are not cutting |
+| you (plural) | **m·na·kata** | You (plural) are cutting | **ha·m·kat·i** | You (plural) are not cutting |
+| they | **wa·na·kata** | They are cutting | **ha·wa·kat·i** | They are not cutting |
+| it (N-class) | **i·na·kata** | It (N-class) is cutting | **ha·i·kat·i** | It (N-class) is not cutting |
+| they (N-class) | **zi·na·kata** | They (N-class) are cutting | **ha·zi·kat·i** | They (N-class) are not cutting |
+
+### ⬜ Past
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·li·kata** | I cut | **si·ku·kata** | I didn't cut |
+| you | **u·li·kata** | You cut | **hu·ku·kata** | You didn't cut |
+| he/she | **a·li·kata** | He/she cut | **ha·ku·kata** | He/she didn't cut |
+| we | **tu·li·kata** | We cut | **ha·tu·ku·kata** | We didn't cut |
+| you (plural) | **m·li·kata** | You (plural) cut | **ha·m·ku·kata** | You (plural) didn't cut |
+| they | **wa·li·kata** | They cut | **ha·wa·ku·kata** | They didn't cut |
+| it (N-class) | **i·li·kata** | It (N-class) cut | **ha·i·ku·kata** | It (N-class) didn't cut |
+| they (N-class) | **zi·li·kata** | They (N-class) cut | **ha·zi·ku·kata** | They (N-class) didn't cut |
+
+### ⬜ Future
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·ta·kata** | I will cut | **si·ta·kata** | I won't cut |
+| you | **u·ta·kata** | You will cut | **hu·ta·kata** | You won't cut |
+| he/she | **a·ta·kata** | He/she will cut | **ha·ta·kata** | He/she won't cut |
+| we | **tu·ta·kata** | We will cut | **ha·tu·ta·kata** | We won't cut |
+| you (plural) | **m·ta·kata** | You (plural) will cut | **ha·m·ta·kata** | You (plural) won't cut |
+| they | **wa·ta·kata** | They will cut | **ha·wa·ta·kata** | They won't cut |
+| it (N-class) | **i·ta·kata** | It (N-class) will cut | **ha·i·ta·kata** | It (N-class) won't cut |
+| they (N-class) | **zi·ta·kata** | They (N-class) will cut | **ha·zi·ta·kata** | They (N-class) won't cut |
+
+### ⬜ Perfect (have done / not yet)
+
+| | Positive | | Negative | |
+| --- | --- | --- | --- | --- |
+| I | **ni·me·kata** | I have cut | **si·ja·kata** | I haven't cut yet |
+| you | **u·me·kata** | You have cut | **hu·ja·kata** | You haven't cut yet |
+| he/she | **a·me·kata** | He/she has cut | **ha·ja·kata** | He/she hasn't cut yet |
+| we | **tu·me·kata** | We have cut | **ha·tu·ja·kata** | We haven't cut yet |
+| you (plural) | **m·me·kata** | You (plural) have cut | **ha·m·ja·kata** | You (plural) haven't cut yet |
+| they | **wa·me·kata** | They have cut | **ha·wa·ja·kata** | They haven't cut yet |
+| it (N-class) | **i·me·kata** | It (N-class) has cut | **ha·i·ja·kata** | It (N-class) hasn't cut yet |
+| they (N-class) | **zi·me·kata** | They (N-class) have cut | **ha·zi·ja·kata** | They (N-class) haven't cut yet |
 
 ## kukutana · to meet
 

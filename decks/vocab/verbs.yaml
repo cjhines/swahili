@@ -192,7 +192,14 @@ cards:
   - id: verb-kuchukua
     kind: verb
     sw: kuchukua
-    en: { base: take, past: took, participle: taken, ing: taking, third: takes }
+    en:
+      meaning: to get (fetch) / to take / to pick up
+      base: take
+      past: took
+      participle: taken
+      ing: taking
+      third: takes
+    example: { sw: Nitaenda kuchukua mkasi., en: I'll go get the scissors. }
 
   - id: verb-kuweka
     kind: verb
@@ -240,6 +247,12 @@ cards:
     sw: kupiga
     en: { meaning: to hit / to strike, base: hit, past: hit, participle: hit, ing: hitting, third: hits }
     note: 'Used in lots of fixed phrases: piga simu, phone someone; piga picha, take a photo; piga kelele, shout.'
+
+  - id: verb-kukata
+    kind: verb
+    sw: kukata
+    en: { base: cut, past: cut, participle: cut, ing: cutting, third: cuts }
+    example: { sw: Ninakata karatasi kwa mkasi., en: I'm cutting paper with scissors. }
 
   # kuacha is stopping doing something, quitting, or leaving something behind. "I'm leaving"
   # would mean going away (kuondoka) and "I'm stopping" coming to a halt (kusimama), so its
